@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/view_100"
+        android:text="@string/register_title"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_50" />
+
+    <EditText
+        android:inputType="phone"
+        android:singleLine="true"
+        android:id="@+id/register_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/view_50"
+        android:layout_marginRight="@dimen/view_50"
+        android:layout_marginTop="@dimen/view_80"
+        android:hint="@string/register_phone"
+        android:textColorHint="@color/font_hint_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/view_50"
+        android:layout_marginRight="@dimen/view_50"
+        android:layout_marginTop="@dimen/view_30">
+        <EditText
+            android:inputType="number"
+            android:singleLine="true"
+            android:id="@+id/register_smscode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_smscode"
+            android:textColorHint="@color/font_hint_gray" />
+        <TextView
+            android:textSize="@dimen/font_32"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/font_register_smscode"
+            android:layout_centerVertical="true"
+            android:id="@+id/register_getSmsCode"
+            android:text="获取验证码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+    <EditText
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:id="@+id/register_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/view_50"
+        android:layout_marginRight="@dimen/view_50"
+        android:layout_marginTop="@dimen/view_30"
+        android:hint="@string/register_password"
+        android:textColorHint="@color/font_hint_gray" />
+
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/register_invitation_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/view_50"
+        android:layout_marginRight="@dimen/view_50"
+        android:layout_marginTop="@dimen/view_30"
+        android:hint="@string/register_invitation_code"
+        android:textColorHint="@color/font_hint_gray" />
+
+    <LinearLayout
+        android:id="@+id/register_register_bt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100"
+        android:layout_marginLeft="@dimen/view_60"
+        android:layout_marginRight="@dimen/view_60"
+        android:layout_marginTop="@dimen/view_80"
+        android:background="@drawable/bg_login_btn"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/register_btn_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_36" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/view_60"
+        android:layout_marginRight="@dimen/view_60"
+        android:layout_marginTop="@dimen/view_80"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/bg_line_gray"
+            android:layout_height="@dimen/view_1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_text_or"
+            android:textColor="@color/bg_line_gray"
+            android:textSize="@dimen/font_28" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/bg_line_gray"
+            android:layout_height="@dimen/view_1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_50"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wechat"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/font_30"
+            android:layout_marginLeft="@dimen/view_20"
+            android:text="@string/login_by_wechat"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/register_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/font_30"
+        android:src="@drawable/ic_login_cancel"
+        android:layout_marginTop="@dimen/view_60"
+        android:layout_gravity="center_horizontal"/>
+
+
+</LinearLayout>

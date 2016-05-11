@@ -1,0 +1,191 @@
+apply plugin: 'com.android.application'
+//添加android-apt插件
+apply plugin: 'android-apt'
+def AAVersion = '3.3.1'
+//def AAVersion = '4.0.0'
+// 多渠道打包的时候 会读取系统的时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.youyou.shopping"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+        // dex突破65535的限制
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            // No debug config
+        }
+
+        release {
+            try {
+                storeFile file("shopping.jks")
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("You should define RELEASE_STORE_PASSWORD and " +
+                        "RELEASE_KEY_ALIAS and" + "RELEASE_KEY_PASSWORD in gradle.properties."
+                )
+            }
+        }
+    }
+
+    // 构建类型（打包的是debug，还是release发行的）
+    buildTypes {
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            // 打包的版本后面会添加一个后缀 "-debug"
+            versionNameSuffix "-debug"
+            // 是否混淆
+            minifyEnabled false
+            //
+            zipAlignEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+//            versionNameSuffix "-released"
+            // 想在打包的情况下同样Debug
+            debuggable true
+
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            // android的混淆默认读取proguard-android.txt， 第三方包的混淆配置在proguard-rules.pro 这个文件里
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 读取上面配置的前面参数
+            signingConfig signingConfigs.release
+            // 多渠道打包，循环生存文件名和对应的文件
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为SP_v1.0_2015-01-15_wandoujia.apk
+                        def fileName = "SP_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+
+    //添加.so库依赖
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    // spring
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        //for spring-android
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude '.readme'
+    }
+
+    // 百度多渠道打包
+    productFlavors {
+        google {}
+        youyoumob {}
+        tencent {}
+        wandoujia {}
+        _360 {}
+        baidu {}
+        meizu {}
+        xiaomi {}
+        huawei {}
+    }
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [APP_CHANNEL: name]
+    }
+
+}
+
+// spring
+repositories {
+    maven {
+        url 'http://repo.spring.io/milestone'
+    }
+
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+// （androidannotations）1. 引入对android-apt的依赖
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+// （androidannotations）2.设置android-apt参数
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+        resourcePackageName 'com.youyou.shopping'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    // （androidannotations）3.使用apt引入对androidannotation的依赖
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    //添加glide图片加载库支持
+    //   compile 'com.github.bumptech.glide:glide:3.6.1'
+    //添加picasso图片加载库支持
+    //   compile 'com.squareup.picasso:picasso:2.5.2'
+    // spring相关
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    // eventbus相关
+    compile 'de.greenrobot:eventbus:2.4.0'
+    compile files('libs/gson-2.2.4.jar')
+    //multidex support
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.github.ozodrukh:CircularReveal:1.1.1'
+    compile files('libs/AMap_ Location_v1.4.0_20150830.jar')
+    compile files('libs/Android_Map_V3.0.20150831.jar')
+    compile 'com.facebook.fresco:fresco:0.6.0'
+    compile files('libs/universal-image-loader-1.9.3.jar')
+    compile files('libs/umeng-analytics-v5.6.4.jar')
+    compile files('libs/ShareSDK-Core-2.6.6.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.6.6.jar')
+    compile files('libs/ShareSDK-Wechat-2.6.6.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.6.6.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-2.6.6.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-2.6.6.jar')
+    compile files('libs/MobCommons.jar')
+    compile files('libs/MobTools.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+}

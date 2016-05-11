@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/cate_frag_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_750">
+            <!--轮播图-->
+            <android.support.v4.view.ViewPager
+                android:id="@+id/cate_frag_vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v4.view.ViewPager>
+            <!--红点-->
+            <LinearLayout
+                android:id="@+id/cate_frag_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_30"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </RelativeLayout>
+        <!--详情-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/font_40"
+            android:paddingLeft="@dimen/font_80"
+            android:paddingRight="@dimen/font_80"
+            android:paddingTop="@dimen/font_40">
+
+            <TextView
+                android:id="@+id/cate_frag_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_15"
+                android:gravity="center_horizontal"
+                android:text="兰芝(LANEIGE)细致无暇气垫粉凝霜 细致无暇气垫粉凝霜 5件套"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_30" />
+
+            <TextView
+                android:id="@+id/cate_frag_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_15"
+                android:layout_marginTop="@dimen/view_15"
+                android:gravity="center_horizontal"
+                android:text="￥1209"
+                android:textColor="@color/font_country_conuntry"
+                android:textSize="@dimen/font_30" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/cate_frag_price1"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/view_20"
+                    android:background="@drawable/bg_half_circle_commodity"
+                    android:padding="@dimen/view_10"
+                    android:text="乐天价:￥1523"
+                    android:textColor="@color/font_commodity_origin_price"
+                    android:textSize="@dimen/font_26" />
+
+                <TextView
+                    android:id="@+id/cate_frag_price2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_half_circle_commodity"
+                    android:padding="@dimen/view_10"
+                    android:text="新罗价:￥1523"
+                    android:textColor="@color/font_commodity_origin_price"
+                    android:textSize="@dimen/font_26" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/HorizonLineView20Style" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_80"
+            android:background="@color/white">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.5dp"
+                android:layout_centerInParent="true"
+                android:background="@color/font_hint_gray" />
+
+            <TextView
+                android:layout_width="@dimen/view_250"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/category_decs"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="26sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

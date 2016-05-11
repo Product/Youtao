@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/view_100"
+    android:layout_alignParentBottom="true"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/home_tab"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/home_img"
+            android:layout_width="@dimen/view_44"
+            android:layout_height="@dimen/view_44"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/view_10"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_home_pressed" />
+
+        <TextView
+            android:id="@+id/home_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/view_6"
+            android:layout_marginBottom="@dimen/view_10"
+            android:text="@string/tab_home"
+            android:textColor="@color/bg_btn_login"
+            android:textSize="@dimen/font_24" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/shopping_cart_tab"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/shopping_cart_img"
+            android:layout_width="@dimen/view_44"
+            android:layout_height="@dimen/view_44"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/view_10"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_shopping_car_normal" />
+
+        <TextView
+            android:id="@+id/shopping_cart_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shopping_cart_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/view_6"
+            android:layout_marginBottom="@dimen/view_10"
+            android:textColor="@color/font_gray"
+            android:text="@string/tab_shopping_cart"
+            android:textSize="@dimen/font_24" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mine_tab"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/mine_img"
+            android:layout_width="@dimen/view_44"
+            android:layout_height="@dimen/view_44"
+            android:layout_marginTop="@dimen/view_10"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_mine_normal" />
+
+        <TextView
+            android:id="@+id/mine_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mine_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/view_6"
+            android:layout_marginBottom="@dimen/view_10"
+            android:text="@string/tab_mine"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/font_24" />
+
+    </RelativeLayout>
+
+</LinearLayout>

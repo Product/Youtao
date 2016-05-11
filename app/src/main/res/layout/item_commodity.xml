@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/left_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_25"
+            android:layout_marginRight="@dimen/view_15"
+            android:layout_marginBottom="@dimen/view_30"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/left_commodity_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_262"
+                android:background="@color/transparent"/>
+
+            <TextView
+                android:lines="2"
+                android:id="@+id/left_commodity_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/left_commodity_img"
+                android:text="韩束红石榴鲜活水影"
+                android:textSize="@dimen/font_28"
+                android:textColor="@color/font_black"
+                android:layout_marginLeft="@dimen/view_27"
+                android:layout_marginRight="@dimen/view_27"
+                android:layout_marginTop="@dimen/view_18"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/left_commodity_name"
+                android:layout_marginLeft="@dimen/view_27"
+                android:layout_marginRight="@dimen/view_27"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/view_20">
+
+                <TextView
+                    android:id="@+id/left_commodity_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_commodity_price"
+                    android:textSize="@dimen/font_30"
+                    android:text="￥92"/>
+
+                <TextView
+                    android:singleLine="true"
+                    android:id="@+id/left_commodity_origin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_commodity_origin_price"
+                    android:background="@drawable/bg_half_circle_commodity"
+                    android:layout_marginLeft="@dimen/view_30"
+                    android:textSize="@dimen/font_20"
+                    android:paddingLeft="@dimen/view_15"
+                    android:paddingRight="@dimen/view_15"
+                    android:paddingTop="@dimen/view_6"
+                    android:paddingBottom="@dimen/view_6"
+                    android:text="乐天价：￥150"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/right_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_15"
+            android:layout_marginRight="@dimen/view_25"
+            android:layout_marginBottom="@dimen/view_30"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/right_commodity_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_262"
+                android:background="@color/transparent"/>
+
+            <TextView
+                android:lines="2"
+                android:id="@+id/right_commodity_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/right_commodity_img"
+                android:text="韩束红石榴鲜活水影"
+                android:textSize="@dimen/font_28"
+                android:textColor="@color/font_black"
+                android:layout_marginLeft="@dimen/view_27"
+                android:layout_marginRight="@dimen/view_27"
+                android:layout_marginTop="@dimen/view_18"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/right_commodity_name"
+                android:layout_marginLeft="@dimen/view_27"
+                android:layout_marginRight="@dimen/view_27"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/view_20">
+
+                <TextView
+                    android:id="@+id/right_commodity_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_commodity_price"
+                    android:textSize="@dimen/font_30"
+                    android:text="￥92"/>
+
+                <TextView android:singleLine="true"
+                    android:id="@+id/right_commodity_origin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font_commodity_origin_price"
+                    android:background="@drawable/bg_half_circle_commodity"
+                    android:layout_marginLeft="@dimen/view_30"
+                    android:textSize="@dimen/font_20"
+                    android:paddingLeft="@dimen/view_15"
+                    android:paddingRight="@dimen/view_15"
+                    android:paddingTop="@dimen/view_6"
+                    android:paddingBottom="@dimen/view_6"
+                    android:text="乐天价：￥150"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

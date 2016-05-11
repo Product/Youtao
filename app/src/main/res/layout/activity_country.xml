@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_90"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="选择所在城市"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_36"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_1"
+        android:background="@color/bg_hint_line_gray"/>
+    <GridView
+        android:verticalSpacing="@dimen/view_37"
+        android:horizontalSpacing="@dimen/view_75"
+        android:layout_margin="@dimen/view_60"
+        android:numColumns="3"
+        android:id="@+id/country_list_grid"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+    </GridView>
+    <ImageView
+        android:id="@+id/country_cancel_iv"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/view_180"
+        android:background="@drawable/ic_login_cancel"/>
+
+</LinearLayout>

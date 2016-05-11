@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">shopping</string>
+    <string name="app_exit">程序异常退出</string>
+    <string name="press_again_to_exit_program">再按一次退出程序</string>
+    <string name="hint">提示</string>
+    <string name="sure">确定</string>
+
+    <string name="tab_home">首页</string>
+    <string name="tab_shopping_cart">购物车</string>
+    <string name="tab_mine">我的</string>
+
+    <!-- mine fragment-->
+    <string name="mine_payment">待付款</string>
+    <string name="mine_shipped">待发货</string>
+    <string name="mine_pickup">待取货</string>
+    <string name="mine_all_order">全部订单</string>
+    <string name="mine_wechat_client">微信客服</string>
+    <string name="mine_mainland_client">大陆客服</string>
+    <string name="mine_korea_client">韩国客服</string>
+    <string name="mine_recommand_reward">推荐有奖</string>
+    <string name="mine_my_reward">我的红包</string>
+    <string name="mine_comment_problem">常见问题</string>
+    <string name="mine_settings">设置</string>
+
+    <!-- login-->
+    <string name="login_title">登录美淘</string>
+    <string name="login_phone">请输入手机号</string>
+    <string name="login_pwd">请输入密码</string>
+    <string name="login_btn_text">登录</string>
+    <string name="login_forgot_pwd">忘记密码 ?</string>
+    <string name="login_register">注册</string>
+    <string name="login_by_wechat">用微信登录</string>
+    <string name="login_text_or">或</string>
+
+    <!-- register -->
+    <string name="register_title">注册美淘</string>
+    <string name="register_phone">手机号码</string>
+    <string name="register_code">验证码</string>
+    <string name="register_btn_text">注册</string>
+    <string name="register_get_code">获取验证码</string>
+    <string name="register_password">密码</string>
+    <string name="register_smscode">验证码</string>
+    <string name="register_invitation_code">邀请码（选填）</string>
+
+    <!--home fragment-->
+    <string name="home_hotcategory">热销产品</string>
+    <string name="home_search_hint">搜索产品或品牌</string>
+
+    <!--category decs-->
+    <string name="category_decs">产品详情</string>
+    <string name="category_decs_insertcar">加入购物车</string>
+    <string name="category_decs_buynow">立即购买</string>
+
+    <!--shopcart-->
+    <string name="shopcart_title">购物车</string>
+</resources>

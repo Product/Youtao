@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--灰色横线-->
+    <style name="HorizonLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/view_1</item>
+        <item name="android:background">@color/bg_line_gray</item>
+    </style>
+
+    <!--灰色横线-->
+    <style name="HorizonLineView20Style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/view_20</item>
+        <item name="android:background">@color/bg_settings_gap</item>
+    </style>
+
+
+
+</resources>
