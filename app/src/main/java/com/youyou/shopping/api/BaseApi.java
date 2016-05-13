@@ -7,10 +7,12 @@ import com.youyou.shopping.api.config.AppRequestFactory;
 import com.youyou.shopping.base.BaseConstants;
 import com.youyou.shopping.bean.Response;
 import com.youyou.shopping.model.BrandBean;
+import com.youyou.shopping.model.CategoryBean;
 import com.youyou.shopping.model.DictBean;
 import com.youyou.shopping.model.GalleryBean;
 import com.youyou.shopping.model.GoodsDescBean;
 import com.youyou.shopping.model.RecommendBean;
+import com.youyou.shopping.model.ShopCartBean;
 import com.youyou.shopping.model.SmsCodeBean;
 import com.youyou.shopping.model.UserInfoBean;
 
@@ -68,7 +70,11 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
 
     /*用户登录*/
     @Post("/malluser/userLogin.json")
-    Response<UserInfoBean> userLogin(Map map);
+    Response<List<UserInfoBean>> userLogin(Map map);
+
+    /*登录测试*/
+    @Post("/malluser/userLogin.json")
+    Object textLogin(Map map);
 
     /*重置密码*/
     @Post("/malluser/retrievePassword.json")
@@ -82,7 +88,19 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     @Post("/mall/queryGoodsById.json")
     Response<GoodsDescBean> queryGoodsById(Map map);
 
-    /*商品详情*/
+    /*添加购物车*/
     @Post("/mall/cartItemMod.json")
-    Response<GoodsDescBean> updatecart(Map map);
+    Response<Object> updatecart(Map map);
+
+    /*商品分类*/
+    @Post("/mall/category.json")
+    Response<List<CategoryBean>> queryCategory(Map map);
+
+    /*关键字搜索商品*/
+    @Post("/mall/queryGoodsByKeywords.json")
+    Response<List<GoodsDescBean>> queryGoodsByKeywords(Map map);
+
+    /*购物车查询*/
+    @Post("/mall/cartItemList.json")
+    Response<List<ShopCartBean>> getcartList();
 }

@@ -28,12 +28,14 @@ public class AppRequestFactory extends SimpleClientHttpRequestFactory {
             restTemplate = new RestTemplate();
         }
 //        restTemplate = new RestTemplate();
+//        restTemplate.setRequestFactory();
         ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
         /**
          * 这里设置请求超时等,如果超时，会抛出异常到AppErrorHandler捕获
          */
         if (requestFactory instanceof SimpleClientHttpRequestFactory) {
 //            log.e("HttpUrlConnection is used");
+
             ((SimpleClientHttpRequestFactory) requestFactory).setConnectTimeout(BaseConstants.connection.TIMEOUT);
             ((SimpleClientHttpRequestFactory) requestFactory).setReadTimeout(BaseConstants.connection.TIMEOUT);
         } else if (requestFactory instanceof HttpComponentsClientHttpRequestFactory) {

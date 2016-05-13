@@ -32,6 +32,7 @@ public class MyUtils {
     public static final int M = 1024 * K;
     public static final int G = 1024 * M;
     public static final long EXTRA_SPACE = 200 * M;
+    public static final String YOU_TAO = "youtao";
     private static String VERSION = null;
     private static final Byte lock[] = new Byte[0];
     public static int min = 60 * 1000;
@@ -52,7 +53,7 @@ public class MyUtils {
         synchronized (lock) {
             String secret = key;
             if (key.length() < 8) {
-                secret += "youtao";
+                secret += YOU_TAO;
             }
             secret = secret.substring(0, 8);
             try {
@@ -77,7 +78,7 @@ public class MyUtils {
         SharedPreferences settings = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         String secret = key;
         if (key.length() < 8) {
-            secret += "paipai";
+            secret += YOU_TAO;
         }
         secret = secret.substring(0, 8);
         try {
@@ -88,6 +89,7 @@ public class MyUtils {
                 return DES.decryptDES(saveValue, secret);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return settings.getString(key, "");
         }
     }

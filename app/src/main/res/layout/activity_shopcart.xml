@@ -35,11 +35,18 @@
         android:layout_height="@dimen/view_1"
         android:background="@color/bg_line_gray" />
 
-    <FrameLayout
-        android:id="@+id/shopcart_fragment_fl"
+    <ListView
+        android:cacheColorHint="@android:color/transparent"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:id="@+id/shopcart_fragment_lv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></FrameLayout>
+        android:layout_weight="1">
+
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"

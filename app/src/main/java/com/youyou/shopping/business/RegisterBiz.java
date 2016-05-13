@@ -13,16 +13,16 @@ import java.util.Map;
 @EBean
 public class RegisterBiz extends BaseBusiness {
     public static final int GET_SMS_LIST = 1;
-    private static final int USER_REGISTER =2 ;
+    public static final int USER_REGISTER =2 ;
 
     @Background
     public void getSmsCode(Map map){
-        objectCallbackInterface.objectCallBack(GET_SMS_LIST, handleResponse(baseApi.getSMSCode(map)));
+        objectCallbackInterface.objectCallBack(GET_SMS_LIST, baseApi.getSMSCode(map));
     }
 
     @Background
     public void userRegister(Map map){
-        objectCallbackInterface.objectCallBack(USER_REGISTER, handleResponse(baseApi.userRegister(map)));
+        objectCallbackInterface.objectCallBack(USER_REGISTER, baseApi.userRegister(map));
     }
 
     @Background

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,8 +27,12 @@ import com.youyou.shopping.model.BrandBean;
 import com.youyou.shopping.model.DictBean;
 import com.youyou.shopping.model.GalleryBean;
 import com.youyou.shopping.model.RecommendBean;
+import com.youyou.shopping.ui.CategoryActivity;
+import com.youyou.shopping.ui.CategoryActivity_;
 import com.youyou.shopping.ui.CategoryDescActivity_;
 import com.youyou.shopping.ui.CountryActivity_;
+import com.youyou.shopping.ui.QueryMainActivity;
+import com.youyou.shopping.ui.QueryMainActivity_;
 import com.youyou.shopping.utils.MyUtils;
 import com.youyou.shopping.view.GalleryView;
 
@@ -42,7 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @EFragment(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface {
+public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener {
 
     public static final String BG_BASE_COUNTRY = "bg_base_country";
     public static final String COUNTRY_CODE = "countryCode";
@@ -53,6 +58,8 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     @ViewById
     TextView home_country_tv;
+    @ViewById
+    TextView home_search_tv;
 
     @Bean
     CommodityAdapter adapter;
@@ -95,16 +102,26 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
             OnItemClickListener listener = new OnItemClickListener();
             adapter.setOnItemClickListener(listener);
         }
+        home_search_tv.setOnTouchListener(this);
     }
 
-    // // TODO: 2016/5/11 弃用 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            QueryMainActivity_.intent(getActivity()).start();
+            getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+        }
+        return false;
+    }
+
+
     class OnItemClickListener implements CommodityAdapter.OnItemClickListener {
 
         @Override
         public void itemClick(View view) {
             //需要传递id,打开一个新的act
             Intent intent = new Intent(mContext, CategoryDescActivity_.class);
-            intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, (String)view.getTag());
+            intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, (String) view.getTag());
 //            CategoryDescActivity_.intent(mContext).extra("goodsId",recommendList.get(position).id).start();
             startActivity(intent);
         }
@@ -174,6 +191,18 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
         CountryActivity_.intent(getActivity()).start();
         getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
+
+    @Click(R.id.home_category_iv)
+    void jumpCategory() {
+        CategoryActivity_.intent(getActivity()).start();
+        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+    }
+
+//    @Click(R.id.home_search_tv)
+//    void jumpSearch() {
+//        QueryMainActivity_.intent(getActivity()).start();
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//    }
 
 
     @UiThread

@@ -15,6 +15,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.youyou.shopping.R;
 import com.youyou.shopping.base.BaseActivity;
 import com.youyou.shopping.base.BaseBusiness;
+import com.youyou.shopping.bean.Response;
 import com.youyou.shopping.business.RegisterBiz;
 import com.youyou.shopping.model.SmsCodeBean;
 import com.youyou.shopping.utils.UserUtils;
@@ -24,6 +25,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.w3c.dom.Text;
 
@@ -81,10 +83,9 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
             map.put("mobile", phone);
             map.put("type", "1");
             registerBiz.getSmsCode(map);//请求完数据后
-//            registerBiz.showErrorMessage("验证码已发送");// TODO: 2016/5/5 这里不是很完善,到后面可能要改动接口方法,给接口方法设置返回值 
             isTimeout = false;
-            handler.postDelayed(runable,30000);
-        }else{
+            handler.postDelayed(runable, 30000);
+        } else {
             showToastShort("30秒后重试");
         }
 
@@ -98,12 +99,12 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
     };
 
     @Click
-    void register_register_bt(){
+    void register_register_bt() {
         String phoneNum = register_phone.getText().toString();
         String SMSCode = register_smscode.getText().toString();
         String passWord = register_password.getText().toString();
         String invCode = register_invitation_code.getText().toString();
-        if (TextUtils.isEmpty(phoneNum)||TextUtils.isEmpty(SMSCode)||TextUtils.isEmpty(passWord)){
+        if (TextUtils.isEmpty(phoneNum) || TextUtils.isEmpty(SMSCode) || TextUtils.isEmpty(passWord)) {
             showToastShort("值不能为空");
             return;
         }
@@ -114,6 +115,7 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         map.put("parentInvitationCode", invCode);
         registerBiz.userRegister(map);
     }
+
     @Click
     void register_cancel() {
         finish();
@@ -127,10 +129,24 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
+    @UiThread
     @Override
     public void objectCallBack(int type, Object t) {
-        if (type == RegisterBiz.GET_SMS_LIST) {
-
+        if (type == RegisterBiz.USER_REGISTER) {
+            Response response = (Response) t;
+            if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                showToastShort("注册成功");
+                register_cancel();
+            } else {
+                showToastShort(response.msg );
+            }
+        }else if (type == RegisterBiz.GET_SMS_LIST) {
+            Response response = (Response) t;
+            if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                showToastShort("验证码已发送");
+            } else {
+                showToastShort(response.msg);
+            }
         }
     }
 }

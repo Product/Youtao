@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.shopping.R;
 import com.youyou.shopping.base.BaseConstants;
 import com.youyou.shopping.bean.ViewHolder;
+import com.youyou.shopping.model.GoodsDescBean;
 import com.youyou.shopping.model.RecommendBean;
 
 import org.androidannotations.annotations.AfterInject;
@@ -23,11 +24,11 @@ import org.androidannotations.annotations.RootContext;
 import java.util.List;
 
 @EBean
-public class CommodityAdapter extends BaseAdapter {
+public class QueryMainAdapter extends BaseAdapter {
 
     @RootContext
     Context context;
-    private List<RecommendBean> list;
+    private List<GoodsDescBean> list;
     private LayoutInflater mInflater;
     DisplayImageOptions options;
     ImageLoader imageLoader;
@@ -41,7 +42,7 @@ public class CommodityAdapter extends BaseAdapter {
 
     //对外提供设置数据的接口
     //设置数据之后刷新界面
-    public void setData(List<RecommendBean> list) {
+    public void setData(List<GoodsDescBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -77,12 +78,12 @@ public class CommodityAdapter extends BaseAdapter {
         TextView left_commodity_origin_price = ViewHolder.get(convertView, R.id.left_commodity_origin_price);
         ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img);
 
-        RecommendBean leftitem = list.get(position * 2);
+        GoodsDescBean leftitem = list.get(position * 2);
         leftLayout.setTag(leftitem.id);
-        left_commodity_name.setText(leftitem.name);
+        left_commodity_name.setText(leftitem.categoryName);
         left_commodity_price.setText("¥" + leftitem.price);
         left_commodity_origin_price.setText(leftitem.customizedPriceName + ":¥" + leftitem.customizedPrice);
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + leftitem.location, left_commodity_img);
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + leftitem.image, left_commodity_img);
         leftLayout.setOnClickListener(new AdapterClickListener());
         /**
          *  position 0    1   2
@@ -91,16 +92,16 @@ public class CommodityAdapter extends BaseAdapter {
         TextView right_commodity_name = ViewHolder.get(convertView, R.id.right_commodity_name);
         TextView right_commodity_price = ViewHolder.get(convertView, R.id.right_commodity_price);
         TextView right_commodity_origin_price = ViewHolder.get(convertView, R.id.right_commodity_origin_price);
-        ImageView right_commodity_img = ViewHolder.get(convertView, R.id.right_commodity_img);
+
 
         if (position * 2 + 1 < list.size()) {
             rightLayout.setOnClickListener(new AdapterClickListener());
-            RecommendBean rightitem = list.get(position * 2 + 1);
+            GoodsDescBean rightitem = list.get(position * 2 + 1);
             rightLayout.setTag(rightitem.id);
-            right_commodity_name.setText(rightitem.name);
+            right_commodity_name.setText(rightitem.categoryName);
             right_commodity_price.setText("¥" + rightitem.price);
             right_commodity_origin_price.setText(rightitem.customizedPriceName + ":¥" + rightitem.customizedPrice);
-            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + rightitem.location, right_commodity_img);
+            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + rightitem.image, left_commodity_img);
             rightLayout.setVisibility(View.VISIBLE);
         } else {
             rightLayout.setVisibility(View.INVISIBLE);

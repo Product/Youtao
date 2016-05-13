@@ -14,10 +14,16 @@ import java.util.Map;
 @EBean
 public class CategoryDescBiz extends BaseBusiness {
     public static final int QUERY_GOODS_BY_ID = 1;
+    public static final int QUERY_CATEGORY = 2;
 
     @Background
     public void queryGoodsById(Map map){
         objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_ID, handleResponse(baseApi.queryGoodsById(map)));
+    }
+
+    @Background
+    public void queryCategory(Map map) {
+        arrayListCallbackInterface.arrayCallBack(QUERY_CATEGORY, handleResponse(baseApi.queryCategory(map)));
     }
 
 

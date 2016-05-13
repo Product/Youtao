@@ -2,16 +2,18 @@ package com.youyou.shopping.ui;
 
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.youyou.shopping.R;
 import com.youyou.shopping.base.BaseActivity;
 import com.youyou.shopping.base.BaseBusiness;
+import com.youyou.shopping.bean.Response;
 import com.youyou.shopping.business.LoginBiz;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.HashMap;
@@ -27,7 +29,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     @Bean
     LoginBiz loginBiz;
 
-    Map paramMap ;
+    Map<String,String> paramMap ;
     @AfterViews
     void afterViews() {
         loginBiz.setObjectCallbackInterface(this);
@@ -45,12 +47,14 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
             showToastShort("密码不能为空");
             return;
         }
-        paramMap = new HashMap();
+        paramMap = new HashMap<>();
         paramMap.put("mobile",userPhone);
         paramMap.put("password",userPwd);
         loginBiz.userLogin(paramMap);
-        showToastShort("登录成功");
-        login_cancel();
+    }
+
+    @Click
+    void login_weixin_ll() {
     }
     @Click
     void login_forgetpwd_tv(){
@@ -77,8 +81,17 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
         overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
+    @UiThread
     @Override
     public void objectCallBack(int type, Object t) {
-        //// TODO: 2016/5/5 用户登录的操作,可以拿取到数据
+        if (type == LoginBiz.USER_LOGIN) {
+            Response response = (Response) t;
+            if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                showToastShort("登录成功");
+                login_cancel();
+            } else {
+                showToastShort(response.msg);
+            }
+        }
     }
 }

@@ -13,11 +13,11 @@ import java.util.Map;
 @EBean
 public class LoginBiz extends BaseBusiness {
     public static final int USER_LOGIN = 1;
-    private static final int USER_REGISTER =2 ;
+    public static final int TEXT_LOGIN =2 ;
 
     @Background
     public void userLogin(Map map){
-        objectCallbackInterface.objectCallBack(USER_LOGIN, handleResponse(baseApi.userLogin(map)));
+        objectCallbackInterface.objectCallBack(USER_LOGIN,baseApi.userLogin(map));
     }
 
 

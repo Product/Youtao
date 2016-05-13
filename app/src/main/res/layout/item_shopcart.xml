@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_country_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_200"
+        android:background="@color/material_blue_grey_900"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/view_35"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:paddingTop="@dimen/view_35">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/view_40"
+            android:background="@drawable/shopbox_seletecd_2x" />
+
+        <ImageView
+            android:id="@+id/item_shopcart_pic_iv"
+            android:layout_width="@dimen/view_140"
+            android:layout_height="@dimen/view_140"
+            android:background="@color/font_hint_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/view_5"
+            android:layout_marginLeft="@dimen/view_25"
+            android:layout_marginTop="@dimen/view_5"
+            android:background="@android:color/holo_orange_light">
+
+            <TextView
+                android:id="@+id/item_shopcart_name_tv"
+                android:textColor="@color/font_black"
+                android:lines="2"
+                android:textSize="@dimen/font_24"
+                android:text="兰芝(LANEIGE)细致无暇气垫粉凝霜SPF30+5件套"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="@dimen/view_286"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/item_shopcart_price_tv"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:textSize="@dimen/font_26"
+                android:text="￥1295"
+                android:textColor="@color/font_country_conuntry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="@dimen/font_24"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="删除"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:padding="@dimen/view_10"
+                android:id="@+id/item_shopcart_down_iv"
+                android:textSize="@dimen/view_35"
+                android:gravity="center"
+                android:src="@drawable/bar_shopcart_down"
+                android:background="@android:color/holo_green_light"
+                android:layout_alignParentBottom="true"
+                android:layout_width="@dimen/view_50"
+                android:layout_height="@dimen/view_50" />
+
+            <TextView
+                android:text="1"
+                android:layout_toRightOf="@id/item_shopcart_down_iv"
+                android:id="@+id/item_shopcart_mid_tv"
+                android:textSize="@dimen/view_35"
+                android:gravity="center"
+                android:background="@android:color/holo_blue_bright"
+                android:layout_alignParentBottom="true"
+                android:layout_width="@dimen/view_80"
+                android:layout_height="@dimen/view_50" />
+
+            <ImageView
+                android:layout_toRightOf="@id/item_shopcart_mid_tv"
+                android:padding="@dimen/view_10"
+                android:id="@+id/item_shopcart_up_iv"
+                android:textSize="@dimen/view_35"
+                android:gravity="center"
+                android:src="@drawable/bar_shopcart_up"
+                android:background="@android:color/holo_green_light"
+                android:layout_alignParentBottom="true"
+                android:layout_width="@dimen/view_50"
+                android:layout_height="@dimen/view_50" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/HorizonLineView20Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

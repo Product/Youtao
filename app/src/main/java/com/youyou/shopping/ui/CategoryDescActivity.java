@@ -3,25 +3,38 @@ package com.youyou.shopping.ui;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 
 import com.youyou.shopping.R;
 import com.youyou.shopping.base.BaseActivity;
+import com.youyou.shopping.base.BaseBusiness;
 import com.youyou.shopping.base.BaseConstants;
+import com.youyou.shopping.bean.Response;
+import com.youyou.shopping.business.ShopcartBiz;
 import com.youyou.shopping.ui.fragment.CategoryDescFragment_;
 import com.youyou.shopping.ui.fragment.ShoppingCatFragment_;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/10.
  */
 @EActivity(R.layout.activity_category_desc)
-public class CategoryDescActivity extends BaseActivity {
+public class CategoryDescActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface {
 
     private FragmentManager fragmentManager;
     private String goodsId;
+    @Bean
+    ShopcartBiz shopcartBiz;
+
+    Map map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +48,7 @@ public class CategoryDescActivity extends BaseActivity {
 
         CategoryDescFragment_ categoryDescFragment = new CategoryDescFragment_();
         Bundle bundle = new Bundle();
-        bundle.putString(BaseConstants.preferencesFiled.GOODS_ID,goodsId);
+        bundle.putString(BaseConstants.preferencesFiled.GOODS_ID, goodsId);
         categoryDescFragment.setArguments(bundle);
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -64,8 +77,16 @@ public class CategoryDescActivity extends BaseActivity {
      * 这个方式待定
      */
     @Click
-    void category_insertcar_bt() {// TODO: 2016/5/11 加入购物车操作
-
+    void category_insertcar_bt() {
+        shopcartBiz.setObjectCallbackInterface(this);
+        map = new HashMap();
+        Map dataArray = new HashMap();
+        dataArray.put("goodsId", goodsId);
+        dataArray.put("count", 1);
+        Map[] array = {dataArray};
+        map.put("isUpdate", 0);
+        map.put("dataArray", array);
+        shopcartBiz.updatecart(map);
     }
 
     @Override
@@ -73,5 +94,17 @@ public class CategoryDescActivity extends BaseActivity {
         super.onBackPressed();
         finish();
         overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+    }
+    @UiThread
+    @Override
+    public void objectCallBack(int type, Object t) {
+        if (ShopcartBiz.UPDATE_CART == type) {
+            Response response = (Response) t;
+            if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                showToastShort("成功加入购物车");
+            }else{
+                showToastShort(response.msg);
+            }
+        }
     }
 }

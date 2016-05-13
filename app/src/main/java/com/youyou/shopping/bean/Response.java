@@ -20,4 +20,5 @@ public class Response<T> {
 	public String msg;
 	public Integer size;
 	public T data;
+	public Integer totalPrice;
 }

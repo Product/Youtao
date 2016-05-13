@@ -3,7 +3,7 @@
     android:id="@+id/item_country_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/item_country_tv"
@@ -13,5 +13,10 @@
         android:gravity="center"
         android:textColor="@color/font_black"
         android:textSize="@dimen/font_32" />
+
+
+
+
+
 
 </LinearLayout>
