@@ -28,7 +28,7 @@
                     android:layout_marginTop="@dimen/view_30"
                     android:layout_marginRight="@dimen/view_30"/>
                 
-                <com.youyou.shopping.view.CircleImageView
+                <com.youyou.uumall.view.CircleImageView
                     android:id="@+id/mine_head"
                     android:layout_width="@dimen/view_120"
                     android:layout_height="@dimen/view_120"

@@ -19,6 +19,7 @@
     <color name="bg_message_hint_point">#fe4853</color>
     <color name="font_commodity_price">#fa5b46</color>
     <color name="font_commodity_origin_price">#b6b6b6</color>
+    <color name="bg_confirm_shape">#b5b5b5</color>
     <color name="font_register_smscode">#FFFD4932</color>
     <color name="font_country_conuntry">#ff4933</color>
 </resources>

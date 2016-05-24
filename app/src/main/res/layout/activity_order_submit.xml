@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout style="@style/RelativeLayout_Title_Normal">
+
+        <ImageButton
+            android:id="@+id/order_submit_iv"
+            style="@style/ImageView_Title_Pro" />
+
+        <TextView
+            android:id="@+id/order_submit_tv"
+            style="@style/TextView_Title_Title"
+            android:text="@string/order_submit_title" />
+    </RelativeLayout>
+    <View style="@style/HorizonLineStyle" />
+    <ListView
+        android:id="@+id/order_submit_lv"
+        android:cacheColorHint="@android:color/transparent"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

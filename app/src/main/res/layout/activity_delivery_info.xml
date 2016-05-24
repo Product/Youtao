@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_90"
+        android:paddingBottom="@dimen/view_10"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:paddingTop="@dimen/view_10">
+
+        <ImageView
+            android:id="@+id/delivery_info_pro_iv"
+            android:layout_width="@dimen/view_25"
+            android:layout_height="@dimen/view_44"
+            android:layout_centerVertical="true"
+            android:background="@drawable/pro_2x" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="@string/delivery_info_title"
+            android:textSize="@dimen/font_40" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/view_25"
+        android:layout_marginRight="@dimen/view_25"
+        android:orientation="vertical">
+
+        <View style="@style/HorizonLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_name"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="陈冰"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+
+        <View style="@style/HorizonLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_phone"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13795376899"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+
+        <View style="@style/HorizonLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_date"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_date_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+
+        <View style="@style/HorizonLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_flt_no"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_flt_no_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+
+        <View style="@style/HorizonLineStyle" />
+
+        <LinearLayout
+            android:id="@+id/delivery_info_delivery_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_delivery"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <TextView
+                android:id="@+id/delivery_info_delivery_tv2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 >
+                <TextView
+                    android:id="@+id/delivery_info_delivery_tv"
+                    android:textColor="@color/font_country_conuntry"
+                    android:textSize="@dimen/font_26"
+                    android:text="请选择自提点"
+                    android:layout_marginRight="@dimen/view_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/delivery_info_delivery_iv"
+                    android:background="@drawable/bar_arrow_normal_2x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/HorizonLineStyle" />
+        <LinearLayout
+            android:id="@+id/delivery_info_add_ll"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:enabled="false"
+        android:id="@+id/delivery_info_confirm_btn"
+        android:background="@drawable/btn_confirm_seclector"
+        android:textColor="@drawable/font_confirm_seclector"
+        android:textSize="@dimen/font_30"
+        android:text="@string/delivery_info_confirm"
+        android:layout_marginTop="@dimen/view_80"
+        android:layout_width="@dimen/view_650"
+        android:layout_height="@dimen/view_86" />
+
+
+
+</LinearLayout>

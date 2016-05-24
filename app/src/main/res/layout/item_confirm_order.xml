@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_country_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_180"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/view_20"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:paddingTop="@dimen/view_20">
+
+
+        <ImageView
+            android:id="@+id/item_confirm_order_pic_iv"
+            android:layout_width="@dimen/view_140"
+            android:layout_height="@dimen/view_140" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/view_5"
+            android:layout_marginLeft="@dimen/view_25"
+            android:layout_marginTop="@dimen/view_5">
+
+            <TextView
+                android:id="@+id/item_confirm_order_name_tv"
+                android:textColor="@color/font_black"
+                android:lines="2"
+                android:textSize="@dimen/font_24"
+                android:text="兰芝(LANEIGE)细致无暇气垫粉凝霜SPF30+5件套"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="@dimen/view_356"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/item_confirm_order_price_tv"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:textSize="@dimen/font_26"
+                android:text="￥1295"
+                android:textColor="@color/font_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="@dimen/view_25"
+                android:text="x1"
+                android:layout_below="@id/item_confirm_order_name_tv"
+                android:id="@+id/item_confirm_order_count_tv"
+                android:textSize="@dimen/font_24"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

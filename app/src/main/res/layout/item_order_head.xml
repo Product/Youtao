@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_64"
+        android:background="@color/bg_settings_gap"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25">
+    <TextView
+        android:id="@+id/item_order_date_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="2016-03-28"
+        android:textColor="@color/font_hint_gray"
+        android:textSize="@dimen/font_24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order_submit_title"
+        android:textColor="@color/font_country_conuntry"
+        android:textSize="@dimen/font_24" />
+
+    </LinearLayout>
+</LinearLayout>

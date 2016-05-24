@@ -14,7 +14,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.youyou.shopping"
+        applicationId "com.youyou.uumall"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -31,7 +31,7 @@ android {
 
         release {
             try {
-                storeFile file("shopping.jks")
+                storeFile file("uumall.jks")
                 storePassword RELEASE_STORE_PASSWORD
                 keyAlias RELEASE_KEY_ALIAS
                 keyPassword RELEASE_KEY_PASSWORD
@@ -151,12 +151,12 @@ buildscript {
 apt {
     arguments {
         androidManifestFile variant.outputs[0].processResources.manifestFile
-        resourcePackageName 'com.youyou.shopping'
+        resourcePackageName 'com.youyou.uumall'
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:22.2.1'
     // （androidannotations）3.使用apt引入对androidannotation的依赖
@@ -188,4 +188,5 @@ dependencies {
     compile files('libs/MobCommons.jar')
     compile files('libs/MobTools.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile files('libs/libammsdk.jar')
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:paddingLeft="@dimen/view_182"
+        android:id="@+id/item_delivery_info_tv"
+        android:gravity="center_vertical"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_26"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100" />
+    <View style="@style/HorizonLineStyle" />
+</LinearLayout>

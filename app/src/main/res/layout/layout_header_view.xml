@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.youyou.shopping.view.GalleryView
+    <com.youyou.uumall.view.GalleryView
         android:id="@+id/gallery"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_300"/>

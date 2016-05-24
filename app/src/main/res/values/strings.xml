@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">shopping</string>
+    <string name="app_name">油桃</string>
     <string name="app_exit">程序异常退出</string>
     <string name="press_again_to_exit_program">再按一次退出程序</string>
     <string name="hint">提示</string>
@@ -53,4 +53,35 @@
 
     <!--shopcart-->
     <string name="shopcart_title">购物车</string>
+    <string name="shopcart_accounts">结算(0)</string>
+    <string name="shopcart_confirm">确定</string>
+
+    <!--delivery info-->
+    <string name="delivery_info_title">编辑取货信息</string>
+    <string name="delivery_info_name">收货人</string>
+    <string name="delivery_info_phone">手机号码</string>
+    <string name="delivery_info_date">回国日期</string>
+    <string name="delivery_info_flt_no">航班号</string>
+    <string name="delivery_info_delivery">自提点</string>
+    <string name="delivery_info_confirm">确认</string>
+
+    <!--payment-->
+    <string name="payment_title">支付方式:</string>
+    <string name="payment_online">在线支付</string>
+    <string name="payment_wxpay_01">微信支付</string>
+    <string name="payment_wxpay_02">使用微信支付,安全便捷</string>
+
+    <!--order submit-->
+    <string name="order_submit_title">待付款</string>
+    <string name="order_submit_item_pay">去付款</string>
+    <string name="order_submit_item_cancel">取消订单</string>
+    <!--order confirm-->
+    <string name="order_submit_confirm_title">待发货</string>
+    <!--order shipping-->
+    <string name="order_submit_shipping_title">待发货</string>
+    <!--dialog-->
+    <string name="dialog_cancel_title">确认取消订单?</string>
+    <string name="dialog_cancel_message">取消之后将自动退款</string>
+    <string name="dialog_cancel_pos">放弃</string>
+    <string name="dialog_cancel_neg">确定</string>
 </resources>

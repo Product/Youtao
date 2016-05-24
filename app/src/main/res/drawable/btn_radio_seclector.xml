@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--被点中,失去焦点
+    <item android:state_checked="true" android:state_window_focused="false"
+        android:drawable="@drawable/shopbox_seletecd_2x" />
+    &lt;!&ndash;没有被点中,失去焦点&ndash;&gt;
+    <item android:state_checked="false" android:state_window_focused="false"
+        android:drawable="@drawable/nomal_btn_radio" />
+    &lt;!&ndash;点中,按下&ndash;&gt;
+    <item android:state_checked="true" android:state_pressed="true"
+        android:drawable="@drawable/shopbox_seletecd_2x" />
+    &lt;!&ndash;没被点中,按下&ndash;&gt;
+    <item android:state_checked="false" android:state_pressed="true"
+        android:drawable="@drawable/nomal_btn_radio" />
+    &lt;!&ndash;点中,有焦点&ndash;&gt;
+    <item android:state_checked="true" android:state_focused="true"
+        android:drawable="@drawable/shopbox_seletecd_2x" />
+    &lt;!&ndash;没被点中,得到焦点&ndash;&gt;
+    <item android:state_checked="false" android:state_focused="true"
+        android:drawable="@drawable/nomal_btn_radio" />-->
+    <!--没被点-->
+    <item android:state_checked="false" android:state_enabled="false" android:drawable="@drawable/shopbox_nomal_2x" />
+    <!--点中了-->
+    <item android:state_checked="true" android:state_enabled="true" android:drawable="@drawable/shopbox_seletecd_2x" />
+</selector>

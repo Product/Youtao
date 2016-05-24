@@ -14,6 +14,30 @@
         <item name="android:background">@color/bg_settings_gap</item>
     </style>
 
+    <!--常用头标题背景框架-->
+    <style name="RelativeLayout_Title_Normal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/view_90</item>
+        <item name="android:paddingBottom">@dimen/view_10</item>
+        <item name="android:paddingLeft">@dimen/view_25</item>
+        <item name="android:paddingRight">@dimen/view_25</item>
+        <item name="android:paddingTop">@dimen/view_10</item>
+    </style>
 
+    <!--左上角返回键-->
+    <style name="ImageView_Title_Pro">
+        <item name="android:layout_width">@dimen/view_25</item>
+        <item name="android:layout_height">@dimen/view_44</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/pro_2x</item>
+    </style>
 
+    <!--头标题-->
+    <style name="TextView_Title_Title">
+        <item name="android:textColor">@color/font_black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_36</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
 </resources>
