@@ -22,7 +22,7 @@
         android:textColor="@color/font_hint_gray"
         android:textSize="@dimen/font_24" />
 
-    <TextView
+    <TextView android:id="@+id/item_order_state_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/order_submit_title"

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+    <TextView
+        android:layout_marginTop="@dimen/view_150"
+        android:textSize="@dimen/font_50"
+        style="@style/TextView_Title_Title"
+        android:text="@string/wxpay_callback_title" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/view_100"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_150">
+        <Button
+            android:id="@+id/wxpay_callback_home_btn"
+            android:background="@drawable/bg_disenabled_confirm_shape"
+            android:textSize="@dimen/font_40"
+            android:text="@string/wxpay_callback_home"
+            android:layout_marginLeft="@dimen/view_50"
+            android:layout_marginRight="@dimen/view_50"
+            android:layout_marginTop="@dimen/view_20"
+            android:layout_marginBottom="@dimen/view_20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/wxpay_callback_order_btn"
+            android:background="@drawable/bg_disenabled_confirm_shape"
+            android:textSize="@dimen/font_40"
+            android:text="@string/wxpay_callback_order"
+            android:layout_marginLeft="@dimen/view_50"
+            android:layout_marginRight="@dimen/view_50"
+            android:layout_marginTop="@dimen/view_20"
+            android:layout_marginBottom="@dimen/view_20"
+            android:layout_margin="@dimen/view_20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</LinearLayout>

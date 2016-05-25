@@ -46,7 +46,7 @@ public class OrderBean {
     public String status;
     public ArrayList<GoodsList> goodsList;
 
-    class Address {
+    public class Address {
         public Boolean searchFromPage;
         public String createDate;
         public String updateDate;
@@ -56,6 +56,19 @@ public class OrderBean {
         public String name;
         public String description;
 
+        @Override
+        public String toString() {
+            return "Address{" +
+                    "searchFromPage=" + searchFromPage +
+                    ", createDate='" + createDate + '\'' +
+                    ", updateDate='" + updateDate + '\'' +
+                    ", delFlag='" + delFlag + '\'' +
+                    ", id='" + id + '\'' +
+                    ", countryCode='" + countryCode + '\'' +
+                    ", name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    '}';
+        }
     }
 
     @Override

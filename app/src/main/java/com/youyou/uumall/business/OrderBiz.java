@@ -40,10 +40,8 @@ public class OrderBiz extends BaseBusiness{
         Map map = new HashMap();
         map.put("pageNo",pageNo);
         map.put("pageSize",pageSize);
-        map.put("orderId",orderId);
+        map.put("id",orderId);
         map.put("status",status);
-//        Response<Object> listResponse = baseApi.queryOrder(map);
-//        log.e(listResponse.toString());
         arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,handleResponse(baseApi.queryOrder(map)));
     }
 }

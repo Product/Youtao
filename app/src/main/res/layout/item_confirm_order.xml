@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/item_confirm_order_ll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_180"
         android:background="@color/white"

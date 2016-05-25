@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
+import com.youyou.uumall.model.GoodsList;
 import com.youyou.uumall.model.ShopCartBean;
 
 import org.androidannotations.annotations.AfterInject;
@@ -27,7 +28,7 @@ public class ConfirmOrderAdapter extends BaseAdapter{
     @RootContext
     Context mContext;
 
-    List<ShopCartBean> mData;
+    List mData;
     private ImageLoader imageLoader;
 
     @AfterInject
@@ -35,7 +36,7 @@ public class ConfirmOrderAdapter extends BaseAdapter{
         imageLoader = ImageLoader.getInstance();
     }
 
-    public void setData(List<ShopCartBean> mData){
+    public void setData(List mData){
         this.mData = mData;
         notifyDataSetChanged();
     }
@@ -64,13 +65,22 @@ public class ConfirmOrderAdapter extends BaseAdapter{
             TextView item_confirm_order_name_tv = ViewHolder.get(convertView, R.id.item_confirm_order_name_tv);
             TextView item_confirm_order_price_tv = ViewHolder.get(convertView, R.id.item_confirm_order_price_tv);
             TextView item_confirm_order_count_tv = ViewHolder.get(convertView, R.id.item_confirm_order_count_tv);
-
-        ShopCartBean bean = mData.get(position);
+        Object data = mData.get(position);
+        if (data instanceof  ShopCartBean){
+        ShopCartBean bean = (ShopCartBean) data;
         String[] pics = bean.image.split("\\|");
         item_confirm_order_name_tv.setText(bean.goodsName);
         item_confirm_order_price_tv.setText("￥"+bean.subtotal);
         item_confirm_order_count_tv.setText("x"+bean.count);
         imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv);
+        }else if (data instanceof GoodsList){
+            GoodsList bean = (GoodsList) data;
+            item_confirm_order_name_tv.setText(bean.title);
+            item_confirm_order_price_tv.setText("￥"+bean.coupon);
+            item_confirm_order_count_tv.setText("x"+bean.cnt);
+            String[] pics = bean.img.split("\\|");
+            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv);
+        }
         return convertView;
     }
 }

@@ -84,17 +84,20 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center"
                     >
 
                     <ImageView
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/payment_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_mine_payment"/>
 
                     <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/mine_point_ll_1"
+                        android:layout_alignTop="@id/payment_img"
                         android:layout_width="@dimen/view_32"
                         android:layout_height="@dimen/view_32"
                         android:background="@drawable/bg_msg_hint_point"
@@ -104,6 +107,8 @@
                         android:gravity="center">
 
                         <TextView
+                            android:gravity="center"
+                            android:id="@+id/mine_point_tv_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -113,6 +118,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/payment_img"
@@ -123,45 +129,73 @@
 
                 </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/shipped_layout"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    >
 
                     <ImageView
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/shipped_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_mine_shipped"/>
 
                     <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/shipped_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/font_gray"
                         android:textSize="@dimen/font_24"
                         android:layout_marginTop="@dimen/view_20"
                         android:text="@string/mine_shipped"/>
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/mine_point_ll_2"
+                        android:layout_alignTop="@id/shipped_img"
+                        android:layout_width="@dimen/view_32"
+                        android:layout_height="@dimen/view_32"
+                        android:background="@drawable/bg_msg_hint_point"
+                        android:layout_toRightOf="@id/shipped_img"
+                        android:layout_marginLeft="-8dp"
+                        android:layout_marginTop="-8dp"
+                        android:gravity="center">
 
-                </LinearLayout>
+                        <TextView
+                            android:gravity="center"
+                            android:id="@+id/mine_point_tv_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_22"
+                            android:text="3"/>
 
-                <LinearLayout
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:gravity="center"
                     android:id="@+id/pickup_layout"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    >
 
                     <ImageView
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/pickup_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_mine_pickup"/>
 
                     <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/pickup_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/font_gray"
@@ -169,31 +203,78 @@
                         android:layout_marginTop="@dimen/view_20"
                         android:text="@string/mine_pickup"/>
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/mine_point_ll_3"
+                        android:layout_alignTop="@id/pickup_img"
+                        android:layout_width="@dimen/view_32"
+                        android:layout_height="@dimen/view_32"
+                        android:background="@drawable/bg_msg_hint_point"
+                        android:layout_toRightOf="@id/pickup_img"
+                        android:layout_marginLeft="-8dp"
+                        android:layout_marginTop="-8dp"
+                        android:gravity="center">
 
-                <LinearLayout
+                        <TextView
+                            android:gravity="center"
+                            android:id="@+id/mine_point_tv_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_22"
+                            android:text="3"/>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/all_order_layout"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    >
 
                     <ImageView
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/all_order_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_mine_all_order"/>
 
                     <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/all_order_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/font_gray"
                         android:textSize="@dimen/font_24"
                         android:layout_marginTop="@dimen/view_20"
                         android:text="@string/mine_all_order"/>
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/mine_point_ll_4"
+                        android:layout_width="@dimen/view_32"
+                        android:layout_height="@dimen/view_32"
+                        android:background="@drawable/bg_msg_hint_point"
+                        android:layout_toRightOf="@id/all_order_img"
+                        android:layout_alignTop="@id/all_order_img"
+                        android:layout_marginLeft="-8dp"
+                        android:layout_marginTop="-8dp"
+                        android:gravity="center">
 
-                </LinearLayout>
+                        <TextView
+                            android:gravity="center"
+                            android:id="@+id/mine_point_tv_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_22"
+                            android:text="3"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
 

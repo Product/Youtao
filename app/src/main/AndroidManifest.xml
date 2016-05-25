@@ -110,14 +110,30 @@
         <activity
             android:name=".ui.OrderShippingActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="待发货界面"
+            android:label="待收货界面"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.OrderAllActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="全部订单界面"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.OrderDetailActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="订单详情界面"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.youyou.uumall.wxapi.WXPayEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="微信回调"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wxdfc1314988fb84a9"/>
+            </intent-filter>
+        </activity>
         <!--友盟app key-->
         <meta-data
             android:name="UMENG_APPKEY"

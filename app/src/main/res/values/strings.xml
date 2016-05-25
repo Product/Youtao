@@ -78,10 +78,25 @@
     <!--order confirm-->
     <string name="order_submit_confirm_title">待发货</string>
     <!--order shipping-->
-    <string name="order_submit_shipping_title">待发货</string>
+    <string name="order_submit_shipping_title">待取货</string>
+    <!--order all-->
+    <string name="order_submit_all_title">全部订单</string>
+    <string name="order_submit_cancel_title">已取消订单</string>
+    <string name="order_submit_done_title">完成订单</string>
+
     <!--dialog-->
     <string name="dialog_cancel_title">确认取消订单?</string>
     <string name="dialog_cancel_message">取消之后将自动退款</string>
     <string name="dialog_cancel_pos">放弃</string>
     <string name="dialog_cancel_neg">确定</string>
+
+    <!--order detail-->
+    <string name="order_detail_item">订单详情</string>
+    <string name="order_detail_cancel">取消订单</string>
+    <string name="order_detail_pay">去付款</string>
+
+    <!--wxpay_callback-->
+    <string name="wxpay_callback_title">支付成功</string>
+    <string name="wxpay_callback_order">查看订单</string>
+    <string name="wxpay_callback_home">返回首页</string>
 </resources>

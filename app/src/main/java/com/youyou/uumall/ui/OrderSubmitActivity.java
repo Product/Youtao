@@ -61,6 +61,7 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
             if (arrayList != null) {
                 List<OrderBean> orderBean = (List<OrderBean>) arrayList;
                 orderAdapter.setData(orderBean);
+                log.e(orderBean.toString());
             }
         }
     }
