@@ -106,9 +106,9 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
             }
             typeData.put(pos, i);
             typeMap.put(pos++, FOOT_TYPE);
-            if (type == ORDER_SUBMIT){//如果是未付款,就加上这个条目
-            typeData.put(pos, i);
-            typeMap.put(pos++, SUBMIT_TYPE);
+            if (type == ORDER_SUBMIT) {//如果是未付款,就加上这个条目
+                typeData.put(pos, i);
+                typeMap.put(pos++, SUBMIT_TYPE);
             }
         }
         return typeMap.get(position);
@@ -142,6 +142,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         int type = getItemViewType(position);
         OrderBean bean = mData.get(typeData.get(position));
         switch (type) {
@@ -179,6 +180,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
                 }
                 int itemPos = itemPosition.get(position);
                 ImageView item_confirm_order_pic_iv = ViewHolder.get(convertView, R.id.item_confirm_order_pic_iv);
+                item_confirm_order_pic_iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 TextView item_confirm_order_name_tv = ViewHolder.get(convertView, R.id.item_confirm_order_name_tv);
                 TextView item_confirm_order_count_tv = ViewHolder.get(convertView, R.id.item_confirm_order_count_tv);
                 TextView item_confirm_order_price_tv = ViewHolder.get(convertView, R.id.item_confirm_order_price_tv);
@@ -216,29 +218,30 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
                 break;
 
         }
+        
         return convertView;
     }
 
     @Override
     public void onClick(View v) {
-            Activity activity = (Activity) mContext;
+        Activity activity = (Activity) mContext;
         if (v.getId() == R.id.item_order_submit_btn) {
-            OrderBean orderBean = mData.get(typeData.get( v.getTag()));
+            OrderBean orderBean = mData.get(typeData.get(v.getTag()));
             Intent intent = new Intent(mContext, PaymentActivity_.class);
             intent.putExtra("data", orderBean.id);
             Double price = Double.valueOf(orderBean.totalCoupon);
             intent.putExtra("price", price);
             mContext.startActivity(intent);
         } else if (v.getId() == R.id.item_order_cancel_btn) {
-            OrderBean orderBean = mData.get(typeData.get( v.getTag()));
+            OrderBean orderBean = mData.get(typeData.get(v.getTag()));
             String orderId = orderBean.id;
             if (listener != null) {
                 listener.cancel(orderId);
             }
         } else if (v.getId() == R.id.item_confirm_order_ll) {
-           String id = (String) v.getTag();
+            String id = (String) v.getTag();
             Intent intent = new Intent(activity, OrderDetailActivity_.class);
-            intent.putExtra("id",id);
+            intent.putExtra("id", id);
             activity.startActivity(intent);
         }
         activity.overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);

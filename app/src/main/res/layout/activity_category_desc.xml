@@ -5,52 +5,39 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_90"
-        android:paddingBottom="@dimen/view_10"
-        android:paddingLeft="@dimen/view_25"
-        android:paddingRight="@dimen/view_25"
-        android:paddingTop="@dimen/view_10">
+        style="@style/RelativeLayout_Title_Normal">
 
         <ImageView
             android:id="@+id/category_pro_iv"
-            android:layout_width="@dimen/view_25"
-            android:layout_height="@dimen/view_44"
-            android:layout_centerVertical="true"
-            android:background="@drawable/pro_2x" />
+            style="@style/ImageView_Title_Pro" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
+            style="@style/TextView_Title_Title"
             android:text="@string/category_decs"
-            android:textSize="@dimen/font_40" />
+            />
 
         <ImageView
             android:id="@+id/category_car_iv"
-            android:layout_width="@dimen/view_50"
-            android:layout_height="@dimen/view_50"
+            android:layout_width="@dimen/view_40"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/view_35"
             android:layout_toLeftOf="@+id/category_menu_iv"
-            android:background="@drawable/shopbox_normal_2x" />
+            android:src="@drawable/shopbox_normal_3x" />
 
         <ImageView
             android:id="@+id/category_menu_iv"
-            android:layout_width="@dimen/view_50"
-            android:layout_height="@dimen/view_50"
+            android:layout_width="@dimen/view_40"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/barmore_normal_2x" />
+            android:src="@drawable/bar_share_3x" />
 
 
     </RelativeLayout>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_1"
-        android:background="@color/bg_line_gray" />
+        style="@style/HorizonLineStyle" />
 
     <FrameLayout
         android:id="@+id/category_fragment_fl"

@@ -1,5 +1,7 @@
 package com.youyou.uumall.ui;
 
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,7 +37,8 @@ public class OrderShippingActivity extends BaseActivity implements BaseBusiness.
 
     @ViewById
     TextView order_submit_tv;
-
+    @ViewById
+    LinearLayout order_empty;
     @AfterViews
     void afterViews() {
         orderAdapter = new OrderAdapter(this,OrderAdapter.ORDER_SHIPPING);
@@ -49,9 +52,13 @@ public class OrderShippingActivity extends BaseActivity implements BaseBusiness.
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == OrderBiz.QUERY_ORDER) {
-            if (arrayList != null) {
+            if (arrayList != null&&arrayList.size()!=0) {
                 List<OrderBean> orderBean = (List<OrderBean>) arrayList;
                 orderAdapter.setData(orderBean);
+            }else{
+                order_submit_lv.setVisibility(View.GONE);
+                order_empty.setVisibility(View.VISIBLE);
+                return ;
             }
         }
     }

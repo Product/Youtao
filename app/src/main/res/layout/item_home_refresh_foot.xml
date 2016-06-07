@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:paddingBottom="@dimen/drop_down_list_header_padding_bottom"
+    android:paddingTop="@dimen/drop_down_list_header_padding_top" >
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_150">
+    <TextView
+        android:textSize="@dimen/font_28"
+        android:text="加载更多"
+        android:id="@+id/item_refresh_foot_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

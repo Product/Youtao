@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/item_category_head_ll"
+        android:gravity="center_vertical"
+        android:padding="@dimen/view_25"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100">
+        <TextView
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/font_28"
+            android:id="@+id/item_category_head_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:paddingTop="@dimen/view_14"
+            android:paddingBottom="@dimen/view_14"
+            android:src="@drawable/next_2x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        style="@style/HorizonLineStyle"
+        />
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="@dimen/view_100"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/guide_vp"
+        android:layout_width="@dimen/view_800"
+        android:layout_height="@dimen/view_800">
+        <com.ant.liao.GifView
+            android:id="@+id/guide_gv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        </android.support.v4.view.ViewPager>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/view_80" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/guide_points_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/guide_redpoint_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/guide_point_selected_3x" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/guide_bt"
+        android:text="@string/guide_btn"
+        android:textColor="@drawable/font_guide_btn_seclector"
+        android:textSize="@dimen/font_34"
+        android:background="@drawable/btn_guide_seclector"
+        android:layout_marginBottom="@dimen/view_175"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/view_300"
+        android:layout_height="@dimen/view_86" />
+</RelativeLayout>

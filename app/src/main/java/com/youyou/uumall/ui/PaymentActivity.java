@@ -1,7 +1,6 @@
 package com.youyou.uumall.ui;
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.tencent.mm.sdk.modelpay.PayReq;
@@ -13,7 +12,6 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.model.WxPrepayOrderBean;
-import com.youyou.uumall.secure.MD5;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -21,9 +19,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/18.
@@ -54,11 +50,7 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
 
     @Click
     void payment_weixin_rl() {
-        Map param = new HashMap();
-        param.put("orderId", mOrder);
-        param.put("totalFee", mPrice);
-        param.put("body", "油桃扫货");
-        orderBiz.createWxPrepayOrder(param);
+        orderBiz.createWxPrepayOrder(mOrder,mPrice);
     }
 
     /**
@@ -81,23 +73,27 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
      */
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
+        log.e(arrayList.get(0).toString());
+
         if (arrayList != null && type == OrderBiz.CREATE_WX_PREPAY_ORDER) {
+//        if (false){
             List<WxPrepayOrderBean> list = (List<WxPrepayOrderBean>) arrayList;
             WxPrepayOrderBean wxPrepayOrderBean = list.get(0);
-            String appId = BaseConstants.ImportantField.APP_ID;
-            String partnerId = wxPrepayOrderBean.mch_id;
-            String prepayId = wxPrepayOrderBean.prepay_id;
+            String appId = wxPrepayOrderBean.appid;
+//            String appId = BaseConstants.ImportantField.APP_ID;
+            String partnerId = wxPrepayOrderBean.partnerid;
+            String prepayId = wxPrepayOrderBean.prepayid;
             String packageValue = "Sign=WXPay";
-            String nonceStr = wxPrepayOrderBean.nonce_str;
+            String nonceStr = wxPrepayOrderBean.noncestr;
             String timeStamp = wxPrepayOrderBean.timestamp;
 //            String sign = wxPrepayOrderBean.sign;
             //appid noncestr package partnerid prepayid timestamp
-            String stringA = "appid="+appId+"&noncestr="+nonceStr+"&package="+packageValue+"&partnerid="+partnerId+"&prepayid="+prepayId+"&timestamp="+timeStamp;
-            String stringSignTemp=stringA+"&key=jMetopvfeiUKKVrVKZLsdxnfTOPmPDSF";
-            stringSignTemp = MD5.md5(stringSignTemp);
-            stringSignTemp=stringSignTemp.toUpperCase();
-            log.e(wxPrepayOrderBean.toString());
-            if (api != null && TextUtils.equals(wxPrepayOrderBean.return_code, "SUCCESS")) {
+//            String stringA = "appid="+appId+"&noncestr="+nonceStr+"&package="+packageValue+"&partnerid="+partnerId+"&prepayid="+prepayId+"&timestamp="+timeStamp;
+//            String stringSignTemp=stringA+"&key=jMetopvfeiUKKVrVKZLsdxnfTOPmPDSF";
+//            stringSignTemp = MD5.md5(stringSignTemp);
+//            stringSignTemp=stringSignTemp.toUpperCase();
+//            log.e(wxPrepayOrderBean.toString());
+            if (api != null) {
                 PayReq req = new PayReq();
                 req.appId = appId;
                 req.partnerId = partnerId;
@@ -105,7 +101,8 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
                 req.packageValue = packageValue;
                 req.nonceStr = nonceStr;
                 req.timeStamp = timeStamp;
-                req.sign = stringSignTemp;
+                req.sign = wxPrepayOrderBean.sign;
+//                req.sign = stringSignTemp;
                 boolean b = api.sendReq(req);
             }
         }

@@ -5,6 +5,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @EBean
@@ -33,10 +34,11 @@ public class CommodityBiz extends BaseBusiness {
 
     /**
      * 推荐品牌查询
-     * @param map
      */
     @Background
-    public void getBrandList(Map map) {
+    public void getBrandList() {
+        Map map = new HashMap();
+        map.put("maxResultSize", "");
         arrayListCallbackInterface.arrayCallBack(GET_BRAND_LIST, handleResponse(baseApi.getBrandData(map)));
     }
 }

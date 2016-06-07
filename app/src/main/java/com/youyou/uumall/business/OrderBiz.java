@@ -1,11 +1,14 @@
 package com.youyou.uumall.business;
 
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.model.OrderBean;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,8 +27,13 @@ public class OrderBiz extends BaseBusiness{
     }
 
     @Background
-    public void createWxPrepayOrder(Map map){
-        arrayListCallbackInterface.arrayCallBack(CREATE_WX_PREPAY_ORDER,handleResponse(baseApi.createWxPrepayOrder(map)));
+    public void createWxPrepayOrder(String orderId,double totalFee){
+        Map param = new HashMap();
+        param.put("orderId", orderId);
+        param.put("totalFee", totalFee);
+        param.put("body", "油桃扫货");
+        param.put("tradeType", "APP");
+        arrayListCallbackInterface.arrayCallBack(CREATE_WX_PREPAY_ORDER,handleResponse(baseApi.createWxPrepayOrder(param)));
     }
 
     @Background
@@ -42,6 +50,8 @@ public class OrderBiz extends BaseBusiness{
         map.put("pageSize",pageSize);
         map.put("id",orderId);
         map.put("status",status);
-        arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,handleResponse(baseApi.queryOrder(map)));
+        Response<List<OrderBean>> listResponse = baseApi.queryOrder(map);
+        log.e(listResponse);
+        arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,listResponse.data);
     }
 }

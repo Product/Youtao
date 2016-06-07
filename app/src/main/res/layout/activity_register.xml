@@ -125,28 +125,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_50"
-        android:gravity="center_vertical|center_horizontal"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_wechat"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/font_gray"
-            android:textSize="@dimen/font_30"
-            android:layout_marginLeft="@dimen/view_20"
-            android:text="@string/login_by_wechat"/>
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/register_cancel"
         android:layout_width="wrap_content"

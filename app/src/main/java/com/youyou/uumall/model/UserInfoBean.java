@@ -11,4 +11,17 @@ public class UserInfoBean {
     public String userId;
     public String mobile;
     public String invitationCode;
+    public String openId;
+    public String parentInvitationCode;
+
+    @Override
+    public String toString() {
+        return "UserInfoBean{" +
+                "userId='" + userId + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", invitationCode='" + invitationCode + '\'' +
+                ", openId='" + openId + '\'' +
+                ", parentInvitationCode='" + parentInvitationCode + '\'' +
+                '}';
+    }
 }

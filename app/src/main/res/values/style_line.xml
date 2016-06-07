@@ -7,6 +7,16 @@
         <item name="android:background">@color/bg_line_gray</item>
     </style>
 
+    <!--常用linearlayout-->
+    <style name="HorizonLinearLayoutW100Style">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/view_25</item>
+        <item name="android:paddingRight">@dimen/view_25</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">@dimen/view_100</item>
+    </style>
     <!--灰色横线-->
     <style name="HorizonLineView20Style">
         <item name="android:layout_width">match_parent</item>
@@ -16,6 +26,7 @@
 
     <!--常用头标题背景框架-->
     <style name="RelativeLayout_Title_Normal">
+        <item name="background">@color/bg_title_gap</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/view_90</item>
         <item name="android:paddingBottom">@dimen/view_10</item>
@@ -26,10 +37,13 @@
 
     <!--左上角返回键-->
     <style name="ImageView_Title_Pro">
-        <item name="android:layout_width">@dimen/view_25</item>
-        <item name="android:layout_height">@dimen/view_44</item>
+        <item name="android:layout_width">@dimen/view_80</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:background">@drawable/pro_2x</item>
+        <item name="android:src">@drawable/pro_2x</item>
+        <item name="android:paddingLeft">@dimen/view_m50</item>
+        <item name="android:paddingTop">@dimen/view_10</item>
+        <item name="android:paddingBottom">@dimen/view_10</item>
     </style>
 
     <!--头标题-->
@@ -39,5 +53,32 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_36</item>
         <item name="android:layout_centerInParent">true</item>
+    </style>
+
+
+    <!--drop_down_list_view-->
+    <style name="drop_down_list_header_progress_bar_style">
+        <item name="android:minHeight">@dimen/drop_down_list_header_progress_bar_height</item>
+        <item name="android:maxHeight">@dimen/drop_down_list_header_progress_bar_height</item>
+    </style>
+
+    <style name="drop_down_list_footer_progress_bar_style">
+        <item name="android:minHeight">@dimen/drop_down_list_footer_progress_bar_height</item>
+        <item name="android:maxHeight">@dimen/drop_down_list_footer_progress_bar_height</item>
+    </style>
+
+    <style name="drop_down_list_header_font_style">
+        <item name="android:textColor">@color/transparent</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="drop_down_list_header_second_font_style">
+        <item name="android:textColor">@color/transparent</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="drop_down_list_footer_font_style">
+        <item name="android:textColor">@color/transparent</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 </resources>

@@ -46,6 +46,9 @@ public class BaseConstants {
     }
 
     public static final class preferencesFiled {
+        public static final String FIRST_LOGIN = "firstLogin";
+        public static final String NICK_NAME = "nickname"; //wx昵称
+        public static final String HEAD_IMG_URL = "headimgurl"; //头像url
         public static final String ACCESS_TOKEN = "AccessToken"; //登录用户token
         public static final String PP_USER_ID = "pp_user_id"; //用户ID
         public static final String PP_USER_AVATAR = "pp_user_avatar"; //用头头像地址
@@ -58,11 +61,16 @@ public class BaseConstants {
         public static final String ISFIRST_CLICK_BUILD = "first_build";
         public static final String ISFIRST_CLICK_CITY_SELECT = "first_city_select";
         public static final String DEFAULT_COUNTRY = "defaultCountry";
+        public static final String DEFAULT_COUNTRY_CODE = "defaultCountryCode";
         public static final String DICT_LIST = "dictList";
         public static final String GOODS_ID = "goodsId";//商品id
+        public static final String DEVICE_TOKEN = "device_token";//设备号
+        public static final String OPEN_ID = "openid";//微信登录
     }
 
     public static final class ImportantField{
         public static final String APP_ID = "wxdfc1314988fb84a9"; //登录用户token
+        public static final String APP_SECRET = "d80b759a7e56445fddd67a7afc435c67"; //登录用户token
+//        public static final String APP_SECRET = "jMetopvfeiUKKVrVKZLsdxnfTOPmPDSF"; //登录用户token
     }
 }

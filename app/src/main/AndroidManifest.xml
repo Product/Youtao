@@ -18,23 +18,31 @@
     <application
         android:name="com.youyou.uumall.SPApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/desktop_icon_3x"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
+            android:launchMode="singleTask"
             android:name="com.youyou.uumall.ui.MainActivity_"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/desktop_icon_3x"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.youyou.uumall.ui.GuideActivity_"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale"
+            android:icon="@mipmap/desktop_icon_3x"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            </activity>
 
         <activity
             android:name="com.youyou.uumall.ui.LoginActivity_"
@@ -43,6 +51,7 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:exported="true"
             android:name="com.youyou.uumall.ui.RegisterActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="注册"
@@ -117,6 +126,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="全部订单界面"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.MobileBindingActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="全部订单界面"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.OrderDetailActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -124,9 +139,32 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.SettingActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="订单详情界面"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.AboutActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="关于界面"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.BonusActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="红包界面"
+            android:screenOrientation="portrait" />
+        <activity
+            android:exported="true"
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="微信登录回调"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:exported="true"
             android:name="com.youyou.uumall.wxapi.WXPayEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="微信回调"
+            android:label="微信支付回调"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -137,10 +175,17 @@
         <!--友盟app key-->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="57286378e0f55af999000154"></meta-data>
+            android:value="5746515de0f55af83f0022af">
+        </meta-data>
+
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="9621da6aa6fb01674e3597da7d0c25b7" >
+        </meta-data>
+        <!--umeng推广用-->
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Wandoujia" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+            android:value="" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"

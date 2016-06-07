@@ -20,8 +20,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.HashMap;
-
 /**
  * Created by Administrator on 2016/5/10.
  */
@@ -40,7 +38,6 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     LinearLayout cate_frag_ll;
     @Bean
     CategoryDescBiz categoryDescBiz;
-    HashMap map;
     private FragmentActivity activity;
 
     @AfterViews
@@ -50,9 +47,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
         String goodsId = bundle.getString(BaseConstants.preferencesFiled.GOODS_ID);
         //访问网络的操作
         categoryDescBiz.setObjectCallbackInterface(this);
-        map = new HashMap();
-        map.put("goodsId", goodsId);
-        categoryDescBiz.queryGoodsById(map);
+        categoryDescBiz.queryGoodsById(goodsId);
     }
 
     @UiThread
@@ -75,6 +70,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
         for (String
                 pic : pics) {
             ImageView imageView = new ImageView(activity);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             cate_frag_ll.addView(imageView);
             imageLoader.displayImage(BaseConstants.connection.ROOT_URL+pic, imageView);
         }

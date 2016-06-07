@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_settings_gap"
+    >
     <RelativeLayout style="@style/RelativeLayout_Title_Normal">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/order_submit_iv"
             style="@style/ImageView_Title_Pro" />
 
@@ -15,6 +17,7 @@
     </RelativeLayout>
     <View style="@style/HorizonLineStyle" />
     <ListView
+        android:divider="@null"
         android:id="@+id/order_submit_lv"
         android:cacheColorHint="@android:color/transparent"
         android:scrollbars="none"
@@ -22,4 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+    <include
+        android:id="@+id/order_empty"
+        layout="@layout/item_order_empty"/>
 </LinearLayout>

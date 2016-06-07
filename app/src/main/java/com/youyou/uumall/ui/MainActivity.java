@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
+import com.youyou.uumall.event.MineTriggerEvent;
+import com.youyou.uumall.event.ShopCartTriggerEvent;
 import com.youyou.uumall.ui.fragment.HomeFragment_;
 import com.youyou.uumall.ui.fragment.MineFragment_;
 import com.youyou.uumall.ui.fragment.ShoppingCatFragment_;
@@ -51,6 +53,7 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     void afterViews() {
+
 
     }
 
@@ -105,7 +108,8 @@ public class MainActivity extends BaseActivity {
         currentTabsTextView.setTextColor(getResources()
                 .getColor(R.color.font_gray));
 
-        mCurrentPostion = position;
+        mCurrentPostion = position;//现在需要对网络访问进行触发
+        //第一个页面,默认进入触发网络访问,第二个点击的时候有加载图片,并做判断.第三个页面进入时做响应的操作
 
     }
 
@@ -116,11 +120,17 @@ public class MainActivity extends BaseActivity {
 
     @Click
     void shopping_cart_tab() {
+        if (mCurrentPostion != 1) {
+            eventBus.post(new ShopCartTriggerEvent());
+        }
         showSelectedBtn(1);
     }
 
     @Click
     void mine_tab() {
+        if (mCurrentPostion != 2) {
+            eventBus.post(new MineTriggerEvent());
+        }
         showSelectedBtn(2);
     }
 

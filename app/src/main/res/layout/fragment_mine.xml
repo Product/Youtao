@@ -15,8 +15,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_300"
-                android:background="@color/bg_mine_head"
+                android:layout_height="@dimen/view_330"
+                android:background="@drawable/mine_title_bg_3x"
                 >
 
                 <ImageView
@@ -27,24 +27,26 @@
                     android:src="@drawable/ic_mine_bell_white"
                     android:layout_marginTop="@dimen/view_30"
                     android:layout_marginRight="@dimen/view_30"/>
-                
+                <LinearLayout
+                    android:id="@+id/mine_user_ll"
+                    android:gravity="center_horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 <com.youyou.uumall.view.CircleImageView
                     android:id="@+id/mine_head"
                     android:layout_width="@dimen/view_120"
                     android:layout_height="@dimen/view_120"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
                     android:src="@drawable/default_header"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/view_50"
                      />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/mine_login_reg_ll"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/mine_head"
-                    android:layout_marginTop="@dimen/view_35"
-                    android:gravity="center"
+                    android:layout_marginTop="@dimen/view_20"
+                    android:gravity="center|center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -70,6 +72,14 @@
                         android:textSize="@dimen/font_30"
                         android:text="@string/login_register"/>
 
+                </LinearLayout>
+                    <TextView
+                        android:id="@+id/mine_userid_tv"
+                        android:layout_marginTop="@dimen/view_20"
+                        android:textSize="@dimen/font_30"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
             </RelativeLayout>

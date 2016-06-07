@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseConstants;
-import com.youyou.uumall.bean.EventBean;
+import com.youyou.uumall.event.CountryCallbackEvent;
 import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.adapter.CountryAdapter;
 
@@ -45,7 +45,7 @@ public class CountryActivity extends BaseActivity {
                 String country = item_country_bt.getText().toString();
                 MyUtils.savePara(getApplicationContext(),BaseConstants.preferencesFiled.DEFAULT_COUNTRY,country);
                 country_cancel_iv();
-                eventBus.post(new EventBean("refresh"));
+                eventBus.post(new CountryCallbackEvent("refresh"));
             }
         });
     }

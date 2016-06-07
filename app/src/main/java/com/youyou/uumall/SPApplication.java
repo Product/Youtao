@@ -18,10 +18,12 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UmengRegistrar;
+import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.manager.LocationManager_;
 import com.youyou.uumall.system.CrashHandler_;
 import com.youyou.uumall.utils.MyLogger;
-import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.utils.ScreenUtils;
 
@@ -107,6 +109,12 @@ public class SPApplication extends MultiDexApplication {
         MobclickAgent.setDebugMode(true); //开启调试模式，在发布版本时应关闭日志
         MobclickAgent.setCatchUncaughtExceptions(false); //关闭友盟的错误统计功能，通过CrashHandler上传错误日志
         log.e("umeng添加设备需要：" + MyUtils.getDeviceInfo(this));
+
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+        //开启推送并设置注册的回调处理
+        mPushAgent.enable();
+        String device_token = UmengRegistrar.getRegistrationId(this);
+        MyUtils.savePara(this,BaseConstants.preferencesFiled.DEVICE_TOKEN,device_token);
     }
 
     /**

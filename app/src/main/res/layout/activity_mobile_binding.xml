@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_settings_gap"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/RelativeLayout_Title_Normal">
+
+        <ImageView
+            android:id="@+id/mobile_binding_pro_iv"
+            style="@style/ImageView_Title_Pro" />
+
+        <TextView
+            style="@style/TextView_Title_Title"
+            android:text="@string/mobile_binding_title" />
+
+        <TextView
+            android:id="@+id/mobile_binding_next_tv"
+            android:layout_width="@dimen/view_60"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/mobile_binding_next"
+            android:textColor="@color/font_country_conuntry"
+            android:textSize="@dimen/font_28" />
+    </RelativeLayout>
+
+    <View style="@style/HorizonLineStyle" />
+
+    <EditText
+        android:id="@+id/mobile_binding_phone_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:hint="@string/mobile_binding_hint_phone"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:textSize="@dimen/font_26" />
+
+    <View style="@style/HorizonLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25">
+
+        <EditText
+            android:background="@color/white"
+            android:id="@+id/mobile_binding_sms_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:hint="@string/mobile_binding_hint_sms"
+            android:textSize="@dimen/font_26" />
+
+        <TextView
+            android:id="@+id/mobile_binding_getsms_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:text="@string/mobile_binding_hint_getsms"
+            android:textColor="@color/font_country_conuntry"
+            android:textSize="@dimen/font_26" />
+    </LinearLayout>
+
+    <View style="@style/HorizonLineStyle" />
+
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/mobile_binding_pwd_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:hint="@string/mobile_binding_hint_pwd"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:textSize="@dimen/font_26" />
+
+    <View style="@style/HorizonLineStyle" />
+
+    <Button
+        android:id="@+id/mobile_binding_confirm_btn"
+        android:layout_width="@dimen/view_650"
+        android:layout_height="@dimen/view_86"
+        android:layout_marginTop="@dimen/view_110"
+        android:background="@drawable/bg_enabled_confirm_shape"
+        android:text="@string/mobile_binding_confirm"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_30" />
+</LinearLayout>

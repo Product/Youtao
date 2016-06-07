@@ -26,7 +26,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.youyou.uumall.utils.MyLogger;
 import com.youyou.uumall.view.ToastMaster;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 
 /**

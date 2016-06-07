@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="@color/white">
 
     <LinearLayout
@@ -30,5 +30,8 @@
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_28" />
     </LinearLayout>
-
+    <View
+        android:layout_marginLeft="@dimen/view_25"
+        android:layout_marginRight="@dimen/view_25"
+        style="@style/HorizonLineStyle"/>
 </LinearLayout>

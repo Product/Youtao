@@ -29,4 +29,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_30" />
     </LinearLayout>
+    <View
+        android:background="@color/bg_title_gap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_30"/>
 </LinearLayout>

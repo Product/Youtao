@@ -169,7 +169,6 @@ dependencies {
     // spring相关
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     // eventbus相关
-    compile 'de.greenrobot:eventbus:2.4.0'
     compile files('libs/gson-2.2.4.jar')
     //multidex support
     compile 'com.android.support:multidex:1.0.0'
@@ -189,4 +188,7 @@ dependencies {
     compile files('libs/MobTools.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/libammsdk.jar')
+    compile project(':PushSDK')
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile files('libs/GifView.jar')
 }

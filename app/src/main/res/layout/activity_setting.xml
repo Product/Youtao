@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_settings_gap"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/RelativeLayout_Title_Normal">
+
+        <ImageView
+            style="@style/ImageView_Title_Pro"
+            android:id="@+id/setting_pro_im"
+            />
+
+        <TextView
+            style="@style/TextView_Title_Title"
+            android:text="@string/setting_title" />
+    </RelativeLayout>
+    <View
+        style="@style/HorizonLineStyle"
+        />
+    <LinearLayout
+        style="@style/HorizonLinearLayoutW100Style">
+        <TextView
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_26"
+            android:text="@string/setting_line1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:checked="true"
+            android:id="@+id/setting_push_cb"
+            android:button="@drawable/btn_push_seclector"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        style="@style/HorizonLineStyle"
+        />
+    <LinearLayout
+        android:id="@+id/setting_appraise_ll"
+        style="@style/HorizonLinearLayoutW100Style">
+        <TextView
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_26"
+            android:text="@string/setting_line2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/view_35"
+            android:paddingLeft="@dimen/view_35"
+            android:paddingTop="@dimen/view_35"
+            android:src="@drawable/next_2x"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        style="@style/HorizonLineStyle"
+        />
+    <LinearLayout
+        android:id="@+id/setting_cache_ll"
+        style="@style/HorizonLinearLayoutW100Style">
+        <TextView
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_26"
+            android:text="@string/setting_line3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/font_hint_gray"
+            android:textSize="@dimen/font_26"
+            android:text="5.12M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View
+        style="@style/HorizonLineView20Style"
+        />
+    <LinearLayout
+        android:id="@+id/setting_about_ll"
+        style="@style/HorizonLinearLayoutW100Style">
+        <TextView
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_26"
+            android:text="@string/setting_line4"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/font_hint_gray"
+            android:textSize="@dimen/font_26"
+            android:text="V1.0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginLeft="@dimen/view_15"
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/view_35"
+            android:paddingTop="@dimen/view_35"
+            android:src="@drawable/next_2x"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/setting_exit_btn"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_enabled_confirm_shape"
+        android:text="@string/setting_exit"
+        android:layout_marginTop="@dimen/view_110"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/view_650"
+        android:layout_height="@dimen/view_86" />
+</LinearLayout>

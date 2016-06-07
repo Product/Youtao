@@ -3,6 +3,8 @@ package com.youyou.uumall.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.youyou.uumall.R;
@@ -33,13 +35,15 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
 
     @Bean
     OrderBiz orderBiz;
+    @ViewById
+    LinearLayout order_empty;
 
     private OrderAdapter orderAdapter;
 
 
     @AfterViews
     void afterViews() {
-        orderAdapter = new OrderAdapter(this,OrderAdapter.ORDER_SUBMIT);
+        orderAdapter = new OrderAdapter(this, OrderAdapter.ORDER_SUBMIT);
         orderAdapter.setOnCancelClickedListener(this);
         orderBiz.setArrayListCallbackInterface(this);
         orderBiz.setObjectCallbackInterface(this);
@@ -58,10 +62,19 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == OrderBiz.QUERY_ORDER) {
-            if (arrayList != null) {
+            if (arrayList != null&&arrayList.size()!=0) {
                 List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+//                if (orderBean == null) {
+//                    order_submit_lv.setVisibility(View.GONE);
+//                    order_empty.setVisibility(View.VISIBLE);
+//                    return ;
+//                }
                 orderAdapter.setData(orderBean);
                 log.e(orderBean.toString());
+            }else{
+                order_submit_lv.setVisibility(View.GONE);
+                order_empty.setVisibility(View.VISIBLE);
+                return ;
             }
         }
     }

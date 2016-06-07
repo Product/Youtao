@@ -32,6 +32,7 @@
 
     <dimen name="view_1000">500dp</dimen>
     <dimen name="view_990">495dp</dimen>
+    <dimen name="view_800">400dp</dimen>
     <dimen name="view_750">375dp</dimen>
     <dimen name="view_700">350dp</dimen>
     <dimen name="view_650">325dp</dimen>
@@ -46,6 +47,7 @@
     <dimen name="view_370">185dp</dimen>
     <dimen name="view_360">180dp</dimen>
     <dimen name="view_356">178dp</dimen>
+    <dimen name="view_330">165dp</dimen>
     <dimen name="view_300">150dp</dimen>
     <dimen name="view_286">143dp</dimen>
     <dimen name="view_262">131dp</dimen>
@@ -61,7 +63,9 @@
     <dimen name="view_188">94dp</dimen>
     <dimen name="view_182">91dp</dimen>
     <dimen name="view_180">90dp</dimen>
+    <dimen name="view_175">87.5dp</dimen>
     <dimen name="view_170">85dp</dimen>
+    <dimen name="view_164">82dp</dimen>
     <dimen name="view_160">80dp</dimen>
     <dimen name="view_158">79dp</dimen>
     <dimen name="view_150">75dp</dimen>
@@ -111,4 +115,14 @@
     <dimen name="view_1">0.5dp</dimen>
     <dimen name="view_2">1dp</dimen>
     <dimen name="view_0">0.3dp</dimen>
+    <dimen name="view_m50">-25dp</dimen>
+
+    <!--drop_down_list_view-->
+    <dimen name="drop_down_list_header_padding_top">12dp</dimen>
+    <dimen name="drop_down_list_header_padding_bottom">15dp</dimen>
+    <dimen name="drop_down_list_header_release_min_distance">40dp</dimen>
+    <dimen name="drop_down_list_header_progress_bar_height">36dp</dimen>
+    <dimen name="drop_down_list_footer_progress_bar_height">36dp</dimen>
+    <dimen name="drop_down_list_footer_button_margin_left">8dp</dimen>
+    <dimen name="drop_down_list_footer_button_height">48dp</dimen>
 </resources>

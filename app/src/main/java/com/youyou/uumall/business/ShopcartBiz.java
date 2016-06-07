@@ -1,10 +1,16 @@
 package com.youyou.uumall.business;
 
+import android.content.Context;
+
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.base.BaseConstants;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @EBean
@@ -13,6 +19,9 @@ public class ShopcartBiz extends BaseBusiness {
     public static final int UPDATE_CART = 1;
     public static final int GET_CART_LIST = 2;
     public static final int CART_ITEM_DEL = 3;
+
+    @RootContext
+    Context mContext;
 
     /**
      * 跟新购物车
@@ -28,7 +37,19 @@ public class ShopcartBiz extends BaseBusiness {
      */
     @Background
     public void getcartList() {
-        objectCallbackInterface.objectCallBack(GET_CART_LIST, baseApi.getcartList());
+        String countryCode="";
+        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
+        String dictList = MyUtils.getPara("dictList", mContext);
+        String[] split = dictList.split(";");
+        for (String s:
+                split) {
+            if (s.contains(country)){
+                 countryCode =   s.split(",")[1];
+            }
+        }
+        Map map = new HashMap();
+        map.put("countryCode",countryCode);
+        objectCallbackInterface.objectCallBack(GET_CART_LIST, baseApi.getcartList(map));
     }
 
     /**

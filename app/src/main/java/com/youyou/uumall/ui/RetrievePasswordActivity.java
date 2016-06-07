@@ -1,21 +1,21 @@
 package com.youyou.uumall.ui;
 
+import android.os.Handler;
+import android.text.TextUtils;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/5.
@@ -23,43 +23,71 @@ import java.util.Map;
 @EActivity(R.layout.activity_retrieve)
 public class RetrievePasswordActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface {
     @ViewById
-    EditText retrieve_phone_et;
+    EditText retrieve_phone;
     @ViewById
-    EditText retrieve_password_et;
+    EditText retrieve_code;
     @ViewById
-    EditText retrieve_smscode_et;
+    EditText retrieve_pwd;
     @ViewById
-    TextView retrieve_get_smscode_tv;
-
+    EditText retrieve_repwd;
     @Bean
     RegisterBiz registerBiz;
-
-    Map paramMap;
+    private boolean isTimeout = true;
+    static Handler handler = new Handler();
     @AfterViews
     void afterViews(){
         registerBiz.setObjectCallbackInterface(this);
 
     }
+    Runnable runable = new Runnable() {
+        @Override
+        public void run() {
+            isTimeout = true;
+        }
+    };
     @Click
-    void retrieve_get_smscode_tv(){
-        String phone = retrieve_phone_et.getText().toString();
-        paramMap = new HashMap();
-        paramMap.put("mobile", phone);
-        paramMap.put("type", "2");
-        registerBiz.getSmsCode(paramMap);
+    void retrieve_code_tv(){
+        String phone = retrieve_phone.getText().toString();
+        if (TextUtils.isEmpty(phone)) {
+            showToastShort("请正确输入手机号");
+            return;
+        }
+        if (isTimeout) {
+            registerBiz.getSmsCode(phone,"2");
+            isTimeout = false;
+            handler.postDelayed(runable, 30000);
+        } else {
+            showToastShort("30秒后重试");
+        }
     }
 
     @Click
-    void retrieve_get_password_tv(){
-        String phone = retrieve_phone_et.getText().toString();
-        String newPwd = retrieve_password_et.getText().toString();
-        String SmsCode = retrieve_smscode_et.getText().toString();
-//        {mobile:"18555808691",newPassword:"123123",verifyCode:"7839"}
-        paramMap = new HashMap();
-        paramMap.put("mobile", phone);
-        paramMap.put("newPassword", newPwd);
-        paramMap.put("verifyCode", SmsCode);
-        registerBiz.retrievePassword(paramMap);
+    void retrieve_confirm(){
+        String phone = retrieve_phone.getText().toString();
+        String SmsCode = retrieve_code.getText().toString();
+        String pwd = retrieve_pwd.getText().toString();
+        String repwd = retrieve_repwd.getText().toString();
+        if (TextUtils.isEmpty(phone)) {
+            showToastShort("请正确输入手机号");
+            return;
+        }
+        if (TextUtils.isEmpty(SmsCode)) {
+            showToastShort("请输入验证码");
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)) {
+            showToastShort("请输入密码");
+            return;
+        }
+        if (TextUtils.isEmpty(repwd)) {
+            showToastShort("请重复输入密码");
+            return;
+        }
+        if (!TextUtils.equals(repwd, pwd)) {
+            showToastShort("两次密码输入不一致,请重试");
+            return;
+        }
+        registerBiz.retrievePassword(phone,pwd,SmsCode);
     }
 
 
@@ -71,8 +99,31 @@ public class RetrievePasswordActivity extends BaseActivity implements BaseBusine
         overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
+    @Click
+    void retrieve_pro() {
+        finish();
+        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+    }
+
+    @UiThread
     @Override
     public void objectCallBack(int type, Object t) {
-
+        if (type == RegisterBiz.GET_SMS_CODE) {
+            Response response = (Response) t;
+            if (response.code == 0) {
+                showToastShort("验证码以发送");
+            }else{
+                showToastShort(response.msg);
+            }
+        }
+        if (type == RegisterBiz.RETRIEVE_PASSWORD) {
+            Response response = (Response) t;
+            if (response.code == 0) {
+                showToastShort("修改完成");
+                finish();
+            }else{
+                showToastShort(response.msg);
+            }
+        }
     }
 }

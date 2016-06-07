@@ -1,6 +1,8 @@
 package com.youyou.uumall.ui;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,6 +55,9 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
     ImageView item_shopcart_up_iv;
 
     @ViewById
+    LinearLayout shopcart_bg_ll;
+
+    @ViewById
     TextView shopcart_total_tv;
 
     @ViewById
@@ -76,6 +82,7 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
         adapter.setOnDeleteClickListener(this);
         adapter.setOnInsertClickListener(this);
         adapter.setOnItemCheckedListener(this);
+        shopcart_bg_ll.setVisibility(View.VISIBLE);
     }
 
     @Click
@@ -134,9 +141,17 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
             }
         } else if (type == ShopcartBiz.GET_CART_LIST) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 totalPriceForResponse = response.totalPrice;
                 mData = (List<ShopCartBean>) response.data;//第一次进入时,那个集合是空的
+                if (mData.size() == 0) {
+                    shopcart_bg_ll.setVisibility(View.VISIBLE);
+                    return;
+                }
+                shopcart_bg_ll.setVisibility(View.GONE);
                 for (int i = 0; i < mData.size(); i++) {
                     ShopCartBean data = mData.get(i);
                     Boolean isCheck = mCheckedMap.get(data.goodsId);
@@ -145,8 +160,20 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
                     }
                 }
                 adapter.setData(mData);
-            } else {
-                showToastShort(response.msg);
+            } else if (response.code == 46000 && TextUtils.equals(response.msg, "用户登录状态异常，请重新登录！")) {//如果没有登录就显示空列表
+                shopcart_bg_ll.setVisibility(View.VISIBLE);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.dialog_login_title);
+                builder.setMessage(R.string.dialog_login_message);
+                builder.setPositiveButton(R.string.dialog_login_pos, null);
+                builder.setNegativeButton(R.string.dialog_login_neg, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoginActivity_.intent(ShopCartActivity.this).start();
+                    }
+                });
+                builder.show();
+                log.e(t.toString());
             }
         } else if (type == ShopcartBiz.CART_ITEM_DEL) {
             Response response = (Response) t;
@@ -160,7 +187,7 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
 
     // TODO: 2016/5/16  暂且废弃
     @Background
-    public void createDB(List<ShopCartBean> mData) {
+    public void createDB(List<ShopCartBean> mData) {//数据库操作
         if (dbManager == null) {
             dbManager = DataBaseManager.getInstance(mApp);
         }
@@ -183,7 +210,7 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
 
 
     @Override
-    public void deleteGoods(String tag, String view) {
+    public void deleteGoods(String tag, String view) {//适配器里的回调
         switch (view) {
             case ShopcartAdapter.DEL_ALL:
                 param = new HashMap<>();
@@ -196,9 +223,9 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
                     if (TextUtils.equals(tag, data.goodsId) && data.isCheck) {
                         totalPrice -= Double.valueOf(data.subtotal);
                         shopcart_total_tv.setText("￥" + totalPrice);
+                        sumChecked -= 1;
                     }
                 }
-                sumChecked -= 1;
                 shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
                 shopcartBiz.cartItemDel(param);
                 setTotalChecked();

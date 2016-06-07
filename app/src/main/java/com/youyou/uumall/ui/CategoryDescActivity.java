@@ -1,5 +1,6 @@
 package com.youyou.uumall.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,7 +11,9 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.ShopcartBiz;
+import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.ui.fragment.CategoryDescFragment_;
 import com.youyou.uumall.utils.MyUtils;
 
@@ -33,7 +36,10 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
     @Bean
     ShopcartBiz shopcartBiz;
 
+    @Bean
+    CategoryDescBiz categoryDescBiz;
     Map map;
+    private boolean isLogined= true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,9 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
 
     @AfterViews
     void afterViews() {
+        categoryDescBiz.setObjectCallbackInterface(this);
         shopcartBiz.setObjectCallbackInterface(this);
+        shopcartBiz.getcartList();
         CategoryDescFragment_ categoryDescFragment = new CategoryDescFragment_();
         Bundle bundle = new Bundle();
         bundle.putString(BaseConstants.preferencesFiled.GOODS_ID, goodsId);
@@ -67,6 +75,15 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
         overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
+    @Click
+    void category_buynow_bt() {
+        if (isLogined) {
+        categoryDescBiz.queryGoodsById(goodsId);
+        }else {
+            showToastShort("您还未登录");
+        }
+
+    }
     /**
      * 1访问网络,写api
      * http://120.26.75.225:8090/uumall/itf/mall/cartItemMod.json
@@ -77,9 +94,12 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
      */
     @Click
     void category_insertcar_bt() {
-
+        if (isLogined) {
         map = MyUtils.insertOneGoods(goodsId);
         shopcartBiz.updatecart(this.map);
+        }else {
+            showToastShort("您还未登录");
+        }
     }
 
     @Override
@@ -97,6 +117,25 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
                 showToastShort("成功加入购物车");
             }else{
                 showToastShort(response.msg);
+            }
+        }else if (CategoryDescBiz.QUERY_GOODS_BY_ID == type) {
+            GoodsDescBean bean = (GoodsDescBean) t;
+            Bundle bundle = new Bundle();
+            Bundle item = new Bundle();
+            item.putString("goodsId", bean.id);
+            item.putString("goodsName", bean.categoryName);
+            item.putString("count", 1 + "");
+            item.putString("subtotal", bean.coupon);
+            item.putString("image", bean.description);
+            bundle.putBundle(0 + "", item);
+            bundle.putInt("size", 1);
+            Intent intent = new Intent(this, ConfirmOrderActivity_.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else if (ShopcartBiz.GET_CART_LIST == type) {
+            Response response = (Response) t;
+            if (response.code != 0) {
+                isLogined = false;
             }
         }
     }

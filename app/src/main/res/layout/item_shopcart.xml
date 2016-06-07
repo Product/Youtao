@@ -104,6 +104,7 @@
     </LinearLayout>
 
     <View
+        android:background="@color/bg_settings_gap"
         style="@style/HorizonLineView20Style"
          />
 

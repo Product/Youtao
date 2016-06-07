@@ -18,6 +18,11 @@ public class UserUtils {
     @RootContext
     Context context;
 
+
+//    public UserUtils(Context context) {
+//        this.context = context;
+//    }
+
     /**
      * 保存用户的位置数据
      *
@@ -29,6 +34,7 @@ public class UserUtils {
         MyUtils.savePara(context, BaseConstants.preferencesFiled.LAT, String.valueOf(lat));
         MyUtils.savePara(context, BaseConstants.preferencesFiled.LNG, String.valueOf(lng));
     }
+
     public LatLng getCurrentLatLng() {
         double lat = getLat();
         double lng = getLng();
@@ -84,9 +90,9 @@ public class UserUtils {
     }
 
     @Background
-    public void saveUserId(long user_id) {
-        String userId = String.valueOf(user_id);
-        MyUtils.savePara(context, BaseConstants.preferencesFiled.PP_USER_ID, userId);
+    public void saveUserId(String user_id) {
+//        String userId = String.valueOf(user_id);
+        MyUtils.savePara(context, BaseConstants.preferencesFiled.PP_USER_ID, user_id);
     }
 
     public String getUserId() {
@@ -98,6 +104,7 @@ public class UserUtils {
         }
     }
 
+
     public String getAccessToken() {
         return MyUtils.getPara(BaseConstants.preferencesFiled.ACCESS_TOKEN, context);
     }
@@ -106,6 +113,22 @@ public class UserUtils {
         MyUtils.savePara(context, BaseConstants.preferencesFiled.ACCESS_TOKEN, "");
         MyUtils.savePara(context, BaseConstants.preferencesFiled.PP_USER_ID, "");
     }
+
+    @Background
+    public void saveUserInfo(String headimgurl) {
+//        MyUtils.savePara(context, BaseConstants.preferencesFiled.NICK_NAME, nickname);
+        MyUtils.savePara(context, BaseConstants.preferencesFiled.HEAD_IMG_URL, headimgurl);
+    }
+
+    public String getUserInfo() {
+//        if (info == BaseConstants.preferencesFiled.NICK_NAME) {
+//            return MyUtils.getPara(BaseConstants.preferencesFiled.NICK_NAME, context);
+//        } else if (info == BaseConstants.preferencesFiled.HEAD_IMG_URL) {
+            return MyUtils.getPara(BaseConstants.preferencesFiled.HEAD_IMG_URL, context);
+//        }
+//        return "";
+    }
+
     /**
      * 验证手机格式
      */
@@ -120,4 +143,6 @@ public class UserUtils {
         if (TextUtils.isEmpty(mobiles)) return false;
         else return mobiles.matches(telRegex);
     }
+
+
 }

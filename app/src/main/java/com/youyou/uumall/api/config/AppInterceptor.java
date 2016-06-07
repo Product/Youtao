@@ -42,7 +42,7 @@ public class AppInterceptor implements ClientHttpRequestInterceptor {
         if (requestCookies == null) {
             String cookie = MyUtils.getPara(COOKIE, context);
             header.add(COOKIE, cookie);
-            log.e("cookie is add   "+cookie);
+//            log.e("cookie is add   "+cookie);
         }
         String requestUrl = request.getURI().toString();//请求url
         String bodyStr = (body == null ? "" : new String(body, "UTF-8"));
@@ -56,7 +56,7 @@ public class AppInterceptor implements ClientHttpRequestInterceptor {
             String cookie = cookies.get(0);
             if (cookie.startsWith("_SESSIONID")) {
                 MyUtils.savePara(context, COOKIE, cookie);
-                log.e("cookie is save   "+cookie);
+//                log.e("cookie is save   "+cookie);
             }
         }
         if (reponse != null) {

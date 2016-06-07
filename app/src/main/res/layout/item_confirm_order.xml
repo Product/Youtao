@@ -64,5 +64,8 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+    <View
+        android:layout_marginLeft="@dimen/view_25"
+        android:layout_marginRight="@dimen/view_25"
+        style="@style/HorizonLineStyle"/>
 </LinearLayout>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_settings_gap"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -14,10 +15,7 @@
 
         <ImageView
             android:id="@+id/shopcart_pro_iv"
-            android:layout_width="@dimen/view_25"
-            android:layout_height="@dimen/view_44"
-            android:layout_centerVertical="true"
-            android:background="@drawable/pro_2x" />
+            style="@style/ImageView_Title_Pro" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +45,25 @@
         android:layout_weight="1">
 
     </ListView>
-
+    <LinearLayout
+        android:id="@+id/shopcart_bg_ll"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_marginTop="@dimen/view_146"
+            android:background="@drawable/shopcart_null_3x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/view_70"
+            android:text="@string/shopcart_bg"
+            android:textSize="@dimen/font_28"
+            android:textColor="@color/font_hint_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/font_100"

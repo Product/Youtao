@@ -21,6 +21,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -155,6 +156,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
         overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
+    @UiThread
     @Override
     public void objectCallBack(int type, Object t) {
         Response response = (Response) t;

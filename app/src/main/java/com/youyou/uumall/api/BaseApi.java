@@ -6,6 +6,7 @@ import com.youyou.uumall.api.config.AppInterceptor;
 import com.youyou.uumall.api.config.AppRequestFactory;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.model.BonusBean;
 import com.youyou.uumall.model.BrandBean;
 import com.youyou.uumall.model.CategoryBean;
 import com.youyou.uumall.model.DictBean;
@@ -94,6 +95,7 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     /*商品分类*/
     @Post("/mall/category.json")
     Response<List<CategoryBean>> queryCategory(Map map);
+//    Response<List<Object>> queryCategory(Map map);
 
     /*关键字搜索商品*/
     @Post("/mall/queryGoodsByKeywords.json")
@@ -101,7 +103,7 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
 
     /*购物车查询*/
     @Post("/mall/cartItemList.json")
-    Response<List<ShopCartBean>> getcartList();
+    Response<List<ShopCartBean>> getcartList(Map map);
 
     /*购物车删除*/
     @Post("/mall/cartItemDel.json")
@@ -118,6 +120,7 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     /*预处理微信订单*/
     @Post("/mall/createWxPrepayOrder.json")
     Response<List<WxPrepayOrderBean>> createWxPrepayOrder(Map map);
+//    Response<List<WxPrepayOrderBean>> createWxPrepayOrder(Map map);
 
     /*查询订单*/
     @Post("/mall/order/queryOrder.json")
@@ -126,4 +129,20 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     /*取消订单*/
     @Post("/mall/order/cancel.json")
     Response<Object> cancelOrder(Map map);
+
+    /*微信注册*/
+    @Post("/malluser/wechatLogin.json")
+    Response<List<UserInfoBean>> wechatLogin(Map map);
+
+    /*绑定手机*/
+    @Post("/malluser/mobileBinding.json")
+    Response<Object> mobileBinding(Map map);
+
+    /*退出登录*/
+    @Post("/malluser/logout.json")
+    Response<Object> logout();
+
+    /*红包信息查询*/
+    @Post("/mall/queryBonus.json")
+    Response<List<BonusBean>> queryBonus();
 }

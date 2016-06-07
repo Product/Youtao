@@ -55,7 +55,6 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
 
     @Click
     void register_getSmsCode() {
-
         String phone = register_phone.getText().toString();
         if (TextUtils.isEmpty(phone) || !UserUtils.isMobileNO(phone)) {
             showToastShort("请正确输入手机号");
@@ -63,10 +62,7 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         }
         //过了三十秒才可以再次发送请求,用handler来处理整个事件
         if (isTimeout) {
-            map = new HashMap();
-            map.put("mobile", phone);
-            map.put("type", "1");
-            registerBiz.getSmsCode(map);//请求完数据后
+            registerBiz.getSmsCode(phone,"1");//请求完数据后
             isTimeout = false;
             handler.postDelayed(runable, 30000);
         } else {
@@ -113,6 +109,7 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
+
     @UiThread
     @Override
     public void objectCallBack(int type, Object t) {
@@ -122,9 +119,9 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
                 showToastShort("注册成功");
                 register_cancel();
             } else {
-                showToastShort(response.msg );
+                showToastShort(response.msg);
             }
-        }else if (type == RegisterBiz.GET_SMS_LIST) {
+        } else if (type == RegisterBiz.GET_SMS_CODE) {
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("验证码已发送");

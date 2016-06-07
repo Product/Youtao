@@ -9,6 +9,8 @@
     <string name="tab_shopping_cart">购物车</string>
     <string name="tab_mine">我的</string>
 
+    <!--guide-->
+    <string name="guide_btn">立即体验</string>
     <!-- mine fragment-->
     <string name="mine_payment">待付款</string>
     <string name="mine_shipped">待发货</string>
@@ -55,6 +57,7 @@
     <string name="shopcart_title">购物车</string>
     <string name="shopcart_accounts">结算(0)</string>
     <string name="shopcart_confirm">确定</string>
+    <string name="shopcart_bg">购物车空空如也,赶紧囤货吧!</string>
 
     <!--delivery info-->
     <string name="delivery_info_title">编辑取货信息</string>
@@ -75,6 +78,7 @@
     <string name="order_submit_title">待付款</string>
     <string name="order_submit_item_pay">去付款</string>
     <string name="order_submit_item_cancel">取消订单</string>
+    <string name="order_item_empty">你还没有订单哦!</string>
     <!--order confirm-->
     <string name="order_submit_confirm_title">待发货</string>
     <!--order shipping-->
@@ -90,6 +94,18 @@
     <string name="dialog_cancel_pos">放弃</string>
     <string name="dialog_cancel_neg">确定</string>
 
+    <!--dialog_login-->
+    <string name="dialog_login_title">未登录</string>
+    <string name="dialog_login_message">是否转跳到登录界面</string>
+    <string name="dialog_login_pos">放弃</string>
+    <string name="dialog_login_neg">确定</string>
+
+    <!--dialog_bindphone-->
+    <string name="dialog_bind_title">登录成功</string>
+    <string name="dialog_bind_message">是否绑定手机</string>
+    <string name="dialog_bind_pos">放弃</string>
+    <string name="dialog_bind_neg">确定</string>
+
     <!--order detail-->
     <string name="order_detail_item">订单详情</string>
     <string name="order_detail_cancel">取消订单</string>
@@ -97,6 +113,57 @@
 
     <!--wxpay_callback-->
     <string name="wxpay_callback_title">支付成功</string>
-    <string name="wxpay_callback_order">查看订单</string>
-    <string name="wxpay_callback_home">返回首页</string>
+    <string name="wxpay_callback_order">订单详情</string>
+    <string name="wxpay_callback_home">回到首页</string>
+    <string name="wxpay_callback_message">订单支付成功</string>
+
+
+    <!--mobile_binding-->
+    <string name="mobile_binding_title">绑定手机</string>
+    <string name="mobile_binding_next">跳过</string>
+    <string name="mobile_binding_hint_phone">输入手机号码</string>
+    <string name="mobile_binding_hint_sms">验证码</string>
+    <string name="mobile_binding_hint_getsms">获取验证码</string>
+    <string name="mobile_binding_hint_pwd">密码</string>
+    <string name="mobile_binding_confirm">确定绑定</string>
+
+    <!--setting-->
+    <string name="setting_title">设置</string>
+    <string name="setting_line1">推送消息设置</string>
+    <string name="setting_line2">求好评</string>
+    <string name="setting_line3">清除本地缓存</string>
+    <string name="setting_line4">关于</string>
+    <string name="setting_exit">退出登录</string>
+
+    <!--retrieve-->
+    <string name="retrieve_title">找回密码</string>
+    <string name="retrieve_phone">输入手机号码</string>
+    <string name="retrieve_pwd">新密码</string>
+    <string name="retrieve_repwd">确认新密码</string>
+    <string name="retrieve_code">验证码</string>
+    <string name="retrieve_code_tv">获取验证码</string>
+    <string name="retrieve_confirm">完成</string>
+
+    <!--about-->
+    <string name="about_title">关于</string>
+    <string name="about_message">我的海淘送机场</string>
+    <string name="about_version">V1.0.0</string>
+    <string name="about_about">Copyright@2016Youyoumob All rights reserved</string>
+
+    <!--bonus-->
+    <string name="bonus_title">我的红包</string>
+    <string name="bonus_price">5</string>
+    <string name="bonus_item1">有效期至2015-07-02</string>
+    <string name="bonus_item2">适用于所有商品,不找零、不折现</string>
+
+
+    <!--drop_down_list_viwe-->
+    <string name="drop_down_list_header_default_text">Click to refresh&#8230;</string>
+    <string name="drop_down_list_header_pull_text">Drop Down to refresh&#8230;</string>
+    <string name="drop_down_list_header_release_text">Release to refresh&#8230;</string>
+    <string name="drop_down_list_header_loading_text">Loading&#8230;</string>
+    <string name="drop_down_list_footer_default_text">More</string>
+    <string name="drop_down_list_footer_loading_text">Loading&#8230;</string>
+    <string name="drop_down_list_footer_no_more_text">No More</string>
+    <string name="image_content">Image</string>
 </resources>

@@ -36,9 +36,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 import com.youyou.uumall.R;
 import com.youyou.uumall.SPApplication;
 import com.youyou.uumall.system.ActivityManager;
@@ -47,7 +47,7 @@ import com.youyou.uumall.utils.MyLogger;
 import com.youyou.uumall.view.CustomProgressBar;
 import com.youyou.uumall.view.ToastMaster;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -70,7 +70,6 @@ public class BaseActivity extends FragmentActivity {
     protected MyLogger log = MyLogger.getLogger("BaseActivity");
 
     protected EventBus eventBus;
-
     //点击别的区域是否关闭键盘
     private boolean isCloseKeyboardOnClickOtherPlace = true;
 
@@ -84,6 +83,7 @@ public class BaseActivity extends FragmentActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         log.e(this.getClass().getSimpleName());
         /**
          * 屏幕长宽密度比
@@ -116,8 +116,9 @@ public class BaseActivity extends FragmentActivity {
                 return false;
             }
         });
-
+        PushAgent.getInstance(this).onAppStart();//umeng推送 统计应用启动数据
     }
+
 
     /**
      * 是否设置全屏显示内容，需要判断状态栏的高度来设置
@@ -146,7 +147,7 @@ public class BaseActivity extends FragmentActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
         }
-        if(tintManager == null) {
+        if (tintManager == null) {
             tintManager = new SystemBarTintManager(this);
         }
         tintManager.setStatusBarTintEnabled(true);
