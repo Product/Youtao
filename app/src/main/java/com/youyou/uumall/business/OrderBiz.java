@@ -51,7 +51,9 @@ public class OrderBiz extends BaseBusiness{
         map.put("id",orderId);
         map.put("status",status);
         Response<List<OrderBean>> listResponse = baseApi.queryOrder(map);
-        log.e(listResponse);
-        arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,listResponse.data);
+//        log.e(listResponse);
+        if (listResponse!=null) {
+            arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,listResponse.data);
+        }
     }
 }

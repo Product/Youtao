@@ -9,36 +9,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <com.youyou.uumall.view.GalleryView
             android:layout_width="match_parent"
+            android:id="@+id/cate_frag_vp"
             android:layout_height="@dimen/view_750">
             <!--轮播图-->
-            <android.support.v4.view.ViewPager
-                android:id="@+id/cate_frag_vp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v4.view.ViewPager>
-            <!--红点-->
-            <LinearLayout
-                android:id="@+id/cate_frag_point"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/view_30"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </RelativeLayout>
+        </com.youyou.uumall.view.GalleryView>
         <!--详情-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/font_40"
+            android:paddingBottom="@dimen/view_40"
             android:paddingLeft="@dimen/font_80"
             android:paddingRight="@dimen/font_80"
-            android:paddingTop="@dimen/font_40">
+            android:paddingTop="@dimen/view_40">
 
             <TextView
                 android:id="@+id/cate_frag_name"
@@ -62,6 +48,7 @@
                 android:textSize="@dimen/font_30" />
 
             <LinearLayout
+                android:layout_marginTop="@dimen/view_15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center">
@@ -76,7 +63,7 @@
                     android:padding="@dimen/view_10"
                     android:text="乐天价:￥1523"
                     android:textColor="@color/font_commodity_origin_price"
-                    android:textSize="@dimen/font_26" />
+                    android:textSize="@dimen/font_20" />
 
                 <TextView
                     android:id="@+id/cate_frag_price2"
@@ -86,7 +73,7 @@
                     android:padding="@dimen/view_10"
                     android:text="新罗价:￥1523"
                     android:textColor="@color/font_commodity_origin_price"
-                    android:textSize="@dimen/font_26" />
+                    android:textSize="@dimen/font_20" />
             </LinearLayout>
         </LinearLayout>
 
@@ -94,7 +81,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/view_80"
+            android:layout_height="wrap_content"
             android:background="@color/white">
 
             <View
@@ -104,7 +91,9 @@
                 android:background="@color/font_hint_gray" />
 
             <TextView
-                android:layout_width="@dimen/view_250"
+                android:layout_marginTop="@dimen/view_40"
+                android:layout_marginBottom="@dimen/view_40"
+                android:layout_width="@dimen/view_286"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@color/white"

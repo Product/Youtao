@@ -4,7 +4,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
+import com.umeng.message.PushAgent;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
@@ -24,7 +26,7 @@ import org.androidannotations.annotations.ViewById;
  * Created by Administrator on 2016/5/30.
  */
 @EActivity(R.layout.activity_setting)
-public class SettingActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface {
+public class SettingActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface, CompoundButton.OnCheckedChangeListener {
 
     @ViewById
     CheckBox setting_push_cb;//接收push
@@ -45,6 +47,8 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
         }else {
             setting_exit_btn.setVisibility(View.VISIBLE);
         }
+
+        setting_push_cb.setOnCheckedChangeListener(this);
     }
 
     @Click
@@ -86,6 +90,19 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
             } else {
                 showToastShort(response.msg);
             }
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+        if (!mPushAgent.isEnabled()&&isChecked){//点击之后是开
+            mPushAgent.enable();
+            showToastShort("启用推送服务");
+        }
+        if (mPushAgent.isEnabled()&&!isChecked){
+            mPushAgent.disable();
+            showToastShort("关闭推送服务");
         }
     }
 }

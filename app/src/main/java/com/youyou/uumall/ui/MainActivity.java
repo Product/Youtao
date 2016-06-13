@@ -34,9 +34,9 @@ public class MainActivity extends BaseActivity {
     private int[] mTabsImageView = {R.id.home_img, R.id.shopping_cart_img,
             R.id.mine_img};//下部图标
     private int[] mIconsNormal = {R.drawable.icon_home_normal,
-            R.drawable.icon_shopping_car_normal, R.drawable.icon_mine_normal};//
+            R.drawable.shopbox_normal_3x, R.drawable.icon_mine_normal};//
     private int[] mIconsPress = {R.drawable.icon_home_pressed,
-            R.drawable.icon_shopping_car_pressed, R.drawable.icon_mine_pressed};
+            R.drawable.shopbox_seleted_3x, R.drawable.icon_mine_pressed};
     private int[] mTabsTextView = {R.id.home_textView, R.id.shopping_cart_textView,
             R.id.mine_textView};
     private int[] mTabsLinearLayout = {R.id.home_tab, R.id.shopping_cart_tab,

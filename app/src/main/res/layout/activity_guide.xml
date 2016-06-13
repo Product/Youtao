@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <android.support.v4.view.ViewPager
-        android:layout_marginTop="@dimen/view_100"
         android:layout_centerHorizontal="true"
         android:id="@+id/guide_vp"
-        android:layout_width="@dimen/view_800"
-        android:layout_height="@dimen/view_800">
-        <com.ant.liao.GifView
-            android:id="@+id/guide_gv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         </android.support.v4.view.ViewPager>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -29,10 +25,11 @@
             android:id="@+id/guide_redpoint_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/guide_point_selected_3x" />
+            android:background="@drawable/guide_point_selected_2x" />
     </RelativeLayout>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/guide_bt"
         android:text="@string/guide_btn"
         android:textColor="@drawable/font_guide_btn_seclector"

@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.ant.liao.GifView;
 import com.youyou.uumall.R;
 import com.youyou.uumall.utils.MyLogger;
 
 import org.androidannotations.annotations.EView;
 import org.androidannotations.annotations.UiThread;
+
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by Administrator on 2016/6/5 0005.
@@ -30,7 +31,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     private View headerView;
     private OnRefreshListener onRefreshListener;
     private OnLoadMoreListener onOnLoadMoreListener;
-    private GifView lv_gv;
+    private GifImageView lv_gv;
     private MyLogger log;
     private View footerView;
     private int footerHeight;
@@ -72,14 +73,9 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     //初始化头布局操作
     private void addHeader() {
         headerView = View.inflate(getContext(), R.layout.item_home_refresh_head, null);
-        lv_gv = (GifView)headerView.findViewById(R.id.lv_gv);
-        lv_gv.setGifImage(R.drawable.xiala_jia_zai);
-        lv_gv.setGifImageType(GifView.GifImageType.COVER);
-        lv_gv.destroyDrawingCache();
-//        SoftReference<GifView> reference = new SoftReference<GifView>(lv_gv);
-//        if (reference != null) {
-//            if (reference.get()!=null&&!reference.get())
-//        }
+        lv_gv = (GifImageView)headerView.findViewById(R.id.lv_gv);
+        lv_gv.setBackgroundResource(R.drawable.xiala_jia_zai);
+//        lv_gv.setScaleType(ImageView.ScaleType.CENTER);
         headerView.measure(0,0);
         headerHeight = headerView.getMeasuredHeight();
         log.e("控件高度为:"+headerHeight);
@@ -131,10 +127,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                 break;
 
         }
-//        if (getFirstVisiblePosition() !=0 &&lv_gv!=null) {
-//            lv_gv=null;
-//            lv_gv.rec
-//        }
         return super.onTouchEvent(ev);
     }
 

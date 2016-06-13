@@ -1,5 +1,12 @@
 package com.youyou.uumall.ui.fragment;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -135,6 +142,45 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
     @Click
     void my_reward_layout() {
         BonusActivity_.intent(getActivity()).start();
+    }
+
+    @Click
+    void wechat_client_layout() {//复制到剪切板
+        ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        String text = "meitao_youyou";
+        ClipData  myClip = ClipData.newPlainText("text", text);
+        cm.setPrimaryClip(myClip);
+        showToastShort("已将微信公众号复制到剪切板");
+    }
+
+    @Click
+    void mainland_layout() {//大陆客服
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.dialog_tel_message);
+        builder.setPositiveButton(R.string.dialog_tel_pos, null);
+        builder.setNegativeButton(R.string.dialog_tel_neg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+getResources().getString(R.string.dialog_login_pos)));
+                startActivity(intent);
+            }
+        });
+        builder.show();
+
+    }
+    @Click
+    void korea_layout() {//韩国客服
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.dialog_tel_message_2);
+        builder.setPositiveButton(R.string.dialog_tel_pos, null);
+        builder.setNegativeButton(R.string.dialog_tel_neg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+getResources().getString(R.string.dialog_tel_message_2)));
+                startActivity(intent);
+            }
+        });
+        builder.show();
     }
 
     @UiThread

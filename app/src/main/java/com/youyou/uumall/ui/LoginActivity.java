@@ -32,7 +32,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,10 +78,11 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     }
 
     private long firstTime;
+
     @Click
     public void login_weixin_ll() {
 
-        if (System.currentTimeMillis()- firstTime>3000) {
+        if (System.currentTimeMillis() - firstTime > 3000) {
             if (!api.isWXAppInstalled()) {
                 showToastShort("请安装微信");
                 return;
@@ -107,10 +107,8 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
             showToastShort("密码不能为空");
             return;
         }
-        paramMap = new HashMap<>();
-        paramMap.put("mobile", userPhone);
-        paramMap.put("password", userPwd);
-        loginBiz.userLogin(paramMap);
+        String deviceToken = MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this);
+        loginBiz.userLogin(userPhone, userPwd, deviceToken);
     }
 
     @Click
@@ -143,15 +141,17 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     public void objectCallBack(int type, Object t) {
         if (type == LoginBiz.USER_LOGIN) {
             Response response = (Response) t;
-            if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-                ArrayList list = (ArrayList) response.data;
-                UserInfoBean bean = (UserInfoBean) list.get(0);
-                userUtils.saveUserId(bean.mobile);
-                eventBus.post(new MineTriggerEvent());
-                showToastShort("登录成功");
-                login_cancel();
-            } else {
-                showToastShort(response.msg);
+            if (response != null) {
+                if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                    ArrayList list = (ArrayList) response.data;
+                    UserInfoBean bean = (UserInfoBean) list.get(0);
+                    userUtils.saveUserId(bean.mobile);
+                    eventBus.post(new MineTriggerEvent());
+                    showToastShort("登录成功");
+                    login_cancel();
+                } else {
+                    showToastShort(response.msg);
+                }
             }
         }
     }
@@ -177,10 +177,10 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                     }
                 });
                 builder.show();
-            }else {
+            } else {
                 eventBus.post(new MineTriggerEvent());
                 finish();
-//                MainActivity_.intent(LoginActivity.this).start();// TODO: 2016/6/6 内存溢出
+//                MainActivity_.intent(LoginActivity.this).start();
             }
 
         }

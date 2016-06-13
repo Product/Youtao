@@ -23,15 +23,36 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/view_35"
             android:layout_toLeftOf="@+id/category_menu_iv"
-            android:src="@drawable/shopbox_normal_3x" />
+            android:src="@drawable/shopbox_normal_2x" />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/category_menu_point_ll"
+            android:layout_alignTop="@id/category_car_iv"
+            android:layout_width="@dimen/view_20"
+            android:layout_height="@dimen/view_20"
+            android:background="@drawable/bg_msg_hint_point"
+            android:layout_toRightOf="@id/category_car_iv"
+            android:layout_marginLeft="-25dp"
+            android:layout_marginTop="7dp"
+            android:gravity="center">
 
+            <TextView
+                android:gravity="center"
+                android:id="@+id/category_menu_point_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_14"
+                android:text="3"/>
+
+        </LinearLayout>
         <ImageView
             android:id="@+id/category_menu_iv"
             android:layout_width="@dimen/view_40"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/bar_share_3x" />
+            android:src="@drawable/bar_share_2x" />
 
 
     </RelativeLayout>

@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ant.liao.GifView;
 import com.youyou.uumall.R;
 
 /**
@@ -46,7 +45,6 @@ public class DropDownListView extends ListView implements AbsListView.OnScrollLi
     private ProgressBar headerProgressBar;
     private TextView headerText;
     private TextView           headerSecondText;
-    private GifView lv_gv;
     /** footer layout view **/
     private RelativeLayout     footerLayout;
     private ProgressBar        footerProgressBar;
@@ -153,9 +151,6 @@ public class DropDownListView extends ListView implements AbsListView.OnScrollLi
         //初始化默认头布局
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         headerLayout = (RelativeLayout)inflater.inflate(R.layout.drop_down_list_header, this, false);
-        lv_gv = (GifView)headerLayout.findViewById(R.id.lv_gv);
-        lv_gv.setGifImage(R.drawable.xiala_jia_zai);
-        lv_gv.setGifImageType(GifView.GifImageType.COVER);
 //        headerText = (TextView)headerLayout.findViewById(R.id.drop_down_list_header_default_text);
 //        headerImage = (ImageView)headerLayout.findViewById(R.id.drop_down_list_header_image);
 //        headerProgressBar = (ProgressBar)headerLayout.findViewById(R.id.drop_down_list_header_progress_bar);

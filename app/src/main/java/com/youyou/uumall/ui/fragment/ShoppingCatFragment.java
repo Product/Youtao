@@ -129,7 +129,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     public void objectCallBack(int type, Object t) {
         if (type == ShopcartBiz.GET_CART_LIST) {
             Response response = (Response) t;
-            log.e(response.toString());
+//            log.e(response.toString());
             if (t != null) {
 
                 if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {//已经登录过账号

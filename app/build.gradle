@@ -161,6 +161,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     // （androidannotations）3.使用apt引入对androidannotation的依赖
     apt "org.androidannotations:androidannotations:$AAVersion"
+    //
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     //添加glide图片加载库支持
     //   compile 'com.github.bumptech.glide:glide:3.6.1'
@@ -190,5 +191,5 @@ dependencies {
     compile files('libs/libammsdk.jar')
     compile project(':PushSDK')
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile files('libs/GifView.jar')
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.16'
 }

@@ -30,6 +30,7 @@
     <dimen name="font_100">50sp</dimen>
     <dimen name="font_120">60sp</dimen>
 
+    <dimen name="view_1165">582dp</dimen>
     <dimen name="view_1000">500dp</dimen>
     <dimen name="view_990">495dp</dimen>
     <dimen name="view_800">400dp</dimen>

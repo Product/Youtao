@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
@@ -14,6 +17,7 @@ import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.model.GoodsDescBean;
+import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.ui.fragment.CategoryDescFragment_;
 import com.youyou.uumall.utils.MyUtils;
 
@@ -22,7 +26,9 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +46,12 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
     CategoryDescBiz categoryDescBiz;
     Map map;
     private boolean isLogined= true;
+
+    @ViewById
+    LinearLayout category_menu_point_ll;
+
+    @ViewById
+    TextView category_menu_point_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +127,7 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("成功加入购物车");
+                shopcartBiz.getcartList();
             }else{
                 showToastShort(response.msg);
             }
@@ -136,6 +149,21 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.O
             Response response = (Response) t;
             if (response.code != 0) {
                 isLogined = false;
+            }else{
+                List<ShopCartBean> list = (List<ShopCartBean>) response.data;
+                for (ShopCartBean bean :
+                        list) {
+                    if (TextUtils.equals(bean.goodsId,goodsId)){
+                        int count = bean.count;
+                        if (count != 0) {
+                            category_menu_point_ll.setVisibility(View.VISIBLE);
+                            category_menu_point_tv.setText(""+count);
+                        }else{
+                            category_menu_point_ll.setVisibility(View.GONE);
+                        }
+                    }
+                }
+
             }
         }
     }

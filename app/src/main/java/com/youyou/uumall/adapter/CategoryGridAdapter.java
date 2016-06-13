@@ -3,6 +3,7 @@ package com.youyou.uumall.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
@@ -63,7 +64,7 @@ public class CategoryGridAdapter extends BaseAdapter {
         ImageView imageView = (ImageView) convertView;
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         int px = PixelUtil.dp2px(94);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,px);
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,px);
         imageView.setLayoutParams(params);
         String imageSrc = mData.get(position).imageSrc;
         imageLoader.displayImage(BaseConstants.connection.ROOT_URL+imageSrc,  imageView);

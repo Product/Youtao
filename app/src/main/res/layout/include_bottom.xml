@@ -50,7 +50,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/view_10"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/icon_shopping_car_normal" />
+            android:src="@drawable/shopbox_normal_3x" />
 
         <TextView
             android:id="@+id/shopping_cart_textView"

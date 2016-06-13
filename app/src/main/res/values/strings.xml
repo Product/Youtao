@@ -49,7 +49,7 @@
     <string name="home_search_hint">搜索产品或品牌</string>
 
     <!--category decs-->
-    <string name="category_decs">产品详情</string>
+    <string name="category_decs">商品详情</string>
     <string name="category_decs_insertcar">加入购物车</string>
     <string name="category_decs_buynow">立即购买</string>
 
@@ -94,6 +94,11 @@
     <string name="dialog_cancel_pos">放弃</string>
     <string name="dialog_cancel_neg">确定</string>
 
+    <!--tel_dialog-->
+    <string name="dialog_tel_message">400-801-1110</string>
+    <string name="dialog_tel_message_2">400-800-1210</string>
+    <string name="dialog_tel_pos">取消</string>
+    <string name="dialog_tel_neg">呼叫</string>
     <!--dialog_login-->
     <string name="dialog_login_title">未登录</string>
     <string name="dialog_login_message">是否转跳到登录界面</string>

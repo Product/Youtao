@@ -114,6 +114,7 @@ public class SPApplication extends MultiDexApplication {
         //开启推送并设置注册的回调处理
         mPushAgent.enable();
         String device_token = UmengRegistrar.getRegistrationId(this);
+        log.e("device_token"+device_token);
         MyUtils.savePara(this,BaseConstants.preferencesFiled.DEVICE_TOKEN,device_token);
     }
 

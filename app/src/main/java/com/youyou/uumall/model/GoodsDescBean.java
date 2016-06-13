@@ -42,4 +42,26 @@ public class GoodsDescBean {
     public String customizedPrice;
     public String description;
     public String content;
+
+    @Override
+    public String toString() {
+        return "GoodsDescBean{" +
+                "id='" + id + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", titile='" + titile + '\'' +
+                ", color='" + color + '\'' +
+                ", image='" + image + '\'' +
+                ", brandName='" + brandName + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", stock='" + stock + '\'' +
+                ", stockDate='" + stockDate + '\'' +
+                ", limits='" + limits + '\'' +
+                ", price='" + price + '\'' +
+                ", coupon='" + coupon + '\'' +
+                ", customizedPriceName='" + customizedPriceName + '\'' +
+                ", customizedPrice='" + customizedPrice + '\'' +
+                ", description='" + description + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

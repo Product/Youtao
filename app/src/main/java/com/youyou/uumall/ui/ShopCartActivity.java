@@ -173,7 +173,7 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
                     }
                 });
                 builder.show();
-                log.e(t.toString());
+//                log.e(t.toString());
             }
         } else if (type == ShopcartBiz.CART_ITEM_DEL) {
             Response response = (Response) t;

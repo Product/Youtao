@@ -10,11 +10,12 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_150">
-    <com.ant.liao.GifView
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/view_10"
         android:layout_marginBottom="@dimen/view_10"
         android:id="@+id/lv_gv"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

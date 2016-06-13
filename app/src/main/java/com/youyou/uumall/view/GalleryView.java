@@ -136,7 +136,6 @@ public class GalleryView extends RelativeLayout implements
         for (int i = 0; i < mViews.size(); i++) {
             ImageView galleryImageView = new ImageView(mContext);
             galleryImageView.setScaleType(ScaleType.FIT_XY);
-
             galleryImageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
