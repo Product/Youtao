@@ -95,34 +95,34 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
     @Click({R.id.mine_head, R.id.mine_login})
     void userLogin() {
         LoginActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click
     void mine_register() {
         RegisterActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click
     void all_order_layout() {
         // 转跳到全部订单
         com.youyou.uumall.ui.OrderAllActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click
     void pickup_layout() {
         // 转跳到待收货 orderConfirm
         OrderShippingActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click
     void shipped_layout() {
         // 转跳到待发货 orderShipping
         OrderConfirmActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
 
     }
 
@@ -131,7 +131,7 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
         // 转跳到待付款 orderSubmit
 //        orderBiz.queryOrder(0,0,"","orderSubmit");
         OrderSubmitActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click
@@ -223,7 +223,7 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
                     mine_point_tv_3.setText(orderShipping + "");
                 }
                 if (orderBean.size() != 0) {
-                    mine_point_ll_4.setVisibility(View.VISIBLE);
+//                    mine_point_ll_4.setVisibility(View.VISIBLE);
                     mine_point_tv_4.setText(orderBean.size() + "");
                 }
                 //登录状态,在本地获取缓存头像和姓名,如果是普通登录没有头像,采用默认头像,隐藏线性布局,展示姓名,头像点击事件取消

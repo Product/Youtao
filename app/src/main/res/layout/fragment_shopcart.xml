@@ -14,7 +14,8 @@
 
     </RelativeLayout>
 
-    <View style="@style/HorizonLineStyle" />
+    <View style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray"/>
 
     <LinearLayout
         android:id="@+id/shopcart_bg_ll"

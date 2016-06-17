@@ -45,7 +45,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
     private List<OrderBean> mData;
     private Map<Integer, Integer> typeData;
     private Map<Integer, Integer> itemPosition;
-    private OnCancelClickedListener listener;
+//    private OnCancelClickedListener listener;
     private ImageLoader imageLoader;
 
     public OrderAdapter(Context mContext, int type) {
@@ -211,14 +211,14 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
                 }
                 Button item_order_submit_btn = ViewHolder.get(convertView, R.id.item_order_submit_btn);
                 item_order_submit_btn.setTag(position);
-                Button item_order_cancel_btn = ViewHolder.get(convertView, R.id.item_order_cancel_btn);
-                item_order_cancel_btn.setTag(position);
                 item_order_submit_btn.setOnClickListener(this);
-                item_order_cancel_btn.setOnClickListener(this);
+//                Button item_order_cancel_btn = ViewHolder.get(convertView, R.id.item_order_cancel_btn);
+//                item_order_cancel_btn.setTag(position);
+//                item_order_cancel_btn.setOnClickListener(this);
                 break;
 
         }
-        
+
         return convertView;
     }
 
@@ -232,13 +232,15 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
             Double price = Double.valueOf(orderBean.totalCoupon);
             intent.putExtra("price", price);
             mContext.startActivity(intent);
-        } else if (v.getId() == R.id.item_order_cancel_btn) {
-            OrderBean orderBean = mData.get(typeData.get(v.getTag()));
-            String orderId = orderBean.id;
-            if (listener != null) {
-                listener.cancel(orderId);
-            }
-        } else if (v.getId() == R.id.item_confirm_order_ll) {
+        }
+//        else if (v.getId() == R.id.item_order_cancel_btn) {
+//            OrderBean orderBean = mData.get(typeData.get(v.getTag()));
+//            String orderId = orderBean.id;
+//            if (listener != null) {
+//                listener.cancel(orderId);
+//            }
+//        }
+        else if (v.getId() == R.id.item_confirm_order_ll) {
             String id = (String) v.getTag();
             Intent intent = new Intent(activity, OrderDetailActivity_.class);
             intent.putExtra("id", id);
@@ -247,11 +249,11 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
         activity.overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
-    public void setOnCancelClickedListener(OnCancelClickedListener listener) {
-        this.listener = listener;
-    }
+//    public void setOnCancelClickedListener(OnCancelClickedListener listener) {
+//        this.listener = listener;
+//    }
 
-    public interface OnCancelClickedListener {
-        void cancel(String orderId);
-    }
+//    public interface OnCancelClickedListener {
+//        void cancel(String orderId);
+//    }
 }

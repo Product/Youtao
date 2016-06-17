@@ -27,7 +27,11 @@
         android:text="确认订单"
         android:textSize="@dimen/font_40" />
     </RelativeLayout>
+    <View
+        android:background="@color/bg_line_dark_gray"
+        style="@style/HorizonLineStyle"/>
     <LinearLayout
+        android:background="@color/white"
         android:visibility="gone"
         android:id="@+id/confirm_order_info_ll"
         android:paddingBottom="@dimen/view_50"
@@ -136,6 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_64" />
     <ListView
+        android:divider="@null"
         android:id="@+id/confirm_order_lv"
         android:cacheColorHint="@android:color/transparent"
         android:scrollbars="none"

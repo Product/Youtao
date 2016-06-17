@@ -1,7 +1,5 @@
 package com.youyou.uumall.ui;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -28,7 +26,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/23.
  */
 @EActivity(R.layout.activity_order_submit)
-public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface, OrderAdapter.OnCancelClickedListener {
+public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface{
 
     @ViewById
     ListView order_submit_lv;
@@ -44,7 +42,7 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     @AfterViews
     void afterViews() {
         orderAdapter = new OrderAdapter(this, OrderAdapter.ORDER_SUBMIT);
-        orderAdapter.setOnCancelClickedListener(this);
+//        orderAdapter.setOnCancelClickedListener(this);
         orderBiz.setArrayListCallbackInterface(this);
         orderBiz.setObjectCallbackInterface(this);
         orderBiz.queryOrder(0, 0, "", "orderSubmit");
@@ -91,18 +89,18 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
         }
     }
 
-    @Override
-    public void cancel(final String orderId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.dialog_cancel_title);
-        builder.setMessage(R.string.dialog_cancel_message);
-        builder.setPositiveButton(R.string.dialog_cancel_pos, null);
-        builder.setNegativeButton(R.string.dialog_cancel_neg, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                orderBiz.cancelOrder(orderId);
-            }
-        });
-        builder.show();
-    }
+//    @Override
+//    public void cancel(final String orderId) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle(R.string.dialog_cancel_title);
+//        builder.setMessage(R.string.dialog_cancel_message);
+//        builder.setPositiveButton(R.string.dialog_cancel_pos, null);
+//        builder.setNegativeButton(R.string.dialog_cancel_neg, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                orderBiz.cancelOrder(orderId);
+//            }
+//        });
+//        builder.show();
+//    }
 }

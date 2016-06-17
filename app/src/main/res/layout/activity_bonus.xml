@@ -12,7 +12,8 @@
             android:text="@string/bonus_title"
             style="@style/TextView_Title_Title" />
     </RelativeLayout>
-    <View style="@style/HorizonLineStyle"/>
+    <View style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray"/>
     <com.youyou.uumall.view.RefreshListView
         android:background="@color/bg_settings_gap"
         android:id="@+id/bonus_lv"

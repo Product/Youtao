@@ -61,7 +61,7 @@ public class BaseFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		//Fragment created
 		log = MyLogger.getLogger(this.getClass().getSimpleName());
-		eventBus =  EventBus.getDefault(); //获取EventBus的实例
+
 		baseActivity = (BaseActivity) getActivity();//
 		DisplayMetrics metric = new DisplayMetrics();
 		baseActivity.getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -81,6 +81,7 @@ public class BaseFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		eventBus =  EventBus.getDefault(); //获取EventBus的实例
 		log = MyLogger.getLogger(this.getClass().getName());
 	}
 

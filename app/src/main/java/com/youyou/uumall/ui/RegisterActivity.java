@@ -96,11 +96,11 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         registerBiz.userRegister(map);
     }
 
-    @Click
-    void register_cancel() {
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
-    }
+//    @Click
+//    void register_cancel() {
+//        finish();
+//        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -117,7 +117,7 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("注册成功");
-                register_cancel();
+                finish();
             } else {
                 showToastShort(response.msg);
             }

@@ -13,9 +13,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
+    <!--ssdk-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
     <application
         android:name="com.youyou.uumall.SPApplication"
         android:allowBackup="true"
@@ -71,9 +74,14 @@
         android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.youyou.uumall.ui.CategoryDescActivity_"
+            android:name="com.youyou.uumall.ui.CommodityDescActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="商品详情"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.youyou.uumall.ui.CategoryDescActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="分类商品列表"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.youyou.uumall.ui.ShopCartActivity_"
@@ -98,6 +106,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.youyou.uumall.ui.DeliveryInfoActivity_"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="编辑取货信息"
             android:screenOrientation="portrait" />
@@ -155,6 +164,18 @@
             android:label="红包界面"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.BrandDescActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="品牌商品列表"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.WebActivity_"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="品牌商品列表"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:exported="true"
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -173,6 +194,13 @@
                 <data android:scheme="wxdfc1314988fb84a9"/>
             </intent-filter>
         </activity>
+        <!--ssdk-->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <!--友盟app key-->
         <meta-data
             android:name="UMENG_APPKEY"

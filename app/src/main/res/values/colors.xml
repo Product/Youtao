@@ -7,13 +7,15 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="tran85_white">#D8ffffff</color>
-    <color name="bg_edit_text">#e9e9e9</color>
 
     <color name="font_black">#333333</color>
     <color name="font_gray">#666666</color>
     <color name="font_hint_gray">#999999</color>
     <color name="bg_hint_line_gray">#aeaeae</color>
-    <color name="bg_line_gray">#c6c6c6</color>
+    <!--浅色线-->
+    <color name="bg_line_gray">#e6e6e6</color>
+    <!--深色线-->
+    <color name="bg_line_dark_gray">#c6c6c6</color>
     <color name="bg_btn_login">#ff4a32</color>
     <color name="bg_mine_head">#fb7362</color>
     <!--背景色-->

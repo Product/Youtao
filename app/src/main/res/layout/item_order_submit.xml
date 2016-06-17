@@ -4,25 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
-
+    <View
+        android:layout_marginLeft="@dimen/view_25"
+        android:layout_marginRight="@dimen/view_25"
+        style="@style/HorizonLineStyle"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_146"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:layout_marginRight="@dimen/view_50"
-            android:id="@+id/item_order_cancel_btn"
-            android:layout_width="@dimen/view_300"
-            android:layout_height="@dimen/view_86"
-            android:background="@drawable/bg_disenabled_confirm_shape"
-            android:text="@string/order_submit_item_cancel"
-            android:textColor="@color/font_hint_gray"
-            android:textSize="@dimen/font_30" />
+        <!--<Button-->
+            <!--android:layout_marginRight="@dimen/view_50"-->
+            <!--android:id="@+id/item_order_cancel_btn"-->
+            <!--android:layout_width="@dimen/view_300"-->
+            <!--android:layout_height="@dimen/view_86"-->
+            <!--android:background="@drawable/bg_disenabled_confirm_shape"-->
+            <!--android:text="@string/order_submit_item_cancel"-->
+            <!--android:textColor="@color/font_hint_gray"-->
+            <!--android:textSize="@dimen/font_30" />-->
         <Button
             android:id="@+id/item_order_submit_btn"
-            android:layout_width="@dimen/view_300"
+            android:layout_width="@dimen/view_650"
             android:layout_height="@dimen/view_86"
             android:background="@drawable/bg_enabled_confirm_shape"
             android:text="@string/order_submit_item_pay"

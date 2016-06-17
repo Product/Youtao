@@ -2,6 +2,7 @@ package com.youyou.uumall.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -67,29 +68,36 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     }
 
     private void initData(GoodsDescBean bean) {
-        cate_frag_name.setText(bean.brandName);
-        cate_frag_price.setText(bean.price);
-        cate_frag_price1.setText(bean.customizedPriceName + ":￥" + bean.customizedPrice);
-        cate_frag_price2.setText(bean.customizedPriceName + ":￥" + bean.customizedPrice);
-        String description = bean.description;
-        String[] pics = description.split("\\|");
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        for (String
-                pic : pics) {
-            ImageView imageView = new ImageView(activity);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            cate_frag_ll.addView(imageView);
-            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView);
+        if (bean != null) {
+            cate_frag_name.setText(bean.brandName);
+            cate_frag_price.setText(bean.price);
+            cate_frag_price1.setText(bean.customizedPriceName + ":￥" + bean.customizedPrice);
+            cate_frag_price2.setText(bean.customizedPriceName + ":￥" + bean.customizedPrice);
+            String description = bean.description;
+            String[] pics = description.split("\\|");
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            DisplayMetrics metric = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+            mScreenWidth = metric.widthPixels;
+            for (String
+                    pic : pics) {
+                ImageView imageView = new ImageView(activity);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth,mScreenWidth);
+                imageView.setLayoutParams(params);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                cate_frag_ll.addView(imageView);
+                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView);
+            }
+            String image = bean.image;
+            String[] gallery = image.split("\\|");
+            List<GalleryBean> list = new ArrayList<>();
+            for (int i = 0; i < gallery.length; i++) {
+                GalleryBean galleryBean = new GalleryBean();
+                galleryBean.location = gallery[i];
+                list.add(galleryBean);
+            }
+            cate_frag_vp.setParams(list);
         }
-        String image = bean.image;
-        String[] gallery = image.split("\\|");
-        List<GalleryBean> list = new ArrayList<>();
-        for (int i = 0; i < gallery.length; i++) {
-            GalleryBean galleryBean = new GalleryBean();
-            galleryBean.location = gallery[i];
-            list.add(galleryBean);
-        }
-        cate_frag_vp.setParams(list);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.youyou.uumall.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -19,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.model.GalleryBean;
+import com.youyou.uumall.ui.WebActivity_;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,11 +137,14 @@ public class GalleryView extends RelativeLayout implements
 
         for (int i = 0; i < mViews.size(); i++) {
             ImageView galleryImageView = new ImageView(mContext);
+            galleryImageView.setTag(i);
             galleryImageView.setScaleType(ScaleType.FIT_XY);
             galleryImageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(mContext, WebActivity_.class);
+                    intent.putExtra("href",mViews.get((Integer) v.getTag()).href);
+                    mContext.startActivity(intent);
                 }
             });
 

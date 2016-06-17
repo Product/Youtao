@@ -3,6 +3,7 @@ package com.youyou.uumall.business;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.model.OrderBean;
+import com.youyou.uumall.model.ShopCartBean;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
@@ -22,7 +23,24 @@ public class OrderBiz extends BaseBusiness{
     public static final int CANCEL_ORDER =3 ;
 
     @Background
-    public void orderSubmit(Map map){
+    public void orderSubmit(List<ShopCartBean> data,String name,String linkTel,String pickupTime,String deliverType,String deliveryId,String address,String remarks){
+        Map map = new HashMap();
+        map.put("name",name);
+        map.put("linkTel",linkTel);
+        map.put("pickupTime",pickupTime);
+//        map.put("deliverType",deliverType);
+        map.put("deliveryId",deliveryId);
+        map.put("address",address);
+        map.put("remarks",remarks == null? "":remarks);
+        Map[] goodsList = new Map[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            ShopCartBean shopCartBean = data.get(i);
+            Map goods = new HashMap();
+            goods.put("goodsId",shopCartBean.goodsId);
+            goods.put("count",shopCartBean.count);
+            goodsList[i]=goods;
+        }
+        map.put("goodsList",goodsList);
         objectCallbackInterface.objectCallBack(ORDER_SUBMIT,baseApi.orderSubmit(map));
     }
 
@@ -51,7 +69,8 @@ public class OrderBiz extends BaseBusiness{
         map.put("id",orderId);
         map.put("status",status);
         Response<List<OrderBean>> listResponse = baseApi.queryOrder(map);
-//        log.e(listResponse);
+//        Response<Object> listResponse = baseApi.queryOrder(map);
+//        log.e(listResponse.toString());
         if (listResponse!=null) {
             arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,listResponse.data);
         }

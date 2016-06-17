@@ -28,6 +28,31 @@ import java.util.ArrayList;
  * "coupon" : 80.0,//优惠价格
  * "price" : 90.0//实际价格
  * }
+ *
+ * {searchFromPage=false,
+ * createDate=2016-06-14 06:47:19,
+ * updateDate=2016-06-14 06:47:19,
+ * delFlag=0,
+ * id=20160614669880,
+ * buyerId=bb6f3cae837d4c1287cc45e977550131,
+ * totalCnt=1.0,
+ * totalCoupon=400.0,
+ * totalPrice=500.0,
+ * linkTel=13795376899,
+ * name=陈冰,
+ * pickupTime=2016年5月2日  01:07  多发发,
+ * address=23f4c2dbadf545c2b21d0d69cb7e2196,
+ * deliverType=1,
+ * status=orderCancel,
+ * goodsList=[{searchFromPage=false,
+ *             id=8f2be0481bd54c56852b3fb9ada4f063,
+ *             orderId=20160614669880,
+ *             goodsId=acd2abb8b8b04eef9f19e83caae8b442,
+ *             cnt=1.0,
+ *             coupon=400.0,
+ *             price=500.0,
+ *             img=/uumall/userfiles/1/images/mall/goods/2016/04/IMG_1414.JPG,
+ *             title=粉红色兰蔻}]}
  */
 public class OrderBean {
     public Boolean searchFromPage;
@@ -40,9 +65,11 @@ public class OrderBean {
     public String totalCoupon;
     public String totalPrice;
     public String linkTel;
+    public String deliverType;
     public String name;
     public String pickupTime;
-    public Address address;
+//    public Address address;
+    public String address;
     public String status;
     public ArrayList<GoodsList> goodsList;
 
@@ -55,6 +82,8 @@ public class OrderBean {
         public String countryCode;
         public String name;
         public String description;
+        public String img;
+        public String title;
 
         @Override
         public String toString() {
@@ -67,6 +96,8 @@ public class OrderBean {
                     ", countryCode='" + countryCode + '\'' +
                     ", name='" + name + '\'' +
                     ", description='" + description + '\'' +
+                    ", img='" + img + '\'' +
+                    ", title='" + title + '\'' +
                     '}';
         }
     }
@@ -84,9 +115,10 @@ public class OrderBean {
                 ", totalCoupon='" + totalCoupon + '\'' +
                 ", totalPrice='" + totalPrice + '\'' +
                 ", linkTel='" + linkTel + '\'' +
+                ", deliverType='" + deliverType + '\'' +
                 ", name='" + name + '\'' +
                 ", pickupTime='" + pickupTime + '\'' +
-                ", address=" + address +
+                ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
                 ", goodsList=" + goodsList +
                 '}';

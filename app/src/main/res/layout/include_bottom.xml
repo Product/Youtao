@@ -63,7 +63,28 @@
             android:textColor="@color/font_gray"
             android:text="@string/tab_shopping_cart"
             android:textSize="@dimen/font_24" />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/shopping_cart_point_ll"
+            android:layout_alignTop="@id/shopping_cart_img"
+            android:layout_width="@dimen/view_20"
+            android:layout_height="@dimen/view_20"
+            android:background="@drawable/bg_msg_hint_point"
+            android:layout_toRightOf="@id/shopping_cart_img"
+            android:layout_marginLeft="-6dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center">
 
+            <TextView
+                android:gravity="center"
+                android:id="@+id/shopping_cart_point_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_14"
+                android:text="3"/>
+
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

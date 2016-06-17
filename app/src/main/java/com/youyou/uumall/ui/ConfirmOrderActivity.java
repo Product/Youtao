@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,8 +15,8 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.ShopCartBean;
-import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -26,7 +27,6 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/16.
@@ -55,6 +55,9 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
 
     @ViewById
     TextView confirm_total_tv;
+
+    @ViewById
+    Button confirm_buynow_bt;
 
     @Bean
     OrderBiz orderBiz;
@@ -91,7 +94,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
 
     @AfterViews
     void afterViews() {
-        confirm_total_tv.setText(totalPrice+"");
+        confirm_total_tv.setText("￥"+totalPrice);
         orderBiz.setObjectCallbackInterface(this);
         adapter.setData(mData);
         confirm_order_lv.setAdapter(adapter);
@@ -120,8 +123,10 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
                 confirm_order_info_ll.setVisibility(View.VISIBLE);
                 showToastLong(mName + mPhone + mDate + mFltNo + mDelivery);
                 confirm_order_name_tv.setText(mName +"    "+ mPhone);
-                confirm_order_time_tv.setText(mDate +"    "+ mFltNo);
+//                confirm_order_time_tv.setText(mDate +"    "+ mFltNo);
+                confirm_order_time_tv.setText(mDate);
                 confirm_order_address_tv.setText(mDelivery);
+                confirm_buynow_bt.setText("确认("+mData.size()+"件)");
                 break;
             default:
                 break;
@@ -137,31 +142,23 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
             showToastShort("信息填写不完整");
             return ;
         }
-        //开始调用参数,参数返回值为通用,所以用object来接收
-        Map order = MyUtils.orderSubmit(mData, mName, mPhone, mDate +"  "+ mFltNo, mDeliveryId, null);
-        orderBiz.orderSubmit(order);
+        orderBiz.orderSubmit(mData,mName,mPhone,mDate,"1",mDeliveryId,mFltNo,"");
     }
 
 
     @Click
     void confirm_pro_iv() {
         finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
-    }
 
     @UiThread
     @Override
     public void objectCallBack(int type, Object t) {
         Response response = (Response) t;
         if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-            // TODO: 2016/5/18 转跳到微信页面
+            eventBus.post(new ShopCartUpdateEvent());
             log.e("code:"+response.code+"msg:"+response.msg+"data:"+response.data+"size:"+response.size);
             Intent intent = new Intent(this,PaymentActivity_.class);
             intent.putExtra("data",(String)response.data);
@@ -173,7 +170,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
             intent.putExtra("price",totalPrice);
             startActivity(intent);
 //            PaymentActivity_.intent(this).start();
-            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
 
         }else{
             showToastLong(response.msg);

@@ -124,6 +124,7 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
 
     /*查询订单*/
     @Post("/mall/order/queryOrder.json")
+//    Response<Object> queryOrder(Map map);
     Response<List<OrderBean>> queryOrder(Map map);
 
     /*取消订单*/
@@ -145,4 +146,13 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     /*红包信息查询*/
     @Post("/mall/queryBonus.json")
     Response<List<BonusBean>> queryBonus();
+
+    /*品牌搜索商品接口*/
+    @Post("/mall/queryGoodsByBrand.json")
+    Response<List<GoodsDescBean>> queryGoodsByBrand(Map map);
+
+    /*品牌搜索商品接口*/
+    @Post("/mall/queryGoodsByCategory.json")
+    Response<List<GoodsDescBean>> queryGoodsByCategory(Map map);
+//    Response<List<GoodsDescBean>> queryGoodsByCategory(Map map);
 }

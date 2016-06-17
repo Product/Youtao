@@ -14,9 +14,12 @@ import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
+import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.ui.MainActivity_;
 import com.youyou.uumall.ui.OrderAllActivity_;
 import com.youyou.uumall.utils.MyLogger;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Administrator on 2016/5/19.
@@ -71,6 +74,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
         switch (resp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
                 result = "发送成功";
+                EventBus.getDefault().post(new MineTriggerEvent());//取消成功后重新改变原点状态
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 result = "发送取消";
@@ -89,7 +93,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
     }
 
     @Override
-    public void onClick(View v) {
+   public void onClick(View v) {
+
         if (v.getId() == R.id.wxpay_callback_home_btn) {
             MainActivity_.intent(this).start();
             overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);

@@ -1,7 +1,9 @@
 package com.youyou.uumall.ui;
 
+import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -34,7 +36,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/12.
  */
 @EActivity(R.layout.activity_category)
-public class CategoryActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
+public class CategoryActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener, AdapterView.OnItemClickListener {
     @Bean
     CategoryDescBiz categoryDescBiz;
 
@@ -67,6 +69,7 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
 
     @ViewById
     RelativeLayout category_rl;
+    private List<BrandBean> brandList;
 
     @AfterViews
     void afterViews() {
@@ -75,6 +78,7 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
         category_gv.setAdapter(categoryGridAdapter);
         home_search_tv.setOnTouchListener(this);
         category_rg.setOnCheckedChangeListener(this);
+        category_gv.setOnItemClickListener(this);
         initView();
     }
 
@@ -86,10 +90,10 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
         categoryDescBiz.queryCategory("");
     }
 
-    @Click
-    void category_cart_iv() {
-        ShopCartActivity_.intent(this).start();
-    }
+//    @Click
+//    void category_cart_iv() {
+//        ShopCartActivity_.intent(this).start();
+//    }
 
     @Click
     void category_pro_iv() {
@@ -110,7 +114,7 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
             adapter.setData(list);
         } else if (type == CommodityBiz.GET_BRAND_LIST) {
             if (arrayList != null) {
-                List<BrandBean> brandList = (List<BrandBean>) arrayList;
+                brandList = (List<BrandBean>) arrayList;
                 categoryGridAdapter.setData(brandList);
             }
         }
@@ -156,5 +160,14 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
                 category_gv.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        BrandBean brandBean = brandList.get(position);
+        Intent intent = new Intent(this,BrandDescActivity_.class);
+        intent.putExtra("name", brandBean.name);
+        intent.putExtra("id", brandBean.id);
+        startActivity(intent);
     }
 }

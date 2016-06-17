@@ -100,7 +100,7 @@
                 android:gravity="center"
                 android:text="@string/category_decs"
                 android:textColor="@color/font_hint_gray"
-                android:textSize="26sp" />
+                android:textSize="@dimen/font_30" />
         </RelativeLayout>
 
     </LinearLayout>

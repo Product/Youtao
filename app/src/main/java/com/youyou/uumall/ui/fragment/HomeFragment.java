@@ -17,14 +17,18 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.business.AddressBiz;
+import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.CommodityBiz;
 import com.youyou.uumall.event.CountryCallbackEvent;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.BrandBean;
 import com.youyou.uumall.model.DictBean;
 import com.youyou.uumall.model.GalleryBean;
+import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.model.RecommendBean;
+import com.youyou.uumall.ui.BrandDescActivity_;
 import com.youyou.uumall.ui.CategoryActivity_;
-import com.youyou.uumall.ui.CategoryDescActivity_;
+import com.youyou.uumall.ui.CommodityDescActivity_;
 import com.youyou.uumall.ui.CountryActivity_;
 import com.youyou.uumall.ui.QueryMainActivity_;
 import com.youyou.uumall.utils.MyUtils;
@@ -45,7 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @EFragment(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener {
+public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, View.OnClickListener {
 
     public static final String BG_BASE_COUNTRY = "bg_base_country";
     public static final String COUNTRY_CODE = "countryCode";
@@ -79,6 +83,8 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     private List<RecommendBean> recommendList;//推荐商品列表集合
     private boolean isRefresh = false;
     private int loadItem = 0;//加在完的条目
+    private List<BrandBean> brandList;
+
     @AfterViews
     void afterViews() {
         initCountryMap();
@@ -108,16 +114,33 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 afterViews();
             }
         });
+        eventBus.post(new ShopCartUpdateEvent());
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             QueryMainActivity_.intent(getActivity()).start();
-            getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//            getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
         }
         return false;
     }
+
+    @Override
+    public void onClick(View v) {
+        String parentId = (String) v.getTag();
+        for (int i = 0; i < brandList.size(); i++) {
+            BrandBean brandBean = brandList.get(i);
+            if (TextUtils.equals(brandBean.id, parentId)) {
+                Intent intent = new Intent(getActivity(),BrandDescActivity_.class);
+                intent.putExtra("name", brandBean.name);
+                intent.putExtra("id", brandBean.id);
+                startActivity(intent);
+            }
+        }
+    }
+
+
 
 
     class OnItemClickListener implements CommodityAdapter.OnItemClickListener {
@@ -125,7 +148,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
         @Override
         public void itemClick(View view) {
             //需要传递id,打开一个新的act
-            Intent intent = new Intent(mContext, CategoryDescActivity_.class);
+            Intent intent = new Intent(mContext, CommodityDescActivity_.class);
             intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, (String) view.getTag());
 //            CategoryDescActivity_.intent(mContext).extra("goodsId",recommendList.get(position).id).start();
             startActivity(intent);
@@ -192,13 +215,13 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     @Click(R.id.home_country_tv)
     void setCountry() {
         CountryActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click(R.id.home_category_iv)
     void jumpCategory() {
         CategoryActivity_.intent(getActivity()).start();
-        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
 //    @Click(R.id.home_search_tv)
@@ -248,9 +271,14 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
             }
         } else if (CommodityBiz.GET_BRAND_LIST == type) {
             if (arrayList != null) {
-                List<BrandBean> brandList = (List<BrandBean>) arrayList;
+                brandList = (List<BrandBean>) arrayList;
+//                log.e(brandList.toString());
                 setBrandPic(brandList);
                 loadItem++;
+            }
+        }else if (CategoryDescBiz.QUERY_CATEGORY == type) {
+            if (arrayList != null) {
+                List<GoodsDescBean> goodsDescBeen = (List<GoodsDescBean>) arrayList;
             }
         }
         if (loadItem >= 4) {
@@ -282,6 +310,8 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
             int childCount = viewGroup.getChildCount();
             for (int i = 0; i < childCount; i++) {
                 ImageView child = (ImageView) viewGroup.getChildAt(i);
+                child.setTag(brandList.get(i).id);
+                child.setOnClickListener(this);
                 imageLoader.displayImage(BaseConstants.connection.ROOT_URL + brandList.get(i).imageSrc, child);
             }
         }

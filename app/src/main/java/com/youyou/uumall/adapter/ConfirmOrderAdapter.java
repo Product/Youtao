@@ -65,6 +65,7 @@ public class ConfirmOrderAdapter extends BaseAdapter{
             TextView item_confirm_order_name_tv = ViewHolder.get(convertView, R.id.item_confirm_order_name_tv);
             TextView item_confirm_order_price_tv = ViewHolder.get(convertView, R.id.item_confirm_order_price_tv);
             TextView item_confirm_order_count_tv = ViewHolder.get(convertView, R.id.item_confirm_order_count_tv);
+            View item_confirm_order_line = ViewHolder.get(convertView, R.id.item_confirm_order_line);
         Object data = mData.get(position);
         if (data instanceof  ShopCartBean){
         ShopCartBean bean = (ShopCartBean) data;
@@ -80,6 +81,9 @@ public class ConfirmOrderAdapter extends BaseAdapter{
             item_confirm_order_count_tv.setText("x"+bean.cnt);
             String[] pics = bean.img.split("\\|");
             imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv);
+        }
+        if (getCount() - 1 == position) {
+            item_confirm_order_line.setVisibility(View.GONE);
         }
         return convertView;
     }

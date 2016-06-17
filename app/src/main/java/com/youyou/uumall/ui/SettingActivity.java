@@ -13,6 +13,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.utils.UserUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -86,6 +87,7 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
                 eventBus.post(new MineTriggerEvent());
                 userUtils.saveUserId("");//清空
                 userUtils.saveUserInfo("");
+                eventBus.post(new ShopCartUpdateEvent());
                 MainActivity_.intent(this).start();
             } else {
                 showToastShort(response.msg);

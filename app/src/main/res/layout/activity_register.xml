@@ -95,44 +95,44 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/view_60"
-        android:layout_marginRight="@dimen/view_60"
-        android:layout_marginTop="@dimen/view_80"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/view_60"-->
+        <!--android:layout_marginRight="@dimen/view_60"-->
+        <!--android:layout_marginTop="@dimen/view_80"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@color/bg_line_gray"
-            android:layout_height="@dimen/view_1"/>
+        <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/bg_line_gray"-->
+            <!--android:layout_height="@dimen/view_1"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_text_or"
-            android:textColor="@color/bg_line_gray"
-            android:textSize="@dimen/font_28" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/login_text_or"-->
+            <!--android:textColor="@color/bg_line_gray"-->
+            <!--android:textSize="@dimen/font_28" />-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@color/bg_line_gray"
-            android:layout_height="@dimen/view_1"/>
+        <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/bg_line_gray"-->
+            <!--android:layout_height="@dimen/view_1"/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
-    <ImageView
-        android:id="@+id/register_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/font_30"
-        android:src="@drawable/ic_login_cancel"
-        android:layout_marginTop="@dimen/view_60"
-        android:layout_gravity="center_horizontal"/>
+    <!--<ImageView-->
+        <!--android:id="@+id/register_cancel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/font_30"-->
+        <!--android:src="@drawable/ic_login_cancel"-->
+        <!--android:layout_marginTop="@dimen/view_60"-->
+        <!--android:layout_gravity="center_horizontal"/>-->
 
 
 </LinearLayout>

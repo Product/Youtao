@@ -1,6 +1,7 @@
 package com.youyou.uumall.business;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
@@ -32,28 +33,30 @@ public class ShopcartBiz extends BaseBusiness {
     }
 
     /**
-     *
      * 购物车查询
      */
     @Background
     public void getcartList() {
-        String countryCode="";
+        String countryCode = "";
         String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
         String dictList = MyUtils.getPara("dictList", mContext);
-        String[] split = dictList.split(";");
-        for (String s:
-                split) {
-            if (s.contains(country)){
-                 countryCode =   s.split(",")[1];
+        if (!TextUtils.isEmpty(dictList)) {
+            String[] split = dictList.split(";");
+            for (String s :
+                    split) {
+                if (s.contains(country)) {
+                    countryCode = s.split(",")[1];
+                }
             }
+        } else {
+            countryCode="SG";
         }
         Map map = new HashMap();
-        map.put("countryCode",countryCode);
+        map.put("countryCode", countryCode);
         objectCallbackInterface.objectCallBack(GET_CART_LIST, baseApi.getcartList(map));
     }
 
     /**
-     *
      * 删除购物车
      */
     @Background

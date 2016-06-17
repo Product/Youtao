@@ -15,6 +15,7 @@
             style="@style/TextView_Title_Title"/>
     </RelativeLayout>
     <View
+        android:background="@color/bg_line_dark_gray"
         style="@style/HorizonLineStyle"/>
     <ImageView
         android:layout_gravity="center_horizontal"

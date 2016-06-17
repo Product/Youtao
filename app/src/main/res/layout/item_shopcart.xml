@@ -67,8 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:layout_marginRight="-1dp"
                 android:clickable="true"
-
+                android:background="@drawable/bg_shopcart_left"
                 android:padding="@dimen/view_10"
                 android:id="@+id/item_shopcart_down_iv"
                 android:textSize="@dimen/view_35"
@@ -77,8 +78,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="@dimen/view_50"
                 android:layout_height="@dimen/view_50" />
-
+            <!--@drawable/bg_shopcart_mid-->
             <TextView
+                android:background="@drawable/bg_shopcart_mid"
                 android:text="1"
                 android:layout_toRightOf="@id/item_shopcart_down_iv"
                 android:id="@+id/item_shopcart_mid_tv"
@@ -89,6 +91,8 @@
                 android:layout_height="@dimen/view_50" />
 
             <ImageView
+                android:layout_marginLeft="-1dp"
+                android:background="@drawable/bg_shopcart_right"
                 android:clickable="true"
                 android:layout_toRightOf="@id/item_shopcart_mid_tv"
                 android:padding="@dimen/view_10"

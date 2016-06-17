@@ -2,16 +2,16 @@ package com.youyou.uumall.model;
 
 /**
  * Created by Administrator on 2016/5/10.
- * "id": "1",
- "name": "GCC",
- "description": "GCC",
- "sort": 3,
- "imageSrc": "/uumall/userfiles/1/images/mall/brand/2016/04/b8d0989e4bd1815fb7fbcf04a87f1808.jpg",
- "createBy": "1",
- "createDate": "2016-04-06 18:03:20",
- "updateBy": "1",
- "updateDate": "2016-04-14 17:50:15",
- "remarks": ""
+ * id='523319c1372a4a5b815f3a2a32ac59a6',
+ * name='品牌测试01名称',
+ * description='品牌测试01描述',
+ * sort='1',
+ * imageSrc='/uumall/userfiles/1/images/mall/brand/2016/06/banner03.png',
+ * createBy='null',
+ * createDate='2016-06-13 02:23:19',
+ * updateBy='null',
+ * updateDate='2016-06-13 02:29:29',
+ * remarks='品牌测试备注'
 
  */
 public class BrandBean {
@@ -25,4 +25,20 @@ public class BrandBean {
     public String updateBy;
     public String updateDate;
     public String remarks;
+
+    @Override
+    public String toString() {
+        return "BrandBean{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", sort='" + sort + '\'' +
+                ", imageSrc='" + imageSrc + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateDate='" + updateDate + '\'' +
+                ", remarks='" + remarks + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,5 @@
 package com.youyou.uumall.ui;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -17,6 +15,8 @@ import com.youyou.uumall.business.LoginBiz;
 import com.youyou.uumall.business.RegisterBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.MobileBindingEvent;
+import com.youyou.uumall.event.ShopCartTriggerEvent;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.event.WxLoginEvent;
 import com.youyou.uumall.model.UserInfoBean;
 import com.youyou.uumall.utils.MyUtils;
@@ -117,11 +117,11 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
         overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
-    @Click
-    void login_cancel() {
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
-    }
+//    @Click
+//    void login_cancel() {
+//        finish();
+//        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
+//    }
 
     @Click
     void register() {
@@ -147,8 +147,10 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                     UserInfoBean bean = (UserInfoBean) list.get(0);
                     userUtils.saveUserId(bean.mobile);
                     eventBus.post(new MineTriggerEvent());
+                    eventBus.post(new ShopCartUpdateEvent());
+                    eventBus.post(new ShopCartTriggerEvent());
                     showToastShort("登录成功");
-                    login_cancel();
+                    finish();
                 } else {
                     showToastShort(response.msg);
                 }
@@ -156,6 +158,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
         }
     }
 
+    @UiThread
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (RegisterBiz.WECHAT_LOGIN == type) {
@@ -164,21 +167,24 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
             log.e(bean.toString());
 //            showToastShort("注册成功");
             if (TextUtils.isEmpty(bean.mobile)) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.dialog_bind_title);
-                builder.setMessage(R.string.dialog_bind_message);
-                builder.setPositiveButton(R.string.dialog_bind_pos, null);
-                builder.setNegativeButton(R.string.dialog_bind_neg, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        eventBus.postSticky(new MobileBindingEvent(bean.openId));
-                        MobileBindingActivity_.intent(LoginActivity.this).start();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle(R.string.dialog_bind_title);
+//                builder.setMessage(R.string.dialog_bind_message);
+//                builder.setPositiveButton(R.string.dialog_bind_pos, null);
+//                builder.setNegativeButton(R.string.dialog_bind_neg, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+                eventBus.postSticky(new MobileBindingEvent(bean.openId));
+                MobileBindingActivity_.intent(LoginActivity.this).start();
+                finish();
 //                        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
-                    }
-                });
-                builder.show();
+//                    }
+//                });
+//                builder.show();
             } else {
+                eventBus.post(new ShopCartTriggerEvent());
                 eventBus.post(new MineTriggerEvent());
+                eventBus.post(new ShopCartUpdateEvent());
                 finish();
 //                MainActivity_.intent(LoginActivity.this).start();
             }

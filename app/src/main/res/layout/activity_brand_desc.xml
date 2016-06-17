@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:background="@color/bg_settings_gap"
+        style="@style/RelativeLayout_Title_Normal">
+        <ImageView
+            style="@style/ImageView_Title_Pro"
+            android:id="@+id/brand_desc_pro_iv"/>
+        <TextView
+            android:id="@+id/brand_desc_title_tv"
+            style="@style/TextView_Title_Title"/>
+    </RelativeLayout>
+            <!--refresh:isLoadMore="false"-->
+    <View
+        style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray"/>
+    <GridView
+        android:numColumns="2"
+        android:id="@+id/brand_desc_gv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none">
+    </GridView>
+</LinearLayout>

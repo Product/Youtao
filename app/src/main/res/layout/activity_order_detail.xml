@@ -15,8 +15,11 @@
             style="@style/TextView_Title_Title"
             android:text="确认订单" />
     </RelativeLayout>
-
+    <View
+        android:background="@color/bg_line_dark_gray"
+        style="@style/HorizonLineStyle"/>
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/confirm_order_info_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,17 +122,66 @@
         android:textSize="@dimen/font_24" />
 
     <ListView
+        android:divider="@null"
         android:id="@+id/order_detail_lv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:cacheColorHint="@android:color/transparent"
         android:listSelector="@android:color/transparent"
         android:scrollbars="none">
 
     </ListView>
-
     <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_90"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25">
+
+        <TextView
+            android:id="@+id/order_detail_total_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/view_25"
+            android:text="共3件"
+            android:textColor="@color/font_hint_gray"
+            android:textSize="@dimen/font_24" />
+
+        <TextView
+            android:id="@+id/order_detail_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合计:￥1485"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_28" />
+    </LinearLayout>
+    <View
+        style="@style/HorizonLineView20Style"/>
+    <TextView
+        android:paddingRight="@dimen/view_10"
+        android:paddingLeft="@dimen/view_10"
+        android:background="@color/white"
+        android:id="@+id/order_detail_order_id"
+        android:paddingTop="@dimen/view_10"
+        android:textSize="@dimen/view_25"
+        android:textColor="@color/font_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:paddingLeft="@dimen/view_10"
+        android:paddingRight="@dimen/view_10"
+        android:background="@color/white"
+        android:id="@+id/order_detail_create_date"
+        android:paddingBottom="@dimen/view_10"
+        android:textSize="@dimen/view_25"
+        android:textColor="@color/font_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/order_detail_cancel_ll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/font_100"
         android:orientation="horizontal">
@@ -162,4 +214,16 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_28" />
     </LinearLayout>
+    <Button
+
+        android:id="@+id/order_detail_pay_bt2"
+        android:textSize="@dimen/font_28"
+        android:textColor="@color/white"
+        android:text="@string/order_detail_pay"
+        android:layout_marginTop="@dimen/view_10"
+        android:layout_marginBottom="@dimen/view_10"
+        android:background="@drawable/bg_enabled_confirm_shape"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/view_650"
+        android:layout_height="@dimen/view_86" />
 </LinearLayout>

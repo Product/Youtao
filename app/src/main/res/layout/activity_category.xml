@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:gravity="center_vertical"
         android:paddingLeft="@dimen/view_25"
         android:paddingRight="@dimen/view_25"
         android:layout_width="match_parent"
@@ -13,12 +14,9 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:layout_marginRight="@dimen/view_25"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:paddingTop="@dimen/view_25"
-            android:paddingBottom="@dimen/view_25"
-            android:paddingLeft="-5dp"
-            android:layout_width="@dimen/view_60"
             style="@style/ImageView_Title_Pro"
             android:id="@+id/category_pro_iv"
              />
@@ -33,23 +31,27 @@
             android:background="@color/white"
             android:drawableLeft="@drawable/search_5_2x"
             android:drawablePadding="@dimen/view_15"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textSize="@dimen/font_28"
             android:hint="@string/home_search_hint"
             android:paddingLeft="@dimen/view_20"
             android:singleLine="true"
             android:textColorHint="@color/font_hint_gray" />
 
 
-        <ImageView
-            android:id="@+id/category_cart_iv"
-            android:padding="@dimen/view_18"
-            android:layout_width="@dimen/view_86"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/view_25"
-            android:src="@drawable/shopbox_normal_2x" />
+        <!--<ImageView-->
+            <!--android:id="@+id/category_cart_iv"-->
+            <!--android:padding="@dimen/view_18"-->
+            <!--android:layout_width="@dimen/view_86"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginLeft="@dimen/view_25"-->
+            <!--android:src="@drawable/shopbox_normal_2x" />-->
 
     </LinearLayout>
     <View
+        android:background="@color/bg_line_dark_gray"
         style="@style/HorizonLineStyle" />
     <RelativeLayout
         android:id="@+id/category_rl"

@@ -5,26 +5,51 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
+import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
+import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.ui.fragment.HomeFragment_;
 import com.youyou.uumall.ui.fragment.MineFragment_;
 import com.youyou.uumall.ui.fragment.ShoppingCatFragment_;
 import com.youyou.uumall.view.ToastMaster;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
+
+import cn.sharesdk.framework.ShareSDK;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface {
 
+
+    @Bean
+    ShopcartBiz shopcartBiz;
+
+    @ViewById
+    LinearLayout shopping_cart_point_ll;
+
+    @ViewById
+    TextView shopping_cart_point_tv;
     private FragmentManager fm;
     private MineFragment_ mineFg;
     private HomeFragment_ homeFg;
@@ -48,15 +73,32 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ShareSDK.initSDK(this);//share初始化
         initViews();
     }
 
     @AfterViews
     void afterViews() {
-
-
+        shopcartBiz.setObjectCallbackInterface(this);
+        // TODO: 2016/6/15 由于这个接口需要国家码,所以触发在home中的访问之后
     }
 
+    @Override
+    protected void registerEvent() {
+        super.registerEvent();
+        eventBus.register(this);
+    }
+
+    @Override
+    protected void unRegisterEvent() {
+        super.unRegisterEvent();
+        eventBus.unregister(this);
+    }
+
+    @Subscribe(sticky = false,threadMode = ThreadMode.MAIN)
+    public void onShopCartUpdate(ShopCartUpdateEvent event) {
+        shopcartBiz.getcartList();
+    }
 
     private void initViews() {
         homeFg = new HomeFragment_();
@@ -149,10 +191,35 @@ public class MainActivity extends BaseActivity {
                 ToastMaster.makeText(this, R.string.press_again_to_exit_program, Toast.LENGTH_SHORT);
                 mExitTime = System.currentTimeMillis();
             } else {
+                ShareSDK.stopSDK(this);//关闭分享
                 finish();
             }
             return true;
         }
         return super.dispatchKeyEvent(event);
+    }
+
+    @UiThread
+    @Override
+    public void objectCallBack(int type, Object t) {
+        if (ShopcartBiz.GET_CART_LIST == type) {
+            Response response = (Response) t;
+            if (response.code == 0) {
+                List<ShopCartBean> list = (List<ShopCartBean>) response.data;
+                int count = 0;
+                for (ShopCartBean bean : list) {
+                    count += bean.count;
+                }
+                if (count != 0) {
+                    shopping_cart_point_ll.setVisibility(View.VISIBLE);
+                    shopping_cart_point_tv.setText("" + count);
+                } else {
+                    shopping_cart_point_ll.setVisibility(View.GONE);
+                }
+
+            }else{
+                shopping_cart_point_ll.setVisibility(View.GONE);
+            }
+        }
     }
 }

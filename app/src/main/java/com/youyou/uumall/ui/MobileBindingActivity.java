@@ -116,6 +116,11 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
         MainActivity_.intent(this).start();
     }
 
+    @Override
+    public void onBackPressed() {
+        MainActivity_.intent(this).start();
+    }
+
     @UiThread
     @Override
     public void objectCallBack(int type, Object t) {

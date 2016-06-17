@@ -1,30 +1,11 @@
 package com.youyou.uumall.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Administrator on 2016/5/10.
- * {
- "msg": "请求成功",
- "code": "0",
- "size": 1,
- "data": {
- "id": "acd2abb8b8b04eef9f19e83caae8b442",
- "categoryName": "口红",
- "titile": "粉红色兰蔻",
- "color": "",
- "image": "/uumall/userfiles/1/images/mall/goods/2016/04/IMG_1414.JPG",
- "brandName": "LV",
- "keywords": "44发  发",
- "stock": 99837,
- "stockDate": "2016-07-21 00:00:00",
- "limits": 5,
- "price": 500,
- "coupon": 400,
- "customizedPriceName": "乐天价",
- "customizedPrice": 600,
- "description": "/uumall/userfiles/1/images/mall/brand/2016/04/56a4ca7cc3757f88d8009444ac5e60e4.jpeg|/uumall/userfiles/1/images/mall/brand/2016/04/b8d0989e4bd1815fb7fbcf04a87f1808.jpg",
- "content": "订单"
- }
- */
+ *
+ * */
 public class GoodsDescBean {
     public String id;
     public String categoryName;
@@ -35,6 +16,7 @@ public class GoodsDescBean {
     public String keywords;
     public String stock;
     public String stockDate;
+    public String sales;
     public String limits;
     public String price;
     public String coupon;
@@ -42,6 +24,31 @@ public class GoodsDescBean {
     public String customizedPrice;
     public String description;
     public String content;
+    public ArrayList<GoodsPrice> goodsPrice;
+    class GoodsPrice {
+        @Override
+        public String toString() {
+            return "GoodsPrice{" +
+                    "searchFromPage=" + searchFromPage +
+                    ", createDate='" + createDate + '\'' +
+                    ", updateDate='" + updateDate + '\'' +
+                    ", delFlag='" + delFlag + '\'' +
+                    ", id='" + id + '\'' +
+                    ", goodsId='" + goodsId + '\'' +
+                    ", name='" + name + '\'' +
+                    ", discountPriceCny=" + discountPriceCny +
+                    '}';
+        }
+
+        public boolean searchFromPage;
+        public String createDate;
+        public String updateDate;
+        public String delFlag;
+        public String id;
+        public String goodsId;
+        public String name;
+        public double discountPriceCny;
+    }
 
     @Override
     public String toString() {
@@ -55,6 +62,7 @@ public class GoodsDescBean {
                 ", keywords='" + keywords + '\'' +
                 ", stock='" + stock + '\'' +
                 ", stockDate='" + stockDate + '\'' +
+                ", sales='" + sales + '\'' +
                 ", limits='" + limits + '\'' +
                 ", price='" + price + '\'' +
                 ", coupon='" + coupon + '\'' +
@@ -62,6 +70,60 @@ public class GoodsDescBean {
                 ", customizedPrice='" + customizedPrice + '\'' +
                 ", description='" + description + '\'' +
                 ", content='" + content + '\'' +
+                ", goodsPrice=" + goodsPrice +
                 '}';
     }
+    /**
+     * code=0,
+     * msg='请求成功',
+     * size=2,
+     *
+     * data=[{id=cf739208eb4d43db92a2534b3926a0e1,
+     *        categoryName=V领,
+     *        titile=韩束 (KanS)红石榴鲜活水盈四件套,
+     *        color=red,
+     *        image=/uumall/userfiles/1/images/mall/goods/2016/06/pro001.jpg|/uumall/userfiles/1/images/mall/goods/2016/06/pro002.jpg|/uumall/userfiles/1/images/mall/goods/2016/06/pro003.jpg,
+     *        brandName=品牌测试01名称,
+     *        keywords=爆款,
+     *        stock=11.0,
+     *        stockDate=,
+     *        sales=69.0,
+     *        limits=0.0,
+     *        price=666.0,
+     *        coupon=10.0,
+     *        goodsPrice=[{searchFromPage=false,
+     *                     createDate=2016-06-13 03:11:29,
+     *                     updateDate=2016-06-13 03:11:29,
+     *                     delFlag=0,
+     *                     id=9f30c9b137f84192b6f5d73633537824,
+     *                     goodsId=cf739208eb4d43db92a2534b3926a0e1,
+     *                     name=新罗价,
+     *                     discountPriceCny=777.0},
+     *
+     *                     {searchFromPage=false,
+     *                     createDate=2016-06-13 03:11:29,
+     *                     updateDate=2016-06-13 03:11:29,
+     *                     delFlag=0,
+     *                     id=fae323ecf46b4bb0973f077b66e4f27e,
+     *                     goodsId=cf739208eb4d43db92a2534b3926a0e1,
+     *                     name=乐天价,
+     *                     discountPriceCny=888.0}]},
+     *        {id=f21fd412266c4e55b14ec59d28f4d8fa,
+     *        categoryName=V领,
+     *        titile=韩束 (KanS)红石榴鲜活水盈四件套,
+     *        color=,
+     *        image=/uumall/userfiles/1/images/mall/goods/2016/06/pro002.jpg|/uumall/userfiles/1/images/mall/goods/2016/06/pro003.jpg,
+     *        brandName=品牌测试01名称,
+     *        keywords=发，爱迪生，,
+     *        stock=1000.0,
+     *        stockDate=2016-06-30 00:00:00,
+     *        sales=0.0,
+     *        limits=5.0,
+     *        price=90.0,
+     *        coupon=10.0,
+     *        goodsPrice=[]}],
+     *  totalPrice=null,
+     *  prev=null,
+     *  next=null
+     */
 }

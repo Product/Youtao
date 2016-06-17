@@ -3,22 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_90"
-        android:orientation="horizontal">
+    <RelativeLayout
+        style="@style/RelativeLayout_Title_Normal"
+        >
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        style="@style/TextView_Title_Title"
         android:text="选择所在城市"
-        android:textColor="@color/font_black"
-        android:textSize="@dimen/font_36"/>
-    </LinearLayout>
+        />
+    </RelativeLayout>
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_1"
-        android:background="@color/bg_hint_line_gray"/>
+        style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray"/>
     <GridView
         android:verticalSpacing="@dimen/view_37"
         android:horizontalSpacing="@dimen/view_75"

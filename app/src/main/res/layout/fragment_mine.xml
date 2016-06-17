@@ -20,8 +20,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/font_44"
+                    android:layout_height="@dimen/font_44"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:src="@drawable/ic_mine_bell_white"
@@ -100,8 +100,8 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/payment_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/font_44"
+                        android:layout_height="@dimen/font_44"
                         android:src="@drawable/ic_mine_payment"/>
 
                     <LinearLayout
@@ -150,8 +150,8 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/shipped_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/font_44"
+                        android:layout_height="@dimen/font_44"
                         android:src="@drawable/ic_mine_shipped"/>
 
                     <TextView
@@ -199,8 +199,8 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/pickup_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/font_44"
+                        android:layout_height="@dimen/font_44"
                         android:src="@drawable/ic_mine_pickup"/>
 
                     <TextView
@@ -248,8 +248,8 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/all_order_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/font_44"
+                        android:layout_height="@dimen/font_44"
                         android:src="@drawable/ic_mine_all_order"/>
 
                     <TextView
@@ -328,7 +328,8 @@
                     android:textSize="@dimen/font_28"/>
 
             </RelativeLayout>
-
+            <View
+                style="@style/HorizonLineStyle"/>
             <RelativeLayout
                 android:id="@+id/mainland_layout"
                 android:layout_width="match_parent"
@@ -365,7 +366,8 @@
                     android:textSize="@dimen/font_28"/>
 
             </RelativeLayout>
-
+            <View
+                style="@style/HorizonLineStyle"/>
             <RelativeLayout
                 android:id="@+id/korea_layout"
                 android:layout_width="match_parent"
@@ -441,7 +443,8 @@
                     android:layout_marginLeft="@dimen/view_25"/>
 
             </RelativeLayout>
-
+            <View
+                style="@style/HorizonLineStyle"/>
             <RelativeLayout
                 android:id="@+id/my_reward_layout"
                 android:layout_width="match_parent"
@@ -476,7 +479,8 @@
                     android:layout_marginLeft="@dimen/view_25"/>
 
             </RelativeLayout>
-
+            <View
+                style="@style/HorizonLineView20Style"/>
             <RelativeLayout
                 android:id="@+id/common_problem_layout"
                 android:layout_width="match_parent"
@@ -487,7 +491,7 @@
                     android:id="@+id/common_problem_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_my_reward"
+                    android:src="@drawable/question_2x"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -511,7 +515,8 @@
                     android:layout_marginLeft="@dimen/view_25"/>
 
             </RelativeLayout>
-
+            <View
+                style="@style/HorizonLineView20Style"/>
             <RelativeLayout
                 android:id="@+id/setting_layout"
                 android:layout_width="match_parent"
@@ -546,7 +551,8 @@
                     android:layout_marginLeft="@dimen/view_25"/>
 
             </RelativeLayout>
-
+            <View
+                style="@style/HorizonLineView20Style"/>
         </LinearLayout>
 
     </ScrollView>

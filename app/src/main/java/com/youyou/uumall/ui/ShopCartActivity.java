@@ -20,6 +20,7 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.ShopcartBiz;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.manager.DataBaseManager;
 import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.utils.MyUtils;
@@ -183,6 +184,7 @@ public class ShopCartActivity extends BaseActivity implements BaseBusiness.Objec
                 showToastShort(response.msg);
             }
         }
+        eventBus.post(new ShopCartUpdateEvent());
     }
 
     // TODO: 2016/5/16  暂且废弃

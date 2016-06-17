@@ -20,6 +20,7 @@ import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.ui.ConfirmOrderActivity_;
 import com.youyou.uumall.ui.LoginActivity_;
@@ -165,7 +166,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                         }
                     });
                     builder.show();
-                    log.e(t.toString());
+//                    log.e(t.toString());
                 }
 
             }
@@ -184,6 +185,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 showToastShort(response.msg);
             }
         }
+        eventBus.post(new ShopCartUpdateEvent());
     }
 
     @UiThread

@@ -65,7 +65,7 @@
 
     </LinearLayout>
     <View
+        android:id="@+id/item_confirm_order_line"
         android:layout_marginLeft="@dimen/view_25"
-        android:layout_marginRight="@dimen/view_25"
         style="@style/HorizonLineStyle"/>
 </LinearLayout>

@@ -87,9 +87,9 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
         item_shopcart_down_iv.setTag(item.goodsId);
         item_shopcart_check_cb.setChecked(item.isCheck);
         item_shopcart_name_tv.setText(item.goodsName);
-        item_shopcart_price_tv.setText(item.subtotal);
+        item_shopcart_price_tv.setText("￥"+item.subtotal);
         item_shopcart_mid_tv.setText(item.count+"");
-
+        item_shopcart_pic_iv.setScaleType(ImageView.ScaleType.FIT_XY);
         String[] split = item.image.split("\\|");
         imageLoader.displayImage(BaseConstants.connection.ROOT_URL + split[0], item_shopcart_pic_iv);
 
