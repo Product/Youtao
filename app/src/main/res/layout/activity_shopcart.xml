@@ -6,113 +6,109 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_90"
-        android:paddingBottom="@dimen/view_10"
-        android:paddingLeft="@dimen/view_25"
-        android:paddingRight="@dimen/view_25"
-        android:paddingTop="@dimen/view_10">
+        style="@style/RelativeLayout_Title_Normal">
 
         <ImageView
             android:id="@+id/shopcart_pro_iv"
             style="@style/ImageView_Title_Pro" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
+            style="@style/TextView_Title_Title"
             android:text="@string/shopcart_title"
-            android:textSize="@dimen/font_40" />
+             />
 
 
     </RelativeLayout>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_1"
-        android:background="@color/bg_line_gray" />
+        style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray" />
 
-    <ListView
-        android:cacheColorHint="@android:color/transparent"
-        android:scrollbars="none"
-        android:listSelector="@android:color/transparent"
-        android:clipToPadding="false"
-        android:divider="@null"
-        android:id="@+id/shopcart_fragment_lv"
+    <FrameLayout
+        android:id="@+id/shopcart_fl"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"/>
+    <!--<ListView-->
+        <!--android:cacheColorHint="@android:color/transparent"-->
+        <!--android:scrollbars="none"-->
+        <!--android:listSelector="@android:color/transparent"-->
+        <!--android:clipToPadding="false"-->
+        <!--android:divider="@null"-->
+        <!--android:id="@+id/shopcart_fragment_lv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1">-->
 
-    </ListView>
-    <LinearLayout
-        android:id="@+id/shopcart_bg_ll"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:layout_marginTop="@dimen/view_146"
-            android:background="@drawable/shopcart_null_3x"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginTop="@dimen/view_70"
-            android:text="@string/shopcart_bg"
-            android:textSize="@dimen/font_28"
-            android:textColor="@color/font_hint_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/font_100"
-        android:orientation="horizontal">
+    <!--</ListView>-->
+    <!--<LinearLayout-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/shopcart_bg_ll"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<ImageView-->
+            <!--android:layout_marginTop="@dimen/view_146"-->
+            <!--android:background="@drawable/shopcart_null_3x"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:layout_marginTop="@dimen/view_70"-->
+            <!--android:text="@string/shopcart_bg"-->
+            <!--android:textSize="@dimen/font_28"-->
+            <!--android:textColor="@color/font_hint_gray"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/font_100"-->
+        <!--android:orientation="horizontal">-->
 
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:id="@+id/shopcart_bottom_ll"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/tran85_white"
-            android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/shopcart_total_cb"
-                android:layout_marginLeft="@dimen/view_25"
-                android:button ="@drawable/btn_radio_seclector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/view_40"
-                />
-            <TextView
-                android:textColor="@color/font_black"
-                android:textSize="@dimen/font_30"
-                android:text="合计:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/shopcart_total_tv"
-                android:textColor="@color/font_country_conuntry"
-                android:textSize="@dimen/font_30"
-                android:text="￥0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:textColor="@color/font_black"
-                android:textSize="@dimen/font_30"
-                android:text="(不含运费)"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:id="@+id/shopcart_bottom_ll"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/tran85_white"-->
+            <!--android:orientation="horizontal">-->
+            <!--<CheckBox-->
+                <!--android:id="@+id/shopcart_total_cb"-->
+                <!--android:layout_marginLeft="@dimen/view_25"-->
+                <!--android:button ="@drawable/btn_radio_seclector"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="@dimen/view_40"-->
+                <!--/>-->
+            <!--<TextView-->
+                <!--android:textColor="@color/font_black"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:text="合计:"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/shopcart_total_tv"-->
+                <!--android:textColor="@color/font_country_conuntry"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:text="￥0"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:textColor="@color/font_black"-->
+                <!--android:textSize="@dimen/font_30"-->
+                <!--android:text="(不含运费)"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
 
-        <Button
-            android:id="@+id/shopcart_buynow_bt"
-            android:layout_width="@dimen/view_221"
-            android:layout_height="match_parent"
-            android:background="@color/bg_btn_login"
-            android:text="@string/shopcart_accounts"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_30" />
-    </LinearLayout>
+        <!--<Button-->
+            <!--android:id="@+id/shopcart_buynow_bt"-->
+            <!--android:layout_width="@dimen/view_221"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/bg_btn_login"-->
+            <!--android:text="@string/shopcart_accounts"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/font_30" />-->
+    <!--</LinearLayout>-->
 </LinearLayout>

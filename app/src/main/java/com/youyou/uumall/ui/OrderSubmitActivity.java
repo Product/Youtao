@@ -11,6 +11,7 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
+import com.youyou.uumall.event.OrderActFinishEvent;
 import com.youyou.uumall.model.OrderBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -19,6 +20,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -51,9 +53,9 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     }
 
     @Click
-    void order_submit_iv() {
+    void order_submit_iv() {//首先要把
         finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
     @UiThread
@@ -88,7 +90,21 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
             }
         }
     }
+    @Override
+    protected void unRegisterEvent() {
+        super.unRegisterEvent();
+        eventBus.unregister(this);
+    }
 
+    @Override
+    protected void registerEvent() {
+        super.registerEvent();
+        eventBus.register(this);
+    }
+    @Subscribe
+    public void onFinish(OrderActFinishEvent event) {
+        finish();
+    }
 //    @Override
 //    public void cancel(final String orderId) {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);

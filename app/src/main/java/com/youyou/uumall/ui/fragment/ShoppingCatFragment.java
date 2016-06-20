@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.youyou.uumall.R;
@@ -18,9 +19,11 @@ import com.youyou.uumall.adapter.ShopcartAdapter;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.business.SearchBiz;
 import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
+import com.youyou.uumall.model.BonusBean;
 import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.ui.ConfirmOrderActivity_;
 import com.youyou.uumall.ui.LoginActivity_;
@@ -46,6 +49,9 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     @Bean
     ShopcartAdapter adapter;
 
+    @Bean
+    SearchBiz searchBiz;
+
     @ViewById
     ListView shopcart_fragment_lv;
 
@@ -60,6 +66,12 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
 
     @ViewById
     CheckBox shopcart_total_cb;
+
+    @ViewById
+    TextView shopcart_bonus_tv;
+
+    @ViewById
+    RelativeLayout shopcart_title_rl;
 
     private Double totalPriceForResponse;//总金额
     private int sumChecked;//总选择数
@@ -85,17 +97,30 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     void afterViews() {
         mContext = getActivity();
         shopcart_fragment_lv.setAdapter(adapter);
+        searchBiz.setArrayListCallbackInterface(this);
         shopcartBiz.setObjectCallbackInterface(this);
         adapter.setOnDeleteClickListener(this);
         adapter.setOnInsertClickListener(this);
         adapter.setOnItemCheckedListener(this);
         shopcart_bg_ll.setVisibility(View.VISIBLE);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Boolean isAct = bundle.getBoolean("isAct",false);
+            if (isAct) {
+                shopcartBiz.getcartList();
+                searchBiz.queryBonus();
+                shopcart_title_rl.setVisibility(View.GONE);
+            }
+        }
+
     }
 
     @Subscribe
     public void onSelected(ShopCartTriggerEvent event) {
         shopcartBiz.getcartList();
+        searchBiz.queryBonus();
     }
+
 
     @Click
     void shopcart_buynow_bt() {//根据check总数判断是否选中商品,未选中不执行转跳操作,选中将商品信息全部传递给订单页面
@@ -130,7 +155,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     public void objectCallBack(int type, Object t) {
         if (type == ShopcartBiz.GET_CART_LIST) {
             Response response = (Response) t;
-//            log.e(response.toString());
+            log.e(response.toString());
             if (t != null) {
 
                 if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {//已经登录过账号
@@ -191,8 +216,22 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     @UiThread
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
-        List<ShopCartBean> list = (List<ShopCartBean>) arrayList;
-        adapter.setData(list);
+//        List<ShopCartBean> list = (List<ShopCartBean>) arrayList;
+//        adapter.setData(list);
+        if (type == SearchBiz.QUERY_BONUS) {
+            if (arrayList != null&&arrayList.size()!=0) {
+                List<BonusBean> list = (List<BonusBean>) arrayList;
+                double bonus = 0;
+                for (BonusBean bean : list) {
+                    bonus += bean.value;
+                }
+                shopcart_bonus_tv.setVisibility(View.VISIBLE);
+                shopcart_bonus_tv.setText("红包抵扣"+bonus+"元");
+            }else{
+                shopcart_bonus_tv.setVisibility(View.GONE);
+            }
+
+        }
     }
 
 

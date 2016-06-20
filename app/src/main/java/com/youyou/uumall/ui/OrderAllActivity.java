@@ -67,6 +67,6 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
     @Click
     void order_submit_iv() {
         finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 }

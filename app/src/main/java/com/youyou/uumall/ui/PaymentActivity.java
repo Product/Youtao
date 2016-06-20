@@ -1,5 +1,7 @@
 package com.youyou.uumall.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.TextView;
 
@@ -106,5 +108,30 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
                 boolean b = api.sendReq(req);
             }
         }
+    }
+
+    @Click
+    void payment_pro_iv() {
+        showDialog();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showDialog();
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.dialog_cancel_pay_title);
+        builder.setMessage(R.string.dialog_cancel_pay_message);
+        builder.setPositiveButton(R.string.dialog_cancel_pay_pos, null);
+        builder.setNegativeButton(R.string.dialog_cancel_pay_neg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                OrderSubmitActivity_.intent(PaymentActivity.this).start();
+                finish();
+            }
+        });
+        builder.show();
     }
 }

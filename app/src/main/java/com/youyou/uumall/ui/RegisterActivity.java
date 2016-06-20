@@ -102,12 +102,6 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
 //        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
 //    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
-    }
 
 
     @UiThread

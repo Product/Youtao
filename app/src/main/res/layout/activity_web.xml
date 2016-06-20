@@ -2,10 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        style="@style/RelativeLayout_Title_Normal">
+        <ImageView
+            android:id="@+id/web_pro_iv"
+            style="@style/ImageView_Title_Pro"/>
+        <TextView
+            android:text="商品详情"
+            style="@style/TextView_Title_Title"/>
+    </RelativeLayout>
+    <View
+        style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray"/>
     <WebView
         android:id="@+id/wv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </WebView>
 </LinearLayout>

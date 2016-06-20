@@ -92,17 +92,11 @@ public class RetrievePasswordActivity extends BaseActivity implements BaseBusine
 
 
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
-    }
 
     @Click
     void retrieve_pro() {
         finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
     @UiThread

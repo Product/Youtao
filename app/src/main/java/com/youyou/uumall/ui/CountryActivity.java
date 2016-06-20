@@ -62,7 +62,7 @@ public class CountryActivity extends BaseActivity {
     @Click
     void country_cancel_iv(){
            finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
     }
 
 

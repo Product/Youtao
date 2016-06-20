@@ -5,27 +5,16 @@
     android:background="@color/bg_settings_gap"
     >
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_90"
-        android:paddingBottom="@dimen/view_10"
-        android:paddingLeft="@dimen/view_25"
-        android:paddingRight="@dimen/view_25"
-        android:paddingTop="@dimen/view_10">
+        style="@style/RelativeLayout_Title_Normal">
 
     <ImageView
         android:id="@+id/confirm_pro_iv"
-        android:layout_width="@dimen/view_25"
-        android:layout_height="@dimen/view_44"
-        android:layout_centerVertical="true"
-        android:background="@drawable/pro_2x" />
+        style="@style/ImageView_Title_Pro" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
+        style="@style/TextView_Title_Title"
         android:text="确认订单"
-        android:textSize="@dimen/font_40" />
+        />
     </RelativeLayout>
     <View
         android:background="@color/bg_line_dark_gray"
@@ -176,6 +165,14 @@
                 android:textColor="@color/font_country_conuntry"
                 android:textSize="@dimen/font_30"
                 android:text="￥1295"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/confirm_bonus_tv"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

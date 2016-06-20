@@ -113,13 +113,10 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
 
     @Click
     void mobile_binding_pro_iv() {//回退上一页?// TODO: 2016/5/27 回退到哪里
-        MainActivity_.intent(this).start();
+        finish();
+//        MainActivity_.intent(this).start();
     }
 
-    @Override
-    public void onBackPressed() {
-        MainActivity_.intent(this).start();
-    }
 
     @UiThread
     @Override
@@ -136,7 +133,8 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("绑定完成");
-                MainActivity_.intent(this).start();// TODO: 2016/5/27 暂时转跳至主页面
+//                MainActivity_.intent(this).start();
+                finish();
             } else {
                 showToastShort(response.msg);
             }

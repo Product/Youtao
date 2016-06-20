@@ -42,8 +42,7 @@ public class ShopcartBiz extends BaseBusiness {
         String dictList = MyUtils.getPara("dictList", mContext);
         if (!TextUtils.isEmpty(dictList)) {
             String[] split = dictList.split(";");
-            for (String s :
-                    split) {
+            for (String s : split) {
                 if (s.contains(country)) {
                     countryCode = s.split(",")[1];
                 }

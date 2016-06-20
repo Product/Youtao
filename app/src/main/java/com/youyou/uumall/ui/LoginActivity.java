@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     @Click
     void login_forgetpwd_tv() {
         RetrievePasswordActivity_.intent(this).start();
-        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
 //    @Click
@@ -126,15 +126,10 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     @Click
     void register() {
         RegisterActivity_.intent(this).start();
-        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        finish();
+//        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
-    }
 
     @UiThread
     @Override
@@ -164,7 +159,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
         if (RegisterBiz.WECHAT_LOGIN == type) {
             final UserInfoBean bean = (UserInfoBean) arrayList.get(0);
 //            userUtils.saveUserId(bean.userId);
-            log.e(bean.toString());
+//            log.e(bean.toString());
 //            showToastShort("注册成功");
             if (TextUtils.isEmpty(bean.mobile)) {
 //                AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -186,6 +181,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                 eventBus.post(new MineTriggerEvent());
                 eventBus.post(new ShopCartUpdateEvent());
                 finish();
+                overridePendingTransition(0,0);
 //                MainActivity_.intent(LoginActivity.this).start();
             }
 

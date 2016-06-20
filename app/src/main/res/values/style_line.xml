@@ -38,7 +38,7 @@
     <!--左上角返回键-->
     <style name="ImageView_Title_Pro">
         <item name="android:layout_width">@dimen/view_44</item>
-        <item name="android:layout_height">@dimen/view_44</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:src">@drawable/ic_pro_2x</item>
         <!--<item name="android:paddingLeft">@dimen/view_m50</item>-->

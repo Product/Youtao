@@ -27,6 +27,7 @@
         android:orientation="vertical">
 
         <View
+            android:background="@color/bg_line_dark_gray"
             style="@style/HorizonLineStyle" />
 
         <LinearLayout

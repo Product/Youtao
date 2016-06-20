@@ -176,6 +176,7 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:theme="@style/transparent"
             android:exported="true"
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

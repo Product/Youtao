@@ -148,12 +148,6 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
         oks.show(this);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
-    }
 
     @UiThread
     @Override

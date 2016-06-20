@@ -17,6 +17,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
+import com.youyou.uumall.event.OrderActFinishEvent;
 import com.youyou.uumall.model.OrderBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -118,8 +119,9 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
                 log.e(t.toString());
                 if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                     eventBus.post(new MineTriggerEvent());//取消成功后重新改变原点状态
-                    OrderSubmitActivity_.intent(this).start();
-                    this.overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+                    OrderAllActivity_.intent(this).start();
+                    eventBus.post(new MineTriggerEvent());
+                    eventBus.post(new OrderActFinishEvent());
                     finish();
                 }
             }
@@ -153,7 +155,7 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
                 order_detail_address_tv.setText(bean.address);
                 order_detail_time_tv.setText(bean.pickupTime);
                 confirmOrderAdapter.setData(bean.goodsList);
-                log.e(bean.toString());
+//                log.e(bean.toString());
             }
         }
     }

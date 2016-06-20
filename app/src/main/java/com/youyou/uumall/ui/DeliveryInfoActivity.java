@@ -225,15 +225,9 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
     @Click
     void delivery_info_pro_iv() {
         finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
-    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

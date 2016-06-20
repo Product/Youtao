@@ -32,7 +32,7 @@ public class SearchBiz extends BaseBusiness {
     public void queryBonus(){
         // TODO: 2016/6/7 测试
         Response<List<BonusBean>> listResponse = baseApi.queryBonus();
-        log.e(listResponse.toString());
-        arrayListCallbackInterface.arrayCallBack(QUERY_BONUS, handleResponse(listResponse));
+//        log.e(listResponse.toString());
+        arrayListCallbackInterface.arrayCallBack(QUERY_BONUS, listResponse.data);
     }
 }

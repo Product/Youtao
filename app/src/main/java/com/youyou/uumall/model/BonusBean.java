@@ -12,12 +12,12 @@ package com.youyou.uumall.model;
  }
  */
 public class BonusBean {
-    private String id;
-    private String userId;
-    private String value;
-    private String expiryDate;
-    private String createDate;
-    private String updateDate;
+    public String id;
+    public String userId;
+    public double value;
+    public String expiryDate;
+    public String createDate;
+    public String updateDate;
 
     @Override
     public String toString() {

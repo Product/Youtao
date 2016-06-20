@@ -15,7 +15,9 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
+import com.youyou.uumall.business.SearchBiz;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
+import com.youyou.uumall.model.BonusBean;
 import com.youyou.uumall.model.ShopCartBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -32,7 +34,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/16.
  */
 @EActivity(R.layout.activity_confirm_order)
-public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface {
+public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.ObjectCallbackInterface, BaseBusiness.ArrayListCallbackInterface {
 
 
     @ViewById
@@ -55,6 +57,12 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
 
     @ViewById
     TextView confirm_total_tv;
+
+    @ViewById
+    TextView confirm_bonus_tv;
+
+    @Bean
+    SearchBiz searchBiz;
 
     @ViewById
     Button confirm_buynow_bt;
@@ -98,6 +106,8 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
         orderBiz.setObjectCallbackInterface(this);
         adapter.setData(mData);
         confirm_order_lv.setAdapter(adapter);
+        searchBiz.setArrayListCallbackInterface(this);
+        searchBiz.queryBonus();
     }
 
     @Click
@@ -105,7 +115,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
         Intent intent = new Intent(this, DeliveryInfoActivity_.class);
         startActivityForResult(intent,0);
 //        DeliveryInfoActivity_.intent(this).start();
-        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Override
@@ -169,11 +179,30 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
             intent.putExtra("name","油桃");
             intent.putExtra("price",totalPrice);
             startActivity(intent);
+            finish();
 //            PaymentActivity_.intent(this).start();
 //            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
 
         }else{
             showToastLong(response.msg);
+        }
+    }
+
+    @Override
+    public void arrayCallBack(int type, List<? extends Object> arrayList) {
+        if (type == SearchBiz.QUERY_BONUS) {
+            if (arrayList != null&&arrayList.size()!=0) {
+                List<BonusBean> list = (List<BonusBean>) arrayList;
+                double bonus = 0;
+                for (BonusBean bean : list) {
+                    bonus += bean.value;
+                }
+                confirm_bonus_tv.setVisibility(View.VISIBLE);
+                confirm_bonus_tv.setText("红包抵扣"+bonus+"元");
+            }else{
+                confirm_bonus_tv.setVisibility(View.GONE);
+            }
+
         }
     }
 }

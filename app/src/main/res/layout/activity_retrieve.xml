@@ -13,7 +13,7 @@
             android:text="@string/retrieve_title"
             style="@style/TextView_Title_Title"/>
     </RelativeLayout>
-    <View
+    <View android:background="@color/bg_line_dark_gray"
         style="@style/HorizonLineStyle"/>
     <EditText
         android:inputType="number"

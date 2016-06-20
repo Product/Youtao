@@ -10,6 +10,7 @@ import com.youyou.uumall.adapter.OrderAdapter;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.business.OrderBiz;
+import com.youyou.uumall.event.OrderActFinishEvent;
 import com.youyou.uumall.model.OrderBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -18,6 +19,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -67,6 +69,22 @@ public class OrderConfirmActivity extends BaseActivity implements BaseBusiness.A
     @Click
     void order_submit_iv() {
         finish();
-        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+//        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
+    }
+
+    @Override
+    protected void unRegisterEvent() {
+        super.unRegisterEvent();
+        eventBus.unregister(this);
+    }
+
+    @Override
+    protected void registerEvent() {
+        super.registerEvent();
+        eventBus.register(this);
+    }
+    @Subscribe
+    public void onFinish(OrderActFinishEvent event) {
+        finish();
     }
 }

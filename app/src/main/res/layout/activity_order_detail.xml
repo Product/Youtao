@@ -218,11 +218,11 @@
 
         android:id="@+id/order_detail_pay_bt2"
         android:textSize="@dimen/font_28"
-        android:textColor="@color/white"
-        android:text="@string/order_detail_pay"
+        android:textColor="@color/font_hint_gray"
+        android:text="@string/order_detail_cancel"
         android:layout_marginTop="@dimen/view_10"
         android:layout_marginBottom="@dimen/view_10"
-        android:background="@drawable/bg_enabled_confirm_shape"
+        android:background="@drawable/bg_disenabled_confirm_shape"
         android:layout_gravity="center"
         android:layout_width="@dimen/view_650"
         android:layout_height="@dimen/view_86" />

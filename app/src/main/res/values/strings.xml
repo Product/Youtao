@@ -111,6 +111,11 @@
     <string name="dialog_bind_pos">放弃</string>
     <string name="dialog_bind_neg">确定</string>
 
+    <!--dialog_cancel_pay-->
+    <string name="dialog_cancel_pay_title">取消支付</string>
+    <string name="dialog_cancel_pay_message">是否取消支付</string>
+    <string name="dialog_cancel_pay_pos">继续支付</string>
+    <string name="dialog_cancel_pay_neg">确定</string>
     <!--order detail-->
     <string name="order_detail_item">订单详情</string>
     <string name="order_detail_cancel">取消订单</string>

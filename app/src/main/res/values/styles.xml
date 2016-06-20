@@ -19,4 +19,7 @@
         <item name="android:windowBackground">@color/transparent</item>
     </style>
 
+    <style name="transparent" parent="android:style/Theme.Dialog">
+        <item name="android:background">@color/transparent</item>
+    </style>
 </resources>

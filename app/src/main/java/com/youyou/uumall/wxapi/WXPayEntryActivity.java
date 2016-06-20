@@ -97,14 +97,20 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 
         if (v.getId() == R.id.wxpay_callback_home_btn) {
             MainActivity_.intent(this).start();
-            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
             finish();
         }
         else if (v.getId() == R.id.wxpay_callback_order_btn) {
             OrderAllActivity_.intent(this).start();
-            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        MainActivity_.intent(this).start();
+        finish();
     }
 }
 

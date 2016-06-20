@@ -9,6 +9,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -40,5 +41,10 @@ public class WebActivity extends BaseActivity{
             log.e(url);
             return true;
         }
+    }
+
+    @Click
+    void web_pro_iv() {
+        finish();
     }
 }
