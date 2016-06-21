@@ -106,7 +106,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.youyou.uumall.ui.DeliveryInfoActivity_"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="编辑取货信息"
             android:screenOrientation="portrait" />

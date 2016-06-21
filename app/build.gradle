@@ -181,8 +181,11 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/libammsdk.jar')
     compile project(':PushSDK')
+
     compile 'org.greenrobot:eventbus:3.0.0'
+    //gif
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.16'
+//分享
     compile files('libs/MobCommons-2016.0426.1819.jar')
     compile files('libs/MobTools-2016.0426.1819.jar')
     compile files('libs/ShareSDK-Core-2.7.2.jar')

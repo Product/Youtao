@@ -1,28 +1,24 @@
 package com.youyou.uumall.ui;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.format.Time;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.business.AddressBiz;
 import com.youyou.uumall.model.DictBean;
+import com.youyou.uumall.view.DateTimePickerDialog;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -38,7 +34,7 @@ import java.util.Map;
  * Created by Administrator on 2016/5/17.
  */
 @EActivity(R.layout.activity_delivery_info)
-public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, View.OnClickListener, TextWatcher, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, View.OnClickListener, TextWatcher, DateTimePickerDialog.OnClickPositive {
     public static final int DOWN_ANIMATION = 0;
     public static final int UP_ANIMATION = 1;
     private boolean isOpen;
@@ -174,25 +170,12 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
         setResult(RESULT_OK, intent);
         finish();
     }
-//    private boolean isDeliveryChecked = false;
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.delivery_info_date_tv) {//选择日期和时间
-
-//            Date date = new Date();
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss");
-//            String dormatDate = dateFormat.format(date);
-//            String[] splitDate = dormatDate.split("/");
-//            for (int i = 0; i < splitDate.length; i++) {
-//
-//            }
-            Time t=new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
-            t.setToNow(); // 取得系统时间。
-            int year = t.year;
-            int month = t.month;
-            int date = t.monthDay;
-            DatePickerDialog pickerDialog = new DatePickerDialog(this,this,year,month,date);
-            pickerDialog.show();
+            DateTimePickerDialog dialog = new DateTimePickerDialog(this);
+            dialog.setOnClickPositive(this);
+            dialog.show();
         }else{//选择自提点
             isOpen = false;
             delivery_info_add_ll.removeAllViews();
@@ -244,35 +227,10 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
 //        log.e("afterTextChanged-->Editable:"+s);
         setButtonState();
     }
-    private int year;
-    private int month;
-    private int day;
-//    private int hour;
-//    private int minute;
+    //当选择好时间的时候
     @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {//日期
-        this.year = year;
-        this.month = monthOfYear;
-        this.day = dayOfMonth;
-        Time t=new Time();
-        t.setToNow();
-        int hour = t.hour; // 0-23
-        int minute = t.minute;
-//        int second = t.second;
-        TimePickerDialog pickerDialog  = new TimePickerDialog(this,this,hour+1,minute,true);
-        pickerDialog.show();
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {//时间
-        String hour = ""+hourOfDay;
-        String min = ""+minute;
-        if (hourOfDay < 10) {
-            hour = "0"+hour;
-        }
-        if (minute < 10) {
-            min = "0"+min;
-        }
-        delivery_info_date_tv.setText(year+"年"+month+"月"+day+"日  "+hour+":"+min);
+    public void getDateTime(String date, String hour, String minute) {
+        delivery_info_date_tv.setText(date+" "+hour+"时"+minute);
+        setButtonState();
     }
 }

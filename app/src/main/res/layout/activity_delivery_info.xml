@@ -100,10 +100,11 @@
                 android:textSize="@dimen/font_26" />
 
             <TextView
+                android:gravity="center_vertical"
                 android:background="@color/white"
                 android:id="@+id/delivery_info_date_tv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="选择机场提货时间"
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_26" />
