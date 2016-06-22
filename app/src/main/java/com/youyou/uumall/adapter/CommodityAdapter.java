@@ -1,6 +1,7 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,15 @@ public class CommodityAdapter extends BaseAdapter {
     void afterInject() {
         mInflater = LayoutInflater.from(context);
         imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
     }
 
     //对外提供设置数据的接口
@@ -82,7 +92,7 @@ public class CommodityAdapter extends BaseAdapter {
         left_commodity_name.setText(leftitem.name);
         left_commodity_price.setText("¥" + leftitem.price);
         left_commodity_origin_price.setText(leftitem.customizedPriceName + ":¥" + leftitem.customizedPrice);
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + leftitem.location, left_commodity_img);
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + leftitem.location, left_commodity_img,options);
         leftLayout.setOnClickListener(new AdapterClickListener());
         /**
          *  position 0    1   2
@@ -100,7 +110,7 @@ public class CommodityAdapter extends BaseAdapter {
             right_commodity_name.setText(rightitem.name);
             right_commodity_price.setText("¥" + rightitem.price);
             right_commodity_origin_price.setText(rightitem.customizedPriceName + ":¥" + rightitem.customizedPrice);
-            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + rightitem.location, right_commodity_img);
+            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + rightitem.location, right_commodity_img,options);
             rightLayout.setVisibility(View.VISIBLE);
         } else {
             rightLayout.setVisibility(View.INVISIBLE);

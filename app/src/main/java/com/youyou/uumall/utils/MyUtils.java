@@ -13,11 +13,12 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.text.TextUtils;
 
-
+import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.secure.DES;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import java.util.Map;
  *
  * @author liuj
  */
+
 public class MyUtils {
 
     public static final String SHARED_PREFERENCES_NAME = "yt";
@@ -259,7 +261,7 @@ public class MyUtils {
     }
 
     public static boolean filter() {
-        if(lastClickTime == 0){
+        if (lastClickTime == 0) {
             lastClickTime = System.currentTimeMillis();
             return false;
         }
@@ -295,19 +297,56 @@ public class MyUtils {
         }
     }
 
-    public static Map insertOneGoods(String goodsId) {
-        Map map = new HashMap();
+    public static Map[] insertOneGoods(String goodsId) {
         Map dataArray = new HashMap();
         dataArray.put("goodsId", goodsId);
         dataArray.put("count", 1);
         Map[] array = {dataArray};
-        map.put("isUpdate", 0);
-        map.put("dataArray", array);
-        return map;
+        return array;
     }
 
-    public static Map deleteOneGoods(String[] goodsId, int[] count, String tag) {
-        Map map = new HashMap();
+    public static Map[] deleteAllGoods(List<ShopCartBean> mData, String tag) {
+        List<ShopCartBean> list = new ArrayList<>();
+        for (int i = 0; i < mData.size(); i++) {
+            ShopCartBean shopCartBean = mData.get(i);//拿到每一件商品
+            if (TextUtils.equals(shopCartBean.goodsId, tag)) {
+                continue;
+            }
+            ShopCartBean temp = new ShopCartBean();
+            temp.goodsId = shopCartBean.goodsId;
+            temp.count = shopCartBean.count;
+            list.add(temp);
+        }
+        Map[] array;
+        if (list.size() == 0) {
+//            Map dataArray = new HashMap();
+//            dataArray.put("goodsId", "");
+//            dataArray.put("count", 0);
+//            array = new Map[1];
+//            array[0] = dataArray;
+//            int[] a = {1,2};
+            array = null;
+        } else {
+            array = new Map[list.size()];
+            for (int i = 0; i < list.size(); i++) {
+                Map map = new HashMap();
+                ShopCartBean shopCartBean = list.get(i);
+                map.put("goodsId", shopCartBean.goodsId);
+                map.put("count", shopCartBean.count);
+                array[i] = map;
+            }
+        }
+        return array;
+    }
+
+    public static Map[] deleteOneGoods(List<ShopCartBean> mData, String tag) {
+        String[] goodsId = new String[mData.size()];//建立一个商品id的集合
+        int[] count = new int[mData.size()];//建立一个商品数量的集合
+        for (int i = 0; i < mData.size(); i++) {
+            ShopCartBean shopCartBean = mData.get(i);//拿到每一件商品
+            goodsId[i] = shopCartBean.goodsId; //
+            count[i] = shopCartBean.count;
+        }
         Map[] array = new Map[goodsId.length];
         for (int i = 0; i < goodsId.length; i++) {
             Map dataArray = new HashMap();
@@ -319,37 +358,51 @@ public class MyUtils {
             }
             array[i] = dataArray;
         }
-        map.put("isUpdate", 1);
-        map.put("dataArray", array);
-        return map;
+        return array;
     }
 
     /**
-     *
-     * @param data 商品id及数量，内容为JSONObject{goodsId,count}
-     * @param name 取货人姓名
-     * @param linkTel 联系方式
+     * @param data       商品id及数量，内容为JSONObject{goodsId,count}
+     * @param name       取货人姓名
+     * @param linkTel    联系方式
      * @param pickupTime 取货时间
-     * @param address 自提点Id
-     * @param remarks 备注
+     * @param address    自提点Id
+     * @param remarks    备注
      * @return
      */
-    public static Map orderSubmit(List<ShopCartBean> data,String name,String linkTel,String pickupTime,String address,String remarks){
+    public static Map orderSubmit(List<ShopCartBean> data, String name, String linkTel, String pickupTime, String address, String remarks) {
         Map order = new HashMap();
-        order.put("name",name);
-        order.put("linkTel",linkTel);
-        order.put("pickupTime",pickupTime);
-        order.put("address",address);
-        order.put("remarks",remarks == null? "":remarks);
+        order.put("name", name);
+        order.put("linkTel", linkTel);
+        order.put("pickupTime", pickupTime);
+        order.put("address", address);
+        order.put("remarks", remarks == null ? "" : remarks);
         Map[] goodsList = new Map[data.size()];
         for (int i = 0; i < data.size(); i++) {
             ShopCartBean shopCartBean = data.get(i);
             Map goods = new HashMap();
-            goods.put("goodsId",shopCartBean.goodsId);
-            goods.put("count",shopCartBean.count);
-            goodsList[i]=goods;
+            goods.put("goodsId", shopCartBean.goodsId);
+            goods.put("count", shopCartBean.count);
+            goodsList[i] = goods;
         }
-        order.put("goodsList",goodsList);
+        order.put("goodsList", goodsList);
         return order;
+    }
+
+    public static String getCountryCode(Context context) {
+        String countryCode = "";
+        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, context);
+        String dictList = MyUtils.getPara("dictList", context);
+        if (!TextUtils.isEmpty(dictList)) {
+            String[] split = dictList.split(";");
+            for (String s : split) {
+                if (s.contains(country)) {
+                    countryCode = s.split(",")[1];
+                }
+            }
+        } else {
+            countryCode = "SG";// TODO: 2016/6/22 逻辑问题
+        }
+        return countryCode;
     }
 }

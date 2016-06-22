@@ -3,6 +3,7 @@ package com.youyou.uumall.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
 
+    private final DisplayImageOptions options;
     Context mContext;
     private int type = -1;
     public static final int ORDER_SUBMIT = 0;
@@ -52,6 +55,15 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
         this.mContext = mContext;
         this.type = type;
         imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
     }
 
 
@@ -192,7 +204,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
                 item_confirm_order_count_tv.setText("x" + goodsList.cnt);
                 item_confirm_order_price_tv.setText("￥" + goodsList.coupon);
                 String[] pics = goodsList.img.split("\\|");
-                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0], item_confirm_order_pic_iv);
+                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0], item_confirm_order_pic_iv,options);
                 break;
             case FOOT_TYPE:
                 if (convertView == null) {

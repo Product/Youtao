@@ -2,6 +2,7 @@ package com.youyou.uumall.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseBusiness;
@@ -43,6 +45,7 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
     @Bean
     CategoryDescBiz categoryDescBiz;
 
+    private DisplayImageOptions options;
     LayoutInflater mInflater;
     List<CategoryBean> dictList;
     Map typePos;
@@ -60,6 +63,15 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
         mInflater = LayoutInflater.from(mContext);
         categoryDescBiz.setArrayListCallbackInterface(this);
         imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x) // 设置图片下载期间显示的图片
+                .showImageForEmptyUri(R.drawable.order_empty_3x) // 设置图片Uri为空或是错误的时候显示的图片
+                .showImageOnFail(R.drawable.order_empty_3x) // 设置图片加载或解码过程中发生错误显示的图片
+                .cacheInMemory(true) // 设置下载的图片是否缓存在内存中
+                .cacheOnDisk(true) // 设置下载的图片是否缓存在SD卡中
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build(); // 构建完成
     }
 
     public CategoryAdapter() {
@@ -165,12 +177,12 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                     item_category_main_tv_4.setText(temp.get(4).name);
                     item_category_main_tv_5.setText(temp.get(5).name);
 
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(0).location.split("\\|")[0],item_category_main_iv_0);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(1).location.split("\\|")[0],item_category_main_iv_1);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(2).location.split("\\|")[0],item_category_main_iv_2);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(3).location.split("\\|")[0],item_category_main_iv_3);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(4).location.split("\\|")[0],item_category_main_iv_4);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(5).location.split("\\|")[0],item_category_main_iv_5);
+                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(0).location.split("\\|")[0],item_category_main_iv_0,options);
+                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(1).location.split("\\|")[0],item_category_main_iv_1,options);
+                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(2).location.split("\\|")[0],item_category_main_iv_2,options);
+                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(3).location.split("\\|")[0],item_category_main_iv_3,options);
+                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(4).location.split("\\|")[0],item_category_main_iv_4,options);
+                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(5).location.split("\\|")[0],item_category_main_iv_5,options);
                     LinearLayout item_category_main_ll_0 = ViewHolder.get(convertView, R.id.item_category_main_ll_0);
                     LinearLayout item_category_main_ll_1 = ViewHolder.get(convertView, R.id.item_category_main_ll_1);
                     LinearLayout item_category_main_ll_2 = ViewHolder.get(convertView, R.id.item_category_main_ll_2);

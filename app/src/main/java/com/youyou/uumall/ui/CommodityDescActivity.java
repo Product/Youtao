@@ -48,7 +48,6 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
 
     @Bean
     CategoryDescBiz categoryDescBiz;
-    Map map;
     private boolean isLogined = true;
 
     @ViewById
@@ -112,8 +111,8 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
     @Click
     void category_insertcar_bt() {
         if (isLogined) {
-            map = MyUtils.insertOneGoods(goodsId);
-            shopcartBiz.updatecart(this.map);
+            Map[] map = MyUtils.insertOneGoods(goodsId);
+            shopcartBiz.updatecart(map,0);
         } else {
             showToastShort("您还未登录");
         }

@@ -2,6 +2,7 @@ package com.youyou.uumall.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -43,6 +44,7 @@ public class GalleryView extends RelativeLayout implements
     private Timer mTimer;
     private TimerTask mTimerTask;
     private long mShowTime = 3000;
+    private DisplayImageOptions options;
 
     public GalleryView(Context context) {
         super(context);
@@ -69,6 +71,15 @@ public class GalleryView extends RelativeLayout implements
         mGalleryDotLayout = (LinearLayout) mGallery
                 .findViewById(R.id.gallery_dot);
         addView(mGallery, 0);
+        options =  new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .build();
     }
 
     public void setParams(List<GalleryBean> list) {
@@ -170,7 +181,7 @@ public class GalleryView extends RelativeLayout implements
             });
 
             ImageLoader.getInstance().displayImage(BaseConstants.connection.ROOT_URL + mViews.get(i).location,
-                    galleryImageView);
+                    galleryImageView,options);
 
             mGalleryImageViewArray.add(galleryImageView);
         }

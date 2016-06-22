@@ -11,7 +11,6 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
-import com.youyou.uumall.utils.UserUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -56,7 +55,8 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
     @Click
     void register_getSmsCode() {
         String phone = register_phone.getText().toString();
-        if (TextUtils.isEmpty(phone) || !UserUtils.isMobileNO(phone)) {
+//        if (TextUtils.isEmpty(phone) || !UserUtils.isMobileNO(phone)) {
+        if (TextUtils.isEmpty(phone) ) {
             showToastShort("请正确输入手机号");
             return;
         }

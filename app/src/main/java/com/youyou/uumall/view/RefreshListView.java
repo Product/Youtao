@@ -20,6 +20,7 @@ import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by Administrator on 2016/6/5 0005.
+ * @author cmandy
  */
 @EView
 public class RefreshListView extends ListView implements AbsListView.OnScrollListener {

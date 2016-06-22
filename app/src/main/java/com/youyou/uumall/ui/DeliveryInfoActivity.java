@@ -17,6 +17,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.business.AddressBiz;
+import com.youyou.uumall.event.DeliveryEditEvent;
 import com.youyou.uumall.model.DictBean;
 import com.youyou.uumall.view.DateTimePickerDialog;
 
@@ -25,10 +26,10 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/17.
@@ -78,6 +79,7 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
     private String date;
     private String fltNO;
     private String delivery;
+    private DeliveryEditEvent event;
 
     @AfterViews
     void afterViews() {
@@ -87,12 +89,33 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
         delivery_info_phone_et.addTextChangedListener(this);
         delivery_info_flt_no_et.addTextChangedListener(this);
         delivery_info_date_tv.setOnClickListener(this);
+        if (event != null) {
+            delivery_info_name_et.setText(event.name);
+            delivery_info_phone_et.setText(event.phone);
+            delivery_info_flt_no_et.setText(event.fltNo);
+            delivery_info_date_tv.setText(event.date);
+        }
+    }
+
+    @Override
+    protected void registerEvent() {
+        super.registerEvent();
+        eventBus.register(this);
+    }
+
+    @Override
+    protected void unRegisterEvent() {
+        super.unRegisterEvent();
+        eventBus.unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void onRestart(DeliveryEditEvent event) {
+        this.event = event;
     }
 
     private void getDelivery() {
-        Map param = new HashMap();
-        param.put("countryCode", "KR");// TODO: 2016/5/18 未完待续
-        addressBiz.queryDelivery(param);
+        addressBiz.queryDelivery();
     }
 
     @Override
@@ -198,7 +221,7 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
         date = delivery_info_date_tv.getText().toString();
         fltNO = delivery_info_flt_no_et.getText().toString();
         delivery = delivery_info_delivery_tv2.getText().toString();
-        if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(date)&&!TextUtils.isEmpty(fltNO)&&!TextUtils.isEmpty(delivery)) {
+        if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(phone)&&!TextUtils.equals(date,"选择机场提货时间")&&!TextUtils.isEmpty(fltNO)&&!TextUtils.isEmpty(delivery)) {
             delivery_info_confirm_btn.setEnabled(true);
         }else{
             delivery_info_confirm_btn.setEnabled(false);

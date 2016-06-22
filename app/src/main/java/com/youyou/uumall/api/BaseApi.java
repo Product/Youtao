@@ -12,6 +12,7 @@ import com.youyou.uumall.model.CategoryBean;
 import com.youyou.uumall.model.DictBean;
 import com.youyou.uumall.model.GalleryBean;
 import com.youyou.uumall.model.GoodsDescBean;
+import com.youyou.uumall.model.GoodsPrice;
 import com.youyou.uumall.model.OrderBean;
 import com.youyou.uumall.model.RecommendBean;
 import com.youyou.uumall.model.ShopCartBean;
@@ -107,7 +108,7 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
 
     /*购物车删除*/
     @Post("/mall/cartItemDel.json")
-    Response<Object> cartItemDel(Map map);
+    Response<Object> cartItemDel(Map map);//废弃
 
     /*自提点查询*/
     @Post("/sys/queryDelivery.json")
@@ -155,4 +156,9 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     @Post("/mall/queryGoodsByCategory.json")
     Response<List<GoodsDescBean>> queryGoodsByCategory(Map map);
 //    Response<List<GoodsDescBean>> queryGoodsByCategory(Map map);
+
+    /*品牌搜索商品接口*/
+    @Post("/mall/updateGoodsPrice.json")
+    Response<List<GoodsPrice>> updateGoodsPrice(Map map);
+//    Response<Object> updateGoodsPrice(Map map);
 }

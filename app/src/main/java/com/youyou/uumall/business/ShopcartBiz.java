@@ -1,10 +1,8 @@
 package com.youyou.uumall.business;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.youyou.uumall.base.BaseBusiness;
-import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
@@ -28,7 +26,12 @@ public class ShopcartBiz extends BaseBusiness {
      * 跟新购物车
      */
     @Background
-    public void updatecart(Map map) {
+    public void updatecart(Map[] dataArray,int isUpdate) {
+        String countryCode = new MyUtils().getCountryCode(mContext);
+        Map map = new HashMap();
+        map.put("countryCode", countryCode);
+        map.put("dataArray", dataArray);
+        map.put("isUpdate", isUpdate);
         objectCallbackInterface.objectCallBack(UPDATE_CART, baseApi.updatecart(map));
     }
 
@@ -37,26 +40,14 @@ public class ShopcartBiz extends BaseBusiness {
      */
     @Background
     public void getcartList() {
-        String countryCode = "";
-        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
-        String dictList = MyUtils.getPara("dictList", mContext);
-        if (!TextUtils.isEmpty(dictList)) {
-            String[] split = dictList.split(";");
-            for (String s : split) {
-                if (s.contains(country)) {
-                    countryCode = s.split(",")[1];
-                }
-            }
-        } else {
-            countryCode="SG";
-        }
+        String countryCode = new MyUtils().getCountryCode(mContext);
         Map map = new HashMap();
         map.put("countryCode", countryCode);
         objectCallbackInterface.objectCallBack(GET_CART_LIST, baseApi.getcartList(map));
     }
 
     /**
-     * 删除购物车
+     * 删除购物车(废弃)
      */
     @Background
     public void cartItemDel(Map map) {

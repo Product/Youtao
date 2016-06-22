@@ -3,6 +3,7 @@ package com.youyou.uumall.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.model.GalleryBean;
 import com.youyou.uumall.model.GoodsDescBean;
+import com.youyou.uumall.model.GoodsPrice;
 import com.youyou.uumall.view.GalleryView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -30,7 +32,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/10.
  */
 @EFragment(R.layout.fragment_cate_desc)
-public class CategoryDescFragment extends BaseFragment implements BaseBusiness.ObjectCallbackInterface {
+public class CategoryDescFragment extends BaseFragment implements BaseBusiness.ObjectCallbackInterface, BaseBusiness.ArrayListCallbackInterface {
     @ViewById
     TextView cate_frag_name;
     @ViewById
@@ -43,6 +45,10 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     GalleryView cate_frag_vp;
     @ViewById
     LinearLayout cate_frag_ll;
+
+    @ViewById
+    LinearLayout cate_frag_price_ll;
+
     @Bean
     CategoryDescBiz categoryDescBiz;
     private FragmentActivity activity;
@@ -54,7 +60,9 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
         String goodsId = bundle.getString(BaseConstants.preferencesFiled.GOODS_ID);
         //访问网络的操作
         categoryDescBiz.setObjectCallbackInterface(this);
+        categoryDescBiz.setArrayListCallbackInterface(this);
         categoryDescBiz.queryGoodsById(goodsId);
+        categoryDescBiz.updateGoodsPrice(goodsId);
     }
 
     @UiThread
@@ -70,9 +78,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     private void initData(GoodsDescBean bean) {
         if (bean != null) {
             cate_frag_name.setText(bean.brandName);
-            cate_frag_price.setText(bean.price);
-            cate_frag_price1.setText(bean.customizedPriceName + ":￥" + bean.customizedPrice);
-            cate_frag_price2.setText(bean.customizedPriceName + ":￥" + bean.customizedPrice);
+            cate_frag_price.setText("￥"+bean.price);
             String description = bean.description;
             String[] pics = description.split("\\|");
             ImageLoader imageLoader = ImageLoader.getInstance();
@@ -100,4 +106,28 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
         }
     }
 
+    @UiThread
+    @Override
+    public void arrayCallBack(int type, List<? extends Object> arrayList) {
+        if (CategoryDescBiz.UPDATE_GOODS_PRICE == type){
+            if (arrayList != null && arrayList.size() != 0) {
+                cate_frag_price_ll.setVisibility(View.VISIBLE);
+                List<GoodsPrice> list = (List<GoodsPrice>) arrayList;
+                GoodsPrice goodsPrice1 = list.get(0);
+                if (list.size() == 1) {
+                    cate_frag_price1.setText(goodsPrice1.name+":￥"+goodsPrice1.priceCny);
+                    cate_frag_price1.setVisibility(View.VISIBLE);
+                    cate_frag_price2.setVisibility(View.GONE);
+                } else if (list.size() == 2) {
+                GoodsPrice goodsPrice2 = list.get(1);
+                    cate_frag_price1.setText(goodsPrice1.name+":￥"+goodsPrice1.priceCny);
+                    cate_frag_price2.setText(goodsPrice2.name+":￥"+goodsPrice2.priceCny);
+                    cate_frag_price1.setVisibility(View.VISIBLE);
+                    cate_frag_price2.setVisibility(View.VISIBLE);
+                }
+            } else {
+                cate_frag_price_ll.setVisibility(View.GONE);
+            }
+        }
+    }
 }

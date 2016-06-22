@@ -25,5 +25,21 @@ public class ShopCartBean {
     public String subtotal;
     public String createDate;
     public boolean isCheck;
+
+    @Override
+    public String toString() {
+        return "ShopCartBean{" +
+                "updateDate='" + updateDate + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", id='" + id + '\'' +
+                ", goodsId='" + goodsId + '\'' +
+                ", price='" + price + '\'' +
+                ", image='" + image + '\'' +
+                ", count=" + count +
+                ", subtotal='" + subtotal + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", isCheck=" + isCheck +
+                '}';
+    }
 }
 

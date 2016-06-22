@@ -2,6 +2,7 @@ package com.youyou.uumall.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.adapter.CommodityAdapter;
@@ -84,6 +86,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     private boolean isRefresh = false;
     private int loadItem = 0;//加在完的条目
     private List<BrandBean> brandList;
+    private DisplayImageOptions options;
 
     @AfterViews
     void afterViews() {
@@ -115,6 +118,15 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
             }
         });
         eventBus.post(new ShopCartUpdateEvent());
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
     }
 
     @Override
@@ -312,7 +324,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 ImageView child = (ImageView) viewGroup.getChildAt(i);
                 child.setTag(brandList.get(i).id);
                 child.setOnClickListener(this);
-                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + brandList.get(i).imageSrc, child);
+                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + brandList.get(i).imageSrc, child,options);
             }
         }
     }

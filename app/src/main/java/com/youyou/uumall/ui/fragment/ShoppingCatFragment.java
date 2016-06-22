@@ -239,10 +239,8 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     public void deleteGoods(String tag, String view) {
         switch (view) {
             case ShopcartAdapter.DEL_ALL:
-                param = new HashMap<>();
-                String[] id = {tag};
-                param.put("idArray", id);
-                param.put("idType", 1);
+                Map[] dataArray1 = MyUtils.deleteAllGoods( mData, tag);
+                shopcartBiz.updatecart(dataArray1,1);
                 //总价计算
                 for (int i = 0; i < mData.size(); i++) {
                     ShopCartBean data = mData.get(i);
@@ -253,22 +251,11 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                     }
                 }
                 shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
-                shopcartBiz.cartItemDel(param);
                 break;
             case ShopcartAdapter.DEL_ONE:
-                /**
-                 * 现在只需要拿到整张data表里goodsId数据和count数据
-                 * 传递的时候把要单独删除的数据id作为标记传递
-                 *
-                 */
-                String[] goodsId = new String[mData.size()];
-                int[] count = new int[mData.size()];
-                for (int i = 0; i < mData.size(); i++) {
-                    ShopCartBean shopCartBean = mData.get(i);
-                    goodsId[i] = shopCartBean.goodsId;
-                    count[i] = shopCartBean.count;
-                }
-                param = MyUtils.deleteOneGoods(goodsId, count, tag);
+                Map[] dataArray = MyUtils.deleteOneGoods( mData, tag);
+                shopcartBiz.updatecart(dataArray,1);
+
                 //总价计算
                 for (int i = 0; i < mData.size(); i++) {
                     ShopCartBean data = mData.get(i);
@@ -281,17 +268,14 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                         }
                     }
                 }
-                shopcartBiz.updatecart(param);
-                break;
-            default:
-
                 break;
         }
     }
 
     @Override
     public void insertGoods(String tag) {
-        param = MyUtils.insertOneGoods(tag);
+        Map[] dataArray = MyUtils.insertOneGoods(tag);
+        shopcartBiz.updatecart(dataArray,0);
         //总价计算
         for (int i = 0; i < mData.size(); i++) {
             ShopCartBean data = mData.get(i);
@@ -300,7 +284,6 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 shopcart_total_tv.setText("￥" + totalPrice);
             }
         }
-        shopcartBiz.updatecart(param);
     }
 
     @Override

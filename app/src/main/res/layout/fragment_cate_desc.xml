@@ -48,6 +48,8 @@
                 android:textSize="@dimen/font_30" />
 
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/cate_frag_price_ll"
                 android:layout_marginTop="@dimen/view_15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +60,7 @@
                     android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/view_20"
+
                     android:background="@drawable/bg_half_circle_commodity"
                     android:padding="@dimen/view_10"
                     android:text="乐天价:￥1523"
@@ -66,6 +68,7 @@
                     android:textSize="@dimen/font_20" />
 
                 <TextView
+                    android:layout_marginLeft="@dimen/view_20"
                     android:id="@+id/cate_frag_price2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

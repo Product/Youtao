@@ -1,12 +1,14 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
@@ -30,10 +32,19 @@ public class ConfirmOrderAdapter extends BaseAdapter{
 
     List mData;
     private ImageLoader imageLoader;
-
+    private DisplayImageOptions options;
     @AfterInject
     void afterInject() {
         imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
     }
 
     public void setData(List mData){
@@ -73,14 +84,14 @@ public class ConfirmOrderAdapter extends BaseAdapter{
         item_confirm_order_name_tv.setText(bean.goodsName);
         item_confirm_order_price_tv.setText("￥"+bean.subtotal);
         item_confirm_order_count_tv.setText("x"+bean.count);
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv);
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv,options);
         }else if (data instanceof GoodsList){
             GoodsList bean = (GoodsList) data;
             item_confirm_order_name_tv.setText(bean.title);
             item_confirm_order_price_tv.setText("￥"+bean.coupon);
             item_confirm_order_count_tv.setText("x"+bean.cnt);
             String[] pics = bean.img.split("\\|");
-            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv);
+            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0],item_confirm_order_pic_iv,options);
         }
         if (getCount() - 1 == position) {
             item_confirm_order_line.setVisibility(View.GONE);

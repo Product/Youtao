@@ -16,6 +16,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.business.SearchBiz;
+import com.youyou.uumall.event.DeliveryEditEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.BonusBean;
 import com.youyou.uumall.model.ShopCartBean;
@@ -144,6 +145,13 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
     }
 
     @Click
+    void confirm_order_info_ll() {
+        Intent intent = new Intent(this, DeliveryInfoActivity_.class);
+        startActivityForResult(intent,0);
+        eventBus.postSticky(new DeliveryEditEvent(mName,mPhone,mDate,mFltNo));
+    }
+
+    @Click
     void confirm_buynow_bt() {
         if (mData == null || mData.size() == 0) {
             return ;
@@ -161,6 +169,8 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
         finish();
 //        overridePendingTransition(R.anim.anim_none, R.anim.from_right_exit);
     }
+
+
 
 
     @UiThread

@@ -1,10 +1,16 @@
 package com.youyou.uumall.business;
 
+import android.content.Context;
+
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.base.BaseConstants;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,8 +18,13 @@ import java.util.Map;
  */
 @EBean
 public class AddressBiz extends BaseBusiness {
+
     public static final int QUERY_COUNTRY = 3; //查询数据字典
+
     public static final int GET_RECOMMEND_LIST = 2;//获取推荐商品数据
+
+    @RootContext
+    Context mContext;
 
     /**
      * 获取国家信息
@@ -24,7 +35,6 @@ public class AddressBiz extends BaseBusiness {
     }
 
     /**
-     *
      * 查询推荐商品
      */
     @Background
@@ -33,11 +43,22 @@ public class AddressBiz extends BaseBusiness {
     }
 
     /**
-     *
      * 查询推荐商品
      */
     @Background
-    public void queryDelivery(Map map) {
+    public void queryDelivery() {
+        String countryCode = "";
+        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
+        String dictList = MyUtils.getPara("dictList", mContext);
+        String[] split = dictList.split(";");
+        for (String s :
+                split) {
+            if (s.contains(country)) {
+                countryCode = s.split(",")[1];
+            }
+        }
+        Map map = new HashMap();
+        map.put("countryCode", countryCode);
         arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.queryDelivery(map)));
     }
 

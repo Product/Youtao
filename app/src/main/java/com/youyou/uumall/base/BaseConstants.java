@@ -31,11 +31,11 @@ public class BaseConstants {
         public static final String APP_DIR = Environment
                 .getExternalStorageDirectory()
                 + File.separator
-                + "SP";
+                + "uumall";
 
         public static final String FILE_DIR = APP_DIR + File.separator
                 + "file" + File.separator;//一般文件存放
-        public static final String IMAGE_DIR = "SP" + File.separator
+        public static final String IMAGE_DIR = APP_DIR + File.separator
                 + "image" + File.separator; //存放缓存图片
         public static final String PHOTO_DIR = APP_DIR + File.separator
                 + "photo" + File.separator; //存放发送的图片

@@ -150,7 +150,7 @@ public class SPApplication extends MultiDexApplication {
     }
 
     private void initImageLoader(){
-        File cacheDir = StorageUtils.getOwnCacheDirectory(this, BaseConstants.path.IMAGE_DIR);
+        File cacheDir = StorageUtils.getOwnCacheDirectory(this, BaseConstants.path.IMAGE_DIR);//缓存的目录
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         int cacheSize = maxMemory / 6;
         ImageLoaderConfiguration config = new ImageLoaderConfiguration
@@ -169,6 +169,7 @@ public class SPApplication extends MultiDexApplication {
                 .diskCache(new UnlimitedDiscCache(cacheDir))//自定义缓存路径
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
                 .imageDownloader(new BaseImageDownloader(this, 5 * 1000, 30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间
+                .writeDebugLogs()
                 .build();//开始构建
         ImageLoader.getInstance().init(config);
     }

@@ -1,6 +1,7 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
@@ -38,11 +40,21 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
     private OnInsertClickListener insertclicklistener;
     private OnDeleteClickListener deleteclicklistener;
     private OnItemCheckedListener checkedListener;
+    private DisplayImageOptions options;
 
     @AfterInject
     void afterInject() {
         mInflater = LayoutInflater.from(mContext);
         imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
     }
 
     public void setData(List dictList) {
@@ -91,7 +103,7 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
         item_shopcart_mid_tv.setText(item.count+"");
         item_shopcart_pic_iv.setScaleType(ImageView.ScaleType.FIT_XY);
         String[] split = item.image.split("\\|");
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + split[0], item_shopcart_pic_iv);
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + split[0], item_shopcart_pic_iv,options);
 
         item_shopcart_up_iv.setOnClickListener(this);
         item_shopcart_down_iv.setOnClickListener(this);
