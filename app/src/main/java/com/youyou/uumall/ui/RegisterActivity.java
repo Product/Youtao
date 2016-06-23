@@ -124,5 +124,11 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_none,R.anim.from_top_exit);
+    }
 }
 

@@ -81,6 +81,12 @@ public class BaseFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		baseActivity = (BaseActivity) getActivity();//
+		DisplayMetrics metric = new DisplayMetrics();
+		baseActivity.getWindowManager().getDefaultDisplay().getMetrics(metric);
+
+		mScreenWidth = metric.widthPixels;
+		mScreenHeight = metric.heightPixels;
 		eventBus =  EventBus.getDefault(); //获取EventBus的实例
 		log = MyLogger.getLogger(this.getClass().getName());
 	}

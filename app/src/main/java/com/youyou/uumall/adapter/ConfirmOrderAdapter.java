@@ -73,6 +73,7 @@ public class ConfirmOrderAdapter extends BaseAdapter{
             convertView = View.inflate(mContext,R.layout.item_confirm_order, null);
         }
             ImageView item_confirm_order_pic_iv = ViewHolder.get(convertView, R.id.item_confirm_order_pic_iv);
+        item_confirm_order_pic_iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             TextView item_confirm_order_name_tv = ViewHolder.get(convertView, R.id.item_confirm_order_name_tv);
             TextView item_confirm_order_price_tv = ViewHolder.get(convertView, R.id.item_confirm_order_price_tv);
             TextView item_confirm_order_count_tv = ViewHolder.get(convertView, R.id.item_confirm_order_count_tv);

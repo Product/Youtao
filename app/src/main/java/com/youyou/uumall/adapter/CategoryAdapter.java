@@ -58,6 +58,27 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
     private final MyLogger log;
     private ImageLoader imageLoader;
 
+    private static final int[] textViewRes = {R.id.item_category_main_tv_0,
+            R.id.item_category_main_tv_1,
+            R.id.item_category_main_tv_2,
+            R.id.item_category_main_tv_3,
+            R.id.item_category_main_tv_4,
+            R.id.item_category_main_tv_5,};
+
+    private static final int[] imageViewRes = {R.id.item_category_main_iv_0,
+            R.id.item_category_main_iv_1,
+            R.id.item_category_main_iv_2,
+            R.id.item_category_main_iv_3,
+            R.id.item_category_main_iv_4,
+            R.id.item_category_main_iv_5,};
+
+    private static final int[] linearLayoutRes = {R.id.item_category_main_ll_0,
+            R.id.item_category_main_ll_1,
+            R.id.item_category_main_ll_2,
+            R.id.item_category_main_ll_3,
+            R.id.item_category_main_ll_4,
+            R.id.item_category_main_ll_5,};
+
     @AfterInject
     void afterInject() {
         mInflater = LayoutInflater.from(mContext);
@@ -143,10 +164,11 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                 TextView item_category_head_tv = ViewHolder.get(convertView, R.id.item_category_head_tv);
                 item_category_head_tv.setText(bean.name);
                 LinearLayout item_category_head_ll = ViewHolder.get(convertView, R.id.item_category_head_ll);
-                item_category_head_ll.setTag(bean.id+"|"+bean.name);
+                item_category_head_ll.setTag(bean.id + "|" + bean.name);
                 item_category_head_ll.setOnClickListener(this);
                 break;
             case TYPE_MAIN:
+
                 if (convertView == null) {
                     convertView = mInflater.inflate(R.layout.item_category_main, null);
                 }
@@ -157,56 +179,38 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                         temp.add(categoryBean);
                     }
                 }
-                TextView item_category_main_tv_0 = ViewHolder.get(convertView, R.id.item_category_main_tv_0);
-                TextView item_category_main_tv_1 = ViewHolder.get(convertView, R.id.item_category_main_tv_1);
-                TextView item_category_main_tv_2 = ViewHolder.get(convertView, R.id.item_category_main_tv_2);
-                TextView item_category_main_tv_3 = ViewHolder.get(convertView, R.id.item_category_main_tv_3);
-                TextView item_category_main_tv_4 = ViewHolder.get(convertView, R.id.item_category_main_tv_4);
-                TextView item_category_main_tv_5 = ViewHolder.get(convertView, R.id.item_category_main_tv_5);
-                ImageView item_category_main_iv_0 = ViewHolder.get(convertView, R.id.item_category_main_iv_0);
-                ImageView item_category_main_iv_1 = ViewHolder.get(convertView, R.id.item_category_main_iv_1);
-                ImageView item_category_main_iv_2 = ViewHolder.get(convertView, R.id.item_category_main_iv_2);
-                ImageView item_category_main_iv_3 = ViewHolder.get(convertView, R.id.item_category_main_iv_3);
-                ImageView item_category_main_iv_4 = ViewHolder.get(convertView, R.id.item_category_main_iv_4);
-                ImageView item_category_main_iv_5 = ViewHolder.get(convertView, R.id.item_category_main_iv_5);
-                if (temp.size() != 0) {
-                    item_category_main_tv_0.setText(temp.get(0).name);
-                    item_category_main_tv_1.setText(temp.get(1).name);
-                    item_category_main_tv_2.setText(temp.get(2).name);
-                    item_category_main_tv_3.setText(temp.get(3).name);
-                    item_category_main_tv_4.setText(temp.get(4).name);
-                    item_category_main_tv_5.setText(temp.get(5).name);
 
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(0).location.split("\\|")[0],item_category_main_iv_0,options);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(1).location.split("\\|")[0],item_category_main_iv_1,options);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(2).location.split("\\|")[0],item_category_main_iv_2,options);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(3).location.split("\\|")[0],item_category_main_iv_3,options);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(4).location.split("\\|")[0],item_category_main_iv_4,options);
-                    imageLoader.displayImage(BaseConstants.connection.ROOT_URL+temp.get(5).location.split("\\|")[0],item_category_main_iv_5,options);
-                    LinearLayout item_category_main_ll_0 = ViewHolder.get(convertView, R.id.item_category_main_ll_0);
-                    LinearLayout item_category_main_ll_1 = ViewHolder.get(convertView, R.id.item_category_main_ll_1);
-                    LinearLayout item_category_main_ll_2 = ViewHolder.get(convertView, R.id.item_category_main_ll_2);
-                    LinearLayout item_category_main_ll_3 = ViewHolder.get(convertView, R.id.item_category_main_ll_3);
-                    LinearLayout item_category_main_ll_4 = ViewHolder.get(convertView, R.id.item_category_main_ll_4);
-                    LinearLayout item_category_main_ll_5 = ViewHolder.get(convertView, R.id.item_category_main_ll_5);
-                    item_category_main_ll_0.setTag(temp.get(0).id+"|"+temp.get(0).name);
-                    item_category_main_ll_1.setTag(temp.get(1).id+"|"+temp.get(1).name);
-                    item_category_main_ll_2.setTag(temp.get(2).id+"|"+temp.get(2).name);
-                    item_category_main_ll_3.setTag(temp.get(3).id+"|"+temp.get(3).name);
-                    item_category_main_ll_4.setTag(temp.get(4).id+"|"+temp.get(4).name);
-                    item_category_main_ll_5.setTag(temp.get(5).id+"|"+temp.get(5).name);
-                    item_category_main_ll_0.setOnClickListener(this);
-                    item_category_main_ll_1.setOnClickListener(this);
-                    item_category_main_ll_2.setOnClickListener(this);
-                    item_category_main_ll_3.setOnClickListener(this);
-                    item_category_main_ll_4.setOnClickListener(this);
-                    item_category_main_ll_5.setOnClickListener(this);
+                List<TextView> textViews = new ArrayList<>();
+                for (int i = 0; i < textViewRes.length; i++) {
+                    textViews.add((TextView) ViewHolder.get(convertView, textViewRes[i]));
                 }
-                temp.clear();
+
+                List<ImageView> imageViews = new ArrayList<>();
+                for (int i = 0; i < imageViewRes.length; i++) {
+                    imageViews.add((ImageView) ViewHolder.get(convertView, imageViewRes[i], true));
+                }
+
+                List<LinearLayout> linearLayouts = new ArrayList<>();
+                for (int i = 0; i < linearLayoutRes.length; i++) {
+                    linearLayouts.add((LinearLayout) ViewHolder.get(convertView, linearLayoutRes[i]));
+                }
+                if (temp.size() != 0) {
+                    for (int i = 0; i < temp.size(); i++) {
+                        CategoryBean categoryBean = temp.get(i);
+                        if (categoryBean != null) {
+                            textViews.get(i).setText(categoryBean.name ==null?"":categoryBean.name);
+                            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + categoryBean.location.split("\\|")[0], imageViews.get(i), options);
+                            LinearLayout linearLayout = linearLayouts.get(i);
+                            linearLayout.setTag(categoryBean.id + "|" + categoryBean.name);
+                            linearLayout.setOnClickListener(this);
+                        }
+                    }
+                    temp.clear();
+                }
+
 
                 break;
         }
-
         return convertView;
     }
 
@@ -229,14 +233,14 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
 
     @Override
     public void onClick(View v) {
-        if (v.getId() ==R.id.item_category_head_ll) {
+        if (v.getId() == R.id.item_category_head_ll) {
             String tag = (String) v.getTag();
             String[] split = tag.split("\\|");
             Intent intent = new Intent(mContext, CategoryDescActivity_.class);
             intent.putExtra("name", split[1]);
             intent.putExtra("id", split[0]);
             mContext.startActivity(intent);
-        }else{
+        } else {
             String tag = (String) v.getTag();
             String[] split = tag.split("\\|");
             Intent intent = new Intent(mContext, CategoryDescActivity_.class);

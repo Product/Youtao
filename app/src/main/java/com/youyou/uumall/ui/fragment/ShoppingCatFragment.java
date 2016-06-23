@@ -1,7 +1,5 @@
 package com.youyou.uumall.ui.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -105,7 +103,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
         shopcart_bg_ll.setVisibility(View.VISIBLE);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Boolean isAct = bundle.getBoolean("isAct",false);
+            Boolean isAct = bundle.getBoolean("isAct", false);
             if (isAct) {
                 shopcartBiz.getcartList();
                 searchBiz.queryBonus();
@@ -177,20 +175,21 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                     setTotalChecked();
                 } else if (response.code == 46000 && TextUtils.equals(response.msg, "用户登录状态异常，请重新登录！")) {//如果没有登录就显示空列表
                     shopcart_bg_ll.setVisibility(View.VISIBLE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle(R.string.dialog_login_title);
-                    builder.setMessage(R.string.dialog_login_message);
-                    builder.setPositiveButton(R.string.dialog_login_pos, null);
-                    builder.setNegativeButton(R.string.dialog_login_neg, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(mContext, LoginActivity_.class);
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//                    builder.setTitle(R.string.dialog_login_title);
+//                    builder.setMessage(R.string.dialog_login_message);
+//                    builder.setPositiveButton(R.string.dialog_login_pos, null);
+//                    builder.setNegativeButton(R.string.dialog_login_neg, new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(mContext, LoginActivity_.class);
 //                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                            startActivity(intent);
+                    startActivity(intent);
+//                    getActivity().overridePendingTransition(R.anim.from_below_enter,R.anim.anim_none);
 //                            LoginActivity_.intent(mContext).flags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
-                        }
-                    });
-                    builder.show();
+//                        }
+//                    });
+//                    builder.show();
 //                    log.e(t.toString());
                 }
 
@@ -219,15 +218,15 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
 //        List<ShopCartBean> list = (List<ShopCartBean>) arrayList;
 //        adapter.setData(list);
         if (type == SearchBiz.QUERY_BONUS) {
-            if (arrayList != null&&arrayList.size()!=0) {
+            if (arrayList != null && arrayList.size() != 0) {
                 List<BonusBean> list = (List<BonusBean>) arrayList;
                 double bonus = 0;
                 for (BonusBean bean : list) {
                     bonus += bean.value;
                 }
                 shopcart_bonus_tv.setVisibility(View.VISIBLE);
-                shopcart_bonus_tv.setText("红包抵扣"+bonus+"元");
-            }else{
+                shopcart_bonus_tv.setText("红包抵扣" + bonus + "元");
+            } else {
                 shopcart_bonus_tv.setVisibility(View.GONE);
             }
 
@@ -239,8 +238,8 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     public void deleteGoods(String tag, String view) {
         switch (view) {
             case ShopcartAdapter.DEL_ALL:
-                Map[] dataArray1 = MyUtils.deleteAllGoods( mData, tag);
-                shopcartBiz.updatecart(dataArray1,1);
+                Map[] dataArray1 = MyUtils.deleteAllGoods(mData, tag);
+                shopcartBiz.updatecart(dataArray1, 1);
                 //总价计算
                 for (int i = 0; i < mData.size(); i++) {
                     ShopCartBean data = mData.get(i);
@@ -253,8 +252,8 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
                 break;
             case ShopcartAdapter.DEL_ONE:
-                Map[] dataArray = MyUtils.deleteOneGoods( mData, tag);
-                shopcartBiz.updatecart(dataArray,1);
+                Map[] dataArray = MyUtils.deleteOneGoods(mData, tag);
+                shopcartBiz.updatecart(dataArray, 1);
 
                 //总价计算
                 for (int i = 0; i < mData.size(); i++) {
@@ -275,7 +274,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     @Override
     public void insertGoods(String tag) {
         Map[] dataArray = MyUtils.insertOneGoods(tag);
-        shopcartBiz.updatecart(dataArray,0);
+        shopcartBiz.updatecart(dataArray, 0);
         //总价计算
         for (int i = 0; i < mData.size(); i++) {
             ShopCartBean data = mData.get(i);

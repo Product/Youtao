@@ -22,4 +22,16 @@
     <style name="transparent" parent="android:style/Theme.Dialog">
         <item name="android:background">@color/transparent</item>
     </style>
+
+    <style name="Theme_FullScreen" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+        <item name="android:windowNoTitle">true</item> <!-- 设置无标题 -->
+        <item name="android:windowFullscreen">?android:windowNoTitle</item> <!-- 是否填充慢屏幕，引用android:windowNoTitle 的值 ?android:windowNoTitle，取决于android:windowNoTitle的值-->
+    </style>
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/from_below_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_none</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_none</item>
+        <item name="android:activityCloseExitAnimation">@anim/from_top_exit</item>
+    </style>
 </resources>

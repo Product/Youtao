@@ -87,6 +87,7 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
         TextView item_shopcart_mid_tv = ViewHolder.get(convertView, R.id.item_shopcart_mid_tv);
         TextView item_shopcart_delete_tv = ViewHolder.get(convertView, R.id.item_shopcart_delete_tv);
         ImageView item_shopcart_pic_iv = ViewHolder.get(convertView, R.id.item_shopcart_pic_iv);
+        item_shopcart_pic_iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         //给这个图片添加个tag用于传递数据信息
         ImageView item_shopcart_up_iv = ViewHolder.get(convertView, R.id.item_shopcart_up_iv);
         ImageView item_shopcart_down_iv = ViewHolder.get(convertView, R.id.item_shopcart_down_iv);

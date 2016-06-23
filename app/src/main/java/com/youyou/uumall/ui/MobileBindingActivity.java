@@ -9,9 +9,12 @@ import android.widget.TextView;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.MobileBindingEvent;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
+import com.youyou.uumall.event.ShopCartTriggerEvent;
+import com.youyou.uumall.event.ShopCartUpdateEvent;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -95,7 +98,8 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
 
     @Click
     void mobile_binding_next_tv() {//跳过本步骤
-        MainActivity_.intent(this).start();
+        sendEvent();
+        finish();
     }
 
     @Click
@@ -113,10 +117,16 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
 
     @Click
     void mobile_binding_pro_iv() {//回退上一页?// TODO: 2016/5/27 回退到哪里
+        sendEvent();
         finish();
 //        MainActivity_.intent(this).start();
     }
 
+    @Override
+    public void onBackPressed() {
+        sendEvent();
+        super.onBackPressed();
+    }
 
     @UiThread
     @Override
@@ -133,12 +143,18 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("绑定完成");
-//                MainActivity_.intent(this).start();
+                sendEvent();
                 finish();
             } else {
                 showToastShort(response.msg);
             }
         }
 
+    }
+
+    private void sendEvent() {
+        eventBus.post(new ShopCartTriggerEvent());
+        eventBus.post(new MineTriggerEvent());
+        eventBus.post(new ShopCartUpdateEvent());
     }
 }

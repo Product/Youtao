@@ -85,8 +85,7 @@ public class CommodityAdapter extends BaseAdapter {
         TextView left_commodity_name = ViewHolder.get(convertView, R.id.left_commodity_name);
         TextView left_commodity_price = ViewHolder.get(convertView, R.id.left_commodity_price);
         TextView left_commodity_origin_price = ViewHolder.get(convertView, R.id.left_commodity_origin_price);
-        ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img);
-
+        ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img,true);
         RecommendBean leftitem = list.get(position * 2);
         leftLayout.setTag(leftitem.id);
         left_commodity_name.setText(leftitem.name);
@@ -101,8 +100,8 @@ public class CommodityAdapter extends BaseAdapter {
         TextView right_commodity_name = ViewHolder.get(convertView, R.id.right_commodity_name);
         TextView right_commodity_price = ViewHolder.get(convertView, R.id.right_commodity_price);
         TextView right_commodity_origin_price = ViewHolder.get(convertView, R.id.right_commodity_origin_price);
-        ImageView right_commodity_img = ViewHolder.get(convertView, R.id.right_commodity_img);
-
+        ImageView right_commodity_img = ViewHolder.get(convertView, R.id.right_commodity_img,true);
+        right_commodity_img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         if (position * 2 + 1 < list.size()) {
             rightLayout.setOnClickListener(new AdapterClickListener());
             RecommendBean rightitem = list.get(position * 2 + 1);

@@ -95,7 +95,8 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
         if (isLogined) {
             categoryDescBiz.queryGoodsById(goodsId);
         } else {
-            showToastShort("您还未登录");
+            Intent intent = new Intent(this, LoginActivity_.class);
+            startActivity(intent);
         }
 
     }
@@ -114,7 +115,8 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             Map[] map = MyUtils.insertOneGoods(goodsId);
             shopcartBiz.updatecart(map,0);
         } else {
-            showToastShort("您还未登录");
+            Intent intent = new Intent(this, LoginActivity_.class);
+            startActivity(intent);
         }
     }
 

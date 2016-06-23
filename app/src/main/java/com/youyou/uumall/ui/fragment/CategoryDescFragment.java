@@ -1,5 +1,6 @@
 package com.youyou.uumall.ui.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseBusiness;
@@ -33,6 +35,7 @@ import java.util.List;
  */
 @EFragment(R.layout.fragment_cate_desc)
 public class CategoryDescFragment extends BaseFragment implements BaseBusiness.ObjectCallbackInterface, BaseBusiness.ArrayListCallbackInterface {
+
     @ViewById
     TextView cate_frag_name;
     @ViewById
@@ -52,9 +55,23 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     @Bean
     CategoryDescBiz categoryDescBiz;
     private FragmentActivity activity;
+    private DisplayImageOptions options;
 
     @AfterViews
     void afterViews() {
+        int galleryHeight = (int) (mScreenWidth / 1.28);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth,galleryHeight );
+        cate_frag_vp.setLayoutParams(params);
+        cate_frag_vp.invalidate();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.drawable.order_empty_3x)
+                .showImageOnFail(R.drawable.order_empty_3x)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
         activity = getActivity();
         Bundle bundle = getArguments();
         String goodsId = bundle.getString(BaseConstants.preferencesFiled.GOODS_ID);
@@ -92,7 +109,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
                 imageView.setLayoutParams(params);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 cate_frag_ll.addView(imageView);
-                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView);
+                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView,options);
             }
             String image = bean.image;
             String[] gallery = image.split("\\|");

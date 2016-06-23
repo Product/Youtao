@@ -49,12 +49,15 @@
             </activity>
 
         <activity
+            android:launchMode="singleTask"
+            android:theme="@style/Theme_FullScreen"
             android:name="com.youyou.uumall.ui.LoginActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="登录"
             android:screenOrientation="portrait" />
 
         <activity
+            android:theme="@style/Theme_FullScreen"
             android:exported="true"
             android:name="com.youyou.uumall.ui.RegisterActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"

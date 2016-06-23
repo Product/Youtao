@@ -86,7 +86,7 @@ public class QueryMainAdapter extends BaseAdapter {
         TextView left_commodity_price = ViewHolder.get(convertView, R.id.left_commodity_price);
         TextView left_commodity_origin_price = ViewHolder.get(convertView, R.id.left_commodity_origin_price);
         ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img);
-
+        left_commodity_img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         GoodsDescBean leftitem = list.get(position * 2);
         leftLayout.setTag(leftitem.id);
         left_commodity_name.setText(leftitem.categoryName);

@@ -74,7 +74,7 @@ public class CategoryGridAdapter extends BaseAdapter {
             convertView = new ImageView(context);
         }
         ImageView imageView = (ImageView) convertView;
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         int px = PixelUtil.dp2px(94);
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,px);
         imageView.setLayoutParams(params);

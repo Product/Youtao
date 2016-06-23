@@ -187,4 +187,10 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_none,R.anim.from_top_exit);
+    }
 }

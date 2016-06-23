@@ -12,7 +12,7 @@
         <com.youyou.uumall.view.GalleryView
             android:layout_width="match_parent"
             android:id="@+id/cate_frag_vp"
-            android:layout_height="@dimen/view_750">
+            android:layout_height="@dimen/view_600">
             <!--轮播图-->
         </com.youyou.uumall.view.GalleryView>
         <!--详情-->

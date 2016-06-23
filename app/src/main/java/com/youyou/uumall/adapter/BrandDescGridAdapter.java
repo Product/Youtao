@@ -73,7 +73,7 @@ public class BrandDescGridAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.item_brand_desc, null);
         }
-        ImageView item_brand_desc_iv = ViewHolder.get(convertView, R.id.item_brand_desc_iv);
+        ImageView item_brand_desc_iv = ViewHolder.get(convertView, R.id.item_brand_desc_iv,true);
         TextView item_brand_desc_title_tv = ViewHolder.get(convertView, R.id.item_brand_desc_title_tv);
         TextView item_brand_desc_price1_tv = ViewHolder.get(convertView, R.id.item_brand_desc_price1_tv);
         TextView item_brand_desc_price2_tv = ViewHolder.get(convertView, R.id.item_brand_desc_price2_tv);
