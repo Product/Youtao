@@ -107,7 +107,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
                 ImageView imageView = new ImageView(activity);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth,mScreenWidth);
                 imageView.setLayoutParams(params);
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 cate_frag_ll.addView(imageView);
                 imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView,options);
             }

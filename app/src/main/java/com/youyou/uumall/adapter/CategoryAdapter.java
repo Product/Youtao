@@ -51,7 +51,7 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
     Map typePos;
     Map typeData;
     ArrayList<CategoryBean> secondList = new ArrayList<>();
-    List<CategoryBean> temp = new ArrayList<>();
+
     private final int TYPE_LINE = 0;
     private final int TYPE_HEAD = 1;
     private final int TYPE_MAIN = 2;
@@ -172,14 +172,14 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                 if (convertView == null) {
                     convertView = mInflater.inflate(R.layout.item_category_main, null);
                 }
-
+                List<CategoryBean> temp = new ArrayList<>();
                 for (int i = 0; i < secondList.size(); i++) {
                     CategoryBean categoryBean = secondList.get(i);
                     if (TextUtils.equals(bean.id, categoryBean.parentId)) {
                         temp.add(categoryBean);
                     }
                 }
-
+                log.e(temp.toString());
                 List<TextView> textViews = new ArrayList<>();
                 for (int i = 0; i < textViewRes.length; i++) {
                     textViews.add((TextView) ViewHolder.get(convertView, textViewRes[i]));
@@ -187,7 +187,7 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
 
                 List<ImageView> imageViews = new ArrayList<>();
                 for (int i = 0; i < imageViewRes.length; i++) {
-                    imageViews.add((ImageView) ViewHolder.get(convertView, imageViewRes[i], true));
+                    imageViews.add((ImageView) ViewHolder.get(convertView, imageViewRes[i]));
                 }
 
                 List<LinearLayout> linearLayouts = new ArrayList<>();
@@ -195,11 +195,17 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                     linearLayouts.add((LinearLayout) ViewHolder.get(convertView, linearLayoutRes[i]));
                 }
                 if (temp.size() != 0) {
-                    for (int i = 0; i < temp.size(); i++) {
+                    for (int i = 0; i < linearLayoutRes.length; i++) {
+                        if (temp.size()<=i) {
+                            return convertView;
+                        }
                         CategoryBean categoryBean = temp.get(i);
                         if (categoryBean != null) {
                             textViews.get(i).setText(categoryBean.name ==null?"":categoryBean.name);
-                            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + categoryBean.location.split("\\|")[0], imageViews.get(i), options);
+                            String location = categoryBean.location.split("\\|")[0];
+                            if (!TextUtils.isEmpty(location)) {
+                            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + location, imageViews.get(i), options);
+                            }
                             LinearLayout linearLayout = linearLayouts.get(i);
                             linearLayout.setTag(categoryBean.id + "|" + categoryBean.name);
                             linearLayout.setOnClickListener(this);
@@ -219,6 +225,7 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == CategoryDescBiz.QUERY_CATEGORY) {
             List<CategoryBean> list = (List<CategoryBean>) arrayList;
+//            log.e(list.toString());
             secondList.addAll(list);//将网络获取到的二级数据全部给存储
 //            log.e(list.toString());
         }

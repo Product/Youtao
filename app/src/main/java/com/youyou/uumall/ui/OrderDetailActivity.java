@@ -18,6 +18,7 @@ import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.OrderActFinishEvent;
+import com.youyou.uumall.event.UpdateAllOrder;
 import com.youyou.uumall.model.OrderBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -118,9 +119,9 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
                 Response response = (Response) t;
                 log.e(t.toString());
                 if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                    eventBus.postSticky(new UpdateAllOrder());
                     eventBus.post(new MineTriggerEvent());//取消成功后重新改变原点状态
                     OrderAllActivity_.intent(this).start();
-                    eventBus.post(new MineTriggerEvent());
                     eventBus.post(new OrderActFinishEvent());
                     finish();
                 }

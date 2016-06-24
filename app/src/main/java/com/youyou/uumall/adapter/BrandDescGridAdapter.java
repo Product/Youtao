@@ -1,11 +1,14 @@
 package com.youyou.uumall.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -14,6 +17,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.GoodsDescBean;
+import com.youyou.uumall.utils.PixelUtil;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
@@ -73,7 +77,8 @@ public class BrandDescGridAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.item_brand_desc, null);
         }
-        ImageView item_brand_desc_iv = ViewHolder.get(convertView, R.id.item_brand_desc_iv,true);
+        ImageView item_brand_desc_iv = ViewHolder.get(convertView, R.id.item_brand_desc_iv);
+        setHeight(item_brand_desc_iv);
         TextView item_brand_desc_title_tv = ViewHolder.get(convertView, R.id.item_brand_desc_title_tv);
         TextView item_brand_desc_price1_tv = ViewHolder.get(convertView, R.id.item_brand_desc_price1_tv);
         TextView item_brand_desc_price2_tv = ViewHolder.get(convertView, R.id.item_brand_desc_price2_tv);
@@ -85,5 +90,17 @@ public class BrandDescGridAdapter extends BaseAdapter {
         item_brand_desc_price1_tv.setText("￥"+goodsDescBean.price);
         item_brand_desc_price2_tv.setText("乐天价：￥"+goodsDescBean.price);
         return convertView;
+    }
+
+    private void setHeight(ImageView imageView) {
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        DisplayMetrics metric = new DisplayMetrics();
+        Activity context = (Activity) this.context;
+        context.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int mScreenWidth = metric.widthPixels;
+        int width = mScreenWidth/2- PixelUtil.dp2px(20);
+//        int mScreenHeight = metric.heightPixels;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, (int) (width/1.28));
+        imageView.setLayoutParams(params);
     }
 }

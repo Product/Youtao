@@ -19,14 +19,12 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.business.AddressBiz;
-import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.CommodityBiz;
 import com.youyou.uumall.event.CountryCallbackEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.BrandBean;
 import com.youyou.uumall.model.DictBean;
 import com.youyou.uumall.model.GalleryBean;
-import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.model.RecommendBean;
 import com.youyou.uumall.ui.BrandDescActivity_;
 import com.youyou.uumall.ui.CategoryActivity_;
@@ -54,7 +52,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, View.OnClickListener {
 
     public static final String BG_BASE_COUNTRY = "bg_base_country";
-    public static final String COUNTRY_CODE = "countryCode";
+
 
     Context mContext;
     @ViewById
@@ -79,9 +77,6 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     private View headerView_2;
     private GalleryView mGalleryView;
     HashMap map;
-    HashMap<String, String> countryMap;
-    String[] countryName = {"新加坡", "韩国", "日本"};
-    String[] countryValue = {"SG", "KR", "JP"};
     private List<RecommendBean> recommendList;//推荐商品列表集合
     private boolean isRefresh = false;
     private int loadItem = 0;//加在完的条目
@@ -90,7 +85,6 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     @AfterViews
     void afterViews() {
-        initCountryMap();
         mContext = getActivity().getApplicationContext();
         initCountry();
         if (!isRefresh) {
@@ -99,7 +93,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
         commodityBiz.setArrayListCallbackInterface(this);
         commodityBiz.getSliderList();
         initBrandList();
-        initRecommendList();
+
         if (!isRefresh) {
             listview.addHeaderView(headerView_0);
             listview.addHeaderView(headerView_1);
@@ -169,22 +163,6 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     private void initBrandList() {
         commodityBiz.getBrandList();
-    }
-
-
-    private void initCountryMap() {// TODO: 2016/5/10 好土的方式
-        countryMap = new HashMap<String, String>();
-        for (int i = 0; i < countryName.length; i++) {
-            countryMap.put(countryName[i], countryValue[i]);
-        }
-    }
-
-    private void initRecommendList() {
-        map = new HashMap();
-        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
-        String countryValue = countryMap.get(country);
-        map.put(COUNTRY_CODE, countryValue);
-        commodityBiz.getRecommendList(map);
     }
 
     @Override
@@ -279,6 +257,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 MyUtils.savePara(mContext, "dictList", stringBuffer.toString());
                 defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
                 home_country_tv.setText(defaultCountry);
+                commodityBiz.getRecommendList();//在拿到数值之后再访问
                 loadItem++;
             }
         } else if (CommodityBiz.GET_BRAND_LIST == type) {
@@ -288,11 +267,12 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 setBrandPic(brandList);
                 loadItem++;
             }
-        }else if (CategoryDescBiz.QUERY_CATEGORY == type) {
-            if (arrayList != null) {
-                List<GoodsDescBean> goodsDescBeen = (List<GoodsDescBean>) arrayList;
-            }
         }
+//        else if (CategoryDescBiz.QUERY_CATEGORY == type) {
+//            if (arrayList != null) {
+//                List<GoodsDescBean> goodsDescBeen = (List<GoodsDescBean>) arrayList;
+//            }
+//        }
         if (loadItem >= 4) {
             refreshComplete();
         }
@@ -300,11 +280,11 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     @Background
     public void refreshComplete() {
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(800);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         refresh();
 
     }

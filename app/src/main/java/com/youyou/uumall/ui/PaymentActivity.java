@@ -13,6 +13,7 @@ import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.business.OrderBiz;
+import com.youyou.uumall.event.PaySuceessEvent;
 import com.youyou.uumall.model.WxPrepayOrderBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -20,6 +21,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -133,5 +135,20 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
             }
         });
         builder.show();
+    }
+    @Override
+    protected void unRegisterEvent() {
+        super.unRegisterEvent();
+        eventBus.unregister(this);
+    }
+
+    @Override
+    protected void registerEvent() {
+        super.registerEvent();
+        eventBus.register(this);
+    }
+    @Subscribe
+    public void onFinish(PaySuceessEvent event) {
+        finish();
     }
 }

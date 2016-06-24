@@ -1,7 +1,9 @@
 package com.youyou.uumall.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.RecommendBean;
+import com.youyou.uumall.utils.PixelUtil;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
@@ -85,7 +88,9 @@ public class CommodityAdapter extends BaseAdapter {
         TextView left_commodity_name = ViewHolder.get(convertView, R.id.left_commodity_name);
         TextView left_commodity_price = ViewHolder.get(convertView, R.id.left_commodity_price);
         TextView left_commodity_origin_price = ViewHolder.get(convertView, R.id.left_commodity_origin_price);
-        ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img,true);
+        ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img);
+        setHeight(left_commodity_img);
+
         RecommendBean leftitem = list.get(position * 2);
         leftLayout.setTag(leftitem.id);
         left_commodity_name.setText(leftitem.name);
@@ -100,8 +105,8 @@ public class CommodityAdapter extends BaseAdapter {
         TextView right_commodity_name = ViewHolder.get(convertView, R.id.right_commodity_name);
         TextView right_commodity_price = ViewHolder.get(convertView, R.id.right_commodity_price);
         TextView right_commodity_origin_price = ViewHolder.get(convertView, R.id.right_commodity_origin_price);
-        ImageView right_commodity_img = ViewHolder.get(convertView, R.id.right_commodity_img,true);
-        right_commodity_img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        ImageView right_commodity_img = ViewHolder.get(convertView, R.id.right_commodity_img);
+        setHeight(right_commodity_img);
         if (position * 2 + 1 < list.size()) {
             rightLayout.setOnClickListener(new AdapterClickListener());
             RecommendBean rightitem = list.get(position * 2 + 1);
@@ -136,4 +141,15 @@ public class CommodityAdapter extends BaseAdapter {
         this.listener = listener;
     }
 
+    private void setHeight(ImageView imageView) {
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        DisplayMetrics metric = new DisplayMetrics();
+        Activity context = (Activity) this.context;
+        context.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int mScreenWidth = metric.widthPixels;
+        int width = mScreenWidth/2- PixelUtil.dp2px(20);
+//        int mScreenHeight = metric.heightPixels;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, (int) (width/1.28));
+        imageView.setLayoutParams(params);
+    }
 }

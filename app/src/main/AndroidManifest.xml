@@ -119,6 +119,7 @@
             android:label="支付界面"
             android:screenOrientation="portrait" />
         <activity
+            android:launchMode="singleTask"
             android:name="com.youyou.uumall.ui.OrderSubmitActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="待付款界面"
@@ -134,6 +135,7 @@
             android:label="待收货界面"
             android:screenOrientation="portrait" />
         <activity
+            android:launchMode="singleTask"
             android:name=".ui.OrderAllActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="全部订单界面"
@@ -182,8 +184,8 @@
             android:exported="true"
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="微信登录回调"
             android:screenOrientation="portrait" />
+            <!--android:label="微信登录回调"-->
 
         <activity
             android:exported="true"

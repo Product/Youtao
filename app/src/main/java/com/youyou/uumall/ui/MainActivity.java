@@ -19,6 +19,7 @@ import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
+import com.youyou.uumall.event.ShowFragmentEvent;
 import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.ui.fragment.HomeFragment_;
 import com.youyou.uumall.ui.fragment.MineFragment_;
@@ -160,6 +161,7 @@ public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCal
         showSelectedBtn(0);
     }
 
+
     @Click
     void shopping_cart_tab() {
         if (mCurrentPostion != 1) {
@@ -174,6 +176,12 @@ public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCal
             eventBus.post(new MineTriggerEvent());
         }
         showSelectedBtn(2);
+    }
+
+    @Subscribe
+    public void showFragment(ShowFragmentEvent event) {
+        int position = event.position;
+        showSelectedBtn(position);
     }
 
     /**

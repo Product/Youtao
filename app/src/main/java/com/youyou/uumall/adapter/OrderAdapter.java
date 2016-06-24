@@ -258,7 +258,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
             intent.putExtra("id", id);
             activity.startActivity(intent);
         }
-        activity.overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
+//        activity.overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
 //    public void setOnCancelClickedListener(OnCancelClickedListener listener) {

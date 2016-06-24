@@ -39,6 +39,7 @@ public class CategoryBean {
                 ", parentId='" + parentId + '\'' +
                 ", parentIds='" + parentIds + '\'' +
                 ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
                 ", code='" + code + '\'' +
                 ", icon='" + icon + '\'' +
                 ", sort='" + sort + '\'' +

@@ -20,6 +20,8 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
+import com.youyou.uumall.event.UpdateAllOrder;
+import com.youyou.uumall.event.UpdateSubmitOrder;
 import com.youyou.uumall.model.OrderBean;
 import com.youyou.uumall.ui.BonusActivity_;
 import com.youyou.uumall.ui.LoginActivity_;
@@ -107,12 +109,14 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
     @Click
     void all_order_layout() {
         // 转跳到全部订单
+        eventBus.postSticky(new UpdateAllOrder());
         com.youyou.uumall.ui.OrderAllActivity_.intent(getActivity()).start();
 //        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
     }
 
     @Click
     void pickup_layout() {
+
         // 转跳到待收货 orderConfirm
         OrderShippingActivity_.intent(getActivity()).start();
 //        getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
@@ -128,6 +132,7 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     @Click
     void payment_layout() {
+        eventBus.postSticky(new UpdateSubmitOrder());
         // 转跳到待付款 orderSubmit
 //        orderBiz.queryOrder(0,0,"","orderSubmit");
         OrderSubmitActivity_.intent(getActivity()).start();
@@ -213,14 +218,20 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
                 if (orderSubmit != 0) {
                     mine_point_ll_1.setVisibility(View.VISIBLE);
                     mine_point_tv_1.setText(orderSubmit + "");
+                } else {
+                    mine_point_ll_1.setVisibility(View.GONE);
                 }
                 if (orderConfirm != 0) {
                     mine_point_ll_2.setVisibility(View.VISIBLE);
                     mine_point_tv_2.setText(orderConfirm + "");
+                }else {
+                    mine_point_ll_2.setVisibility(View.GONE);
                 }
                 if (orderShipping != 0) {
                     mine_point_ll_3.setVisibility(View.VISIBLE);
                     mine_point_tv_3.setText(orderShipping + "");
+                }else {
+                    mine_point_ll_3.setVisibility(View.GONE);
                 }
                 if (orderBean.size() != 0) {
 //                    mine_point_ll_4.setVisibility(View.VISIBLE);

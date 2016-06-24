@@ -20,7 +20,7 @@ public class CommodityBiz extends BaseBusiness {
     public static final int GET_RECOMMEND_LIST = 2;//获取推荐商品数据
     public static final int GET_BRAND_LIST = 4;//推荐品牌查询
     public static final int QUERY_GOODS_BY_BRAND = 5;//品牌搜索商品接口
-
+    public static final String COUNTRY_CODE = "countryCode";
     @RootContext
     Context mContext;
     /**
@@ -36,7 +36,10 @@ public class CommodityBiz extends BaseBusiness {
      * 推荐商品查询
      */
     @Background
-    public void getRecommendList(Map map) {
+    public void getRecommendList() {
+        String countryCode = MyUtils.getCountryCode(mContext);
+        Map map = new HashMap();
+        map.put(COUNTRY_CODE, countryCode);
         arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.getRecommendData(map)));
     }
 

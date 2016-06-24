@@ -15,6 +15,9 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.event.MineTriggerEvent;
+import com.youyou.uumall.event.PaySuceessEvent;
+import com.youyou.uumall.event.ShowFragmentEvent;
+import com.youyou.uumall.event.UpdateAllOrder;
 import com.youyou.uumall.ui.MainActivity_;
 import com.youyou.uumall.ui.OrderAllActivity_;
 import com.youyou.uumall.utils.MyLogger;
@@ -27,6 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, View.OnClickListener {
     MyLogger log = MyLogger.getLogger("Wx");
     private IWXAPI api;
+    private EventBus eventBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, BaseConstants.ImportantField.APP_ID, false);
         api.registerApp(BaseConstants.ImportantField.APP_ID);
-
+        eventBus = EventBus.getDefault();
         api.handleIntent(getIntent(), this);
     }
 
@@ -74,7 +78,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
         switch (resp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
                 result = "发送成功";
-                EventBus.getDefault().post(new MineTriggerEvent());//取消成功后重新改变原点状态
+                eventBus.post(new PaySuceessEvent());//把pay页面关掉,避免误跳转
+                eventBus.post(new MineTriggerEvent());//取消成功后重新改变原点状态
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 result = "发送取消";
@@ -96,11 +101,13 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
    public void onClick(View v) {
 
         if (v.getId() == R.id.wxpay_callback_home_btn) {
+            eventBus.post(new ShowFragmentEvent(0));
             MainActivity_.intent(this).start();
 //            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
             finish();
         }
         else if (v.getId() == R.id.wxpay_callback_order_btn) {
+            eventBus.postSticky(new UpdateAllOrder());
             OrderAllActivity_.intent(this).start();
 //            overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
             finish();
@@ -109,6 +116,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 
     @Override
     public void onBackPressed() {
+        eventBus.post(new ShowFragmentEvent(0));
         MainActivity_.intent(this).start();
         finish();
     }

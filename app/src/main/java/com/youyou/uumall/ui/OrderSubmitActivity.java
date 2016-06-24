@@ -12,6 +12,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.event.OrderActFinishEvent;
+import com.youyou.uumall.event.UpdateSubmitOrder;
 import com.youyou.uumall.model.OrderBean;
 
 import org.androidannotations.annotations.AfterViews;
@@ -47,7 +48,7 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
 //        orderAdapter.setOnCancelClickedListener(this);
         orderBiz.setArrayListCallbackInterface(this);
         orderBiz.setObjectCallbackInterface(this);
-        orderBiz.queryOrder(0, 0, "", "orderSubmit");
+
         order_submit_lv.setAdapter(orderAdapter);
 
     }
@@ -104,6 +105,11 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     @Subscribe
     public void onFinish(OrderActFinishEvent event) {
         finish();
+    }
+
+    @Subscribe(sticky = true)
+    public void onFinish(UpdateSubmitOrder event) {
+        orderBiz.queryOrder(0, 0, "", "orderSubmit");
     }
 //    @Override
 //    public void cancel(final String orderId) {
