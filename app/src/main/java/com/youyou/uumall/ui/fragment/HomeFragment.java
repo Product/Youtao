@@ -36,7 +36,6 @@ import com.youyou.uumall.view.GalleryView;
 import com.youyou.uumall.view.RefreshListView;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -45,13 +44,12 @@ import org.androidannotations.annotations.ViewById;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.HashMap;
 import java.util.List;
 
 @EFragment(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, View.OnClickListener {
+public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, View.OnClickListener, CommodityAdapter.OnItemClickListener {
 
-    public static final String BG_BASE_COUNTRY = "bg_base_country";
+
 
 
     Context mContext;
@@ -76,42 +74,27 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     private View headerView_1;
     private View headerView_2;
     private GalleryView mGalleryView;
-    HashMap map;
     private List<RecommendBean> recommendList;//推荐商品列表集合
-    private boolean isRefresh = false;
     private int loadItem = 0;//加在完的条目
     private List<BrandBean> brandList;
     private DisplayImageOptions options;
-
+    private  boolean isFirstLoading  = true;
     @AfterViews
     void afterViews() {
         mContext = getActivity().getApplicationContext();
-        initCountry();
-        if (!isRefresh) {
-            initHeaderView();
-        }
+        initHeaderView();
         commodityBiz.setArrayListCallbackInterface(this);
-        commodityBiz.getSliderList();
-        initBrandList();
-
-        if (!isRefresh) {
-            listview.addHeaderView(headerView_0);
-            listview.addHeaderView(headerView_1);
-            listview.addHeaderView(headerView_2);
-        }
+        addressBiz.setArrayListCallbackInterface(this);
         listview.setAdapter(adapter);
-        OnItemClickListener listener = new OnItemClickListener();
-        adapter.setOnItemClickListener(listener);
-
+        adapter.setOnItemClickListener(this);
         home_search_tv.setOnTouchListener(this);
         listview.setOnRefreshListener(new RefreshListView.OnRefreshListener() {
             @Override
-            public void onRefreshing() {
-                isRefresh=true;
-                afterViews();
+            public void onRefreshing(boolean isAuto) {
+                loadData();
             }
         });
-        eventBus.post(new ShopCartUpdateEvent());
+        eventBus.post(new ShopCartUpdateEvent());// TODO: 2016/6/25 0025 观察bug
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.order_empty_3x)
                 .showImageForEmptyUri(R.drawable.order_empty_3x)
@@ -124,10 +107,24 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (isFirstLoading) {
+            listview.autoRefresh();
+            isFirstLoading=false;
+        }
+    }
+
+    public void loadData() {
+        addressBiz.queryDict();
+        commodityBiz.getSliderList();
+        commodityBiz.getBrandList();
+    }
+
+    @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             QueryMainActivity_.intent(getActivity()).start();
-//            getActivity().overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
         }
         return false;
     }
@@ -146,11 +143,6 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
         }
     }
 
-
-
-
-    class OnItemClickListener implements CommodityAdapter.OnItemClickListener {
-
         @Override
         public void itemClick(View view) {
             //需要传递id,打开一个新的act
@@ -159,11 +151,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 //            CategoryDescActivity_.intent(mContext).extra("goodsId",recommendList.get(position).id).start();
             startActivity(intent);
         }
-    }
 
-    private void initBrandList() {
-        commodityBiz.getBrandList();
-    }
 
     @Override
     protected void registerEvent() {
@@ -177,29 +165,15 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
         eventBus.unregister(this);
     }
 
-    /**
-     * 在此处优先获取到sp里的数据.
-     * sp里有两个相关数据:
-     * 1.用来存储用户选择的偏好国家信息
-     * 2.用来存储访问网络得到的国家列表
-     * 在此进行判断:
-     * 如果获取到1的数据,直接展示,之后访问网络获取列表,存储到2
-     * 没有的话,直接访问网络,拿到列表.将第一个国家数据做展示,并保存1和2
-     */
-    private void initCountry() {
-        addressBiz.setArrayListCallbackInterface(this);
-        map = new HashMap();
-        map.put("dictType", BG_BASE_COUNTRY);
-        addressBiz.queryDict(map);
-    }
-
 
     private void initHeaderView() {//首先添加头布局
         headerView_0 = LayoutInflater.from(getActivity()).inflate(R.layout.layout_header_view, null);
         mGalleryView = (GalleryView) headerView_0.findViewById(R.id.gallery);
         headerView_1 = LayoutInflater.from(getActivity()).inflate(R.layout.layou_header_recommed, null);
         headerView_2 = LayoutInflater.from(getActivity()).inflate(R.layout.layout_header_hotcategory, null);
-
+        listview.addHeaderView(headerView_0);
+        listview.addHeaderView(headerView_1);
+        listview.addHeaderView(headerView_2);
     }
 
     @Click(R.id.home_country_tv)
@@ -228,24 +202,23 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
             if (arrayList != null) {
                 List<GalleryBean> slideList = (List<GalleryBean>) arrayList;
                 mGalleryView.setParams(slideList);
-                loadItem++;
             }
+                loadItem++;
         } else if (CommodityBiz.GET_RECOMMEND_LIST == type) {//推荐商品
             if (arrayList != null) {
                 recommendList = (List<RecommendBean>) arrayList;
-                setRecommendPic(recommendList);
-                loadItem++;
+                if (recommendList != null) {
+                    adapter.setData(recommendList);
+                }
             }
+                loadItem++;
         } else if (AddressBiz.QUERY_COUNTRY == type) {//城市查询
             if (arrayList != null) {
                 List<DictBean> dictList = (List<DictBean>) arrayList;
                 // TODO: 2016/5/6 将数据存储到本地
                 String defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
-//                String defaultCountryCode = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY_CODE, mContext);
-                if (TextUtils.isEmpty(defaultCountry)) {
-                    //存到默认
+                if (TextUtils.isEmpty(defaultCountry)) {//存到默认
                     MyUtils.savePara(mContext, BaseConstants.preferencesFiled.DEFAULT_COUNTRY, defaultCountry == "" ? dictList.get(0).dictName : defaultCountry);
-//                    MyUtils.savePara(mContext, BaseConstants.preferencesFiled.DEFAULT_COUNTRY_CODE, defaultCountryCode == "" ? dictList.get(0).dictValue : defaultCountryCode);
                 }
                 //存列表
                 StringBuffer stringBuffer = new StringBuffer();
@@ -258,41 +231,22 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
                 home_country_tv.setText(defaultCountry);
                 commodityBiz.getRecommendList();//在拿到数值之后再访问
-                loadItem++;
             }
-        } else if (CommodityBiz.GET_BRAND_LIST == type) {
+                loadItem++;
+        } else if (CommodityBiz.GET_BRAND_LIST == type) {//平拍商品
             if (arrayList != null) {
                 brandList = (List<BrandBean>) arrayList;
 //                log.e(brandList.toString());
                 setBrandPic(brandList);
-                loadItem++;
             }
+                loadItem++;
         }
-//        else if (CategoryDescBiz.QUERY_CATEGORY == type) {
-//            if (arrayList != null) {
-//                List<GoodsDescBean> goodsDescBeen = (List<GoodsDescBean>) arrayList;
-//            }
-//        }
         if (loadItem >= 4) {
-            refreshComplete();
+            listview.onRefreshComplete();
+            loadItem =0;
         }
     }
 
-    @Background
-    public void refreshComplete() {
-//        try {
-//            Thread.sleep(800);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        refresh();
-
-    }
-    @UiThread
-    public void refresh() {
-        listview.onRefreshComplete();
-        loadItem =0;
-    }
 
     //这个是推荐品牌的设置方式
     private void setBrandPic(List<BrandBean> brandList) {
@@ -309,16 +263,8 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
         }
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBackgroundThread(CountryCallbackEvent event) {
-        String type = event.getEvent();
-        isRefresh = true;
-        afterViews();
+    public void onCountrySeleced(CountryCallbackEvent event) {
+        listview.autoRefresh();
     }
 
-
-    public void setRecommendPic(List<RecommendBean> recommendPic) {
-        if (recommendPic != null) {
-            adapter.setData(recommendPic);
-        }
-    }
 }

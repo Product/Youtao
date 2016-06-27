@@ -6,11 +6,11 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.youyou.uumall.R;
+import com.youyou.uumall.adapter.CountryAdapter;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.event.CountryCallbackEvent;
 import com.youyou.uumall.utils.MyUtils;
-import com.youyou.uumall.adapter.CountryAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -31,11 +31,12 @@ public class CountryActivity extends BaseActivity {
 
     @Bean
     CountryAdapter adapter;
+    private List<String> list;
 
     @AfterViews
     public void initGridView() {
         String dictList = MyUtils.getPara(BaseConstants.preferencesFiled.DICT_LIST, this);
-        List<String> list= getDictList(dictList);
+        list = getDictList(dictList);
         adapter.setData(list);
         country_list_grid.setAdapter(adapter);
         country_list_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -43,9 +44,15 @@ public class CountryActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView item_country_bt = (TextView) view.findViewById(R.id.item_country_tv);
                 String country = item_country_bt.getText().toString();
-                MyUtils.savePara(getApplicationContext(),BaseConstants.preferencesFiled.DEFAULT_COUNTRY,country);
-                country_cancel_iv();
-                eventBus.post(new CountryCallbackEvent("refresh"));
+                MyUtils.savePara(getApplicationContext(), BaseConstants.preferencesFiled.DEFAULT_COUNTRY, country);
+                String defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, getApplicationContext());
+                String currentCountry = list.get(position).split(",")[0];
+//                if (!TextUtils.equals(defaultCountry,currentCountry)){
+//                    eventBus.post(new CountryCallbackEvent("refresh"));
+//                    finish();
+//                    return;
+//                }
+                    country_cancel_iv();
             }
         });
     }
@@ -60,11 +67,10 @@ public class CountryActivity extends BaseActivity {
     }
 
     @Click
-    void country_cancel_iv(){
-           finish();
-//        overridePendingTransition(R.anim.anim_none, R.anim.to_center_exit);
+    void country_cancel_iv() {
+        eventBus.post(new CountryCallbackEvent("refresh"));
+        finish();
+
     }
-
-
 
 }

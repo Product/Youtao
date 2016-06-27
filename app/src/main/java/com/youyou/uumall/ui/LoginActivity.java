@@ -13,6 +13,7 @@ import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.LoginBiz;
 import com.youyou.uumall.business.RegisterBiz;
+import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.MobileBindingEvent;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
@@ -144,6 +145,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                     eventBus.post(new MineTriggerEvent());
                     eventBus.post(new ShopCartUpdateEvent());
                     eventBus.post(new ShopCartTriggerEvent());
+                    eventBus.post(new LoginEvent());
                     showToastShort("登录成功");
                     finish();
                 } else {
@@ -180,6 +182,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                 eventBus.post(new ShopCartTriggerEvent());
                 eventBus.post(new MineTriggerEvent());
                 eventBus.post(new ShopCartUpdateEvent());
+                eventBus.post(new LoginEvent());
                 finish();
                 overridePendingTransition(0,0);
 //                MainActivity_.intent(LoginActivity.this).start();

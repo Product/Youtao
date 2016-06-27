@@ -22,7 +22,7 @@ public class AddressBiz extends BaseBusiness {
     public static final int QUERY_COUNTRY = 3; //查询数据字典
 
     public static final int GET_RECOMMEND_LIST = 2;//获取推荐商品数据
-
+    public static final String BG_BASE_COUNTRY = "bg_base_country";
     @RootContext
     Context mContext;
 
@@ -30,7 +30,10 @@ public class AddressBiz extends BaseBusiness {
      * 获取国家信息
      */
     @Background
-    public void queryDict(Map map) {
+    public void queryDict() {
+
+        Map map = new HashMap();
+        map.put("dictType", BG_BASE_COUNTRY);
         arrayListCallbackInterface.arrayCallBack(QUERY_COUNTRY, handleResponse(baseApi.queryDict(map)));
     }
 

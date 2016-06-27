@@ -17,8 +17,7 @@
     <View
         style="@style/HorizonLineStyle"
         android:background="@color/bg_line_dark_gray"/>
-    <GridView
-        android:numColumns="2"
+    <com.youyou.uumall.view.RefreshListView
         android:id="@+id/brand_desc_gv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,6 +25,6 @@
         android:clipToPadding="false"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
-        android:scrollbars="none">
-    </GridView>
+        android:scrollbars="vertical">
+    </com.youyou.uumall.view.RefreshListView>
 </LinearLayout>

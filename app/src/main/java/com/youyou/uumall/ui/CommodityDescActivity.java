@@ -16,6 +16,7 @@ import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.ShopcartBiz;
+import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.model.ShopCartBean;
@@ -28,6 +29,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 import java.util.Map;
@@ -169,7 +171,7 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             item.putString("goodsId", bean.id);
             item.putString("goodsName", bean.categoryName);
             item.putString("count", 1 + "");
-            item.putString("subtotal", bean.coupon);
+            item.putString("subtotal", bean.coupon==null?bean.price: bean.coupon);
             item.putString("image", bean.description);
             bundle.putBundle(0 + "", item);
             bundle.putInt("size", 1);
@@ -181,6 +183,7 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             if (response.code != 0) {
                 isLogined = false;
             } else {
+                isLogined = true;
                 List<ShopCartBean> list = (List<ShopCartBean>) response.data;
                 int count = 0;
                 for (ShopCartBean bean :list) {
@@ -195,5 +198,21 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
 
             }
         }
+    }
+    @Override
+    protected void registerEvent() {
+        super.registerEvent();
+        eventBus.register(this);
+    }
+
+    @Override
+    protected void unRegisterEvent() {
+        super.unRegisterEvent();
+        eventBus.unregister(this);
+    }
+
+    @Subscribe
+    public void onLoginSuceess(LoginEvent event) {//eventBus接收数据,并后台调用
+        shopcartBiz.getcartList();
     }
 }

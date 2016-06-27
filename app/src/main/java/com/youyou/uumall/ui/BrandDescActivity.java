@@ -2,8 +2,6 @@ package com.youyou.uumall.ui;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.youyou.uumall.R;
@@ -13,6 +11,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.business.CommodityBiz;
 import com.youyou.uumall.model.GoodsDescBean;
+import com.youyou.uumall.view.RefreshListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -27,28 +26,29 @@ import java.util.List;
  * Created by Administrator on 2016/6/14.
  */
 @EActivity(R.layout.activity_brand_desc)
-public class BrandDescActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, AdapterView.OnItemClickListener {
+public class BrandDescActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BrandDescGridAdapter.OnItemClickListener, RefreshListView.OnRefreshListener {
     @ViewById
     TextView brand_desc_title_tv;
 
     @ViewById
-    GridView brand_desc_gv;
+    RefreshListView brand_desc_gv;
     @Bean
     BrandDescGridAdapter gridAdapter;
     @Bean
     CommodityBiz commodityBiz;
     private List<GoodsDescBean> goodsDescBeanList;
+    private String mId;
 
     @AfterViews
     void afterViews() {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        String id = intent.getStringExtra("id");
+        mId = intent.getStringExtra("id");
         brand_desc_title_tv.setText(name);
         commodityBiz.setArrayListCallbackInterface(this);
-        commodityBiz.queryGoodsByBrand(id);
-        brand_desc_gv.setOnItemClickListener(this);
-
+        gridAdapter.setOnItemClickListener(this);
+        brand_desc_gv.setOnRefreshListener(this);
+        brand_desc_gv.autoRefresh();
     }
 
     @UiThread
@@ -60,6 +60,7 @@ public class BrandDescActivity extends BaseActivity implements BaseBusiness.Arra
                 brand_desc_gv.setAdapter(gridAdapter);
                 gridAdapter.setData(goodsDescBeanList);
             }
+            brand_desc_gv.onRefreshComplete();
         }
     }
 
@@ -69,9 +70,14 @@ public class BrandDescActivity extends BaseActivity implements BaseBusiness.Arra
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void itemClick(View view) {
         Intent intent = new Intent(this, CommodityDescActivity_.class);
-        intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, goodsDescBeanList.get(position).id);
+        intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, view.getTag()+"");
         startActivity(intent);
+    }
+
+    @Override
+    public void onRefreshing(boolean isAuto) {
+        commodityBiz.queryGoodsByBrand(mId);
     }
 }

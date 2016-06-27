@@ -1,5 +1,6 @@
 package com.youyou.uumall.view;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,10 +24,9 @@ import pl.droidsonroids.gif.GifImageView;
  * @author cmandy
  */
 @EView
-public class RefreshListView extends ListView implements AbsListView.OnScrollListener {
+public class RefreshListView extends ListView implements AbsListView.OnScrollListener, Animator.AnimatorListener {
 
     private int headerHeight;
-
     private static final int PULLDOWN_STATE = 0;// 下拉刷新状态
     private static final int RELEASE_STATE = 1;// 松开刷新状态
     private static final int REFRESHING_STATE = 2;// 正在刷新状态
@@ -40,6 +40,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     private int footerHeight;
     private boolean isLoadMome;
     private int diffY;
+    private boolean isAutoRefresh = true;
 
     public RefreshListView(Context context) {
         this(context, null);
@@ -51,11 +52,12 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
 
     public RefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RefreshListView, defStyleAttr, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RefreshListView, defStyleAttr, 0);
         int attr = typedArray.getIndex(0);
         if (attr == R.styleable.RefreshListView_isLoadMore) {
             isLoadMome = typedArray.getBoolean(0, false);
         }
+        typedArray.recycle();
         log = MyLogger.getLogger("refresh");
         addHeader();
         if (isLoadMome) {
@@ -105,7 +107,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                     break;
                 }
                 int moveY = (int) ev.getY();
-                diffY = (moveY-downY)/2;
+                    diffY = (moveY-downY)/2;
                 if (diffY > 0) {
                     int topPadding =  diffY - headerHeight;
                     if (topPadding < 0 && current_state != PULLDOWN_STATE) {
@@ -121,7 +123,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                 downY=-1;
                 if (current_state == PULLDOWN_STATE) {//没拉到位状态,这个时候应该写动画,让这个toppadding从当前状态变成-headerHeight
                     ValueAnimator animator = ValueAnimator.ofInt(diffY-headerHeight,-headerHeight);
-                    animator.setDuration(500);
+                    animator.setDuration(300);
                     animator.setInterpolator(new AccelerateDecelerateInterpolator());
                     animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
@@ -134,10 +136,20 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                     animator.start();
                 } else if (current_state == RELEASE_STATE) {
                     current_state = REFRESHING_STATE;//正在刷新
-                    headerView.setPadding(0, 0, 0, 0);
-                    if (onRefreshListener != null) {
-                    onRefreshListener.onRefreshing();
-                    }
+                    isAutoRefresh = false;//刷新为手动刷新
+                    ValueAnimator animator = ValueAnimator.ofInt(diffY-headerHeight,0);
+                    animator.setDuration(300);
+                    animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            Integer animatedValue = (Integer) animation.getAnimatedValue();
+                            headerView.setPadding(0, animatedValue, 0, 0);
+
+                        }
+                    });
+                    animator.start();
+                    animator.addListener(this);
                 }
 
                 break;
@@ -145,12 +157,47 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         }
         return super.onTouchEvent(ev);
     }
+    @Override
+    public void onAnimationStart(Animator animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        if (onRefreshListener != null) {
+            onRefreshListener.onRefreshing(isAutoRefresh);
+        }
+    }
+
+    @Override
+    public void onAnimationCancel(Animator animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animator animation) {
+
+    }
+    public void autoRefresh() {//主页如果是首次进入,加载动画
+        ValueAnimator animator = ValueAnimator.ofInt(-headerHeight,0);
+        animator.setDuration(600);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer animatedValue = (Integer) animation.getAnimatedValue();
+                headerView.setPadding(0, animatedValue, 0, 0);
+            }
+        });
+        animator.start();
+        animator.addListener(this);
+    }
 
     @UiThread
     public void onRefreshComplete() {
         current_state = PULLDOWN_STATE;
         ValueAnimator animator = ValueAnimator.ofInt(0,-headerHeight);
-        animator.setDuration(500);
+        animator.setDuration(300);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -170,13 +217,18 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     }
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (OnScrollListener.SCROLL_STATE_IDLE == scrollState
-                || OnScrollListener.SCROLL_STATE_FLING == scrollState) {
-            if(getLastVisiblePosition()==getCount()-1&&!isLoadMore){
+        if (OnScrollListener.SCROLL_STATE_IDLE == scrollState) {
+            int position = getLastVisiblePosition();
+            boolean load =false;
+            int count = getCount()-1;
+            if (position == count||position == count-1 || getLastVisiblePosition() == count - 2 && getLastVisiblePosition() == count-3) {
+                load = true;
+            }
+            if(load&&!isLoadMore){
                 isLoadMore = true;
-                footerView.setPadding(0, 0, 0, 0);
+//                footerView.setPadding(0, 0, 0, 0);
                 // 让加载更多脚布局自动显示
-                setSelection(getCount());
+//                setSelection(getCount());
                 // 调用外界加载更多的业务
                 if(onOnLoadMoreListener!=null){
                     onOnLoadMoreListener.onLoadingMore();
@@ -191,7 +243,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     }
 
     public interface OnRefreshListener{
-        void onRefreshing();
+        void onRefreshing(boolean isAuto);
     }
 
     public interface OnLoadMoreListener{

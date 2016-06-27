@@ -36,7 +36,7 @@ public class BrandDescGridAdapter extends BaseAdapter {
     private List<GoodsDescBean> mData;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
-
+    OnItemClickListener listener;
     public void setData(List mData) {
         this.mData = mData;
         notifyDataSetChanged();
@@ -58,7 +58,7 @@ public class BrandDescGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mData == null ? 0 : mData.size();
+        return mData == null ? 0 : (mData.size()+1)/2;
 
     }
 
@@ -75,20 +75,43 @@ public class BrandDescGridAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.item_brand_desc, null);
+            convertView = View.inflate(context, R.layout.item_commodity, null);
         }
-        ImageView item_brand_desc_iv = ViewHolder.get(convertView, R.id.item_brand_desc_iv);
-        setHeight(item_brand_desc_iv);
-        TextView item_brand_desc_title_tv = ViewHolder.get(convertView, R.id.item_brand_desc_title_tv);
-        TextView item_brand_desc_price1_tv = ViewHolder.get(convertView, R.id.item_brand_desc_price1_tv);
-        TextView item_brand_desc_price2_tv = ViewHolder.get(convertView, R.id.item_brand_desc_price2_tv);
+        RelativeLayout rightLayout = ViewHolder.get(convertView, R.id.right_layout);
+        RelativeLayout leftLayout = ViewHolder.get(convertView, R.id.left_layout);
+        TextView left_commodity_name = ViewHolder.get(convertView, R.id.left_commodity_name);
+        TextView left_commodity_price = ViewHolder.get(convertView, R.id.left_commodity_price);
+        TextView left_commodity_origin_price = ViewHolder.get(convertView, R.id.left_commodity_origin_price);
+        ImageView left_commodity_img = ViewHolder.get(convertView, R.id.left_commodity_img);
+        setHeight(left_commodity_img);
 
-        GoodsDescBean goodsDescBean = mData.get(position);
+        GoodsDescBean goodsDescBean = mData.get(position* 2);
+        leftLayout.setTag(goodsDescBean.id);
         String image = goodsDescBean.image.split("\\|")[0];
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL+image,item_brand_desc_iv,options);
-        item_brand_desc_title_tv.setText(goodsDescBean.titile);
-        item_brand_desc_price1_tv.setText("￥"+goodsDescBean.price);
-        item_brand_desc_price2_tv.setText("乐天价：￥"+goodsDescBean.price);
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL+image,left_commodity_img,options);
+        left_commodity_name.setText(goodsDescBean.titile);
+        left_commodity_price.setText("￥"+goodsDescBean.price);
+        left_commodity_origin_price.setText("乐天价：￥"+goodsDescBean.price);
+        leftLayout.setOnClickListener(new AdapterClickListener());
+
+        TextView right_commodity_name = ViewHolder.get(convertView, R.id.right_commodity_name);
+        TextView right_commodity_price = ViewHolder.get(convertView, R.id.right_commodity_price);
+        TextView right_commodity_origin_price = ViewHolder.get(convertView, R.id.right_commodity_origin_price);
+        ImageView right_commodity_img = ViewHolder.get(convertView, R.id.right_commodity_img);
+        setHeight(right_commodity_img);
+        if (position * 2 + 1 < mData.size()) {
+            rightLayout.setOnClickListener(new AdapterClickListener());
+            GoodsDescBean rightitem = mData.get(position * 2 + 1);
+            rightLayout.setTag(rightitem.id);
+            right_commodity_name.setText(rightitem.titile);
+            right_commodity_price.setText("¥" + rightitem.price);
+            right_commodity_origin_price.setText("乐天价：￥"+rightitem.price);
+            String rightImage = rightitem.image.split("\\|")[0];
+            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + rightImage, right_commodity_img,options);
+            rightLayout.setVisibility(View.VISIBLE);
+        } else {
+            rightLayout.setVisibility(View.INVISIBLE);
+        }
         return convertView;
     }
 
@@ -102,5 +125,22 @@ public class BrandDescGridAdapter extends BaseAdapter {
 //        int mScreenHeight = metric.heightPixels;
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, (int) (width/1.28));
         imageView.setLayoutParams(params);
+    }
+
+    class AdapterClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            if (listener != null) {
+                listener.itemClick(v);
+            }
+        }
+    }
+    public interface OnItemClickListener {
+        void itemClick(View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

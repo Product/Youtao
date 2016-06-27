@@ -2,7 +2,6 @@ package com.youyou.uumall.ui;
 
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.youyou.uumall.R;
@@ -12,6 +11,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.event.UpdateAllOrder;
 import com.youyou.uumall.model.OrderBean;
+import com.youyou.uumall.view.RefreshListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -21,20 +21,21 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/24.
  */
 @EActivity(R.layout.activity_order_submit)
-public class OrderAllActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface {
+public class OrderAllActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, RefreshListView.OnRefreshListener, RefreshListView.OnLoadMoreListener {
     @Bean
     OrderBiz orderBiz;
 
     OrderAdapter orderAdapter;
 
     @ViewById
-    ListView order_submit_lv;
+    RefreshListView order_submit_lv;
 
     @ViewById
     TextView order_submit_tv;
@@ -42,27 +43,55 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
     @ViewById
     LinearLayout order_empty;
 
+    private boolean isAuto;
+    private int pageNo = 1;
+    private List<OrderBean> list = new ArrayList<>();
+
     @AfterViews
     void afterViews() {
-        orderAdapter = new OrderAdapter(this,OrderAdapter.ORDER_ALL);
+        orderAdapter = new OrderAdapter(this, OrderAdapter.ORDER_ALL);
         order_submit_tv.setText(R.string.order_submit_all_title);
         orderBiz.setArrayListCallbackInterface(this);
-
         order_submit_lv.setAdapter(orderAdapter);
+        order_submit_lv.setOnRefreshListener(this);
+        order_submit_lv.setOnLoadMoreListener(this);
+        order_submit_lv.autoRefresh();
     }
 
     @UiThread
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == OrderBiz.QUERY_ORDER) {
-            if (arrayList != null&&arrayList.size()!=0) {
+            if (!isAuto) {
+                isAuto=!isAuto;
+                list.clear();
                 List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                orderAdapter.setData(orderBean);
-            }else{
-                order_submit_lv.setVisibility(View.GONE);
-                order_empty.setVisibility(View.VISIBLE);
-                return ;
+                list.addAll(orderBean);
+                orderAdapter.setData(list);
+                order_submit_lv.onRefreshComplete();
+                return;
             }
+            if (pageNo == 1) {//是第一次调用,也就是默认刷新
+                if (arrayList != null && arrayList.size() != 0) {
+                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+                    list.addAll(orderBean);
+                    orderAdapter.setData(list);
+                    order_submit_lv.onRefreshComplete();
+                } else {
+                    order_submit_lv.onRefreshComplete();
+                    order_submit_lv.setVisibility(View.GONE);
+                    order_empty.setVisibility(View.VISIBLE);
+                }
+
+            } else {//这个是上拉加载更多
+                if (arrayList != null && arrayList.size() != 0) {
+                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+                    list.addAll(orderBean);
+                    orderAdapter.setData(list);
+                }
+                order_submit_lv.onLoadMoreComplete();
+            }
+
         }
     }
 
@@ -78,6 +107,7 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
         MainActivity_.intent(this).start();
         super.onBackPressed();
     }
+
     @Override
     protected void unRegisterEvent() {
         super.unRegisterEvent();
@@ -92,6 +122,23 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
 
     @Subscribe(sticky = true)
     public void onFinish(UpdateAllOrder event) {
-        orderBiz.queryOrder(0,0,"","");
+        order_submit_lv.autoRefresh();
+    }
+
+    @Override
+    public void onRefreshing(boolean isAuto) {
+        this.isAuto = isAuto;
+            if (isAuto) {
+                orderBiz.queryOrder(pageNo, 10, "", "");
+            } else {
+                pageNo=1;
+                orderBiz.queryOrder(pageNo, 10, "", "");
+            }
+    }
+
+    @Override
+    public void onLoadingMore() {
+        pageNo++;
+        orderBiz.queryOrder(pageNo, 10, "", "");
     }
 }

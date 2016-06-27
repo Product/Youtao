@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.youyou.uumall.R;
@@ -62,6 +63,7 @@ public class CountryAdapter extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.item_country, null);
         }
         TextView item_country_tv = ViewHolder.get(convertView, R.id.item_country_tv);
+        LinearLayout item_country_ll = ViewHolder.get(convertView, R.id.item_country_ll);
         String defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
         String currentCountry = dictList.get(position).split(",")[0];//这种方法不是很好,应该使用数据库的方式来获取
         if (TextUtils.equals(defaultCountry,currentCountry)){

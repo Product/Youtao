@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_settings_gap"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     >
     <RelativeLayout style="@style/RelativeLayout_Title_Normal">
 
@@ -18,11 +19,12 @@
     <View
         android:background="@color/bg_line_dark_gray"
         style="@style/HorizonLineStyle" />
-    <ListView
+    <com.youyou.uumall.view.RefreshListView
+        android:scrollbars="vertical"
+        custom:isLoadMore="true"
         android:divider="@null"
         android:id="@+id/order_submit_lv"
         android:cacheColorHint="@android:color/transparent"
-        android:scrollbars="none"
         android:listSelector="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.MobileBindingEvent;
 import com.youyou.uumall.bean.Response;
@@ -156,5 +157,6 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
         eventBus.post(new ShopCartTriggerEvent());
         eventBus.post(new MineTriggerEvent());
         eventBus.post(new ShopCartUpdateEvent());
+        eventBus.post(new LoginEvent());
     }
 }
