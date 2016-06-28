@@ -137,7 +137,12 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
 //                confirm_order_time_tv.setText(mDate +"    "+ mFltNo);
                 confirm_order_time_tv.setText(mDate);
                 confirm_order_address_tv.setText(mDelivery);
-                confirm_buynow_bt.setText("确认("+mData.size()+"件)");
+                int sumCount = 0;
+                for (int i = 0;i<mData.size();i++) {
+                    ShopCartBean bean = mData.get(i);
+                        sumCount =  sumCount+bean.count;
+                }
+                confirm_buynow_bt.setText("确认("+sumCount+"件)");
                 break;
             default:
                 break;

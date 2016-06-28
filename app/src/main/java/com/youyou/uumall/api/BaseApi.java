@@ -161,4 +161,9 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     @Post("/mall/updateGoodsPrice.json")
     Response<List<GoodsPrice>> updateGoodsPrice(Map map);
 //    Response<Object> updateGoodsPrice(Map map);
+//
+// /*品牌搜索商品接口*/
+    @Post("/malluser/modUserInfo.json")
+//    Response<List<GoodsPrice>> modUserInfo(Map map);
+    Response<Object> modUserInfo(Map map);
 }

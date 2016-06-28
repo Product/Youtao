@@ -68,6 +68,9 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
     @ViewById
     TextView order_detail_create_date;
 
+    @ViewById
+    TextView order_detail_order_status_tv;
+
     @Bean
     ConfirmOrderAdapter confirmOrderAdapter;
     private OrderBean bean;
@@ -147,6 +150,25 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
                     order_detail_cancel_ll.setVisibility(View.GONE);
                     order_detail_pay_bt2.setVisibility(View.GONE);
                 }
+                String orderStatus ="";
+                switch (bean.status) {
+                    case "orderSubmit":
+                        orderStatus=getResources().getString(R.string.order_submit_title);
+                        break;
+                    case "orderConfirm":
+                        orderStatus=getResources().getString(R.string.order_submit_confirm_title);
+                        break;
+                    case "orderCancel":
+                        orderStatus=getResources().getString(R.string.order_submit_cancel_title);
+                        break;
+                    case "orderShipping":
+                        orderStatus=getResources().getString(R.string.order_submit_shipping_title);
+                        break;
+                    case "orderFinish":
+                        orderStatus=getResources().getString(R.string.order_submit_done_title);
+                        break;
+                }
+                order_detail_order_status_tv.setText(orderStatus);
                 order_detail_total_count.setText("共"+bean.totalCnt+"件");
                 order_detail_total_price.setText("合计￥"+bean.totalPrice);
                 order_detail_order_id.setText("订单编号:    "+bean.id);

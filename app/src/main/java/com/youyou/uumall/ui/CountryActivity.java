@@ -1,5 +1,6 @@
 package com.youyou.uumall.ui;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -44,14 +45,12 @@ public class CountryActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView item_country_bt = (TextView) view.findViewById(R.id.item_country_tv);
                 String country = item_country_bt.getText().toString();
-                MyUtils.savePara(getApplicationContext(), BaseConstants.preferencesFiled.DEFAULT_COUNTRY, country);
                 String defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, getApplicationContext());
-                String currentCountry = list.get(position).split(",")[0];
-//                if (!TextUtils.equals(defaultCountry,currentCountry)){
-//                    eventBus.post(new CountryCallbackEvent("refresh"));
-//                    finish();
-//                    return;
-//                }
+                if (TextUtils.equals(defaultCountry,country)){
+                    finish();
+                    return;
+                }
+                MyUtils.savePara(getApplicationContext(), BaseConstants.preferencesFiled.DEFAULT_COUNTRY, country);
                     country_cancel_iv();
             }
         });
@@ -70,7 +69,6 @@ public class CountryActivity extends BaseActivity {
     void country_cancel_iv() {
         eventBus.post(new CountryCallbackEvent("refresh"));
         finish();
-
     }
 
 }

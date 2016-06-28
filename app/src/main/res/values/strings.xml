@@ -85,8 +85,8 @@
     <string name="order_submit_shipping_title">待取货</string>
     <!--order all-->
     <string name="order_submit_all_title">全部订单</string>
-    <string name="order_submit_cancel_title">已取消订单</string>
-    <string name="order_submit_done_title">完成订单</string>
+    <string name="order_submit_cancel_title">已取消</string>
+    <string name="order_submit_done_title">已完成</string>
 
     <!--dialog-->
     <string name="dialog_cancel_title">确认取消订单?</string>

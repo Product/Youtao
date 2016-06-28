@@ -148,6 +148,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                     eventBus.post(new LoginEvent());
                     showToastShort("登录成功");
                     finish();
+                    overridePendingTransition(R.anim.anim_none,R.anim.from_top_exit);
                 } else {
                     showToastShort(response.msg);
                 }
@@ -174,6 +175,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                 eventBus.postSticky(new MobileBindingEvent(bean.openId));
                 MobileBindingActivity_.intent(LoginActivity.this).start();
                 finish();
+                overridePendingTransition(R.anim.anim_none,R.anim.from_top_exit);
 //                        overridePendingTransition(R.anim.from_right_enter, R.anim.anim_none);
 //                    }
 //                });

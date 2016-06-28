@@ -43,12 +43,7 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
     @AfterViews
     void afterViews() {
         registerBiz.setObjectCallbackInterface(this);
-        if (userUtils.getUserId() == null) {
-            setting_exit_btn.setVisibility(View.GONE);
-        }else {
-            setting_exit_btn.setVisibility(View.VISIBLE);
-        }
-
+        registerBiz.modUserInfo("","");
         setting_push_cb.setOnCheckedChangeListener(this);
     }
 
@@ -91,6 +86,14 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
                 MainActivity_.intent(this).start();
             } else {
                 showToastShort(response.msg);
+            }
+        } else if (RegisterBiz.MOD_USER_INFO == type) {
+            Response response = (Response) t;
+//            log.e(response.toString());
+            if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                setting_exit_btn.setVisibility(View.VISIBLE);
+            } else {
+                setting_exit_btn.setVisibility(View.GONE);
             }
         }
     }

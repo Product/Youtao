@@ -172,6 +172,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                         }
                     }
                     adapter.setData(mData);
+                    shopcart_buynow_bt.setText("结算(" +  getSumCount(mData) + ")");
                     setTotalChecked();
                 } else if (response.code == 46000 && TextUtils.equals(response.msg, "用户登录状态异常，请重新登录！")) {//如果没有登录就显示空列表
                     shopcart_bg_ll.setVisibility(View.VISIBLE);
@@ -249,7 +250,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                         sumChecked -= 1;
                     }
                 }
-                shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
+//                shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
                 break;
             case ShopcartAdapter.DEL_ONE:
                 Map[] dataArray = MyUtils.deleteOneGoods(mData, tag);
@@ -263,7 +264,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                         shopcart_total_tv.setText("￥" + totalPrice);
                         if (data.count == 1) {
                             sumChecked -= 1;
-                            shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
+//                            shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
                         }
                     }
                 }
@@ -283,6 +284,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 shopcart_total_tv.setText("￥" + totalPrice);
             }
         }
+
     }
 
     @Override
@@ -306,7 +308,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                  */
             }
         }
-        shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
+        shopcart_buynow_bt.setText("结算(" + getSumCount(mData) + ")");
         shopcart_total_tv.setText("￥" + totalPrice);
         setTotalChecked();
     }
@@ -326,19 +328,29 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
             for (int i = 0; i < mData.size(); i++) {
                 mData.get(i).isCheck = true;
                 adapter.setData(mData);
-                shopcart_total_tv.setText("￥" + totalPriceForResponse);
                 sumChecked = mData.size();
-                shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
             }
+                shopcart_total_tv.setText("￥" + totalPriceForResponse);
         } else {//全选了,进行反选操作,把所有的check值改为false,从新设置给适配器.价格就是0
             for (int i = 0; i < mData.size(); i++) {
                 mData.get(i).isCheck = false;
                 adapter.setData(mData);
                 totalPrice = 0.0;
                 sumChecked = 0;
-                shopcart_buynow_bt.setText("结算(" + sumChecked + ")");
+            }
                 shopcart_total_tv.setText("￥" + totalPrice);
+        }
+        shopcart_buynow_bt.setText("结算(" + getSumCount(mData) + ")");
+    }
+
+    public Integer getSumCount( List<ShopCartBean> data) {
+        Integer sumCount = 0;
+        for (int i = 0;i<data.size();i++) {
+            ShopCartBean bean = data.get(i);
+            if (bean.isCheck) {
+                sumCount =  sumCount+bean.count;
             }
         }
+        return sumCount;
     }
 }

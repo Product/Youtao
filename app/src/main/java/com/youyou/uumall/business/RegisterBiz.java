@@ -1,10 +1,15 @@
 package com.youyou.uumall.business;
 
+import android.content.Context;
+
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +19,16 @@ import java.util.Map;
  */
 @EBean
 public class RegisterBiz extends BaseBusiness {
+
+    @RootContext
+    Context context;
     public static final int GET_SMS_CODE = 1;
     public static final int USER_REGISTER =2 ;
     public static final int RETRIEVE_PASSWORD =3 ;
     public static final int WECHAT_LOGIN =4 ;
     public static final int MOBILE_BINDING =5 ;
     public static final int LOGOUT =6 ;
+    public static final int MOD_USER_INFO =7 ;
 
     @Background
     public void getSmsCode(String mobile, String type){
@@ -67,6 +76,17 @@ public class RegisterBiz extends BaseBusiness {
     @Background
     public void logout() {
         objectCallbackInterface.objectCallBack(LOGOUT,baseApi.logout());
+    }
+
+    @Background
+    public void modUserInfo(String userName,String userIcon) {
+        String deviceToken = MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, context);
+        Map map = new HashMap();
+        map.put("deviceToken",deviceToken);
+        map.put("clientType","1");
+        map.put("userName",userName);
+        map.put("userIcon",userIcon);
+        objectCallbackInterface.objectCallBack(MOD_USER_INFO,baseApi.modUserInfo(map));
     }
 
 }
