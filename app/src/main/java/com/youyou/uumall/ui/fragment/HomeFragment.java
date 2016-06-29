@@ -2,7 +2,6 @@ package com.youyou.uumall.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -49,9 +48,6 @@ import java.util.List;
 @EFragment(R.layout.fragment_home)
 public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface, View.OnTouchListener, View.OnClickListener, CommodityAdapter.OnItemClickListener {
 
-
-
-
     Context mContext;
     @ViewById
     RefreshListView listview;
@@ -95,15 +91,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
             }
         });
         eventBus.post(new ShopCartUpdateEvent());// TODO: 2016/6/25 0025 观察bug
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        options = MyUtils.getImageOptions();
     }
 
     @Override
@@ -118,7 +106,6 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
     public void loadData() {
         addressBiz.queryDict();
         commodityBiz.getSliderList();
-        commodityBiz.getBrandList();
     }
 
     @Override
@@ -231,6 +218,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
                 home_country_tv.setText(defaultCountry);
                 commodityBiz.getRecommendList();//在拿到数值之后再访问
+                commodityBiz.getBrandList();
             }
                 loadItem++;
         } else if (CommodityBiz.GET_BRAND_LIST == type) {//平拍商品
@@ -250,7 +238,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     //这个是推荐品牌的设置方式
     private void setBrandPic(List<BrandBean> brandList) {
-        if (brandList != null) {
+        if (brandList != null&&brandList.size()!=0) {
             ImageLoader imageLoader = ImageLoader.getInstance();
             ViewGroup viewGroup = (ViewGroup) headerView_1;
             int childCount = viewGroup.getChildCount();

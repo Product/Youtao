@@ -4,14 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.youyou.uumall.R;
-import com.youyou.uumall.adapter.ConfirmOrderAdapter;
+import com.youyou.uumall.adapter.OrderDetailAdapter;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
@@ -34,45 +30,17 @@ import java.util.List;
  * Created by Administrator on 2016/5/24.
  */
 @EActivity(R.layout.activity_order_detail)
-public class OrderDetailActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface {
+public class OrderDetailActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface, OrderDetailAdapter.OnCancelClickListener, OrderDetailAdapter.OnPayClickListener {
     @Bean
     OrderBiz orderBiz;
 
-    @ViewById
-    TextView order_detail_name_tv;
-
-    @ViewById
-    TextView order_detail_address_tv;
-
-    @ViewById
-    TextView order_detail_time_tv;
 
     @ViewById
     ListView order_detail_lv;
 
-    @ViewById
-    LinearLayout order_detail_cancel_ll;
-
-    @ViewById
-    Button order_detail_pay_bt2;
-
-    @ViewById
-    TextView order_detail_total_count;
-
-    @ViewById
-    TextView order_detail_total_price;
-
-    @ViewById
-    TextView order_detail_order_id;
-
-    @ViewById
-    TextView order_detail_create_date;
-
-    @ViewById
-    TextView order_detail_order_status_tv;
 
     @Bean
-    ConfirmOrderAdapter confirmOrderAdapter;
+    OrderDetailAdapter orderDetailAdapter;
     private OrderBean bean;
 
     @AfterViews
@@ -82,32 +50,11 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
         orderBiz.setArrayListCallbackInterface(this);
         orderBiz.setObjectCallbackInterface(this);
         orderBiz.queryOrder(0, 0, id, "");
-        order_detail_lv.setAdapter(confirmOrderAdapter);
+        order_detail_lv.setAdapter(orderDetailAdapter);
+        orderDetailAdapter.setOnCancelClickListener(this);
+        orderDetailAdapter.setOnPayClickListener(this);
     }
 
-    @Click({R.id.order_detail_pay_bt2,R.id.order_detail_cancel_bt})
-    void cancelOrder() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.dialog_cancel_title);
-        builder.setMessage(R.string.dialog_cancel_message);
-        builder.setPositiveButton(R.string.dialog_cancel_pos, null);
-        builder.setNegativeButton(R.string.dialog_cancel_neg, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                orderBiz.cancelOrder(bean.id);
-            }
-        });
-        builder.show();
-    }
-
-    @Click
-    void order_detail_pay_bt() {
-        Intent intent = new Intent(this, PaymentActivity_.class);
-        intent.putExtra("data", bean.id);
-        Double price = Double.valueOf(bean.totalPrice);
-        intent.putExtra("price", price);
-        startActivity(intent);
-    }
 
     @Click
     void order_detail_pro_iv() {
@@ -140,46 +87,34 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
             if (arrayList != null) {
                 List<OrderBean> orderBean = (List<OrderBean>) arrayList;
                 bean = orderBean.get(0);
-                if (TextUtils.equals(bean.status, "orderSubmit")) {//提交:有付款和取消界面
-                    order_detail_cancel_ll.setVisibility(View.VISIBLE);
-                    order_detail_pay_bt2.setVisibility(View.GONE);
-                } else if (TextUtils.equals(bean.status, "orderConfirm")) {//待发货:有取消界面
-                    order_detail_cancel_ll.setVisibility(View.GONE);
-                    order_detail_pay_bt2.setVisibility(View.VISIBLE);
-                }else{//其它界面,两个布局都消失
-                    order_detail_cancel_ll.setVisibility(View.GONE);
-                    order_detail_pay_bt2.setVisibility(View.GONE);
-                }
-                String orderStatus ="";
-                switch (bean.status) {
-                    case "orderSubmit":
-                        orderStatus=getResources().getString(R.string.order_submit_title);
-                        break;
-                    case "orderConfirm":
-                        orderStatus=getResources().getString(R.string.order_submit_confirm_title);
-                        break;
-                    case "orderCancel":
-                        orderStatus=getResources().getString(R.string.order_submit_cancel_title);
-                        break;
-                    case "orderShipping":
-                        orderStatus=getResources().getString(R.string.order_submit_shipping_title);
-                        break;
-                    case "orderFinish":
-                        orderStatus=getResources().getString(R.string.order_submit_done_title);
-                        break;
-                }
-                order_detail_order_status_tv.setText(orderStatus);
-                order_detail_total_count.setText("共"+bean.totalCnt+"件");
-                order_detail_total_price.setText("合计￥"+bean.totalPrice);
-                order_detail_order_id.setText("订单编号:    "+bean.id);
-                order_detail_create_date.setText("下单时间:    "+bean.createDate);
-                order_detail_name_tv.setText(bean.name + "   " + bean.linkTel);
-//                order_detail_address_tv.setText(bean.address.name);
-                order_detail_address_tv.setText(bean.address);
-                order_detail_time_tv.setText(bean.pickupTime);
-                confirmOrderAdapter.setData(bean.goodsList);
+                orderDetailAdapter.setData(orderBean);
 //                log.e(bean.toString());
             }
         }
+    }
+
+
+    @Override
+    public void cancelClick() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.dialog_cancel_title);
+        builder.setMessage(R.string.dialog_cancel_message);
+        builder.setPositiveButton(R.string.dialog_cancel_pos, null);
+        builder.setNegativeButton(R.string.dialog_cancel_neg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                orderBiz.cancelOrder(bean.id);
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void payClick() {
+        Intent intent = new Intent(this, PaymentActivity_.class);
+        intent.putExtra("data", bean.id);
+        Double price = Double.valueOf(bean.totalPrice);
+        intent.putExtra("price", price);
+        startActivity(intent);
     }
 }

@@ -3,7 +3,6 @@ package com.youyou.uumall.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,6 +20,7 @@ import com.youyou.uumall.model.GoodsList;
 import com.youyou.uumall.model.OrderBean;
 import com.youyou.uumall.ui.OrderDetailActivity_;
 import com.youyou.uumall.ui.PaymentActivity_;
+import com.youyou.uumall.utils.MyUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,15 +55,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
         this.mContext = mContext;
         this.type = type;
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        options = MyUtils.getImageOptions();
     }
 
 

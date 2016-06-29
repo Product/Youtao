@@ -1,7 +1,6 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.ShopCartBean;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
@@ -46,15 +46,7 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
     void afterInject() {
         mInflater = LayoutInflater.from(mContext);
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        options = MyUtils.getImageOptions();
     }
 
     public void setData(List dictList) {

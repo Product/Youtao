@@ -1,7 +1,6 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -10,9 +9,9 @@ import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.model.BrandBean;
+import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.utils.PixelUtil;
 
 import org.androidannotations.annotations.AfterInject;
@@ -41,15 +40,7 @@ public class CategoryGridAdapter extends BaseAdapter {
     @AfterInject
     void afterInject() {
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        options = MyUtils.getImageOptions();
     }
 
     @Override

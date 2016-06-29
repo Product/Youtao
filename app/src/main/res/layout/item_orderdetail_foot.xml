@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_90"
+        android:background="@color/white"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25">
+
+        <TextView
+            android:id="@+id/delivery_total_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/view_25"
+            android:text="共3件"
+            android:textColor="@color/font_hint_gray"
+            android:textSize="@dimen/font_24" />
+
+        <TextView
+            android:id="@+id/delivery_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合计: ￥1485"
+            android:textColor="@color/font_country_conuntry"
+            android:textSize="@dimen/font_28" />
+    </LinearLayout>
+
+    <View style="@style/HorizonLineView20Style" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_125"
+        android:layout_marginBottom="@dimen/view_64"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25">
+
+        <TextView
+            android:id="@+id/delivery_order_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/view_20"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/view_25" />
+
+        <TextView
+            android:id="@+id/delivery_create_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/view_25" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/delivery_cancel_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/font_86"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/delivery_cancel_bt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/view_20"
+            android:layout_weight="1"
+            android:background="@drawable/bg_disenabled_confirm_shape"
+            android:text="@string/order_detail_cancel"
+            android:textColor="@color/font_hint_gray"
+            android:textSize="@dimen/font_30" />
+
+        <Button
+            android:id="@+id/delivery_pay_bt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_enabled_confirm_shape"
+            android:text="@string/order_detail_pay"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_30" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/delivery_pay_bt2"
+        android:layout_width="@dimen/view_650"
+        android:layout_height="@dimen/view_86"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/view_10"
+        android:layout_marginTop="@dimen/view_10"
+        android:background="@drawable/bg_disenabled_confirm_shape"
+        android:text="@string/order_detail_cancel"
+        android:textColor="@color/font_hint_gray"
+        android:textSize="@dimen/font_30"
+        android:visibility="gone" />
+</LinearLayout>

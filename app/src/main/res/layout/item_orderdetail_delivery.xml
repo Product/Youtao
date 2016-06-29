@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+    android:id="@+id/delivery_info_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/view_50"
+    android:paddingLeft="@dimen/view_25"
+    android:paddingRight="@dimen/view_25"
+    android:paddingTop="@dimen/view_50">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/view_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/view_100"
+            android:layout_height="@dimen/font_36"
+            android:layout_marginRight="@dimen/view_25"
+            android:background="@drawable/bg_text_order_shape"
+            android:gravity="center"
+            android:text="收货人"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/delivery_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="陈冰    13795376899"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/view_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/view_100"
+            android:layout_height="@dimen/font_36"
+            android:layout_marginRight="@dimen/view_25"
+            android:background="@drawable/bg_text_order_shape"
+            android:gravity="center"
+            android:text="提货地址"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/delivery_address_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="仁川机场T2航站楼"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_30" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/view_100"
+            android:layout_height="@dimen/font_36"
+            android:layout_marginRight="@dimen/view_25"
+            android:background="@drawable/bg_text_order_shape"
+            android:gravity="center"
+            android:text="提货时间"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/delivery_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="2016-06-25    19:30-20:40"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_30" />
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

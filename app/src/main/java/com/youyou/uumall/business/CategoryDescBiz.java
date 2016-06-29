@@ -33,8 +33,10 @@ public class CategoryDescBiz extends BaseBusiness {
 
     @Background
     public void queryCategory(String parentId) {
+        String countryCode = MyUtils.getCountryCode(mContext);
         Map map = new HashMap();
         map.put("parentId", parentId);
+        map.put("countryCode", countryCode);
         arrayListCallbackInterface.arrayCallBack(QUERY_CATEGORY, handleResponse(baseApi.queryCategory(map)));
     }
 

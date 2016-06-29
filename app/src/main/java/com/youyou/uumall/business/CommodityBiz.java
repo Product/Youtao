@@ -3,7 +3,6 @@ package com.youyou.uumall.business;
 import android.content.Context;
 
 import com.youyou.uumall.base.BaseBusiness;
-import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
@@ -48,7 +47,9 @@ public class CommodityBiz extends BaseBusiness {
      */
     @Background
     public void getBrandList() {
+        String countryCode = MyUtils.getCountryCode(mContext);
         Map map = new HashMap();
+        map.put("countryCode", countryCode);
         map.put("maxResultSize", "");
         arrayListCallbackInterface.arrayCallBack(GET_BRAND_LIST, handleResponse(baseApi.getBrandData(map)));
     }
@@ -58,16 +59,7 @@ public class CommodityBiz extends BaseBusiness {
      */
     @Background
     public void queryGoodsByBrand(String brandId) {
-        String countryCode="";
-        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
-        String dictList = MyUtils.getPara("dictList", mContext);
-        String[] split = dictList.split(";");
-        for (String s:
-                split) {
-            if (s.contains(country)){
-                countryCode =   s.split(",")[1];
-            }
-        }
+        String countryCode = MyUtils.getCountryCode(mContext);
         Map map = new HashMap();
         map.put("pageNo", "");//当前页码
         map.put("pageSize", "");//分页大小

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_64"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/view_64"
+            android:layout_weight="1"
+            android:background="@color/bg_settings_gap"
+            android:gravity="center_vertical"
+            android:text="@string/order_detail_item"
+            android:textColor="@color/font_hint_gray"
+            android:textSize="@dimen/font_24" />
+
+        <TextView
+            android:id="@+id/delivery_order_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/font_country_conuntry"
+            android:textSize="@dimen/font_24" />
+    </LinearLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@
     android:paddingTop="@dimen/drop_down_list_header_padding_top" >
 
     <LinearLayout
+        android:background="@color/bg_settings_gap"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_150">

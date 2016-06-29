@@ -84,7 +84,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
 //        lv_gv.setScaleType(ImageView.ScaleType.CENTER);
         headerView.measure(0,0);
         headerHeight = headerView.getMeasuredHeight();
-        log.e("控件高度为:"+headerHeight);
+//        log.e("控件高度为:"+headerHeight);
         headerView.setPadding(0,-headerHeight,0,0);
         addHeaderView(headerView);
     }

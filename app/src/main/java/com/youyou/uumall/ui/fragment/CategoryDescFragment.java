@@ -1,6 +1,5 @@
 package com.youyou.uumall.ui.fragment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -19,6 +18,7 @@ import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.model.GalleryBean;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.model.GoodsPrice;
+import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.view.GalleryView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -63,15 +63,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth,galleryHeight );
         cate_frag_vp.setLayoutParams(params);
         cate_frag_vp.invalidate();
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        options = MyUtils.getImageOptions();
         activity = getActivity();
         Bundle bundle = getArguments();
         String goodsId = bundle.getString(BaseConstants.preferencesFiled.GOODS_ID);

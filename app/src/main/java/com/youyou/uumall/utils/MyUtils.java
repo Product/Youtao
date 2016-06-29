@@ -7,12 +7,15 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.TextUtils;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.secure.DES;
@@ -404,5 +407,17 @@ public class MyUtils {
             countryCode = "SG";// TODO: 2016/6/22 逻辑问题
         }
         return countryCode;
+    }
+
+    public static DisplayImageOptions getImageOptions() {
+        return  new DisplayImageOptions.Builder()
+//                .showImageOnLoading(R.drawable.order_empty_3x)
+                .showImageForEmptyUri(R.color.bg_settings_gap)
+                .showImageOnFail(R.color.bg_settings_gap)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .resetViewBeforeLoading(true)
+                .bitmapConfig(Bitmap.Config.ARGB_4444)
+                .build();
     }
 }

@@ -2,7 +2,6 @@ package com.youyou.uumall.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.RecommendBean;
+import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.utils.PixelUtil;
 
 import org.androidannotations.annotations.AfterInject;
@@ -41,15 +41,7 @@ public class CommodityAdapter extends BaseAdapter {
     void afterInject() {
         mInflater = LayoutInflater.from(context);
         imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        options = MyUtils.getImageOptions();
     }
 
     //对外提供设置数据的接口

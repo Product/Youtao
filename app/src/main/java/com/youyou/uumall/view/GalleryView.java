@@ -2,7 +2,6 @@ package com.youyou.uumall.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -23,6 +22,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.model.GalleryBean;
 import com.youyou.uumall.ui.WebActivity_;
+import com.youyou.uumall.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,6 @@ public class GalleryView extends RelativeLayout implements
     private ViewPager mViewPager;
     private GalleryPagerAdapter mGalleryPagerAdapter;
     private View mGallery;
-    private DisplayImageOptions mOptions;
     private LinearLayout mGalleryDotLayout;
     private int mGalleryNumber;
     private Timer mTimer;
@@ -72,15 +71,7 @@ public class GalleryView extends RelativeLayout implements
         mGalleryDotLayout = (LinearLayout) mGallery
                 .findViewById(R.id.gallery_dot);
         addView(mGallery, 0);
-        options =  new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.order_empty_3x)
-                .showImageForEmptyUri(R.drawable.order_empty_3x)
-                .showImageOnFail(R.drawable.order_empty_3x)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.ARGB_8888)
-                .build();
+        options = MyUtils.getImageOptions();
     }
 
     public void setParams(List<GalleryBean> list) {
