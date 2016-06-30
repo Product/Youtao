@@ -15,7 +15,7 @@
             android:id="@+id/item_brand_desc_iv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_262"
-            android:background="@color/transparent"/>
+            android:background="@color/white"/>
 
         <TextView
             android:lines="2"

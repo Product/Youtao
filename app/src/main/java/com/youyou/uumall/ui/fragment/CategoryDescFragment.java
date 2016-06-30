@@ -56,11 +56,17 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     CategoryDescBiz categoryDescBiz;
     private FragmentActivity activity;
     private DisplayImageOptions options;
+    private ImageLoader imageLoader;
+    private int galleryHeight;
 
     @AfterViews
     void afterViews() {
-        int galleryHeight = (int) (mScreenWidth / 1.28);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth,galleryHeight );
+        imageLoader = ImageLoader.getInstance();
+        DisplayMetrics metric =  new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+        mScreenWidth = metric.widthPixels;
+        galleryHeight = (int) (mScreenWidth / 1.28);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth, galleryHeight);
         cate_frag_vp.setLayoutParams(params);
         cate_frag_vp.invalidate();
         options = MyUtils.getImageOptions();
@@ -90,14 +96,10 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
             cate_frag_price.setText("￥"+bean.price);
             String description = bean.description;
             String[] pics = description.split("\\|");
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            DisplayMetrics metric = new DisplayMetrics();
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
-            mScreenWidth = metric.widthPixels;
             for (String
                     pic : pics) {
                 ImageView imageView = new ImageView(activity);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth,mScreenWidth);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth, galleryHeight);
                 imageView.setLayoutParams(params);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 cate_frag_ll.addView(imageView);

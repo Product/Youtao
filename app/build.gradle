@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.youyou.uumall"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"

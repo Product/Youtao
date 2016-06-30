@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_marginLeft="@dimen/view_180"
+        android:id="@+id/delivery_info_child_tv"
+        android:singleLine="true"
+        android:textSize="@dimen/font_26"
+        android:textColor="@color/font_black"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_100" />
+    <View
+        android:layout_marginRight="@dimen/view_25"
+        android:layout_marginLeft="@dimen/view_25"
+        style="@style/HorizonLineStyle"/>
+</LinearLayout>

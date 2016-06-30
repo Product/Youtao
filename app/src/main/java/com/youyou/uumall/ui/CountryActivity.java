@@ -46,11 +46,13 @@ public class CountryActivity extends BaseActivity {
                 TextView item_country_bt = (TextView) view.findViewById(R.id.item_country_tv);
                 String country = item_country_bt.getText().toString();
                 String defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, getApplicationContext());
-                if (TextUtils.equals(defaultCountry,country)){
+                if (!TextUtils.equals(defaultCountry,country)){
+                    MyUtils.savePara(getApplicationContext(), BaseConstants.preferencesFiled.DEFAULT_COUNTRY, country);
+                    eventBus.post(new CountryCallbackEvent("refresh"));
                     finish();
                     return;
                 }
-                MyUtils.savePara(getApplicationContext(), BaseConstants.preferencesFiled.DEFAULT_COUNTRY, country);
+
                     country_cancel_iv();
             }
         });
@@ -67,7 +69,6 @@ public class CountryActivity extends BaseActivity {
 
     @Click
     void country_cancel_iv() {
-        eventBus.post(new CountryCallbackEvent("refresh"));
         finish();
     }
 

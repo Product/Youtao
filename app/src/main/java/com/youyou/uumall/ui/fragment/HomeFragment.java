@@ -217,6 +217,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 MyUtils.savePara(mContext, "dictList", stringBuffer.toString());
                 defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
                 home_country_tv.setText(defaultCountry);
+                eventBus.post(new ShopCartUpdateEvent());
                 commodityBiz.getRecommendList();//在拿到数值之后再访问
                 commodityBiz.getBrandList();
             }

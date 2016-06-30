@@ -93,7 +93,7 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
 
     public void setData(List<CategoryBean> dictList) {
         this.dictList = dictList;
-        if (dictList.size() != 0) {
+        if (dictList!=null&&dictList.size() != 0) {
             for (int i = 0; i < dictList.size(); i++) {//拿到二级的数据
                 categoryDescBiz.queryCategory(dictList.get(i).id);
             }
