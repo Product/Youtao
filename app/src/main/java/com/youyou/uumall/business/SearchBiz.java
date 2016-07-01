@@ -1,12 +1,17 @@
 package com.youyou.uumall.business;
 
+import android.content.Context;
+
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.model.BonusBean;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +20,18 @@ import java.util.Map;
  */
 @EBean
 public class SearchBiz extends BaseBusiness {
+
+    @RootContext
+    Context context;
     public static final int QUERY_GOODS_BY_KEYWORDS = 1;
     public static final int QUERY_BONUS = 2;
 
     @Background
-    public void queryGoodsById(Map map){
+    public void queryGoodsById(String  searchKey){
+        String countryCode = MyUtils.getCountryCode(context);
+        Map map = new HashMap();
+        map.put("countryCode", countryCode);
+        map.put("searchKeywords", searchKey);
         arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_KEYWORDS, handleResponse(baseApi.queryGoodsByKeywords(map)));
     }
 

@@ -63,6 +63,8 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         linearLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         relativeLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 //        MyUtils.savePara(mApp, BaseConstants.preferencesFiled.FIRST_LOGIN,"");// TODO: 2016/6/2 要在主页设置
@@ -71,6 +73,15 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
             MainActivity_.intent(this).start();
             finish();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (statusView != null) {
+            statusView.setBackgroundColor(getResources().getColor(R.color.white));
+        }
+
     }
 
     @AfterViews

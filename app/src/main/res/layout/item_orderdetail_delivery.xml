@@ -34,7 +34,6 @@
             android:id="@+id/delivery_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:text="陈冰    13795376899"
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_30" />
@@ -61,7 +60,6 @@
             android:id="@+id/delivery_address_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:text="仁川机场T2航站楼"
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_30" />
@@ -88,7 +86,6 @@
             android:id="@+id/delivery_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:text="2016-06-25    19:30-20:40"
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_30" />

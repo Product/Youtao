@@ -65,6 +65,7 @@
         android:textColorHint="@color/font_hint_gray" />
 
     <EditText
+        android:inputType="textVisiblePassword"
         android:singleLine="true"
         android:id="@+id/register_invitation_code"
         android:layout_width="match_parent"

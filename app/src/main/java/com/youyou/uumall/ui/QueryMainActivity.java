@@ -1,71 +1,74 @@
 package com.youyou.uumall.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.adapter.QueryMainAdapter;
-import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
-import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.business.SearchBiz;
 import com.youyou.uumall.model.GoodsDescBean;
-import com.youyou.uumall.utils.MyUtils;
+import com.youyou.uumall.view.ClearEditText;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/5/12.
  */
 @EActivity(R.layout.activity_query_main)
-public class QueryMainActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, View.OnClickListener, TextWatcher {
+public class QueryMainActivity extends Activity implements BaseBusiness.ArrayListCallbackInterface, TextWatcher {
+
     @ViewById
     ListView listview;
+
     @ViewById
-    EditText query_search_et;
+    ClearEditText query_search_et;
+
     @ViewById
-    Button query_search_bt;
+    TextView query_cancel_tv;
+
     @Bean
     SearchBiz searchBiz;
+
     @Bean
     QueryMainAdapter adapter;
-    private Map param;
-    private String para;
+
 
     @AfterViews
     void afterViews() {
+        query_cancel_tv.setFocusable(true);
+        query_cancel_tv.setFocusableInTouchMode(true);
+        InputMethodManager systemService = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        systemService.showSoftInput(query_cancel_tv, InputMethodManager.SHOW_FORCED);
+
         searchBiz.setArrayListCallbackInterface(this);
         listview.setAdapter(adapter);
-        para = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mApp);
-        query_search_bt.setOnClickListener(this);
         query_search_et.addTextChangedListener(this);
     }
 
+
     private void search() {
         String searchKey = query_search_et.getText().toString();
-        if (TextUtils.equals("韩国",para)){
-            para = "KR";
-        }
+        searchBiz.queryGoodsById(searchKey);
+    }
 
-        if (param == null) {
-            param = new HashMap();
-        }
-        param.put("countryCode", para);
-        param.put("searchKeywords", searchKey);
-        searchBiz.queryGoodsById(param);
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
     }
 
     @UiThread
@@ -77,9 +80,9 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        search();
+    @Click
+    void query_cancel_tv() {
+        finish();
     }
 
     @Override

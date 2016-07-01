@@ -2,42 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="@color/bg_title_gap"
+        android:paddingLeft="@dimen/view_25"
+        android:paddingRight="@dimen/view_25"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_90"
         android:orientation="horizontal">
 
 
-        <EditText
+        <com.youyou.uumall.view.ClearEditText
+            android:paddingLeft="@dimen/view_20"
+            android:paddingRight="@dimen/view_20"
             android:id="@+id/query_search_et"
-            android:layout_marginLeft="@dimen/view_25"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/view_60"
             android:layout_marginBottom="@dimen/view_14"
             android:layout_marginTop="@dimen/view_14"
             android:layout_weight="1"
-            android:background="@drawable/bg_search_shape"
+            android:background="@color/white"
             android:drawableLeft="@drawable/search_5_2x"
             android:drawablePadding="@dimen/view_15"
             android:hint="@string/home_search_hint"
-            android:paddingLeft="@dimen/view_20"
             android:singleLine="true"
+            android:layout_marginRight="@dimen/font_30"
+            android:textSize="@dimen/font_28"
             android:textColorHint="@color/font_hint_gray" />
 
 
-        <Button
-            android:id="@+id/query_search_bt"
-            android:text="搜索"
+        <TextView
+            android:textSize="@dimen/font_28"
+            android:gravity="center"
+            android:id="@+id/query_cancel_tv"
+            android:text="@string/query_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/view_25"
-            android:layout_marginRight="@dimen/view_25"
              />
 
     </LinearLayout>
+    <View
+        android:background="@color/bg_title_gap"
+        style="@style/HorizonLineStyle"
+        />
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

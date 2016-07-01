@@ -287,5 +287,6 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
         delivery_info_delivery_tv.setVisibility(View.INVISIBLE);
         delivery_info_lv.setVisibility(View.INVISIBLE);
         delivery_info_delivery_tv2.setText(mDeliveryList.get(position).deliveryName);
+        setButtonState();
     }
 }

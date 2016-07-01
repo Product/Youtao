@@ -71,6 +71,7 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     @UiThread
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
+//        log.e(arrayList.toString());
         if (type == OrderBiz.QUERY_ORDER) {
             if (!isAuto) {
                 isAuto = !isAuto;

@@ -18,13 +18,14 @@
                 android:layout_marginBottom="@dimen/view_25"
                 android:id="@+id/item_category_main_iv_0"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/view_160" />
             <TextView
+                android:gravity="top|center_horizontal"
                 android:textSize="@dimen/font_26"
                 android:textColor="@color/font_gray"
                 android:id="@+id/item_category_main_tv_0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/item_category_main_ll_1"
@@ -37,13 +38,14 @@
                 android:layout_marginBottom="@dimen/view_25"
                 android:id="@+id/item_category_main_iv_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/view_160" />
             <TextView
                 android:textSize="@dimen/font_26"
                 android:textColor="@color/font_gray"
                 android:id="@+id/item_category_main_tv_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:gravity="top|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/item_category_main_ll_2"
@@ -56,16 +58,18 @@
                 android:layout_marginBottom="@dimen/view_25"
                 android:id="@+id/item_category_main_iv_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/view_160" />
             <TextView
                 android:textSize="@dimen/font_26"
                 android:textColor="@color/font_gray"
                 android:id="@+id/item_category_main_tv_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:gravity="top|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/item_category_main_below_ll"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_250">
@@ -80,13 +84,14 @@
                 android:layout_marginBottom="@dimen/view_25"
                 android:id="@+id/item_category_main_iv_3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/view_160" />
             <TextView
                 android:textSize="@dimen/font_26"
                 android:textColor="@color/font_gray"
                 android:id="@+id/item_category_main_tv_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:gravity="top|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/item_category_main_ll_4"
@@ -99,13 +104,14 @@
                 android:layout_marginBottom="@dimen/view_25"
                 android:id="@+id/item_category_main_iv_4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/view_160" />
             <TextView
                 android:textSize="@dimen/font_26"
                 android:textColor="@color/font_gray"
                 android:id="@+id/item_category_main_tv_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:gravity="top|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/item_category_main_ll_5"
@@ -118,13 +124,14 @@
                 android:layout_marginBottom="@dimen/view_25"
                 android:id="@+id/item_category_main_iv_5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/view_160" />
             <TextView
                 android:textSize="@dimen/font_26"
                 android:textColor="@color/font_gray"
                 android:id="@+id/item_category_main_tv_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:gravity="top|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -74,6 +74,7 @@
                 android:textSize="@dimen/font_26" />
 
             <EditText
+                android:inputType="phone"
                 android:background="@color/white"
                 android:id="@+id/delivery_info_phone_et"
                 android:layout_width="match_parent"

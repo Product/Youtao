@@ -1,5 +1,6 @@
 package com.youyou.uumall.ui.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
@@ -99,11 +101,8 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
             for (String
                     pic : pics) {
                 ImageView imageView = new ImageView(activity);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth, galleryHeight);
-                imageView.setLayoutParams(params);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView,options,listener);
                 cate_frag_ll.addView(imageView);
-                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView,options);
             }
             String image = bean.image;
             String[] gallery = image.split("\\|");
@@ -116,6 +115,20 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
             cate_frag_vp.setParams(list);
         }
     }
+
+    private  SimpleImageLoadingListener listener = new SimpleImageLoadingListener(){
+        @Override
+        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+            super.onLoadingComplete(imageUri, view, loadedImage);
+            int width = loadedImage.getWidth();
+            int height = loadedImage.getHeight();
+            double scale = height/width;
+            ImageView imageView = (ImageView) view;
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth, (int) (mScreenWidth*scale));
+            imageView.setLayoutParams(params);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+    };
 
     @UiThread
     @Override

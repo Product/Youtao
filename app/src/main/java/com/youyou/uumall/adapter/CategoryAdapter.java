@@ -171,7 +171,8 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                         temp.add(categoryBean);
                     }
                 }
-                log.e(temp.toString());
+                LinearLayout item_category_main_below_ll = ViewHolder.get(convertView, R.id.item_category_main_below_ll);
+//                log.e(temp.toString());
                 List<TextView> textViews = new ArrayList<>();
                 for (int i = 0; i < textViewRes.length; i++) {
                     textViews.add((TextView) ViewHolder.get(convertView, textViewRes[i]));
@@ -187,6 +188,11 @@ public class CategoryAdapter extends BaseAdapter implements BaseBusiness.ArrayLi
                     linearLayouts.add((LinearLayout) ViewHolder.get(convertView, linearLayoutRes[i]));
                 }
                 if (temp.size() != 0) {
+                    if (temp.size() <= 3) {
+                        item_category_main_below_ll.setVisibility(View.GONE);
+                    } else {
+                        item_category_main_below_ll.setVisibility(View.VISIBLE);
+                    }
                     for (int i = 0; i < linearLayoutRes.length; i++) {
                         if (temp.size()<=i) {
                             return convertView;

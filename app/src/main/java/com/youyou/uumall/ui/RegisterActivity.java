@@ -52,6 +52,14 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         registerBiz.setObjectCallbackInterface(this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (statusView != null) {
+            statusView.setBackgroundColor(getResources().getColor(R.color.bg_settings_gap));
+        }
+    }
+
     @Click
     void register_getSmsCode() {
         String phone = register_phone.getText().toString();

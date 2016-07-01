@@ -14,6 +14,7 @@
         android:textSize="@dimen/font_50" />
 
     <EditText
+        android:inputType="phone"
         android:id="@+id/login_phone_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

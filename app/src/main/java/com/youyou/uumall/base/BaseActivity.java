@@ -34,6 +34,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -76,6 +77,7 @@ public class BaseActivity extends FragmentActivity {
     protected SystemBarTintManager tintManager;
 
     protected ImageLoader imageLoader = ImageLoader.getInstance();
+    protected View statusView;
 
     protected void setIsCloseKeyboardOnClickOtherPlace(boolean isClose) {
         isCloseKeyboardOnClickOtherPlace = isClose;
@@ -119,6 +121,32 @@ public class BaseActivity extends FragmentActivity {
         PushAgent.getInstance(this).onAppStart();//umeng推送 统计应用启动数据
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initStatusBar();
+    }
+
+    private void initStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            int statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+            statusView = new View(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    statusBarHeight);
+            statusView.setLayoutParams(params);
+            statusView.setBackgroundColor(getResources().getColor(R.color.font_country_conuntry));
+
+            ViewGroup decorView = (ViewGroup) window.getDecorView();
+            decorView.addView(statusView);
+            ViewGroup rootView = (ViewGroup) ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
+            rootView.setFitsSystemWindows(true);
+            rootView.setClipToPadding(true);
+        }
+    }
 
     /**
      * 是否设置全屏显示内容，需要判断状态栏的高度来设置

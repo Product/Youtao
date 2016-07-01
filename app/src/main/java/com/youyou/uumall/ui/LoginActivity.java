@@ -61,6 +61,14 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (statusView != null) {
+            statusView.setBackgroundColor(getResources().getColor(R.color.bg_settings_gap));
+        }
+    }
+
+    @Override
     protected void registerEvent() {
         super.registerEvent();
         eventBus.register(this);

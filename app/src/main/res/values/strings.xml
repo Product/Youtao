@@ -48,6 +48,9 @@
     <string name="home_hotcategory">热销产品</string>
     <string name="home_search_hint">搜索产品或品牌</string>
 
+    <!--query-->
+    <string name="query_cancel">取消</string>
+
     <!--category decs-->
     <string name="category_decs">商品详情</string>
     <string name="category_decs_insertcar">加入购物车</string>
