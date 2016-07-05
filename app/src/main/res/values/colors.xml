@@ -7,6 +7,7 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="tran85_white">#D8ffffff</color>
+    <color name="tran_black">#33333333</color>
 
     <color name="font_black">#333333</color>
     <color name="font_gray">#666666</color>

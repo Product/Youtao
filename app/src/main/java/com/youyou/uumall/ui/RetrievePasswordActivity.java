@@ -1,14 +1,15 @@
 package com.youyou.uumall.ui;
 
-import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -30,21 +31,16 @@ public class RetrievePasswordActivity extends BaseActivity implements BaseBusine
     EditText retrieve_pwd;
     @ViewById
     EditText retrieve_repwd;
+
+    @ViewById
+    TextView retrieve_code_tv;
     @Bean
     RegisterBiz registerBiz;
-    private boolean isTimeout = true;
-    static Handler handler = new Handler();
     @AfterViews
     void afterViews(){
         registerBiz.setObjectCallbackInterface(this);
 
     }
-    Runnable runable = new Runnable() {
-        @Override
-        public void run() {
-            isTimeout = true;
-        }
-    };
     @Click
     void retrieve_code_tv(){
         String phone = retrieve_phone.getText().toString();
@@ -52,13 +48,8 @@ public class RetrievePasswordActivity extends BaseActivity implements BaseBusine
             showToastShort("请正确输入手机号");
             return;
         }
-        if (isTimeout) {
             registerBiz.getSmsCode(phone,"2");
-            isTimeout = false;
-            handler.postDelayed(runable, 30000);
-        } else {
-            showToastShort("30秒后重试");
-        }
+        MyUtils.setSmsCodeAnimator(retrieve_code_tv,this);
     }
 
     @Click

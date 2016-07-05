@@ -59,10 +59,6 @@ public class GalleryView extends RelativeLayout implements
     }
 
     private void init() {
-//        mOptions = new DisplayImageOptions.Builder().cacheInMemory(true)
-//                .cacheOnDisc(true).showStubImage(R.drawable.gallery_loading)// 下载时显示的图片
-//                .showImageOnFail(R.drawable.gallery_loading)// 下载出错或解码出错时显示的图片
-//                .showImageForEmptyUri(R.drawable.gallery_loading).build();// uri为空是显示的图片
         mGallery = LayoutInflater.from(mContext).inflate(R.layout.layout_gallery,
                 null, true);
         // 幻灯片图片

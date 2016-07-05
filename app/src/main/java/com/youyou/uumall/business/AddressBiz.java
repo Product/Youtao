@@ -3,7 +3,6 @@ package com.youyou.uumall.business;
 import android.content.Context;
 
 import com.youyou.uumall.base.BaseBusiness;
-import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.Background;
@@ -37,31 +36,24 @@ public class AddressBiz extends BaseBusiness {
         arrayListCallbackInterface.arrayCallBack(QUERY_COUNTRY, handleResponse(baseApi.queryDict(map)));
     }
 
-    /**
-     * 查询推荐商品
-     */
-    @Background
-    public void getRecommendList(Map map) {
-        arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.getRecommendData(map)));
-    }
+//    /**
+//     * 查询推荐商品
+//     */
+//    @Background
+//    public void getRecommendList(Map map) {
+//        arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.getRecommendData(map)));
+//    }
 
     /**
-     * 查询推荐商品
+     * 自提点查询
      */
     @Background
     public void queryDelivery() {
-        String countryCode = "";
-        String country = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
-        String dictList = MyUtils.getPara("dictList", mContext);
-        String[] split = dictList.split(";");
-        for (String s :
-                split) {
-            if (s.contains(country)) {
-                countryCode = s.split(",")[1];
-            }
-        }
+        String countryCode = MyUtils.getCountryCode(mContext);
         Map map = new HashMap();
         map.put("countryCode", countryCode);
+//        Response<Object> objectResponse = baseApi.queryDelivery(map);
+//        log.e(objectResponse.toString());
         arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.queryDelivery(map)));
     }
 

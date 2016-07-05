@@ -7,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -68,6 +67,12 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
     RadioGroup category_rg;
 
     @ViewById
+    View category_view1;
+
+    @ViewById
+    View category_view2;
+
+    @ViewById
     RelativeLayout category_rl;
     private List<BrandBean> brandList;
 
@@ -79,7 +84,6 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
         home_search_tv.setOnTouchListener(this);
         category_rg.setOnCheckedChangeListener(this);
         category_gv.setOnItemClickListener(this);
-        initView();
     }
 
 
@@ -128,34 +132,22 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
         return false;
     }
 
-    private void initView() {
-        ImageView line = new ImageView(mApp);
-        line.setBackgroundColor(getResources().getColor(R.color.font_country_conuntry));
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT / 2, 5);
-        line.setLayoutParams(params);
-        category_rl.addView(line, params);
-    }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        switch (buttonView.getId()) {
-            case R.id.category_rb1:
-
-                break;
-            case R.id.category_rb2:
-
-                break;
-        }
-    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.category_rb1:
+                category_view1.setVisibility(View.VISIBLE);
+                category_view2.setVisibility(View.INVISIBLE);
+
                 category_lv.setVisibility(View.VISIBLE);
                 category_gv.setVisibility(View.GONE);
                 break;
             case R.id.category_rb2:
+                category_view2.setVisibility(View.VISIBLE);
+                category_view1.setVisibility(View.INVISIBLE);
+
                 category_lv.setVisibility(View.GONE);
                 category_gv.setVisibility(View.VISIBLE);
                 break;
@@ -169,5 +161,10 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
         intent.putExtra("name", brandBean.name);
         intent.putExtra("id", brandBean.id);
         startActivity(intent);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
     }
 }

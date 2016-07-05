@@ -1,7 +1,12 @@
 package com.youyou.uumall.ui;
 
 import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -43,6 +48,9 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     EditText login_phone_et;
     @ViewById
     EditText login_pwd_et;
+    @ViewById
+    LinearLayout login_pb;
+
     @Bean
     LoginBiz loginBiz;
     @Bean
@@ -51,6 +59,8 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     UserUtils userUtils;
     private IWXAPI api;
     Map<String, String> paramMap;
+    private String userPhone;
+    private String userPwd;
 
     @AfterViews
     void afterViews() {
@@ -64,7 +74,9 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     protected void onStart() {
         super.onStart();
         if (statusView != null) {
-            statusView.setBackgroundColor(getResources().getColor(R.color.bg_settings_gap));
+            ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
+            decorView.removeView(statusView);
+//            statusView.setBackgroundColor(getResources().getColor(R.color.white));
         }
     }
 
@@ -83,6 +95,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     @Subscribe(sticky = false, threadMode = ThreadMode.BACKGROUND)
     public void onEventBackgroundThread(WxLoginEvent event) {//eventBus接收数据,并后台调用
         String openId = event.getEvent();
+        MyUtils.savePara(this,BaseConstants.preferencesFiled.OPEN_ID,openId);
         registerBiz.wechatLogin(openId, "", MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this), "3");
     }
 
@@ -91,23 +104,51 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
     @Click
     public void login_weixin_ll() {
 
-        if (System.currentTimeMillis() - firstTime > 3000) {
+//        if (System.currentTimeMillis() - firstTime > 10000) {
             if (!api.isWXAppInstalled()) {
                 showToastShort("请安装微信");
                 return;
             }
+            login_pb.setVisibility(View.VISIBLE);
             SendAuth.Req req = new SendAuth.Req();//请求CODE
             req.scope = "snsapi_userinfo";
             req.state = "wechat_login";
             api.sendReq(req);
-            firstTime = System.currentTimeMillis();
+//            firstTime = System.currentTimeMillis();
+//        }
+//        progressBar.show();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int keyCode = event.getKeyCode();
+        int action = event.getAction();
+        if (keyCode == KeyEvent.KEYCODE_BACK && action == KeyEvent.ACTION_DOWN) {//首先做双层判断，如果点击是的回退键&&并且动作是按压的时候，触发操作
+            if (login_pb.isShown()) {
+            return false;
+            }
         }
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        login_pb.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (login_pb.isShown()) {
+            return true;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     @Click
     void login_login_bt() {
-        String userPhone = login_phone_et.getText().toString();
-        String userPwd = login_pwd_et.getText().toString();
+        userPhone = login_phone_et.getText().toString();
+        userPwd = login_pwd_et.getText().toString();
         if (TextUtils.isEmpty(userPhone)) {
             showToastShort("手机号不能为空");
             return;
@@ -147,6 +188,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
             Response response = (Response) t;
             if (response != null) {
                 if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
+                    MyUtils.savePara(getApplicationContext(),BaseConstants.preferencesFiled.USER_INFO,userPhone+","+userPwd);
                     ArrayList list = (ArrayList) response.data;
                     UserInfoBean bean = (UserInfoBean) list.get(0);
                     userUtils.saveUserId(bean.mobile);

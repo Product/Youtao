@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">油桃</string>
+    <string name="app_name">游淘</string>
     <string name="app_exit">程序异常退出</string>
     <string name="press_again_to_exit_program">再按一次退出程序</string>
     <string name="hint">提示</string>
@@ -42,6 +42,7 @@
     <string name="register_get_code">获取验证码</string>
     <string name="register_password">密码</string>
     <string name="register_smscode">验证码</string>
+    <string name="register_get_smscode">获取验证码</string>
     <string name="register_invitation_code">邀请码（选填）</string>
 
     <!--home fragment-->
@@ -55,6 +56,7 @@
     <string name="category_decs">商品详情</string>
     <string name="category_decs_insertcar">加入购物车</string>
     <string name="category_decs_buynow">立即购买</string>
+    <string name="category_decs_share">取      消</string>
 
     <!--shopcart-->
     <string name="shopcart_title">购物车</string>

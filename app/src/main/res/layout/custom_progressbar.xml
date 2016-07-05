@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:src="@drawable/close_login_2x"
             android:id="@+id/custom_imageview_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

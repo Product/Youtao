@@ -1,6 +1,7 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.ShopCartBean;
+import com.youyou.uumall.ui.CommodityDescActivity_;
 import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterInject;
@@ -28,7 +30,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/9.
  */
 @EBean
-public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener ,CompoundButton.OnCheckedChangeListener{
+public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     public static final String DEL_ONE = "delOne";
     public static final String DEL_ALL = "delAll";
     @RootContext
@@ -92,16 +94,18 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
         item_shopcart_down_iv.setTag(item.goodsId);
         item_shopcart_check_cb.setChecked(item.isCheck);
         item_shopcart_name_tv.setText(item.goodsName);
-        item_shopcart_price_tv.setText("￥"+item.subtotal);
-        item_shopcart_mid_tv.setText(item.count+"");
-        item_shopcart_pic_iv.setScaleType(ImageView.ScaleType.FIT_XY);
+        item_shopcart_price_tv.setText("￥" + item.subtotal);
+        item_shopcart_mid_tv.setText(item.count + "");
+//        item_shopcart_pic_iv.setScaleType(ImageView.ScaleType.FIT_XY);
         String[] split = item.image.split("\\|");
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + split[0], item_shopcart_pic_iv,options);
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + split[0], item_shopcart_pic_iv, options);
 
         item_shopcart_up_iv.setOnClickListener(this);
         item_shopcart_down_iv.setOnClickListener(this);
         item_shopcart_delete_tv.setOnClickListener(this);
         item_shopcart_check_cb.setOnCheckedChangeListener(this);
+        item_shopcart_pic_iv.setOnClickListener(this);
+        item_shopcart_pic_iv.setTag(item.goodsId);
         return convertView;
     }
 
@@ -123,15 +127,22 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
                     deleteclicklistener.deleteGoods((String) v.getTag(), DEL_ALL);
                 }
                 break;
+            case R.id.item_shopcart_pic_iv:
+                String tag = (String) v.getTag();
+                Intent intent = new Intent(mContext, CommodityDescActivity_.class);
+                intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, tag);
+                mContext.startActivity(intent);
+                break;
             default:
 
                 break;
         }
     }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (checkedListener != null) {
-            checkedListener.onCheckedChanged(buttonView,isChecked);
+            checkedListener.onCheckedChanged(buttonView, isChecked);
         }
     }
 
@@ -144,11 +155,11 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
     }
 
     public void setOnItemCheckedListener(OnItemCheckedListener listener) {
-        this.checkedListener=listener;
+        this.checkedListener = listener;
     }
 
-    public interface OnItemCheckedListener{
-        void onCheckedChanged(View view ,boolean isChecked);
+    public interface OnItemCheckedListener {
+        void onCheckedChanged(View view, boolean isChecked);
     }
 
 
@@ -157,6 +168,6 @@ public class ShopcartAdapter extends BaseAdapter implements View.OnClickListener
     }
 
     public interface OnDeleteClickListener {
-        void deleteGoods(String tag,String view);
+        void deleteGoods(String tag, String view);
     }
 }

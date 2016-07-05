@@ -1,12 +1,13 @@
 package com.youyou.uumall.ui;
 
+import android.widget.ListView;
+
 import com.youyou.uumall.R;
 import com.youyou.uumall.adapter.BonusAdapter;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.business.SearchBiz;
 import com.youyou.uumall.model.BonusBean;
-import com.youyou.uumall.view.RefreshListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -24,7 +25,7 @@ import java.util.List;
 public class BonusActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface {
 
     @ViewById
-    RefreshListView bonus_lv;
+    ListView bonus_lv;
 
     @Bean
     BonusAdapter adapter;

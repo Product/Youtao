@@ -80,6 +80,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
     private String mFltNo;
     private String mDelivery;
     private String mDeliveryId;
+    private String mDescription;
        private double totalPrice;
 
     @Override
@@ -130,13 +131,15 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
                 mFltNo = data.getStringExtra("fltNO");
                 mDelivery = data.getStringExtra("delivery");
                 mDeliveryId = data.getStringExtra("deliveryId");
+                mDescription = data.getStringExtra("description");//服务时间：06:30-22:30   电话：072-461-3123  领取地址：4楼 ABC出发行李运送服务柜台
+                mDescription = mDescription.replace("\r\n","  ");
                 confirm_order_addinfo_ll.setVisibility(View.GONE);
                 confirm_order_info_ll.setVisibility(View.VISIBLE);
                 showToastLong(mName + mPhone + mDate + mFltNo + mDelivery);
                 confirm_order_name_tv.setText(mName +"    "+ mPhone);
 //                confirm_order_time_tv.setText(mDate +"    "+ mFltNo);
                 confirm_order_time_tv.setText(mDate);
-                confirm_order_address_tv.setText(mDelivery);
+                confirm_order_address_tv.setText(mDelivery+" "+mDescription);
                 int sumCount = 0;
                 for (int i = 0;i<mData.size();i++) {
                     ShopCartBean bean = mData.get(i);

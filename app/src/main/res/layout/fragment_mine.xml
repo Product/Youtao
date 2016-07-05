@@ -100,9 +100,9 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/payment_img"
-                        android:layout_width="@dimen/font_44"
-                        android:layout_height="@dimen/font_44"
-                        android:src="@drawable/ic_mine_payment"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_mine_payment"/>
 
                     <LinearLayout
                         android:visibility="gone"
@@ -150,9 +150,9 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/shipped_img"
-                        android:layout_width="@dimen/font_44"
-                        android:layout_height="@dimen/font_44"
-                        android:src="@drawable/ic_mine_shipped"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_mine_shipped"/>
 
                     <TextView
                         android:layout_centerHorizontal="true"
@@ -199,9 +199,9 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/pickup_img"
-                        android:layout_width="@dimen/font_44"
-                        android:layout_height="@dimen/font_44"
-                        android:src="@drawable/ic_mine_pickup"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_mine_pickup"/>
 
                     <TextView
                         android:layout_centerHorizontal="true"
@@ -248,9 +248,9 @@
                     <ImageView
                         android:layout_centerHorizontal="true"
                         android:id="@+id/all_order_img"
-                        android:layout_width="@dimen/font_44"
-                        android:layout_height="@dimen/font_44"
-                        android:src="@drawable/ic_mine_all_order"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_mine_all_order"/>
 
                     <TextView
                         android:layout_centerHorizontal="true"
@@ -302,7 +302,7 @@
                     android:id="@+id/wechat_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_wechat_client"
+                    android:src="@mipmap/ic_wechat_client"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -340,7 +340,7 @@
                     android:id="@+id/mainland_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_mainland_client"
+                    android:src="@mipmap/ic_mainland_client"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -378,7 +378,7 @@
                     android:id="@+id/korea_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_mainland_client"
+                    android:src="@mipmap/ic_mainland_client"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -419,7 +419,7 @@
                     android:id="@+id/recommend_reward_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_recommand_reward"
+                    android:src="@mipmap/ic_recommand_reward"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -455,7 +455,7 @@
                     android:id="@+id/my_reward_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_my_reward"
+                    android:src="@mipmap/ic_my_reward"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -491,7 +491,7 @@
                     android:id="@+id/common_problem_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/question_2x"
+                    android:src="@mipmap/ic_comment_problem"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 
@@ -527,7 +527,7 @@
                     android:id="@+id/settins_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_settings"
+                    android:src="@mipmap/ic_settings"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/view_25"/>
 

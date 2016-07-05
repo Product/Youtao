@@ -190,8 +190,9 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
         Intent intent = new Intent();
         for (int i = 0; i < mDeliveryList.size(); i++) {
             DictBean dictBean = mDeliveryList.get(i);
-            if (TextUtils.equals(dictBean.deliveryName,delivery)){
-                intent.putExtra("deliveryId",dictBean.deliveryId);
+            if (TextUtils.equals(dictBean.name,delivery)){
+                intent.putExtra("deliveryId",dictBean.id);
+                intent.putExtra("description",dictBean.description);
             }
         }
         intent.putExtra("name",name);
@@ -217,7 +218,7 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
                 }else {
                     delivery_info_delivery_tv.setVisibility(View.INVISIBLE);
                 }
-                delivery_info_delivery_iv.setBackgroundResource(R.drawable.bar_arrow_normal_2x);
+                delivery_info_delivery_iv.setBackgroundResource(R.mipmap.bar_arrow_down);
                 delivery_info_lv.setVisibility(View.INVISIBLE);
             }else{//不可见状态
                 delivery_info_lv.setVisibility(View.VISIBLE);
@@ -283,10 +284,10 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        delivery_info_delivery_iv.setBackgroundResource(R.drawable.bar_arrow_normal_2x);
+        delivery_info_delivery_iv.setBackgroundResource(R.mipmap.bar_arrow_down);
         delivery_info_delivery_tv.setVisibility(View.INVISIBLE);
         delivery_info_lv.setVisibility(View.INVISIBLE);
-        delivery_info_delivery_tv2.setText(mDeliveryList.get(position).deliveryName);
+        delivery_info_delivery_tv2.setText(mDeliveryList.get(position).name);
         setButtonState();
     }
 }

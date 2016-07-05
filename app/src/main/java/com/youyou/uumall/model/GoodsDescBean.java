@@ -108,6 +108,7 @@ public class GoodsDescBean {
      *                     goodsId=cf739208eb4d43db92a2534b3926a0e1,
      *                     name=乐天价,
      *                     discountPriceCny=888.0}]},
+     *
      *        {id=f21fd412266c4e55b14ec59d28f4d8fa,
      *        categoryName=V领,
      *        titile=韩束 (KanS)红石榴鲜活水盈四件套,

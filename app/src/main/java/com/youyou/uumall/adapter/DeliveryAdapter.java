@@ -53,7 +53,7 @@ public class DeliveryAdapter extends BaseAdapter {
             convertView = View.inflate(context, R.layout.item_delivery_child,null);
         }
         TextView delivery_info_child_tv = ViewHolder.get(convertView, R.id.delivery_info_child_tv);
-        delivery_info_child_tv.setText(dicts.get(position).deliveryName);
+        delivery_info_child_tv.setText(dicts.get(position).name);
         return convertView;
     }
 }

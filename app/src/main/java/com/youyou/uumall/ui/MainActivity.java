@@ -212,21 +212,23 @@ public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCal
     public void objectCallBack(int type, Object t) {
         if (ShopcartBiz.GET_CART_LIST == type) {
             Response response = (Response) t;
-            if (response.code == 0) {
-                List<ShopCartBean> list = (List<ShopCartBean>) response.data;
-                int count = 0;
-                for (ShopCartBean bean : list) {
-                    count += bean.count;
-                }
-                if (count != 0) {
-                    shopping_cart_point_ll.setVisibility(View.VISIBLE);
-                    shopping_cart_point_tv.setText("" + count);
-                } else {
+            if (response != null) {
+                if (response.code == 0) {
+                    List<ShopCartBean> list = (List<ShopCartBean>) response.data;
+                    int count = 0;
+                    for (ShopCartBean bean : list) {
+                        count += bean.count;
+                    }
+                    if (count != 0) {
+                        shopping_cart_point_ll.setVisibility(View.VISIBLE);
+                        shopping_cart_point_tv.setText("" + count);
+                    } else {
+                        shopping_cart_point_ll.setVisibility(View.GONE);
+                    }
+
+                }else{
                     shopping_cart_point_ll.setVisibility(View.GONE);
                 }
-
-            }else{
-                shopping_cart_point_ll.setVisibility(View.GONE);
             }
         }
     }

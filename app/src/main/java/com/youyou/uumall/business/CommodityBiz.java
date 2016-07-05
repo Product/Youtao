@@ -27,7 +27,10 @@ public class CommodityBiz extends BaseBusiness {
      */
     @Background
     public void getSliderList() {
-        arrayListCallbackInterface.arrayCallBack(GET_SLIDER_LIST, handleResponse(baseApi.getSliderData()));
+        String countryCode = MyUtils.getCountryCode(mContext);
+        Map map = new HashMap();
+        map.put(COUNTRY_CODE, countryCode);
+        arrayListCallbackInterface.arrayCallBack(GET_SLIDER_LIST, handleResponse(baseApi.getSliderData(map)));
     }
 
     /**
@@ -39,6 +42,8 @@ public class CommodityBiz extends BaseBusiness {
         String countryCode = MyUtils.getCountryCode(mContext);
         Map map = new HashMap();
         map.put(COUNTRY_CODE, countryCode);
+//        Response<Object> recommendData = baseApi.getRecommendData(map);
+//        log.e(recommendData.toString());
         arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.getRecommendData(map)));
     }
 

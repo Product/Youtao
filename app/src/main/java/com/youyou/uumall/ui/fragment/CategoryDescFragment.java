@@ -101,7 +101,8 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
             for (String
                     pic : pics) {
                 ImageView imageView = new ImageView(activity);
-                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pic, imageView,options,listener);
+                String uRl = MyUtils.formatURl(pic);
+                imageLoader.displayImage(BaseConstants.connection.ROOT_URL + uRl, imageView,options,listener);
                 cate_frag_ll.addView(imageView);
             }
             String image = bean.image;
@@ -122,7 +123,7 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
             super.onLoadingComplete(imageUri, view, loadedImage);
             int width = loadedImage.getWidth();
             int height = loadedImage.getHeight();
-            double scale = height/width;
+            double scale = (double)height/width;
             ImageView imageView = (ImageView) view;
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mScreenWidth, (int) (mScreenWidth*scale));
             imageView.setLayoutParams(params);

@@ -32,6 +32,8 @@ public class SearchBiz extends BaseBusiness {
         Map map = new HashMap();
         map.put("countryCode", countryCode);
         map.put("searchKeywords", searchKey);
+//        Response<Object> objectResponse = baseApi.queryGoodsByKeywords(map);
+//        log.e(objectResponse.toString());
         arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_KEYWORDS, handleResponse(baseApi.queryGoodsByKeywords(map)));
     }
 

@@ -1,91 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <RelativeLayout style="@style/RelativeLayout_Title_Normal">
-
-        <ImageView
-            android:id="@+id/payment_pro_iv"
-            style="@style/ImageView_Title_Pro" />
-
-        <TextView
-            style="@style/TextView_Title_Title"
-            android:text="@string/payment_title" />
-    </RelativeLayout>
-
-    <View  android:background="@color/bg_line_dark_gray"
-        style="@style/HorizonLineStyle" />
-
-    <LinearLayout
-        android:background="@color/white"
+    <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/view_125"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/view_25"
-        android:paddingRight="@dimen/view_25">
+        android:layout_height="match_parent">
+        <RelativeLayout style="@style/RelativeLayout_Title_Normal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/view_25"
-            android:text="@string/payment_online"
-            android:textSize="@dimen/font_28" />
+            <ImageView
+                android:id="@+id/payment_pro_iv"
+                style="@style/ImageView_Title_Pro" />
 
-        <TextView
-            android:id="@+id/payment_price_tv"
+            <TextView
+                style="@style/TextView_Title_Title"
+                android:text="@string/payment_title" />
+        </RelativeLayout>
+
+        <View  android:background="@color/bg_line_dark_gray"
+            style="@style/HorizonLineStyle" />
+
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_125"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/view_25"
+                android:text="@string/payment_online"
+                android:textSize="@dimen/font_28" />
+
+            <TextView
+                android:id="@+id/payment_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥516"
+                android:textColor="@color/font_country_conuntry"
+                android:textSize="@dimen/font_30" />
+        </LinearLayout>
+
+        <View style="@style/HorizonLineView20Style" />
+
+        <RelativeLayout android:id="@+id/payment_weixin_rl"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_140"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
+
+            <ImageView
+                android:id="@+id/payment_weixin_iv"
+                android:layout_width="@dimen/view_80"
+                android:layout_height="@dimen/view_80"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/view_20"
+                android:background="@drawable/wechat_login_2x" />
+
+            <TextView
+                android:id="@+id/payment_weixin_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/payment_weixin_iv"
+                android:layout_marginTop="@dimen/view_3"
+                android:layout_toRightOf="@id/payment_weixin_iv"
+                android:text="@string/payment_wxpay_01"
+                android:textColor="@color/font_gray"
+                android:textSize="@dimen/font_28" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/payment_weixin_tv1"
+                android:layout_marginTop="@dimen/view_15"
+                android:layout_toRightOf="@id/payment_weixin_iv"
+                android:text="@string/payment_wxpay_02"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_24" />
+
+            <ImageView
+                android:layout_width="@dimen/view_25"
+                android:layout_height="@dimen/view_44"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/next_2x" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/tran_black"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/payment_pb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="￥516"
-            android:textColor="@color/font_country_conuntry"
-            android:textSize="@dimen/font_30" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View style="@style/HorizonLineView20Style" />
-
-    <RelativeLayout android:id="@+id/payment_weixin_rl"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_140"
-        android:paddingLeft="@dimen/view_25"
-        android:paddingRight="@dimen/view_25">
-
-        <ImageView
-            android:id="@+id/payment_weixin_iv"
-            android:layout_width="@dimen/view_80"
-            android:layout_height="@dimen/view_80"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/view_20"
-            android:background="@drawable/wechat_login_2x" />
-
-        <TextView
-            android:id="@+id/payment_weixin_tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/payment_weixin_iv"
-            android:layout_marginTop="@dimen/view_3"
-            android:layout_toRightOf="@id/payment_weixin_iv"
-            android:text="@string/payment_wxpay_01"
-            android:textColor="@color/font_gray"
-            android:textSize="@dimen/font_28" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/payment_weixin_tv1"
-            android:layout_marginTop="@dimen/view_15"
-            android:layout_toRightOf="@id/payment_weixin_iv"
-            android:text="@string/payment_wxpay_02"
-            android:textColor="@color/font_hint_gray"
-            android:textSize="@dimen/font_24" />
-
-        <ImageView
-            android:layout_width="@dimen/view_25"
-            android:layout_height="@dimen/view_44"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/next_2x" />
-    </RelativeLayout>
-</LinearLayout>
+</FrameLayout>

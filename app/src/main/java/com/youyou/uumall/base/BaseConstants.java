@@ -14,13 +14,15 @@ public class BaseConstants {
         //        接口地址
 
 //        public static final String ROOT_URL = "http://58.96.188.197";
-      public static final String ROOT_URL = "http://120.26.75.225:8090";  //生产环境
-//		public static final String ROOT_URL = "http://pptest.youyoumob.com"; //测试环境
+//      public static final String ROOT_URL = "http://120.26.75.225:8090";  //测试环境
+		public static final String ROOT_URL = "http://youtao.youyoumob.com"; //生产环境
 
-        public static final String API_VERSION = "/uumall/itf";
+//        public static final String API_VERSION = "/uumall/itf";
+        public static final String API_VERSION = "/itf";
 
         public static final String API_ROOT_URL = ROOT_URL + API_VERSION;
 
+        public static final String SHEAR_URL = "http://youtao.youyoumob.com/#/productdetails/";
 
     }
 
@@ -43,6 +45,8 @@ public class BaseConstants {
                 + "sticker" + File.separator; //存放贴纸图片
         public static final String LOG_DIR = APP_DIR + File.separator
                 + "log"; //日志存放
+        public static final String WEB_DIR = APP_DIR + File.separator
+                + "web"; //存放网页缓存
     }
 
     public static final class preferencesFiled {
@@ -66,6 +70,8 @@ public class BaseConstants {
         public static final String GOODS_ID = "goodsId";//商品id
         public static final String DEVICE_TOKEN = "device_token";//设备号
         public static final String OPEN_ID = "openid";//微信登录
+        public static final String LAST_LOAD = "last_load";//上次登录时间
+        public static final String USER_INFO = "user_info";//上次登录时间
     }
 
     public static final class ImportantField{

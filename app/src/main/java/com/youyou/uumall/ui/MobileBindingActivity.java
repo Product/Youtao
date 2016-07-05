@@ -1,6 +1,5 @@
 package com.youyou.uumall.ui;
 
-import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,13 +8,14 @@ import android.widget.TextView;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.business.RegisterBiz;
 import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.MobileBindingEvent;
-import com.youyou.uumall.bean.Response;
-import com.youyou.uumall.business.RegisterBiz;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -45,10 +45,6 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
     EditText mobile_binding_phone_et, mobile_binding_sms_et, mobile_binding_pwd_et;
 
 
-    private boolean isTimeout = true;
-
-   static Handler handler = new Handler();
-
     private String openId;
 
     @Override
@@ -63,7 +59,7 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
         eventBus.unregister(this);
     }
 
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEventMainThread(MobileBindingEvent event) {
         openId = event.getEvent();
         showToastShort("消息收到");
@@ -81,21 +77,11 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
             showToastLong("请正确输入手机号");
             return;
         }
-        if (isTimeout) {
-            registerBiz.getSmsCode(phone, "3");
-            isTimeout = false;
-            handler.postDelayed(runable, 30000);
-        } else {
-            showToastShort("30秒后重试");
-        }
+        registerBiz.getSmsCode(phone, "3");
+        MyUtils.setSmsCodeAnimator(mobile_binding_getsms_tv, this);
+
     }
 
-    Runnable runable = new Runnable() {
-        @Override
-        public void run() {
-            isTimeout = true;
-        }
-    };
 
     @Click
     void mobile_binding_next_tv() {//跳过本步骤
@@ -108,11 +94,11 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
         String phone = mobile_binding_phone_et.getText().toString();
         String sms = mobile_binding_sms_et.getText().toString();
 //        String pwd = mobile_binding_pwd_et.getText().toString();
-        if (TextUtils.isEmpty(phone)||TextUtils.isEmpty(sms)){
+        if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(sms)) {
             showToastShort("信息填写不完整");
             return;
         }
-        registerBiz.mobileBinding(openId,phone,sms);
+        registerBiz.mobileBinding(openId, phone, sms);
 
     }
 
@@ -139,8 +125,7 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
             } else {
                 showToastShort(response.msg);
             }
-        }else
-        if (type == RegisterBiz.MOBILE_BINDING) {
+        } else if (type == RegisterBiz.MOBILE_BINDING) {
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("绑定完成");

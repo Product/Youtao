@@ -48,6 +48,8 @@
                 android:textSize="@dimen/font_26" />
 
             <EditText
+                android:maxLines="1"
+                android:inputType="textAutoComplete"
                 android:background="@color/white"
                 android:id="@+id/delivery_info_name_et"
                 android:layout_width="match_parent"
@@ -74,6 +76,7 @@
                 android:textSize="@dimen/font_26" />
 
             <EditText
+                android:maxLines="1"
                 android:inputType="phone"
                 android:background="@color/white"
                 android:id="@+id/delivery_info_phone_et"
@@ -129,6 +132,8 @@
                 android:textSize="@dimen/font_26" />
 
             <EditText
+                android:maxLines="1"
+                android:inputType="textAutoComplete"
                 android:background="@color/white"
                 android:id="@+id/delivery_info_flt_no_et"
                 android:layout_width="match_parent"
@@ -181,7 +186,7 @@
                     android:layout_height="wrap_content" />
                 <ImageView
                 android:id="@+id/delivery_info_delivery_iv"
-                android:background="@drawable/bar_arrow_normal_2x"
+                android:background="@mipmap/bar_arrow_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             </LinearLayout>

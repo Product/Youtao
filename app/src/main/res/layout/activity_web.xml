@@ -8,7 +8,7 @@
             android:id="@+id/web_pro_iv"
             style="@style/ImageView_Title_Pro"/>
         <TextView
-            android:text="商品详情"
+            android:id="@+id/web_tittle_tv"
             style="@style/TextView_Title_Title"/>
     </RelativeLayout>
     <View

@@ -92,7 +92,8 @@ public class SPApplication extends MultiDexApplication {
                         Environment.MEDIA_MOUNTED)) {
                     String[] dirs = {BaseConstants.path.FILE_DIR,
                             BaseConstants.path.IMAGE_DIR, BaseConstants.path.LOG_DIR,
-                            BaseConstants.path.PHOTO_DIR, BaseConstants.path.STICKER_DIR};
+                            BaseConstants.path.PHOTO_DIR, BaseConstants.path.STICKER_DIR,
+                            BaseConstants.path.WEB_DIR};
                     File dir;
                     for (String path : dirs) {
                         dir = new File(path);

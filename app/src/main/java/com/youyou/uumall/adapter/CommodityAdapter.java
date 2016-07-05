@@ -88,7 +88,8 @@ public class CommodityAdapter extends BaseAdapter {
         left_commodity_name.setText(leftitem.name);
         left_commodity_price.setText("¥" + leftitem.price);
         left_commodity_origin_price.setText(leftitem.customizedPriceName + ":¥" + leftitem.customizedPrice);
-        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + leftitem.location, left_commodity_img,options);
+        String[] leftImage = leftitem.location.split("\\|");
+        imageLoader.displayImage(BaseConstants.connection.ROOT_URL + MyUtils.formatURl(leftImage[0]), left_commodity_img,options);
         leftLayout.setOnClickListener(new AdapterClickListener());
         /**
          *  position 0    1   2
@@ -106,7 +107,8 @@ public class CommodityAdapter extends BaseAdapter {
             right_commodity_name.setText(rightitem.name);
             right_commodity_price.setText("¥" + rightitem.price);
             right_commodity_origin_price.setText(rightitem.customizedPriceName + ":¥" + rightitem.customizedPrice);
-            imageLoader.displayImage(BaseConstants.connection.ROOT_URL + rightitem.location, right_commodity_img,options);
+            String[] rightImage = rightitem.location.split("\\|");
+            imageLoader.displayImage(BaseConstants.connection.ROOT_URL +  MyUtils.formatURl(rightImage[0]), right_commodity_img,options);
             rightLayout.setVisibility(View.VISIBLE);
         } else {
             rightLayout.setVisibility(View.INVISIBLE);

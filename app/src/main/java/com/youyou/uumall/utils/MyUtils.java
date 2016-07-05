@@ -1,5 +1,7 @@
 package com.youyou.uumall.utils;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +15,10 @@ import android.net.NetworkInfo;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.TextUtils;
+import android.view.animation.LinearInterpolator;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.youyou.uumall.R;
@@ -21,6 +27,8 @@ import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.secure.DES;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -420,4 +428,118 @@ public class MyUtils {
                 .bitmapConfig(Bitmap.Config.ARGB_4444)
                 .build();
     }
+
+    public static String formatURl(String url) {
+        String decode = "";
+        try {
+            decode = URLDecoder.decode(url, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            MyLogger.getLogger("MyUtils").e(e.toString());
+        }
+        return decode;
+    }
+
+    public static void setSmsCodeAnimator(final TextView textView, final Context context) {
+        textView.setEnabled(false);
+        ValueAnimator animator = ValueAnimator.ofInt(30, 1);
+        animator.setDuration(30000);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer animatedValue = (Integer) animation.getAnimatedValue();
+                textView.setText(animatedValue+"秒后重试");
+                textView.setTextColor(context.getResources().getColor(R.color.font_gray));
+
+            }
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                textView.setEnabled(true);
+                textView.setText(context.getResources().getString(R.string.register_get_smscode));
+                textView.setTextColor(context.getResources().getColor(R.color.font_register_smscode));
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.start();
+    }
+
+    public static void setWebViewSetting(WebView webView) {
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  //设置 缓存模式
+        // 开启 DOM storage API 功能
+        webView.getSettings().setDomStorageEnabled(true);
+        //开启 database storage API 功能
+        webView.getSettings().setDatabaseEnabled(true);
+        String cacheDirPath = BaseConstants.path.WEB_DIR;
+        //设置数据库缓存路径
+        webView.getSettings().setDatabasePath(cacheDirPath);
+        //设置  Application Caches 缓存目录
+        webView.getSettings().setAppCachePath(cacheDirPath);
+        //开启 Application Caches 功能
+        webView.getSettings().setAppCacheEnabled(true);
+    }
+
+    public static void clearWebViewCeche() {
+        //WebView 缓存文件
+        File appCacheDir = new File(BaseConstants.path.WEB_DIR);
+
+        //删除webview 缓存 缓存目录
+        if(appCacheDir.exists()){
+            deleteFile(appCacheDir);
+        }
+    }
+    /**
+     * 递归删除 文件/文件夹
+     *
+     * @param file
+     */
+    public static void deleteFile(File file) {
+
+//        Log.i(TAG, "delete file path=" + file.getAbsolutePath());
+
+        if (file.exists()) {
+            if (file.isFile()) {
+                file.delete();
+            } else if (file.isDirectory()) {
+                File files[] = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    deleteFile(files[i]);
+                }
+            }
+            file.delete();
+        } else {
+//            Log.e(TAG, "delete file no exists " + file.getAbsolutePath());
+        }
+    }
+
+//    public static void setHeight(ImageView imageView) {
+//        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        DisplayMetrics metric = new DisplayMetrics();
+//        Activity context = (Activity) this.context;
+//        context.getWindowManager().getDefaultDisplay().getMetrics(metric);
+//        int mScreenWidth = metric.widthPixels;
+//        int width = mScreenWidth/2- PixelUtil.dp2px(20);
+////        int mScreenHeight = metric.heightPixels;
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, (int) (width/1.28));
+//        imageView.setLayoutParams(params);
+//    }
 }

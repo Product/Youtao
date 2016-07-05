@@ -194,7 +194,8 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
                 item_confirm_order_ll.setOnClickListener(this);
                 item_confirm_order_name_tv.setText(goodsList.title == null ? "" : goodsList.title);
                 item_confirm_order_count_tv.setText("x" + goodsList.cnt);
-                item_confirm_order_price_tv.setText("￥" + goodsList.coupon);
+//                item_confirm_order_price_tv.setText("￥" + goodsList.coupon==null?goodsList.price:goodsList.coupon);
+                item_confirm_order_price_tv.setText("￥" + goodsList.price);
                 String[] pics = goodsList.img.split("\\|");
                 imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0], item_confirm_order_pic_iv,options);
                 break;

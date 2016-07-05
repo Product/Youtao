@@ -99,6 +99,7 @@
             android:label="商品分类"
             android:screenOrientation="portrait" />
         <activity
+            android:windowSoftInputMode="stateVisible"
             android:name="com.youyou.uumall.ui.QueryMainActivity_"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="搜索主页"
@@ -181,7 +182,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:theme="@style/transparent"
+            android:theme="@style/dialog"
             android:exported="true"
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

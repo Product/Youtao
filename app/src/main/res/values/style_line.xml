@@ -40,7 +40,7 @@
         <item name="android:layout_width">@dimen/view_44</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:src">@drawable/ic_pro_2x</item>
+        <item name="android:src">@mipmap/ic_back_space</item>
         <!--<item name="android:paddingLeft">@dimen/view_m50</item>-->
         <!--<item name="android:paddingTop">@dimen/view_10</item>-->
         <!--<item name="android:paddingBottom">@dimen/view_10</item>-->

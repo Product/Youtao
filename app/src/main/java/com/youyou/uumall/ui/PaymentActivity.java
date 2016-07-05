@@ -3,6 +3,10 @@ package com.youyou.uumall.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tencent.mm.sdk.modelpay.PayReq;
@@ -41,6 +45,8 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
     @ViewById
     TextView payment_price_tv;
 
+    @ViewById
+    LinearLayout payment_pb;
     @AfterViews
     void afterViews() {
         Intent intent = getIntent();
@@ -54,9 +60,38 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
 
     @Click
     void payment_weixin_rl() {
+        if (!api.isWXAppInstalled()) {
+            showToastShort("请先安装微信");
+            return;
+        }
+        payment_pb.setVisibility(View.VISIBLE);
         orderBiz.createWxPrepayOrder(mOrder,mPrice);
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (payment_pb.isShown()) {
+            return true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int keyCode = event.getKeyCode();
+        int action = event.getAction();
+        if (keyCode == KeyEvent.KEYCODE_BACK && action == KeyEvent.ACTION_DOWN) {//首先做双层判断，如果点击是的回退键&&并且动作是按压的时候，触发操作
+            if (payment_pb.isShown()) {
+                return false;
+            }
+        }
+        return super.dispatchKeyEvent(event);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        payment_pb.setVisibility(View.GONE);
+    }
     /**
      * request.appId = "wxd930ea5d5a258f4f";
      * <p>
@@ -119,6 +154,9 @@ public class PaymentActivity extends BaseActivity implements BaseBusiness.ArrayL
 
     @Override
     public void onBackPressed() {
+        if (payment_pb.isShown()) {
+            return;
+        }
         showDialog();
     }
 

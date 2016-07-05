@@ -16,6 +16,7 @@
 
 
         <com.youyou.uumall.view.ClearEditText
+            android:imeOptions="actionSearch"
             android:paddingLeft="@dimen/view_20"
             android:paddingRight="@dimen/view_20"
             android:id="@+id/query_search_et"
@@ -25,7 +26,7 @@
             android:layout_marginTop="@dimen/view_14"
             android:layout_weight="1"
             android:background="@color/white"
-            android:drawableLeft="@drawable/search_5_2x"
+            android:drawableLeft="@mipmap/ic_home_search"
             android:drawablePadding="@dimen/view_15"
             android:hint="@string/home_search_hint"
             android:singleLine="true"
@@ -46,7 +47,7 @@
 
     </LinearLayout>
     <View
-        android:background="@color/bg_title_gap"
+        android:background="@color/bg_line_dark_gray"
         style="@style/HorizonLineStyle"
         />
     <ListView

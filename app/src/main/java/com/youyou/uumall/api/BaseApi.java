@@ -52,20 +52,24 @@ import java.util.Map;
         interceptors = {AppInterceptor.class})
 @Accept(MediaType.APPLICATION_JSON_VALUE) //这里过滤出来，表示只是接受json类型的数据
 public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, RestClientSupport, RestClientHeaders {
-    /*主页面*/
+    /*轮播图*/
     @Post("/mall/slider.json")
-    Response<List<GalleryBean>> getSliderData();
+    Response<List<GalleryBean>> getSliderData(Map map);
 
+    /*推荐商品*/
     @Post("/mall/recommend.json?mall/recommend.json")
     Response<List<RecommendBean>> getRecommendData(Map map);
+//    Response<Object> getRecommendData(Map map);
 
+    /*推荐品牌*/
     @Post("/mall/brand.json")
     Response<List<BrandBean>> getBrandData(Map map);
 
-    /*用户注册*/
+    /*验证码*/
     @Post("/malluser/sendSMSCode.json")
     Response<Object> getSMSCode(Map map);
 
+    /*用户注册*/
     @Post("/malluser/userRegister.json")
     Response<Object> userRegister(Map map);
 
@@ -81,7 +85,7 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     @Post("/malluser/retrievePassword.json")
     Response<Object> retrievePassword(Map map);
 
-    /*查询字典*/
+    /*查询国家*/
     @Post("/sys/queryDict.json")
     Response<List<DictBean>> queryDict(Map map);
 
@@ -100,19 +104,21 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
 
     /*关键字搜索商品*/
     @Post("/mall/queryGoodsByKeywords.json")
+//    Response<Object> queryGoodsByKeywords(Map map);
     Response<List<GoodsDescBean>> queryGoodsByKeywords(Map map);
 
     /*购物车查询*/
     @Post("/mall/cartItemList.json")
     Response<List<ShopCartBean>> getcartList(Map map);
 
-    /*购物车删除*/
+    /*购物车删除(废弃)*/
     @Post("/mall/cartItemDel.json")
     Response<Object> cartItemDel(Map map);//废弃
 
     /*自提点查询*/
     @Post("/sys/queryDelivery.json")
     Response<List<DictBean>> queryDelivery(Map map);
+//    Response<Object> queryDelivery(Map map);
 
     /*提交订单*/
     @Post("/mall/order/orderSubmit.json")
@@ -152,17 +158,17 @@ public interface BaseApi extends RestClientErrorHandling, RestClientRootUrl, Res
     @Post("/mall/queryGoodsByBrand.json")
     Response<List<GoodsDescBean>> queryGoodsByBrand(Map map);
 
-    /*品牌搜索商品接口*/
+    /*分类搜索商品接口*/
     @Post("/mall/queryGoodsByCategory.json")
     Response<List<GoodsDescBean>> queryGoodsByCategory(Map map);
 //    Response<List<GoodsDescBean>> queryGoodsByCategory(Map map);
 
-    /*品牌搜索商品接口*/
+    /*商品价格*/
     @Post("/mall/updateGoodsPrice.json")
     Response<List<GoodsPrice>> updateGoodsPrice(Map map);
 //    Response<Object> updateGoodsPrice(Map map);
-//
-// /*品牌搜索商品接口*/
+
+    /*用户信息接口*/
     @Post("/malluser/modUserInfo.json")
 //    Response<List<GoodsPrice>> modUserInfo(Map map);
     Response<Object> modUserInfo(Map map);

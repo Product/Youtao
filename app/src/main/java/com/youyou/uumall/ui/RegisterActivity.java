@@ -1,16 +1,16 @@
 package com.youyou.uumall.ui;
 
-import android.os.Handler;
 import android.text.TextUtils;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
+import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -41,11 +41,8 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+//    private GoogleApiClient client;
     private Map map;
-    private boolean isTimeout = true;
-
-    static Handler handler = new Handler();
 
     @AfterViews
     void afterViews() {
@@ -56,35 +53,23 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
     protected void onStart() {
         super.onStart();
         if (statusView != null) {
-            statusView.setBackgroundColor(getResources().getColor(R.color.bg_settings_gap));
+            ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
+            decorView.removeView(statusView);
         }
     }
 
     @Click
     void register_getSmsCode() {
         String phone = register_phone.getText().toString();
-//        if (TextUtils.isEmpty(phone) || !UserUtils.isMobileNO(phone)) {
         if (TextUtils.isEmpty(phone) ) {
             showToastShort("请正确输入手机号");
             return;
         }
-        //过了三十秒才可以再次发送请求,用handler来处理整个事件
-        if (isTimeout) {
-            registerBiz.getSmsCode(phone,"1");//请求完数据后
-            isTimeout = false;
-            handler.postDelayed(runable, 30000);
-        } else {
-            showToastShort("30秒后重试");
-        }
+        registerBiz.getSmsCode(phone,"1");
+        MyUtils.setSmsCodeAnimator(register_getSmsCode,this);
 
     }
 
-    Runnable runable = new Runnable() {
-        @Override
-        public void run() {
-            isTimeout = true;
-        }
-    };
 
     @Click
     void register_register_bt() {

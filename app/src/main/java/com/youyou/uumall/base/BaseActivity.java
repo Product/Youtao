@@ -20,11 +20,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -42,21 +45,27 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.youyou.uumall.R;
 import com.youyou.uumall.SPApplication;
+import com.youyou.uumall.business.LoginBiz;
+import com.youyou.uumall.business.RegisterBiz;
 import com.youyou.uumall.system.ActivityManager;
 import com.youyou.uumall.system.SystemBarTintManager;
 import com.youyou.uumall.utils.MyLogger;
+import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.view.CustomProgressBar;
 import com.youyou.uumall.view.ToastMaster;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 
 /**
  * @ClassName: BaseActivity
  * @Description: 所有的activity继承该类，可以将通用的东西放到该类
  */
-public class BaseActivity extends FragmentActivity {
-
+public class BaseActivity extends FragmentActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface {
+    private LoginBiz login;
+    private RegisterBiz register;
     public SPApplication mApp;
 
     public CustomProgressBar progressBar;
@@ -124,13 +133,49 @@ public class BaseActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        login = new LoginBiz();
+        register = new RegisterBiz();
+        register.setArrayListCallbackInterface(this);
+        login.setObjectCallbackInterface(this);
         initStatusBar();
+        String last = MyUtils.getPara(BaseConstants.preferencesFiled.LAST_LOAD, this);
+        String info = MyUtils.getPara(BaseConstants.preferencesFiled.USER_INFO, this);
+        String[] infos = info.split(",");
+        if (!TextUtils.isEmpty(last)) {
+            if (System.currentTimeMillis() - Long.valueOf(last) > 1000 * 1800) {
+                String openId = MyUtils.getPara(BaseConstants.preferencesFiled.OPEN_ID, this);
+                if (!TextUtils.isEmpty(openId)) {
+                    register.wechatLogin(openId, "", MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this), "3");
+
+                } else if (!TextUtils.isEmpty(info)) {
+                    String deviceToken = MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this);
+                    login.userLogin(infos[0], infos[1], deviceToken);
+                    MyUtils.savePara(getApplication(), BaseConstants.preferencesFiled.PP_USER_ID, infos[0]);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        MyUtils.savePara(this, BaseConstants.preferencesFiled.LAST_LOAD, "" + System.currentTimeMillis());
+        super.onStop();
+    }
+
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
     }
 
     private void initStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
             int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
             int statusBarHeight = getResources().getDimensionPixelSize(resourceId);
@@ -142,9 +187,11 @@ public class BaseActivity extends FragmentActivity {
 
             ViewGroup decorView = (ViewGroup) window.getDecorView();
             decorView.addView(statusView);
-            ViewGroup rootView = (ViewGroup) ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
+            ViewGroup rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+            if (rootView != null) {
             rootView.setFitsSystemWindows(true);
             rootView.setClipToPadding(true);
+            }
         }
     }
 
@@ -394,5 +441,15 @@ public class BaseActivity extends FragmentActivity {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
+    }
+
+    @Override
+    public void arrayCallBack(int type, List<? extends Object> arrayList) {
+        log.e("微信登录");
+    }
+
+    @Override
+    public void objectCallBack(int type, Object t) {
+        log.e("普通登录");
     }
 }

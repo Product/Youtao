@@ -31,7 +31,7 @@ public class FirstGuideHolder extends BaseGuideHodler {
 //            log.e("1开始");
             drawable = new GifDrawable(mContext.getResources(), R.drawable.newfeature_page_0);
             item_guide_giv.setBackground(drawable);
-            drawable.setLoopCount(1);
+            drawable.setLoopCount(0);
         } catch (IOException e) {
 //            log.e("1错误");
             e.printStackTrace();

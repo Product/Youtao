@@ -105,7 +105,6 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     public void loadData() {
         addressBiz.queryDict();
-        commodityBiz.getSliderList();
     }
 
     @Override
@@ -220,6 +219,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 eventBus.post(new ShopCartUpdateEvent());
                 commodityBiz.getRecommendList();//在拿到数值之后再访问
                 commodityBiz.getBrandList();
+                commodityBiz.getSliderList();
             }
                 loadItem++;
         } else if (CommodityBiz.GET_BRAND_LIST == type) {//平拍商品

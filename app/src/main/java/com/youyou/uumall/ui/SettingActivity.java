@@ -10,10 +10,12 @@ import com.umeng.message.PushAgent;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.RegisterBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
+import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.utils.UserUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -80,6 +82,8 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 eventBus.post(new MineTriggerEvent());
+                MyUtils.savePara(this, BaseConstants.preferencesFiled.OPEN_ID,"");
+                MyUtils.savePara(this, BaseConstants.preferencesFiled.USER_INFO,"");
                 userUtils.saveUserId("");//清空
                 userUtils.saveUserInfo("");
                 eventBus.post(new ShopCartUpdateEvent());

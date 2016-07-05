@@ -1,6 +1,7 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.GoodsList;
 import com.youyou.uumall.model.OrderBean;
+import com.youyou.uumall.ui.CommodityDescActivity_;
 import com.youyou.uumall.utils.MyUtils;
 
 import org.androidannotations.annotations.AfterInject;
@@ -108,7 +110,8 @@ public class OrderDetailAdapter extends BaseAdapter implements View.OnClickListe
                 TextView delivery_address_tv = ViewHolder.get(convertView, R.id.delivery_address_tv);
                 TextView delivery_time_tv = ViewHolder.get(convertView, R.id.delivery_time_tv);
                 delivery_name_tv.setText(orderBean.name + "   " + orderBean.linkTel);
-                delivery_address_tv.setText(orderBean.address);
+                String desc = orderBean.delivery.description.replace("\r\n","  ");
+                delivery_address_tv.setText(orderBean.delivery.name+"  "+desc);
                 delivery_time_tv.setText(orderBean.pickupTime);
                 break;
             case DATE_STATUS:
@@ -176,13 +179,18 @@ public class OrderDetailAdapter extends BaseAdapter implements View.OnClickListe
                 if (convertView == null) {
                     convertView = View.inflate(mContext, R.layout.item_confirm_order, null);
                 }
+                LinearLayout item_confirm_order_ll = ViewHolder.get(convertView, R.id.item_confirm_order_ll);
+                item_confirm_order_ll.setTag(goods.goodsId);
+                item_confirm_order_ll.setOnClickListener(this);
+
                 ImageView item_confirm_order_pic_iv = ViewHolder.get(convertView, R.id.item_confirm_order_pic_iv);
                 item_confirm_order_pic_iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 TextView item_confirm_order_name_tv = ViewHolder.get(convertView, R.id.item_confirm_order_name_tv);
                 TextView item_confirm_order_price_tv = ViewHolder.get(convertView, R.id.item_confirm_order_price_tv);
                 TextView item_confirm_order_count_tv = ViewHolder.get(convertView, R.id.item_confirm_order_count_tv);
                 item_confirm_order_name_tv.setText(goods.title);
-                item_confirm_order_price_tv.setText("￥" + goods.coupon);
+                item_confirm_order_price_tv.setText("￥" + goods.price);
+//                item_confirm_order_price_tv.setText("￥" + goods.coupon==null?goods.price:goods.coupon);
                 item_confirm_order_count_tv.setText("x" + goods.cnt);
                 String[] pics = goods.img.split("\\|");
                 imageLoader.displayImage(BaseConstants.connection.ROOT_URL + pics[0], item_confirm_order_pic_iv, options);
@@ -207,6 +215,11 @@ public class OrderDetailAdapter extends BaseAdapter implements View.OnClickListe
             payListener.payClick();
         } else if (v.getId() == R.id.delivery_cancel_bt) {
             cancelListener.cancelClick();
+        }else if (v.getId() == R.id.item_confirm_order_ll) {
+            String tag = (String) v.getTag();
+            Intent intent = new Intent(mContext, CommodityDescActivity_.class);
+            intent.putExtra(BaseConstants.preferencesFiled.GOODS_ID, tag);
+            mContext.startActivity(intent);
         }
     }
 
