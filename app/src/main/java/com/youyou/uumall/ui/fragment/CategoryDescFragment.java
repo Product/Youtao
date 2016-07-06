@@ -17,6 +17,7 @@ import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.base.BaseFragment;
 import com.youyou.uumall.business.CategoryDescBiz;
+import com.youyou.uumall.event.GoodsDescEvent;
 import com.youyou.uumall.model.GalleryBean;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.model.GoodsPrice;
@@ -88,13 +89,14 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
         if (CategoryDescBiz.QUERY_GOODS_BY_ID == type) {
             GoodsDescBean bean = (GoodsDescBean) t;
 //            log.e(bean.toString());
+            eventBus.post(new GoodsDescEvent(bean));
             initData(bean);
         }
     }
 
     private void initData(GoodsDescBean bean) {
         if (bean != null) {
-            cate_frag_name.setText(bean.brandName);
+            cate_frag_name.setText(bean.titile);
             cate_frag_price.setText("￥"+bean.price);
             String description = bean.description;
             String[] pics = description.split("\\|");

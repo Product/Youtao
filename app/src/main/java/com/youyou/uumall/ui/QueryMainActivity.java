@@ -5,7 +5,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.youyou.uumall.R;
@@ -16,6 +15,7 @@ import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.business.SearchBiz;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.view.ClearEditText;
+import com.youyou.uumall.view.RefreshListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -24,16 +24,17 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/12.
  */
 @EActivity(R.layout.activity_query_main)
-public class QueryMainActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, TextWatcher, QueryMainAdapter.OnItemClickListener {
+public class QueryMainActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, TextWatcher, QueryMainAdapter.OnItemClickListener, RefreshListView.OnLoadMoreListener, RefreshListView.OnRefreshListener {
 
     @ViewById
-    ListView listview;
+    RefreshListView listview;
 
     @ViewById
     ClearEditText query_search_et;
@@ -48,15 +49,20 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
     QueryMainAdapter adapter;
 
 
+    private int pageNo = 1;
+    private List<GoodsDescBean> list = new ArrayList<>();
+    private boolean isSatisfy;
+    private boolean isAuto;
+    private boolean hasAnimation;
+
     @AfterViews
     void afterViews() {
         query_cancel_tv.setFocusable(true);
         query_cancel_tv.setFocusableInTouchMode(true);
-//        InputMethodManager systemService = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//        systemService.showSoftInput(query_cancel_tv, InputMethodManager.SHOW_FORCED);
-
         searchBiz.setArrayListCallbackInterface(this);
         listview.setAdapter(adapter);
+        listview.setOnLoadMoreListener(this);
+        listview.setOnRefreshListener(this);
         adapter.setOnItemClickListener(this);
         query_search_et.addTextChangedListener(this);
     }
@@ -64,23 +70,40 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
 
     private void search() {
         String searchKey = query_search_et.getText().toString();
-        searchBiz.queryGoodsById(searchKey);
+        searchBiz.queryGoodsById(pageNo, 10, searchKey);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
     }
 
     @UiThread
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
-        if (SearchBiz.QUERY_GOODS_BY_KEYWORDS == type) {
-            List<GoodsDescBean> list = (List<GoodsDescBean>) arrayList;
+        //下拉刷新
+        if (!isAuto) {//第一次搜索也可能进入这里
+            if (arrayList != null && arrayList.size() != 0 ) {
+                list.clear();
+                List<GoodsDescBean> orderBean = (List<GoodsDescBean>) arrayList;
+                isSatisfy = orderBean.size() >= 10 ? true : false;
+                list.addAll(orderBean);
+                adapter.setData(list);
+                if (hasAnimation) {//不需要动画
+                    listview.onRefreshComplete();
+                    hasAnimation = false;
+                }
+                return;
+            }
+        }
+        //这个是上拉加载更多
+        if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
+            List<GoodsDescBean> orderBean = (List<GoodsDescBean>) arrayList;
+            list.addAll(orderBean);
             adapter.setData(list);
         }
+        listview.onLoadMoreComplete();
+
     }
 
     @Click
@@ -100,6 +123,7 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
 
     @Override
     public void afterTextChanged(Editable s) {
+        pageNo = 1;
         search();
     }
 
@@ -117,4 +141,18 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
         return super.dispatchKeyEvent(event);
     }
 
+    @Override
+    public void onLoadingMore() {
+        isAuto = true;
+        pageNo++;
+        search();
+    }
+
+    @Override
+    public void onRefreshing(boolean isAuto) {
+        hasAnimation = true;
+        this.isAuto = isAuto;
+        pageNo = 1;
+        search();
+    }
 }

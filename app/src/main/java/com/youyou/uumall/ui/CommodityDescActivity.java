@@ -17,6 +17,7 @@ import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.ShopcartBiz;
+import com.youyou.uumall.event.GoodsDescEvent;
 import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.GoodsDescBean;
@@ -64,6 +65,7 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
     @ViewById
     TextView category_menu_point_tv;
     private ShareDialog shareDialog;
+    private GoodsDescBean goodsDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +172,7 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
                 isLogined = false;
             } else {
                 isLogined = true;
-                List<ShopCartBean> list = (List<ShopCartBean>) response.data;
+                List<ShopCartBean>  list = (List<ShopCartBean>) response.data;
                 int count = 0;
                 for (ShopCartBean bean : list) {
                     count += bean.count;
@@ -203,11 +205,16 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
         shopcartBiz.getcartList();
     }
 
+    @Subscribe
+    public void queryGoodsCallBack(GoodsDescEvent event) {
+        goodsDesc = event.goodsDescBean;
+    }
     /**
      * 商品详情
      发给朋友
      标题：推荐个宝贝给你 副标题：商品名称
      图片：商品第一张主图
+
      分享到朋友圈
      标题：商品名称
       图片：商品第一张主图
@@ -225,10 +232,11 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             Platform.ShareParams sp = new Platform.ShareParams();
             sp.setShareType(Platform.SHARE_WEBPAGE);//非常重要：一定要设置分享属性
             sp.setTitle("推荐个宝贝给你");  //分享标题
-            sp.setText("我是分享文本，啦啦啦~http://uestcbmi.com/");   //分享文本
-            sp.setImageUrl("http://7sby7r.com1.z0.glb.clouddn.com/CYSJ_02.jpg");//网络图片rul
-            sp.setUrl("http://sharesdk.cn");   //网友点进链接后，可以看到分享的详情
-
+            if (goodsDesc != null) {
+            sp.setText(goodsDesc.titile);   //分享文本
+            sp.setImageUrl(BaseConstants.connection.ROOT_URL + goodsDesc.image.split("\\|")[0]);//网络图片rul
+            sp.setUrl(BaseConstants.connection.SHEAR_URL+goodsDesc.id);   //网友点进链接后，可以看到分享的详情
+            }
             //3、非常重要：获取平台对象
             Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
             wechat.setPlatformActionListener(this); // 设置分享事件回调
@@ -240,11 +248,12 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             //2、设置分享内容
             Platform.ShareParams sp = new Platform.ShareParams();
             sp.setShareType(Platform.SHARE_WEBPAGE); //非常重要：一定要设置分享属性
-            sp.setTitle("我是分享标题");  //分享标题
-            sp.setText("我是分享文本，啦啦啦~http://uestcbmi.com/");   //分享文本
-            sp.setImageUrl("http://7sby7r.com1.z0.glb.clouddn.com/CYSJ_02.jpg");//网络图片rul
-            sp.setUrl("http://sharesdk.cn");   //网友点进链接后，可以看到分享的详情
-
+            if (goodsDesc != null) {
+                sp.setTitle(goodsDesc.titile);  //分享标题
+                sp.setText(goodsDesc.titile);   //分享文本
+                sp.setImageUrl(BaseConstants.connection.ROOT_URL + goodsDesc.image.split("\\|")[0]);//网络图片rul
+                sp.setUrl(BaseConstants.connection.SHEAR_URL+goodsDesc.id);   //网友点进链接后，可以看到分享的详情
+            }
             //3、非常重要：获取平台对象
             Platform wechatMoments = ShareSDK.getPlatform(WechatMoments.NAME);
             wechatMoments.setPlatformActionListener(this); // 设置分享事件回调
@@ -253,6 +262,8 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
 
         }
     }
+
+
 
     @Override
     public void onClick(View v) {

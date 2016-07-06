@@ -27,14 +27,16 @@ public class SearchBiz extends BaseBusiness {
     public static final int QUERY_BONUS = 2;
 
     @Background
-    public void queryGoodsById(String  searchKey){
+    public void queryGoodsById(int pageNo,int pageSize, String  searchKey){
         String countryCode = MyUtils.getCountryCode(context);
         Map map = new HashMap();
+        map.put("pageNo",pageNo);
+        map.put("pageSize",pageSize);
         map.put("countryCode", countryCode);
         map.put("searchKeywords", searchKey);
 //        Response<Object> objectResponse = baseApi.queryGoodsByKeywords(map);
 //        log.e(objectResponse.toString());
-        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_KEYWORDS, handleResponse(baseApi.queryGoodsByKeywords(map)));
+        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_KEYWORDS, baseApi.queryGoodsByKeywords(map).data);
     }
 
 //    @Background

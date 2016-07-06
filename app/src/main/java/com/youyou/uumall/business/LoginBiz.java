@@ -1,11 +1,14 @@
 package com.youyou.uumall.business;
 
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.bean.Response;
+import com.youyou.uumall.model.UserInfoBean;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +26,8 @@ public class LoginBiz extends BaseBusiness {
         paramMap.put("password", userPwd);
         paramMap.put("deviceToken", deviceToken);
         paramMap.put("clientType", "1");
-        objectCallbackInterface.objectCallBack(USER_LOGIN, baseApi.userLogin(paramMap));
+        Response<List<UserInfoBean>> listResponse = baseApi.userLogin(paramMap);
+        objectCallbackInterface.objectCallBack(USER_LOGIN, listResponse);
     }
 
 

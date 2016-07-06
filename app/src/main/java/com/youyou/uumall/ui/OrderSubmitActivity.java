@@ -47,6 +47,7 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     private boolean isAuto;
     private int pageNo = 1;
     private List<OrderBean> list = new ArrayList<>();
+    private boolean isSatisfy;
 
     @AfterViews
     void afterViews() {
@@ -74,18 +75,22 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
 //        log.e(arrayList.toString());
         if (type == OrderBiz.QUERY_ORDER) {
             if (!isAuto) {
-                isAuto = !isAuto;
-                list.clear();
-                List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                list.addAll(orderBean);
-                orderAdapter.setData(list);
-                order_submit_lv.onRefreshComplete();
-                return;
+                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
+                    isAuto = !isAuto;
+                    list.clear();
+                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+                    list.addAll(orderBean);
+                    orderAdapter.setData(list);
+                    order_submit_lv.onRefreshComplete();
+                    return;
+                }
             }
             if (pageNo == 1) {//是第一次调用,也就是默认刷新
                 if (arrayList != null && arrayList.size() != 0) {
                     List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                    orderAdapter.setData(orderBean);
+                    isSatisfy = orderBean.size()>=10?true:false;
+                    list.addAll(orderBean);
+                    orderAdapter.setData(list);
                     order_submit_lv.onRefreshComplete();
 //                    log.e(orderBean.toString());
                 } else {
@@ -94,7 +99,7 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
                     order_empty.setVisibility(View.VISIBLE);
                 }
             } else {//这个是上拉加载更多
-                if (arrayList != null && arrayList.size() != 0) {
+                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
                     List<OrderBean> orderBean = (List<OrderBean>) arrayList;
                     list.addAll(orderBean);
                     orderAdapter.setData(list);

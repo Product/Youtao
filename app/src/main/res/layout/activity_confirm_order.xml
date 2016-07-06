@@ -13,7 +13,7 @@
 
     <TextView
         style="@style/TextView_Title_Title"
-        android:text="确认订单"
+        android:text="@string/confirm_order_title"
         />
     </RelativeLayout>
     <View
@@ -40,14 +40,14 @@
                 android:background="@drawable/bg_text_order_shape"
                 android:textColor="@color/font_gray"
                 android:gravity="center"
-                android:text="收货人"
+                android:text="@string/confirm_order_person"
                 android:textSize="@dimen/font_20"
                 android:layout_marginRight="@dimen/view_25"
                 android:layout_width="@dimen/view_100"
                 android:layout_height="@dimen/font_36" />
             <TextView
                 android:id="@+id/confirm_order_name_tv"
-                android:text="陈冰    13795376899"
+                android:text=""
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_30"
                 android:layout_width="wrap_content"
@@ -63,14 +63,14 @@
                 android:background="@drawable/bg_text_order_shape"
                 android:textColor="@color/font_gray"
                 android:gravity="center"
-                android:text="提货地址"
+                android:text="@string/confirm_order_address"
                 android:textSize="@dimen/font_20"
                 android:layout_marginRight="@dimen/view_25"
                 android:layout_width="@dimen/view_100"
                 android:layout_height="@dimen/font_36" />
             <TextView
                 android:id="@+id/confirm_order_address_tv"
-                android:text="仁川机场T2航站楼"
+                android:text=""
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_30"
                 android:layout_width="wrap_content"
@@ -86,14 +86,14 @@
                 android:background="@drawable/bg_text_order_shape"
                 android:textColor="@color/font_gray"
                 android:gravity="center"
-                android:text="提货时间"
+                android:text="@string/confirm_order_date"
                 android:textSize="@dimen/font_20"
                 android:layout_marginRight="@dimen/view_25"
                 android:layout_width="@dimen/view_100"
                 android:layout_height="@dimen/font_36" />
             <TextView
                 android:id="@+id/confirm_order_time_tv"
-                android:text="2016-06-25    19:30-20:40"
+                android:text=""
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_30"
                 android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
             android:drawableLeft="@drawable/bar_shopcart_up"
             android:textSize="@dimen/font_30"
             android:textColor="@color/font_country_conuntry"
-            android:text="添加取货信息"
+            android:text="@string/confirm_order_add_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -122,7 +122,7 @@
         android:textColor="@color/font_hint_gray"
         android:textSize="@dimen/font_24"
         android:gravity="center_vertical"
-        android:text="已购商品"
+        android:text="@string/confirm_order_info"
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_64" />
     <ListView
@@ -154,14 +154,14 @@
                 android:layout_marginLeft="@dimen/view_25"
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_28"
-                android:text="合计:"
+                android:text="@string/confirm_order_sum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/confirm_total_tv"
                 android:textColor="@color/font_country_conuntry"
                 android:textSize="@dimen/font_30"
-                android:text="￥1295"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

@@ -30,6 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/view_180"
-        android:background="@drawable/ic_login_cancel"/>
+        android:background="@mipmap/ic_close"/>
 
 </LinearLayout>

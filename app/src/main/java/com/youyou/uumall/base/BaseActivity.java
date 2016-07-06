@@ -46,7 +46,9 @@ import com.umeng.message.PushAgent;
 import com.youyou.uumall.R;
 import com.youyou.uumall.SPApplication;
 import com.youyou.uumall.business.LoginBiz;
+import com.youyou.uumall.business.LoginBiz_;
 import com.youyou.uumall.business.RegisterBiz;
+import com.youyou.uumall.business.RegisterBiz_;
 import com.youyou.uumall.system.ActivityManager;
 import com.youyou.uumall.system.SystemBarTintManager;
 import com.youyou.uumall.utils.MyLogger;
@@ -64,8 +66,8 @@ import java.util.List;
  * @Description: 所有的activity继承该类，可以将通用的东西放到该类
  */
 public class BaseActivity extends FragmentActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface {
-    private LoginBiz login;
-    private RegisterBiz register;
+    LoginBiz login;
+    RegisterBiz register;
     public SPApplication mApp;
 
     public CustomProgressBar progressBar;
@@ -133,16 +135,17 @@ public class BaseActivity extends FragmentActivity implements BaseBusiness.Array
     @Override
     protected void onStart() {
         super.onStart();
-        login = new LoginBiz();
-        register = new RegisterBiz();
-        register.setArrayListCallbackInterface(this);
-        login.setObjectCallbackInterface(this);
+        login = LoginBiz_.getInstance_(this);
+        register = RegisterBiz_.getInstance_(this);
+
         initStatusBar();
         String last = MyUtils.getPara(BaseConstants.preferencesFiled.LAST_LOAD, this);
         String info = MyUtils.getPara(BaseConstants.preferencesFiled.USER_INFO, this);
         String[] infos = info.split(",");
         if (!TextUtils.isEmpty(last)) {
             if (System.currentTimeMillis() - Long.valueOf(last) > 1000 * 1800) {
+                register.setArrayListCallbackInterface(this);
+                login.setObjectCallbackInterface(this);
                 String openId = MyUtils.getPara(BaseConstants.preferencesFiled.OPEN_ID, this);
                 if (!TextUtils.isEmpty(openId)) {
                     register.wechatLogin(openId, "", MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this), "3");

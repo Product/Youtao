@@ -47,6 +47,7 @@ public class OrderConfirmActivity extends BaseActivity implements BaseBusiness.A
     private boolean isAuto;
     private int pageNo = 1;
     private List<OrderBean> list = new ArrayList<>();
+    private boolean isSatisfy;
 
     @AfterViews
     void afterViews() {
@@ -63,8 +64,9 @@ public class OrderConfirmActivity extends BaseActivity implements BaseBusiness.A
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == OrderBiz.QUERY_ORDER) {
-            if (type == OrderBiz.QUERY_ORDER) {
-                if (!isAuto) {
+
+            if (!isAuto) {//手动刷新
+                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
                     isAuto = !isAuto;
                     list.clear();
                     List<OrderBean> orderBean = (List<OrderBean>) arrayList;
@@ -73,25 +75,28 @@ public class OrderConfirmActivity extends BaseActivity implements BaseBusiness.A
                     order_submit_lv.onRefreshComplete();
                     return;
                 }
-                if (pageNo == 1) {//是第一次调用,也就是默认刷新
-                    if (arrayList != null && arrayList.size() != 0) {
-                        List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                        orderAdapter.setData(orderBean);
-                        order_submit_lv.onRefreshComplete();
-                    } else {
-                        order_submit_lv.onRefreshComplete();
-                        order_submit_lv.setVisibility(View.GONE);
-                        order_empty.setVisibility(View.VISIBLE);
-                    }
-                } else {//这个是上拉加载更多
-                    if (arrayList != null && arrayList.size() != 0) {
-                        List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                        list.addAll(orderBean);
-                        orderAdapter.setData(list);
-                    }
-                    order_submit_lv.onLoadMoreComplete();
-                }
             }
+            if (pageNo == 1) {//是第一次调用,也就是默认刷新
+                if (arrayList != null && arrayList.size() != 0) {
+                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+                    isSatisfy = orderBean.size()>=10?true:false;
+                    list.addAll(orderBean);
+                    orderAdapter.setData(list);
+                    order_submit_lv.onRefreshComplete();
+                } else {
+                    order_submit_lv.onRefreshComplete();
+                    order_submit_lv.setVisibility(View.GONE);
+                    order_empty.setVisibility(View.VISIBLE);
+                }
+            } else {//这个是上拉加载更多
+                if (arrayList != null && arrayList.size() != 0 &&isSatisfy) {
+                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+                    list.addAll(orderBean);
+                    orderAdapter.setData(list);
+                }
+                order_submit_lv.onLoadMoreComplete();
+            }
+
         }
     }
 

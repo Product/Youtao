@@ -73,7 +73,7 @@
             android:id="@+id/category_rb1"
             android:button="@null"
             android:gravity="center"
-            android:text="分类"
+            android:text="@string/category_category_cb"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
@@ -83,7 +83,7 @@
             android:id="@+id/category_rb2"
             android:button="@null"
             android:gravity="center"
-            android:text="品牌"
+            android:text="@string/category_brand_cb"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>

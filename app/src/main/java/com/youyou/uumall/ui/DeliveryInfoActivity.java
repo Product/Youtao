@@ -218,11 +218,11 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
                 }else {
                     delivery_info_delivery_tv.setVisibility(View.INVISIBLE);
                 }
-                delivery_info_delivery_iv.setBackgroundResource(R.mipmap.bar_arrow_down);
+                delivery_info_delivery_iv.setBackgroundResource(R.mipmap.ic_arrow_down);
                 delivery_info_lv.setVisibility(View.INVISIBLE);
             }else{//不可见状态
                 delivery_info_lv.setVisibility(View.VISIBLE);
-                delivery_info_delivery_iv.setBackgroundResource(R.drawable.bararrow_up_2x);
+                delivery_info_delivery_iv.setBackgroundResource(R.mipmap.ic_arrow_up);
                 delivery_info_delivery_tv.setVisibility(View.INVISIBLE);
             }
 //            delivery_info_add_ll.removeAllViews();
@@ -284,7 +284,7 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        delivery_info_delivery_iv.setBackgroundResource(R.mipmap.bar_arrow_down);
+        delivery_info_delivery_iv.setBackgroundResource(R.mipmap.ic_arrow_down);
         delivery_info_delivery_tv.setVisibility(View.INVISIBLE);
         delivery_info_lv.setVisibility(View.INVISIBLE);
         delivery_info_delivery_tv2.setText(mDeliveryList.get(position).name);

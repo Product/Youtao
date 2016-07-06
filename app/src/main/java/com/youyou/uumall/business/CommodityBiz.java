@@ -63,14 +63,14 @@ public class CommodityBiz extends BaseBusiness {
      * 品牌搜索商品接口
      */
     @Background
-    public void queryGoodsByBrand(String brandId) {
+    public void queryGoodsByBrand(int pageNo,int pageSize, String brandId) {
         String countryCode = MyUtils.getCountryCode(mContext);
         Map map = new HashMap();
-        map.put("pageNo", "");//当前页码
-        map.put("pageSize", "");//分页大小
+        map.put("pageNo", pageNo);//当前页码
+        map.put("pageSize", pageSize);//分页大小
         map.put("countryCode", countryCode);//国家编码
         map.put("brandId", brandId);//商品分享ID
-        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_BRAND, handleResponse(baseApi.queryGoodsByBrand(map)));
+        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_BRAND,baseApi.queryGoodsByBrand(map).data);
     }
 
 

@@ -53,6 +53,8 @@
         </LinearLayout>
             <!--android:background=""-->
         <ImageView
+            android:visibility="gone"
+            android:background="@mipmap/bg_expiry"
             android:id="@+id/bonus_expiry_iv"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"

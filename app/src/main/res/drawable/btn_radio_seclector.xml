@@ -19,7 +19,7 @@
     <item android:state_checked="false" android:state_focused="true"
         android:drawable="@drawable/nomal_btn_radio" />-->
     <!--没被点-->
-    <item android:state_checked="false" android:state_enabled="false" android:drawable="@drawable/shopbox_nomal_2x" />
+    <item android:state_checked="false" android:state_enabled="false" android:drawable="@mipmap/ic_circle_hollow" />
     <!--点中了-->
-    <item android:state_checked="true" android:state_enabled="true" android:drawable="@drawable/shopbox_seletecd_2x" />
+    <item android:state_checked="true" android:state_enabled="true" android:drawable="@mipmap/ic_circle_solid" />
 </selector>
