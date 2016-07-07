@@ -14,9 +14,4 @@
         android:textColor="@color/font_black"
         android:textSize="@dimen/font_32" />
 
-
-
-
-
-
 </LinearLayout>

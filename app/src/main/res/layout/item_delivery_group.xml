@@ -37,7 +37,7 @@
                 android:id="@+id/delivery_info_delivery_tv"
                 android:textColor="@color/font_country_conuntry"
                 android:textSize="@dimen/font_26"
-                android:text="请选择自提点"
+                android:text="@string/delivery_info_delivery2"
                 android:layout_marginRight="@dimen/view_20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

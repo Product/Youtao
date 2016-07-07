@@ -67,7 +67,7 @@ android {
             // 想在打包的情况下同样Debug
             debuggable true
 
-            minifyEnabled false
+            minifyEnabled true
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
@@ -173,19 +173,14 @@ dependencies {
     compile files('libs/gson-2.2.4.jar')
     //multidex support
     compile 'com.android.support:multidex:1.0.0'
-    compile 'com.github.ozodrukh:CircularReveal:1.1.1'
-    compile files('libs/AMap_ Location_v1.4.0_20150830.jar')
-    compile files('libs/Android_Map_V3.0.20150831.jar')
-    compile 'com.facebook.fresco:fresco:0.6.0'
     compile files('libs/universal-image-loader-1.9.3.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/libammsdk.jar')
     compile project(':PushSDK')
-
     compile 'org.greenrobot:eventbus:3.0.0'
     //gif
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.16'
-//分享
+    //分享
     compile files('libs/MobCommons-2016.0426.1819.jar')
     compile files('libs/MobTools-2016.0426.1819.jar')
     compile files('libs/ShareSDK-Core-2.7.2.jar')

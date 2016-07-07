@@ -110,7 +110,10 @@ public class OrderDetailAdapter extends BaseAdapter implements View.OnClickListe
                 TextView delivery_address_tv = ViewHolder.get(convertView, R.id.delivery_address_tv);
                 TextView delivery_time_tv = ViewHolder.get(convertView, R.id.delivery_time_tv);
                 delivery_name_tv.setText(orderBean.name + "   " + orderBean.linkTel);
-                String desc = orderBean.delivery.description.replace("\r\n","  ");
+                String desc = "";
+                if (orderBean.delivery.description != null) {
+                    desc = orderBean.delivery.description.replace("\r\n","  ");
+                }
                 delivery_address_tv.setText(orderBean.delivery.name+"  "+desc);
                 delivery_time_tv.setText(orderBean.pickupTime);
                 break;
@@ -211,9 +214,9 @@ public class OrderDetailAdapter extends BaseAdapter implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.delivery_pay_bt || v.getId() == R.id.delivery_pay_bt2) {
+        if (v.getId() == R.id.delivery_pay_bt) {
             payListener.payClick();
-        } else if (v.getId() == R.id.delivery_cancel_bt) {
+        } else if (v.getId() == R.id.delivery_cancel_bt || v.getId() == R.id.delivery_pay_bt2) {
             cancelListener.cancelClick();
         }else if (v.getId() == R.id.item_confirm_order_ll) {
             String tag = (String) v.getTag();

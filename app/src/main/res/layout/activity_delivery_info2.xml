@@ -109,7 +109,7 @@
                 android:id="@+id/delivery_info_date_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="选择机场提货时间"
+                android:text="@string/delivery_info_date2"
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_26" />
         </LinearLayout>
@@ -207,7 +207,7 @@
         />
 
     <Button
-        android:layout_marginBottom="@dimen/view_25"
+        android:layout_marginBottom="@dimen/view_40"
         android:layout_gravity="center_horizontal|bottom"
         android:enabled="false"
         android:id="@+id/delivery_info_confirm_btn"

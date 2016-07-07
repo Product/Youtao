@@ -234,7 +234,7 @@ public class OrderAdapter extends BaseAdapter implements View.OnClickListener {
             OrderBean orderBean = mData.get(typeData.get(v.getTag()));
             Intent intent = new Intent(mContext, PaymentActivity_.class);
             intent.putExtra("data", orderBean.id);
-            Double price = Double.valueOf(orderBean.totalCoupon);
+            Double price = Double.valueOf(orderBean.totalPrice);
             intent.putExtra("price", price);
             mContext.startActivity(intent);
         }

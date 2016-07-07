@@ -1,6 +1,7 @@
 package com.youyou.uumall.adapter;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youyou.uumall.R;
 import com.youyou.uumall.bean.ViewHolder;
 import com.youyou.uumall.model.BonusBean;
+import com.youyou.uumall.utils.PixelUtil;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
@@ -71,9 +73,18 @@ public class BonusAdapter extends BaseAdapter {
         ImageView bonus_expiry_iv = ViewHolder.get(convertView, R.id.bonus_expiry_iv);
 
         BonusBean bonus = mData.get(position);
+        String[] expirys = bonus.expiryDate.split(" ");
+        bonus_expiry_date.setText("有效期至"+expirys[0]);
         //设置价格
         double price = bonus.value;
-        bonus_price.setText(price+"");
+        if (price >= 100) {
+            bonus_price.setTextSize(TypedValue.COMPLEX_UNIT_PX,PixelUtil.dp2px(40));
+        } else if ((price < 100)) {
+            bonus_price.setTextSize(TypedValue.COMPLEX_UNIT_PX,PixelUtil.dp2px(63));
+        }
+        String str = String.valueOf(price);
+        str = str.replace(".0","");
+        bonus_price.setText(str);
 
         //判断过期时间修改样式
         String expiryDate =  bonus.expiryDate;

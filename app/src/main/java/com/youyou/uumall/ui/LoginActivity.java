@@ -97,6 +97,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
         String openId = event.getEvent();
         MyUtils.savePara(this,BaseConstants.preferencesFiled.OPEN_ID,openId);
         registerBiz.wechatLogin(openId, "", MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this), "3");
+//        registerBiz.wechatLogin("1", "", MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this), "3")
     }
 
     private long firstTime;

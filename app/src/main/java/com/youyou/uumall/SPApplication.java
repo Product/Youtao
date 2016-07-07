@@ -7,7 +7,6 @@ import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -75,13 +74,13 @@ public class SPApplication extends MultiDexApplication {
 
         initImageLoader();
         initUmeng();
-        initFresco();
+//        initFresco();
         //    initGlide();//初始化
     }
 
-    private void initFresco(){
-        Fresco.initialize(mInstance);
-    }
+//    private void initFresco(){
+//        Fresco.initialize(mInstance);
+//    }
 
     private void initDirInThread() {
         new Thread(new Runnable() {
@@ -151,7 +150,7 @@ public class SPApplication extends MultiDexApplication {
     }
 
     private void initImageLoader(){
-        File cacheDir = StorageUtils.getOwnCacheDirectory(this, BaseConstants.path.IMAGE_DIR);//缓存的目录
+        File cacheDir = StorageUtils.getOwnCacheDirectory(this, "/uumall/image/");//缓存的目录
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         int cacheSize = maxMemory / 6;
         ImageLoaderConfiguration config = new ImageLoaderConfiguration

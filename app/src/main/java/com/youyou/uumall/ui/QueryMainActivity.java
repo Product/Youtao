@@ -83,7 +83,7 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         //下拉刷新
         if (!isAuto) {//第一次搜索也可能进入这里
-            if (arrayList != null && arrayList.size() != 0 ) {
+            if (arrayList != null && arrayList.size() != 0) {
                 list.clear();
                 List<GoodsDescBean> orderBean = (List<GoodsDescBean>) arrayList;
                 isSatisfy = orderBean.size() >= 10 ? true : false;
@@ -94,6 +94,9 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
                     hasAnimation = false;
                 }
                 return;
+            } else {
+                list.clear();
+                adapter.setData(list);
             }
         }
         //这个是上拉加载更多
@@ -124,6 +127,7 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
     @Override
     public void afterTextChanged(Editable s) {
         pageNo = 1;
+        isAuto = false;
         search();
     }
 

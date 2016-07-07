@@ -26,7 +26,7 @@
             android:layout_marginRight="@dimen/view_25"
             android:background="@drawable/bg_text_order_shape"
             android:gravity="center"
-            android:text="收货人"
+            android:text="@string/delivery_info_name"
             android:textColor="@color/font_gray"
             android:textSize="@dimen/font_20" />
 
@@ -34,7 +34,6 @@
             android:id="@+id/delivery_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="陈冰    13795376899"
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_30" />
     </LinearLayout>
@@ -52,7 +51,7 @@
             android:layout_marginRight="@dimen/view_25"
             android:background="@drawable/bg_text_order_shape"
             android:gravity="center"
-            android:text="提货地址"
+            android:text="@string/delivery_info_delivery"
             android:textColor="@color/font_gray"
             android:textSize="@dimen/font_20" />
 
@@ -60,7 +59,6 @@
             android:id="@+id/delivery_address_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="仁川机场T2航站楼"
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_30" />
     </LinearLayout>
@@ -78,7 +76,7 @@
             android:layout_marginRight="@dimen/view_25"
             android:background="@drawable/bg_text_order_shape"
             android:gravity="center"
-            android:text="提货时间"
+            android:text="@string/delivery_info_date"
             android:textColor="@color/font_gray"
             android:textSize="@dimen/font_20" />
 
@@ -86,7 +84,6 @@
             android:id="@+id/delivery_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2016-06-25    19:30-20:40"
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_30" />
     </LinearLayout>

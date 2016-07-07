@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_15"
                 android:gravity="center_horizontal"
-                android:text="兰芝(LANEIGE)细致无暇气垫粉凝霜 细致无暇气垫粉凝霜 5件套"
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_30" />
 
@@ -43,7 +42,6 @@
                 android:layout_marginBottom="@dimen/view_15"
                 android:layout_marginTop="@dimen/view_15"
                 android:gravity="center_horizontal"
-                android:text="￥1209"
                 android:textColor="@color/font_country_conuntry"
                 android:textSize="@dimen/font_30" />
 

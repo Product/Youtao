@@ -4,6 +4,8 @@
     android:background="@color/transparent"
     android:layout_height="match_parent">
     <GridView
+        android:paddingTop="-10dp"
+        android:paddingBottom="-10dp"
         android:background="@drawable/bg_share_shape"
         android:listSelector="@android:color/transparent"
         android:id="@+id/share_gridView"

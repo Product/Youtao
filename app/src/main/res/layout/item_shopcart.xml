@@ -41,7 +41,6 @@
                 android:textColor="@color/font_black"
                 android:lines="2"
                 android:textSize="@dimen/font_24"
-                android:text="兰芝(LANEIGE)细致无暇气垫粉凝霜SPF30+5件套"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_width="@dimen/view_286"
@@ -52,7 +51,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:textSize="@dimen/font_26"
-                android:text="￥1295"
                 android:textColor="@color/font_country_conuntry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -63,7 +61,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:text="删除"
+                android:text="@string/shopcart_del"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -81,7 +79,6 @@
             <!--@drawable/bg_shopcart_mid-->
             <TextView
                 android:background="@drawable/bg_shopcart_mid"
-                android:text="1"
                 android:layout_toRightOf="@id/item_shopcart_down_iv"
                 android:id="@+id/item_shopcart_mid_tv"
                 android:textSize="@dimen/view_35"

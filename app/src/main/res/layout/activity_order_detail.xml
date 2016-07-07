@@ -13,7 +13,7 @@
 
         <TextView
             style="@style/TextView_Title_Title"
-            android:text="确认订单" />
+            android:text="@string/order_detail_title" />
     </RelativeLayout>
 
     <View

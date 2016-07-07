@@ -425,7 +425,7 @@ public class MyUtils {
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .resetViewBeforeLoading(true)
-                .bitmapConfig(Bitmap.Config.ARGB_4444)
+                .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
     }
 
@@ -480,7 +480,7 @@ public class MyUtils {
         animator.start();
     }
 
-    public static void setWebViewSetting(WebView webView) {
+    public static void setWebViewSetting(WebView webView ,Context context) {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
@@ -488,8 +488,8 @@ public class MyUtils {
         // 开启 DOM storage API 功能
         webView.getSettings().setDomStorageEnabled(true);
         //开启 database storage API 功能
-        webView.getSettings().setDatabaseEnabled(true);
-        String cacheDirPath = BaseConstants.path.WEB_DIR;
+//        webView.getSettings().setDatabaseEnabled(true);
+        String cacheDirPath = context.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
         //设置数据库缓存路径
         webView.getSettings().setDatabasePath(cacheDirPath);
         //设置  Application Caches 缓存目录
@@ -498,10 +498,17 @@ public class MyUtils {
         webView.getSettings().setAppCacheEnabled(true);
     }
 
-    public static void clearWebViewCeche() {
+    public static void clearWebViewCeche(Context context) {
         //WebView 缓存文件
-        File appCacheDir = new File(BaseConstants.path.WEB_DIR);
-
+        String cacheDirPath = context.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+        File appCacheDir = new File(cacheDirPath);
+        try {
+            long folderSize = FileUtils.getFolderSize(appCacheDir);
+            String s = FileUtils.formatFileSize(folderSize);
+//            Log.e("haha",s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //删除webview 缓存 缓存目录
         if(appCacheDir.exists()){
             deleteFile(appCacheDir);

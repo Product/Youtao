@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/left_commodity_img"
-                android:text="韩束红石榴鲜活水影"
                 android:textSize="@dimen/font_28"
                 android:textColor="@color/font_black"
                 android:layout_marginLeft="@dimen/view_27"
@@ -55,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_commodity_price"
                     android:textSize="@dimen/font_30"
-                    android:text="￥92"/>
+                    />
 
                 <TextView
                     android:visibility="gone"
@@ -98,7 +97,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/right_commodity_img"
-                android:text="韩束红石榴鲜活水影"
                 android:textSize="@dimen/font_28"
                 android:textColor="@color/font_black"
                 android:layout_marginLeft="@dimen/view_27"
@@ -122,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/font_commodity_price"
                     android:textSize="@dimen/font_30"
-                    android:text="￥92"/>
+                    />
 
                 <TextView android:singleLine="true"
                     android:visibility="gone"

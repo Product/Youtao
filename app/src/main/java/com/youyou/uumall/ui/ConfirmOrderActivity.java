@@ -104,7 +104,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
 
     @AfterViews
     void afterViews() {
-        confirm_total_tv.setText("￥"+totalPrice);
+        confirm_total_tv.setText("￥"+totalPrice+"  ");
         orderBiz.setObjectCallbackInterface(this);
         adapter.setData(mData);
         confirm_order_lv.setAdapter(adapter);
@@ -194,7 +194,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
                 showToastShort("订单异常");
                 return ;
             }
-            intent.putExtra("name","油桃");
+            intent.putExtra("name","游淘");
             intent.putExtra("price",totalPrice);
             startActivity(intent);
             finish();

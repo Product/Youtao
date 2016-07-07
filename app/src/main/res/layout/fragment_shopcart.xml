@@ -83,7 +83,7 @@
                     android:id="@+id/shopcart_total_tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="合计:"
+                    android:text="@string/shopcart_info1"
                     android:textColor="@color/font_black"
                     android:textSize="@dimen/font_30" />
 
@@ -92,27 +92,17 @@
                     android:id="@+id/shopcart_total_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥0"
                     android:textColor="@color/font_country_conuntry"
                     android:textSize="@dimen/font_30" />
 
-                <TextView
-                    android:layout_toRightOf="@id/shopcart_total_tv"
-                    android:id="@+id/shopcart_total_tv2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="(不含运费)"
-                    android:textColor="@color/font_black"
-                    android:textSize="@dimen/font_30" />
                 <TextView
                     android:visibility="gone"
                     android:layout_below="@id/shopcart_total_tv"
                     android:id="@+id/shopcart_bonus_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="红包抵扣5元"
-                    android:textColor="@color/font_black"
-                    android:textSize="@dimen/font_30" />
+                    android:textColor="@color/font_country_conuntry"
+                    android:textSize="@dimen/font_28" />
             </RelativeLayout>
 
         </LinearLayout>

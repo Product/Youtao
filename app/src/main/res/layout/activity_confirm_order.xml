@@ -168,8 +168,8 @@
             <TextView
                 android:visibility="gone"
                 android:id="@+id/confirm_bonus_tv"
-                android:textColor="@color/font_black"
-                android:textSize="@dimen/font_30"
+                android:textColor="@color/font_country_conuntry"
+                android:textSize="@dimen/font_26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

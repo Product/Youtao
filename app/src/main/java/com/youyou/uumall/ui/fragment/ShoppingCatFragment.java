@@ -76,7 +76,6 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     private List<ShopCartBean> mData;
     Map<String, Boolean> mCheckedMap = new HashMap();//用于暂存选中条目
     private FragmentActivity mContext;
-    private Map param;
     private Double totalPrice;
 
     @Override

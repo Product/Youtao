@@ -14,11 +14,10 @@ public class BaseConstants {
         //        接口地址
 
 //        public static final String ROOT_URL = "http://58.96.188.197";
-//      public static final String ROOT_URL = "http://120.26.75.225:8090";  //测试环境
-		public static final String ROOT_URL = "http://youtao.youyoumob.com"; //生产环境
-
-//        public static final String API_VERSION = "/uumall/itf";
-        public static final String API_VERSION = "/itf";
+      public static final String ROOT_URL = "http://120.26.75.225:8090";  //测试环境
+//		public static final String ROOT_URL = "http://youtao.youyoumob.com"; //生产环境
+        public static final String API_VERSION = "/uumall/itf";
+//        public static final String API_VERSION = "/itf";
 
         public static final String API_ROOT_URL = ROOT_URL + API_VERSION;
 

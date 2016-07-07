@@ -35,7 +35,7 @@ public class WebActivity extends BaseActivity{
         href = intent.getStringExtra("href");
         if (!TextUtils.isEmpty(href)) {
             wv.loadUrl(href);
-            MyUtils.setWebViewSetting(wv);
+            MyUtils.setWebViewSetting(wv,this);
             wv.setWebViewClient(new TempWebViewClient());
             wv.setWebChromeClient(new TempWebChromeClient());
         }

@@ -52,6 +52,9 @@
     <!--query-->
     <string name="query_cancel">取消</string>
 
+    <!--country-->
+    <string name="country_title">选择所在城市</string>
+
     <!--category decs-->
     <string name="category_decs">商品详情</string>
     <string name="category_decs_insertcar">加入购物车</string>
@@ -65,6 +68,9 @@
     <string name="shopcart_accounts">结算(0)</string>
     <string name="shopcart_confirm">确认</string>
     <string name="shopcart_bg">购物车空空如也,赶紧囤货吧!</string>
+    <string name="shopcart_del">删除</string>
+    <string name="shopcart_info1">合计:</string>
+    <string name="shopcart_info2">(不含运费)</string>
 
     <!--delivery info-->
     <string name="delivery_info_title">编辑取货信息</string>
@@ -73,10 +79,12 @@
     <string name="delivery_info_date">回国日期</string>
     <string name="delivery_info_flt_no">航班号</string>
     <string name="delivery_info_delivery">自提点</string>
+    <string name="delivery_info_delivery2">请选择自提点</string>
     <string name="delivery_info_confirm">确认</string>
+    <string name="delivery_info_date2">选择机场提货时间</string>
 
     <!--payment-->
-    <string name="payment_title">支付方式:</string>
+    <string name="payment_title">支付方式</string>
     <string name="payment_online">在线支付</string>
     <string name="payment_wxpay_01">微信支付</string>
     <string name="payment_wxpay_02">使用微信支付,安全便捷</string>
@@ -181,4 +189,7 @@
     <string name="confirm_order_add_info">添加取货信息</string>
     <string name="confirm_order_info">已购商品</string>
     <string name="confirm_order_sum">合计:</string>
+
+    <!--order_detail-->
+    <string name="order_detail_title">确认订单</string>
 </resources>

@@ -20,6 +20,7 @@
                 >
 
                 <ImageView
+                    android:visibility="gone"
                     android:layout_width="@dimen/font_44"
                     android:layout_height="@dimen/font_44"
                     android:layout_alignParentRight="true"

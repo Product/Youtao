@@ -8,7 +8,7 @@
         >
     <TextView
         style="@style/TextView_Title_Title"
-        android:text="选择所在城市"
+        android:text="@string/country_title"
         />
     </RelativeLayout>
     <View
