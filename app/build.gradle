@@ -10,7 +10,7 @@ def releaseTime() {
 
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
@@ -158,7 +158,7 @@ apt {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
     // （androidannotations）3.使用apt引入对androidannotation的依赖
     apt "org.androidannotations:androidannotations:$AAVersion"
     //
@@ -174,7 +174,6 @@ dependencies {
     //multidex support
     compile 'com.android.support:multidex:1.0.0'
     compile files('libs/universal-image-loader-1.9.3.jar')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/libammsdk.jar')
     compile project(':PushSDK')
     compile 'org.greenrobot:eventbus:3.0.0'

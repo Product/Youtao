@@ -44,7 +44,6 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     TextView order_submit_tv;
     private OrderAdapter orderAdapter;
 
-    private boolean isAuto;
     private int pageNo = 1;
     private List<OrderBean> list = new ArrayList<>();
     private boolean isSatisfy;
@@ -74,21 +73,11 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
 //        log.e(arrayList.toString());
         if (type == OrderBiz.QUERY_ORDER) {
-            if (!isAuto) {
-                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
-                    isAuto = !isAuto;
-                    list.clear();
-                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                    list.addAll(orderBean);
-                    orderAdapter.setData(list);
-                    order_submit_lv.onRefreshComplete();
-                    return;
-                }
-            }
             if (pageNo == 1) {//是第一次调用,也就是默认刷新
                 if (arrayList != null && arrayList.size() != 0) {
                     List<OrderBean> orderBean = (List<OrderBean>) arrayList;
                     isSatisfy = orderBean.size()>=10?true:false;
+                    list.clear();
                     list.addAll(orderBean);
                     orderAdapter.setData(list);
                     order_submit_lv.onRefreshComplete();
@@ -115,7 +104,6 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
             if (t != null) {
                 Response response = (Response) t;
                 if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-                    isAuto = false;
                     orderBiz.queryOrder(1, 10, "", "orderSubmit");
                 }
             }
@@ -146,13 +134,8 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
 
     @Override
     public void onRefreshing(boolean isAuto) {
-        this.isAuto = isAuto;
-        if (isAuto) {
-            orderBiz.queryOrder(pageNo, 10, "", "orderSubmit");
-        } else {
             pageNo = 1;
             orderBiz.queryOrder(pageNo, 10, "", "orderSubmit");
-        }
     }
 
     @Override

@@ -43,7 +43,6 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
     @ViewById
     LinearLayout order_empty;
 
-    private boolean isAuto;
     private int pageNo = 1;
     private List<OrderBean> list = new ArrayList<>();
     private boolean isSatisfy;
@@ -63,20 +62,11 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == OrderBiz.QUERY_ORDER) {
-            if (!isAuto) {
-                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
-                isAuto=!isAuto;
-                list.clear();
-                List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                list.addAll(orderBean);
-                orderAdapter.setData(list);
-                order_submit_lv.onRefreshComplete();
-                return;
-            }}
             if (pageNo == 1) {//是第一次调用,也就是默认刷新
                 if (arrayList != null && arrayList.size() != 0) {
                     List<OrderBean> orderBean = (List<OrderBean>) arrayList;
                     isSatisfy = orderBean.size()>=10?true:false;
+                    list.clear();
                     list.addAll(orderBean);
                     orderAdapter.setData(list);
                     order_submit_lv.onRefreshComplete();
@@ -130,13 +120,8 @@ public class OrderAllActivity extends BaseActivity implements BaseBusiness.Array
 
     @Override
     public void onRefreshing(boolean isAuto) {
-        this.isAuto = isAuto;
-            if (isAuto) {
-                orderBiz.queryOrder(pageNo, 10, "", "");
-            } else {
                 pageNo=1;
                 orderBiz.queryOrder(pageNo, 10, "", "");
-            }
     }
 
     @Override

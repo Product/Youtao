@@ -39,7 +39,6 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.A
     CategoryDescBiz categoryDescBiz;
     private List<GoodsDescBean> list = new ArrayList<>();
     private String mId;
-    private boolean isAuto;
     private int pageNo = 1;
     private boolean isSatisfy;
 
@@ -61,21 +60,11 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.A
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (CategoryDescBiz.QUERY_GOODS_BY_CATEGORY == type) {
-            if (!isAuto) {//手动刷新
-                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
-                    isAuto = !isAuto;
-                    list.clear();
-                    List<GoodsDescBean> goodsDescBeanList = (List<GoodsDescBean>) arrayList;
-                    list.addAll(goodsDescBeanList);
-                    gridAdapter.setData(list);
-                    brand_desc_gv.onRefreshComplete();
-                    return;
-                }
-            }
             if (pageNo == 1) {//是第一次调用,也就是默认刷新
                 if (arrayList != null && arrayList.size() != 0) {
                     List<GoodsDescBean> goodsDescBeanList = (List<GoodsDescBean>) arrayList;
                     isSatisfy = goodsDescBeanList.size() >= 10 ? true : false;
+                    list.clear();
                     list.addAll(goodsDescBeanList);
                     gridAdapter.setData(list);
                     brand_desc_gv.onRefreshComplete();
@@ -110,14 +99,8 @@ public class CategoryDescActivity extends BaseActivity implements BaseBusiness.A
 
     @Override
     public void onRefreshing(boolean isAuto) {
-        this.isAuto = isAuto;
-        if (isAuto) {
-            categoryDescBiz.queryGoodsByCategory(pageNo, 10, mId);
-        } else {
             pageNo = 1;
             categoryDescBiz.queryGoodsByCategory(pageNo, 10, mId);
-        }
-
     }
 
     @Override

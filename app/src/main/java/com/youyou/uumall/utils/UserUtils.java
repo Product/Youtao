@@ -3,7 +3,6 @@ package com.youyou.uumall.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.amap.api.maps.model.LatLng;
 import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.model.UserDetailBean;
 
@@ -35,14 +34,14 @@ public class UserUtils {
         MyUtils.savePara(context, BaseConstants.preferencesFiled.LNG, String.valueOf(lng));
     }
 
-    public LatLng getCurrentLatLng() {
-        double lat = getLat();
-        double lng = getLng();
-        if (lat == -1 || lng == -1) {
-            return null;
-        }
-        return new LatLng(lat, lng);
-    }
+//    public LatLng getCurrentLatLng() {
+//        double lat = getLat();
+//        double lng = getLng();
+//        if (lat == -1 || lng == -1) {
+//            return null;
+//        }
+//        return new LatLng(lat, lng);
+//    }
 
     public double getLat() {
         String latStr = MyUtils.getPara(BaseConstants.preferencesFiled.LAT, context);

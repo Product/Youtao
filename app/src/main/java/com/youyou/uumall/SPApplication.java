@@ -20,7 +20,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengRegistrar;
 import com.youyou.uumall.base.BaseConstants;
-import com.youyou.uumall.manager.LocationManager_;
+//import com.youyou.uumall.manager.LocationManager_;
 import com.youyou.uumall.system.CrashHandler_;
 import com.youyou.uumall.utils.MyLogger;
 import com.youyou.uumall.utils.MyUtils;
@@ -55,7 +55,7 @@ public class SPApplication extends MultiDexApplication {
      * 完全退出
      */
     public void exit() {
-        LocationManager_.getInstance_(this).stopLocation();
+//        LocationManager_.getInstance_(this).stopLocation();
         MobclickAgent.onKillProcess(this);
         System.exit(0);
     }
