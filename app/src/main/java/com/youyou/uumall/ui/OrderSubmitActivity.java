@@ -31,7 +31,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/23.
  */
 @EActivity(R.layout.activity_order_submit)
-public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface, RefreshListView.OnRefreshListener, RefreshListView.OnLoadMoreListener {
+public class OrderSubmitActivity extends BaseActivity implements   RefreshListView.OnRefreshListener, RefreshListView.OnLoadMoreListener, BaseBusiness.ObjectCallbackInterface {
 
     @ViewById
     RefreshListView order_submit_lv;
@@ -53,7 +53,6 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
         order_submit_tv.setText(R.string.order_submit_title);
         orderAdapter = new OrderAdapter(this, OrderAdapter.ORDER_SUBMIT);
 //        orderAdapter.setOnCancelClickedListener(this);
-        orderBiz.setArrayListCallbackInterface(this);
         orderBiz.setObjectCallbackInterface(this);
 
         order_submit_lv.setAdapter(orderAdapter);
@@ -70,35 +69,6 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
 
     @UiThread
     @Override
-    public void arrayCallBack(int type, List<? extends Object> arrayList) {
-//        log.e(arrayList.toString());
-        if (type == OrderBiz.QUERY_ORDER) {
-            if (pageNo == 1) {//是第一次调用,也就是默认刷新
-                if (arrayList != null && arrayList.size() != 0) {
-                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                    isSatisfy = orderBean.size()>=10?true:false;
-                    list.clear();
-                    list.addAll(orderBean);
-                    orderAdapter.setData(list);
-                    order_submit_lv.onRefreshComplete();
-//                    log.e(orderBean.toString());
-                } else {
-                    order_submit_lv.onRefreshComplete();
-                    order_submit_lv.setVisibility(View.GONE);
-                    order_empty.setVisibility(View.VISIBLE);
-                }
-            } else {//这个是上拉加载更多
-                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
-                    List<OrderBean> orderBean = (List<OrderBean>) arrayList;
-                    list.addAll(orderBean);
-                    orderAdapter.setData(list);
-                }
-                order_submit_lv.onLoadMoreComplete();
-            }
-        }
-    }
-
-    @Override
     public void objectCallBack(int type, Object t) {
         if (type == OrderBiz.CANCEL_ORDER) {
             if (t != null) {
@@ -107,6 +77,38 @@ public class OrderSubmitActivity extends BaseActivity implements BaseBusiness.Ar
                     orderBiz.queryOrder(1, 10, "", "orderSubmit");
                 }
             }
+        }else if (type == OrderBiz.QUERY_ORDER) {
+            if (t == null) {
+                return;
+            }
+            Response response = (Response) t;
+            List<OrderBean> arrayList = (List<OrderBean>) response.data;
+            if (pageNo == 1) {//是第一次调用,也就是默认刷新
+                if (arrayList == null) {
+                    return;
+                }
+                if (arrayList.size() != 0 &&response.size!=0) {
+                    isSatisfy = arrayList.size()>=10?true:false;
+                    list.clear();
+                    for (int i = 0; i < response.size; i++) {
+                        list.add(arrayList.get(i));
+                    }
+                    orderAdapter.setData(list);
+                    order_submit_lv.onRefreshComplete();
+                } else {
+                    order_submit_lv.onRefreshComplete();
+                    order_submit_lv.setVisibility(View.GONE);
+                    order_empty.setVisibility(View.VISIBLE);
+                }
+
+            } else {//这个是上拉加载更多
+                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
+                    list.addAll(arrayList);
+                    orderAdapter.setData(list);
+                }
+                order_submit_lv.onLoadMoreComplete();
+            }
+
         }
     }
 

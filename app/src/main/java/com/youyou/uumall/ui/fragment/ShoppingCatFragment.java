@@ -122,7 +122,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
     @Click
     void shopcart_buynow_bt() {//根据check总数判断是否选中商品,未选中不执行转跳操作,选中将商品信息全部传递给订单页面
         if (sumChecked == 0) {
-            showToastShort("请选择商品");
+            showToastShort("未选中商品");
             return;
         }
         Bundle bundle = new Bundle();
@@ -171,7 +171,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                         }
                     }
                     adapter.setData(mData);
-                    shopcart_buynow_bt.setText("结算(" +  getSumCount(mData) + ")");
+                    shopcart_buynow_bt.setText("结算(" + getSumCount(mData) + ")");
                     setTotalChecked();
                 } else if (response.code == 46000 && TextUtils.equals(response.msg, "用户登录状态异常，请重新登录！")) {//如果没有登录就显示空列表
                     shopcart_bg_ll.setVisibility(View.VISIBLE);
@@ -218,17 +218,19 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
 //        List<ShopCartBean> list = (List<ShopCartBean>) arrayList;
 //        adapter.setData(list);
         if (type == SearchBiz.QUERY_BONUS) {
-            if (arrayList != null && arrayList.size() != 0) {
-                List<BonusBean> list = (List<BonusBean>) arrayList;
-                double bonus = 0;
-                for (BonusBean bean : list) {
-                    bonus += bean.value;
+            if (arrayList != null) {
+                if (arrayList.size() != 0) {
+                    List<BonusBean> list = (List<BonusBean>) arrayList;
+                    double bonus = 0;
+                    for (BonusBean bean : list) {
+                        bonus += bean.value;
+                    }
+                    shopcart_bonus_tv.setVisibility(View.VISIBLE);
+                    shopcart_bonus_tv.setText("红包抵扣" + bonus + "元");
+                    return;
                 }
-                shopcart_bonus_tv.setVisibility(View.VISIBLE);
-                shopcart_bonus_tv.setText("红包抵扣" + bonus + "元");
-            } else {
-                shopcart_bonus_tv.setVisibility(View.GONE);
             }
+                shopcart_bonus_tv.setVisibility(View.GONE);
 
         }
     }
@@ -329,7 +331,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 adapter.setData(mData);
                 sumChecked = mData.size();
             }
-                shopcart_total_tv.setText("￥" + totalPriceForResponse);
+            shopcart_total_tv.setText("￥" + totalPriceForResponse);
         } else {//全选了,进行反选操作,把所有的check值改为false,从新设置给适配器.价格就是0
             for (int i = 0; i < mData.size(); i++) {
                 mData.get(i).isCheck = false;
@@ -337,17 +339,17 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 totalPrice = 0.0;
                 sumChecked = 0;
             }
-                shopcart_total_tv.setText("￥" + totalPrice);
+            shopcart_total_tv.setText("￥" + totalPrice);
         }
         shopcart_buynow_bt.setText("结算(" + getSumCount(mData) + ")");
     }
 
-    public Integer getSumCount( List<ShopCartBean> data) {
+    public Integer getSumCount(List<ShopCartBean> data) {
         Integer sumCount = 0;
-        for (int i = 0;i<data.size();i++) {
+        for (int i = 0; i < data.size(); i++) {
             ShopCartBean bean = data.get(i);
             if (bean.isCheck) {
-                sumCount =  sumCount+bean.count;
+                sumCount = sumCount + bean.count;
             }
         }
         return sumCount;

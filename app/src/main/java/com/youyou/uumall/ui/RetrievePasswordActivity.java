@@ -45,7 +45,7 @@ public class RetrievePasswordActivity extends BaseActivity implements BaseBusine
     void retrieve_code_tv(){
         String phone = retrieve_phone.getText().toString();
         if (TextUtils.isEmpty(phone)) {
-            showToastShort("请正确输入手机号");
+            showToastShort("手机号输入有误");
             return;
         }
             registerBiz.getSmsCode(phone,"2");
@@ -95,16 +95,22 @@ public class RetrievePasswordActivity extends BaseActivity implements BaseBusine
     public void objectCallBack(int type, Object t) {
         if (type == RegisterBiz.GET_SMS_CODE) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0) {
-                showToastShort("验证码以发送");
+//                showToastShort("验证码以发送");
             }else{
                 showToastShort(response.msg);
             }
         }
         if (type == RegisterBiz.RETRIEVE_PASSWORD) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0) {
-                showToastShort("修改完成");
+                showToastShort("更改成功");
                 finish();
             }else{
                 showToastShort(response.msg);

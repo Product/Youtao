@@ -18,6 +18,7 @@ import com.youyou.uumall.R;
 import com.youyou.uumall.api.OtherApi;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseFragment;
+import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.OrderBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.UpdateAllOrder;
@@ -45,7 +46,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 @EFragment(R.layout.fragment_mine)
-public class MineFragment extends BaseFragment implements BaseBusiness.ArrayListCallbackInterface {
+public class MineFragment extends BaseFragment implements BaseBusiness.ObjectCallbackInterface {
 
     @Bean
     UserUtils userUtils;
@@ -73,7 +74,7 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
     @AfterViews
     void afterViews() {
         imageLoader = ImageLoader.getInstance();
-        orderBiz.setArrayListCallbackInterface(this);
+        orderBiz.setObjectCallbackInterface(this);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
     void wechat_client_layout() {//复制到剪切板
         ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         String text = "meitao_youyou";
-        ClipData  myClip = ClipData.newPlainText("text", text);
+        ClipData myClip = ClipData.newPlainText("text", text);
         cm.setPrimaryClip(myClip);
         showToastShort("已将微信公众号复制到剪切板");
     }
@@ -166,13 +167,14 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
         builder.setNegativeButton(R.string.dialog_tel_neg, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+getResources().getString(R.string.dialog_login_pos)));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + getResources().getString(R.string.dialog_login_pos)));
                 startActivity(intent);
             }
         });
         builder.show();
 
     }
+
     @Click
     void korea_layout() {//韩国客服
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -181,7 +183,7 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
         builder.setNegativeButton(R.string.dialog_tel_neg, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+getResources().getString(R.string.dialog_tel_message_2)));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + getResources().getString(R.string.dialog_tel_message_2)));
                 startActivity(intent);
             }
         });
@@ -190,13 +192,17 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
 
     @UiThread
     @Override
-    public void arrayCallBack(int type, List<? extends Object> arrayList) {
+    public void objectCallBack(int type, Object t) {
         int orderSubmit = 0;
         int orderConfirm = 0;
         int orderShipping = 0;
         if (type == OrderBiz.QUERY_ORDER) {
-            if (arrayList != null) {
-                List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+            if (t == null) {
+                return;
+            }
+            Response response = (Response) t;
+            List<OrderBean> orderBean = (List<OrderBean>) response.data;
+            if (orderBean != null) {
                 for (OrderBean bean :
                         orderBean) {
                     String status = bean.status;
@@ -224,13 +230,13 @@ public class MineFragment extends BaseFragment implements BaseBusiness.ArrayList
                 if (orderConfirm != 0) {
                     mine_point_ll_2.setVisibility(View.VISIBLE);
                     mine_point_tv_2.setText(orderConfirm + "");
-                }else {
+                } else {
                     mine_point_ll_2.setVisibility(View.GONE);
                 }
                 if (orderShipping != 0) {
                     mine_point_ll_3.setVisibility(View.VISIBLE);
                     mine_point_tv_3.setText(orderShipping + "");
-                }else {
+                } else {
                     mine_point_ll_3.setVisibility(View.GONE);
                 }
                 if (orderBean.size() != 0) {

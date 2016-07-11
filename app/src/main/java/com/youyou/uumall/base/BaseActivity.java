@@ -65,7 +65,7 @@ import java.util.List;
  * @ClassName: BaseActivity
  * @Description: 所有的activity继承该类，可以将通用的东西放到该类
  */
-public class BaseActivity extends FragmentActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface {
+public class BaseActivity extends FragmentActivity  {
     LoginBiz login;
     RegisterBiz register;
     public SPApplication mApp;
@@ -144,8 +144,18 @@ public class BaseActivity extends FragmentActivity implements BaseBusiness.Array
         String[] infos = info.split(",");
         if (!TextUtils.isEmpty(last)) {
             if (System.currentTimeMillis() - Long.valueOf(last) > 1000 * 1800) {
-                register.setArrayListCallbackInterface(this);
-                login.setObjectCallbackInterface(this);
+                register.setArrayListCallbackInterface(new BaseBusiness.ArrayListCallbackInterface() {
+                    @Override
+                    public void arrayCallBack(int type, List<? extends Object> arrayList) {
+
+                    }
+                });
+                login.setObjectCallbackInterface(new BaseBusiness.ObjectCallbackInterface() {
+                    @Override
+                    public void objectCallBack(int type, Object t) {
+
+                    }
+                });
                 String openId = MyUtils.getPara(BaseConstants.preferencesFiled.OPEN_ID, this);
                 if (!TextUtils.isEmpty(openId)) {
                     register.wechatLogin(openId, "", MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, this), "3");
@@ -446,13 +456,4 @@ public class BaseActivity extends FragmentActivity implements BaseBusiness.Array
         getWindow().setAttributes(attrs);
     }
 
-    @Override
-    public void arrayCallBack(int type, List<? extends Object> arrayList) {
-        log.e("微信登录");
-    }
-
-    @Override
-    public void objectCallBack(int type, Object t) {
-        log.e("普通登录");
-    }
 }

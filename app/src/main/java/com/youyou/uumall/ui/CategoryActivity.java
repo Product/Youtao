@@ -113,9 +113,11 @@ public class CategoryActivity extends BaseActivity implements BaseBusiness.Array
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == CategoryDescBiz.QUERY_CATEGORY) {
-            List<CategoryBean> list = (List<CategoryBean>) arrayList;
+            if (arrayList != null) {
+                List<CategoryBean> list = (List<CategoryBean>) arrayList;
 //            log.e(arrayList.toString());
-            adapter.setData(list);
+                adapter.setData(list);
+            }
         } else if (type == CommodityBiz.GET_BRAND_LIST) {
             if (arrayList != null) {
                 brandList = (List<BrandBean>) arrayList;

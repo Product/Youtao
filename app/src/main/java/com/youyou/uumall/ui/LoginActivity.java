@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
 
 //        if (System.currentTimeMillis() - firstTime > 10000) {
             if (!api.isWXAppInstalled()) {
-                showToastShort("请安装微信");
+                showToastShort("请先安装微信");
                 return;
             }
             login_pb.setVisibility(View.VISIBLE);
@@ -197,7 +197,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                     eventBus.post(new ShopCartUpdateEvent());
                     eventBus.post(new ShopCartTriggerEvent());
                     eventBus.post(new LoginEvent());
-                    showToastShort("登录成功");
+//                    showToastShort("登录成功");
                     finish();
                     overridePendingTransition(R.anim.anim_none,R.anim.from_top_exit);
                 } else {

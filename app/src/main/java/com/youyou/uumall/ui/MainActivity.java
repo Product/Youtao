@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.youyou.uumall.R;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
+import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.event.MineTriggerEvent;
@@ -24,6 +25,7 @@ import com.youyou.uumall.model.ShopCartBean;
 import com.youyou.uumall.ui.fragment.HomeFragment_;
 import com.youyou.uumall.ui.fragment.MineFragment_;
 import com.youyou.uumall.ui.fragment.ShoppingCatFragment_;
+import com.youyou.uumall.utils.MyUtils;
 import com.youyou.uumall.view.ToastMaster;
 
 import org.androidannotations.annotations.AfterViews;
@@ -81,7 +83,7 @@ public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCal
     @AfterViews
     void afterViews() {
         shopcartBiz.setObjectCallbackInterface(this);
-        // TODO: 2016/6/15 由于这个接口需要国家码,所以触发在home中的访问之后
+        MyUtils.savePara(mApp, BaseConstants.preferencesFiled.FIRST_LOGIN,"false");
     }
 
     @Override
@@ -115,7 +117,6 @@ public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCal
                 ft.hide(fragmentArray[i]);
             }
         }
-
         ft.commit();
         showSelectedBtn(mCurrentPostion);
     }

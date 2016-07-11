@@ -62,7 +62,7 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
     void register_getSmsCode() {
         String phone = register_phone.getText().toString();
         if (TextUtils.isEmpty(phone) ) {
-            showToastShort("请正确输入手机号");
+            showToastShort("手机号输入有误");
             return;
         }
         registerBiz.getSmsCode(phone,"1");
@@ -78,7 +78,7 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
         String passWord = register_password.getText().toString();
         String invCode = register_invitation_code.getText().toString();
         if (TextUtils.isEmpty(phoneNum) || TextUtils.isEmpty(SMSCode) || TextUtils.isEmpty(passWord)) {
-            showToastShort("值不能为空");
+            showToastShort("输入有误");
             return;
         }
         map = new HashMap();
@@ -102,6 +102,9 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
     public void objectCallBack(int type, Object t) {
         if (type == RegisterBiz.USER_REGISTER) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 showToastShort("注册成功");
                 finish();
@@ -110,8 +113,11 @@ public class RegisterActivity extends BaseActivity implements BaseBusiness.Objec
             }
         } else if (type == RegisterBiz.GET_SMS_CODE) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-                showToastShort("验证码已发送");
+//                showToastShort("验证码已发送");
             } else {
                 showToastShort(response.msg);
             }

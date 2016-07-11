@@ -23,7 +23,7 @@ public class ShopcartBiz extends BaseBusiness {
     Context mContext;
 
     /**
-     * 跟新购物车
+     * 更新购物车接口
      */
     @Background
     public void updatecart(Map[] dataArray,int isUpdate) {
@@ -36,7 +36,7 @@ public class ShopcartBiz extends BaseBusiness {
     }
 
     /**
-     * 购物车查询
+     * 购物车查询接口
      */
     @Background
     public void getcartList() {
@@ -47,7 +47,8 @@ public class ShopcartBiz extends BaseBusiness {
     }
 
     /**
-     * 删除购物车(废弃)
+     * 删除购物车
+     * (废弃)
      */
     @Background
     public void cartItemDel(Map map) {

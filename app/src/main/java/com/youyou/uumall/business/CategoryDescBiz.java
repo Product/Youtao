@@ -17,20 +17,28 @@ import java.util.Map;
  */
 @EBean
 public class CategoryDescBiz extends BaseBusiness {
+
     public static final int QUERY_CATEGORY = 5;
     public static final int QUERY_GOODS_BY_ID = 3;
     public static final int QUERY_GOODS_BY_CATEGORY = 6;//商品分类查询接口
     public static final int UPDATE_GOODS_PRICE = 1;//商品分类查询接口
+
     @RootContext
     Context mContext;
 
+    /**
+     * 商品详情查询接口
+     */
     @Background
     public void queryGoodsById(String goodsId) {
         Map map = new HashMap();
         map.put("goodsId", goodsId);
-        objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_ID, handleResponse(baseApi.queryGoodsById(map)));
+        objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_ID, baseApi.queryGoodsById(map).data);
     }
 
+    /**
+     * 商品分类查询接口
+     */
     @Background
     public void queryCategory(String parentId) {
         String countryCode = MyUtils.getCountryCode(mContext);
@@ -41,7 +49,7 @@ public class CategoryDescBiz extends BaseBusiness {
     }
 
     /**
-     * 商品分类查询接口
+     * 分类搜索商品接口
      */
     @Background
     public void queryGoodsByCategory(int pageNo ,int pageSize ,String categoryId) {
@@ -51,10 +59,13 @@ public class CategoryDescBiz extends BaseBusiness {
         map.put("pageSize", pageSize);//分页大小
         map.put("countryCode", countryCode);//国家编码
         map.put("categoryId", categoryId);//商品分类ID
-        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_CATEGORY,baseApi.queryGoodsByCategory(map).data);
-//        objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_CATEGORY, baseApi.queryGoodsByCategory(map));
+//        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_CATEGORY,baseApi.queryGoodsByCategory(map).data);
+        objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_CATEGORY, baseApi.queryGoodsByCategory(map));
     }
 
+    /**
+     * 商品价格查询接口
+     */
     @Background
     public void updateGoodsPrice(String goodsId) {
         Map map = new HashMap();

@@ -70,7 +70,7 @@ public class CommodityBiz extends BaseBusiness {
         map.put("pageSize", pageSize);//分页大小
         map.put("countryCode", countryCode);//国家编码
         map.put("brandId", brandId);//商品分享ID
-        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_BRAND,baseApi.queryGoodsByBrand(map).data);
+        objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_BRAND,baseApi.queryGoodsByBrand(map));
     }
 
 

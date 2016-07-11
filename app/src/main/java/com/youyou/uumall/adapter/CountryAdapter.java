@@ -44,7 +44,7 @@ public class CountryAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return dictList.size();
+        return dictList ==null? 0 : dictList.size();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CountryAdapter extends BaseAdapter{
         TextView item_country_tv = ViewHolder.get(convertView, R.id.item_country_tv);
         LinearLayout item_country_ll = ViewHolder.get(convertView, R.id.item_country_ll);
         String defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
-        String currentCountry = dictList.get(position).split(",")[0];//这种方法不是很好,应该使用数据库的方式来获取
+        String currentCountry = dictList.get(position).split(",")[0];
         if (TextUtils.equals(defaultCountry,currentCountry)){
             item_country_tv.setTextColor(mContext.getResources().getColor(R.color.font_country_conuntry));
         }

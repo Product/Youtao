@@ -103,7 +103,7 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
     }
 
     @Click
-    void mobile_binding_pro_iv() {//回退上一页?// TODO: 2016/5/27 回退到哪里
+    void mobile_binding_pro_iv() {
         sendEvent();
         finish();
 //        MainActivity_.intent(this).start();
@@ -120,15 +120,21 @@ public class MobileBindingActivity extends BaseActivity implements BaseBusiness.
     public void objectCallBack(int type, Object t) {
         if (type == RegisterBiz.GET_SMS_CODE) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-                showToastShort("验证码已发送");
+//                showToastShort("验证码已发送");
             } else {
                 showToastShort(response.msg);
             }
         } else if (type == RegisterBiz.MOBILE_BINDING) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-                showToastShort("绑定完成");
+                showToastShort("绑定成功");
                 sendEvent();
                 finish();
             } else {

@@ -135,7 +135,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
                 mDescription = mDescription.replace("\r\n","  ");
                 confirm_order_addinfo_ll.setVisibility(View.GONE);
                 confirm_order_info_ll.setVisibility(View.VISIBLE);
-                showToastLong(mName + mPhone + mDate + mFltNo + mDelivery);
+//                showToastLong(mName + mPhone + mDate + mFltNo + mDelivery);
                 confirm_order_name_tv.setText(mName +"    "+ mPhone);
 //                confirm_order_time_tv.setText(mDate +"    "+ mFltNo);
                 confirm_order_time_tv.setText(mDate);
@@ -209,7 +209,11 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
         if (type == SearchBiz.QUERY_BONUS) {
-            if (arrayList != null&&arrayList.size()!=0) {
+            if (arrayList == null) {
+                confirm_bonus_tv.setVisibility(View.GONE);
+                return;
+            }
+            if (arrayList.size()!=0) {
                 List<BonusBean> list = (List<BonusBean>) arrayList;
                 double bonus = 0;
                 for (BonusBean bean : list) {

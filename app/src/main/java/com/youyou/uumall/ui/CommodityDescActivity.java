@@ -143,15 +143,21 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
     @Override
     public void objectCallBack(int type, Object t) {
         if (ShopcartBiz.UPDATE_CART == type) {
+            if (t == null) {
+                return;
+            }
             Response response = (Response) t;
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-                showToastShort("成功加入购物车");
+//                showToastShort("成功加入购物车");
                 shopcartBiz.getcartList();
                 eventBus.post(new ShopCartUpdateEvent());//发送给main
             } else {
                 showToastShort(response.msg);
             }
         } else if (CategoryDescBiz.QUERY_GOODS_BY_ID == type) {
+            if (t == null) {
+                return;
+            }
             GoodsDescBean bean = (GoodsDescBean) t;
 //            log.e(bean.toString());
             Bundle bundle = new Bundle();
@@ -167,6 +173,9 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (ShopcartBiz.GET_CART_LIST == type) {
+            if (t == null) {
+                return;
+            }
             Response response = (Response) t;
             if (response.code != 0) {
                 isLogined = false;

@@ -30,7 +30,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/24.
  */
 @EActivity(R.layout.activity_order_detail)
-public class OrderDetailActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BaseBusiness.ObjectCallbackInterface, OrderDetailAdapter.OnCancelClickListener, OrderDetailAdapter.OnPayClickListener {
+public class OrderDetailActivity extends BaseActivity implements  BaseBusiness.ObjectCallbackInterface, OrderDetailAdapter.OnCancelClickListener, OrderDetailAdapter.OnPayClickListener {
     @Bean
     OrderBiz orderBiz;
 
@@ -47,7 +47,6 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
     void afterViews() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-        orderBiz.setArrayListCallbackInterface(this);
         orderBiz.setObjectCallbackInterface(this);
         orderBiz.queryOrder(0, 0, id, "");
         order_detail_lv.setAdapter(orderDetailAdapter);
@@ -76,23 +75,16 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
                     finish();
                 }
             }
-        }
-    }
-
-
-    @UiThread
-    @Override
-    public void arrayCallBack(int type, List<? extends Object> arrayList) {
-        if (type == OrderBiz.QUERY_ORDER) {
-            if (arrayList != null) {
-                List<OrderBean> orderBean = (List<OrderBean>) arrayList;
+        }else if (type == OrderBiz.QUERY_ORDER) {
+            if (t != null) {
+                Response response = (Response) t;
+                List<OrderBean> orderBean = (List<OrderBean>)response.data ;
                 bean = orderBean.get(0);
                 orderDetailAdapter.setData(orderBean);
 //                log.e(bean.toString());
             }
         }
     }
-
 
     @Override
     public void cancelClick() {
@@ -117,4 +109,5 @@ public class OrderDetailActivity extends BaseActivity implements BaseBusiness.Ar
         intent.putExtra("price", price);
         startActivity(intent);
     }
+
 }

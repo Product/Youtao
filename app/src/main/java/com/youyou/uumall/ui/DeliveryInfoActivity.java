@@ -128,8 +128,10 @@ public class DeliveryInfoActivity extends BaseActivity implements BaseBusiness.A
     @UiThread
     @Override
     public void arrayCallBack(int type, List<? extends Object> arrayList) {
+        if (arrayList != null) {
         mDeliveryList = (List<DictBean>) arrayList;
         deliveryAdapter.setData(mDeliveryList);
+        }
     }
 
 

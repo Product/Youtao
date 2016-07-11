@@ -30,6 +30,9 @@ public class RegisterBiz extends BaseBusiness {
     public static final int LOGOUT =6 ;
     public static final int MOD_USER_INFO =7 ;
 
+    /**
+     * 获取验证码接口
+     */
     @Background
     public void getSmsCode(String mobile, String type){
         Map map = new HashMap();
@@ -38,11 +41,17 @@ public class RegisterBiz extends BaseBusiness {
         objectCallbackInterface.objectCallBack(GET_SMS_CODE, baseApi.getSMSCode(map));
     }
 
+    /**
+     * 用户注册接口
+     */
     @Background
     public void userRegister(Map map){
         objectCallbackInterface.objectCallBack(USER_REGISTER, baseApi.userRegister(map));
     }
 
+    /**
+     * 用户找回密码接口
+     */
     @Background
     public void retrievePassword(String phone,String newPwd,String SmsCode){
         Map map = new HashMap();
@@ -54,6 +63,9 @@ public class RegisterBiz extends BaseBusiness {
         objectCallbackInterface.objectCallBack(RETRIEVE_PASSWORD, objectResponse);
     }
 
+    /**
+     * 微信登录接口
+     */
     @Background
     public void wechatLogin(String openId,String parentInvitationCode,String deviceToken,String clientType){
         Map map = new HashMap();
@@ -64,6 +76,9 @@ public class RegisterBiz extends BaseBusiness {
         arrayListCallbackInterface.arrayCallBack(WECHAT_LOGIN, handleResponse(baseApi.wechatLogin(map)));
     }
 
+    /**
+     * 手机绑定接口
+     */
     @Background
     public void mobileBinding(String openId, String mobile, String verifyCode) {
         Map map = new HashMap();
@@ -73,11 +88,17 @@ public class RegisterBiz extends BaseBusiness {
         objectCallbackInterface.objectCallBack(MOBILE_BINDING,baseApi.mobileBinding(map));
     }
 
+    /**
+     * 用户登出接口
+     */
     @Background
     public void logout() {
         objectCallbackInterface.objectCallBack(LOGOUT,baseApi.logout());
     }
 
+    /**
+     * 更新用户信息接口
+     */
     @Background
     public void modUserInfo(String userName,String userIcon) {
         String deviceToken = MyUtils.getPara(BaseConstants.preferencesFiled.DEVICE_TOKEN, context);

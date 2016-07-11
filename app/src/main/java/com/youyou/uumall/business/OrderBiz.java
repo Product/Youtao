@@ -17,11 +17,15 @@ import java.util.Map;
  */
 @EBean
 public class OrderBiz extends BaseBusiness{
+
     public static final int ORDER_SUBMIT = 0;
     public static final int CREATE_WX_PREPAY_ORDER =1 ;
     public static final int QUERY_ORDER =2 ;
     public static final int CANCEL_ORDER =3 ;
 
+    /**
+     * 订单预处理接口
+     */
     @Background
     public void orderSubmit(List<ShopCartBean> data,String name,String linkTel,String pickupTime,String deliverType,String deliveryId,String address,String remarks){
         Map map = new HashMap();
@@ -44,6 +48,9 @@ public class OrderBiz extends BaseBusiness{
         objectCallbackInterface.objectCallBack(ORDER_SUBMIT,baseApi.orderSubmit(map));
     }
 
+    /**
+     * 微信pay预交易接口
+     */
     @Background
     public void createWxPrepayOrder(String orderId,double totalFee){
         Map param = new HashMap();
@@ -54,6 +61,9 @@ public class OrderBiz extends BaseBusiness{
         arrayListCallbackInterface.arrayCallBack(CREATE_WX_PREPAY_ORDER,handleResponse(baseApi.createWxPrepayOrder(param)));
     }
 
+    /**
+     * 取消订单接口
+     */
     @Background
     public void cancelOrder(String orderId){
         Map map = new HashMap();
@@ -61,6 +71,9 @@ public class OrderBiz extends BaseBusiness{
         objectCallbackInterface.objectCallBack(CANCEL_ORDER,baseApi.cancelOrder(map));
     }
 
+    /**
+     * 查询订单接口
+     */
     @Background
     public void queryOrder(Integer pageNo,Integer pageSize,String orderId,String status){
         Map map = new HashMap();
@@ -72,7 +85,8 @@ public class OrderBiz extends BaseBusiness{
 //        Response<Object> listResponse = baseApi.queryOrder(map);
 //        log.e(listResponse.toString());
         if (listResponse!=null) {
-            arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,listResponse.data);
+            objectCallbackInterface.objectCallBack(QUERY_ORDER,listResponse);
+//            arrayListCallbackInterface.arrayCallBack(QUERY_ORDER,listResponse.data);
         }
     }
 }

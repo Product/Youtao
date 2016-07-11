@@ -9,6 +9,7 @@ import com.youyou.uumall.adapter.BrandDescGridAdapter;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
+import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.CommodityBiz;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.view.RefreshListView;
@@ -27,7 +28,7 @@ import java.util.List;
  * Created by Administrator on 2016/6/14.
  */
 @EActivity(R.layout.activity_brand_desc)
-public class BrandDescActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, BrandDescGridAdapter.OnItemClickListener, RefreshListView.OnRefreshListener, RefreshListView.OnLoadMoreListener {
+public class BrandDescActivity extends BaseActivity implements BrandDescGridAdapter.OnItemClickListener, RefreshListView.OnRefreshListener, RefreshListView.OnLoadMoreListener, BaseBusiness.ObjectCallbackInterface {
     @ViewById
     TextView brand_desc_title_tv;
 
@@ -49,40 +50,13 @@ public class BrandDescActivity extends BaseActivity implements BaseBusiness.Arra
         mId = intent.getStringExtra("id");
         brand_desc_title_tv.setText(name);
         brand_desc_gv.setAdapter(gridAdapter);
-        commodityBiz.setArrayListCallbackInterface(this);
+        commodityBiz.setObjectCallbackInterface(this);
         gridAdapter.setOnItemClickListener(this);
         brand_desc_gv.setOnLoadMoreListener(this);
         brand_desc_gv.setOnRefreshListener(this);
         brand_desc_gv.autoRefresh();
     }
 
-    @UiThread
-    @Override
-    public void arrayCallBack(int type, List<? extends Object> arrayList) {
-        if (CommodityBiz.QUERY_GOODS_BY_BRAND == type) {
-            if (pageNo == 1) {//是第一次调用,也就是默认刷新
-                if (arrayList != null && arrayList.size() != 0) {
-                    List<GoodsDescBean> goodsDescBeanList = (List<GoodsDescBean>) arrayList;
-                    isSatisfy = goodsDescBeanList.size() >= 10 ? true : false;
-                    list.clear();
-                    list.addAll(goodsDescBeanList);
-                    gridAdapter.setData(list);
-                    brand_desc_gv.onRefreshComplete();
-                } else {
-                    brand_desc_gv.onRefreshComplete();
-                    brand_desc_gv.setVisibility(View.GONE);
-//                    order_empty.setVisibility(View.VISIBLE);
-                }
-            } else {//这个是上拉加载更多
-                if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
-                    List<GoodsDescBean> goodsDescBeanList = (List<GoodsDescBean>) arrayList;
-                    list.addAll(goodsDescBeanList);
-                    gridAdapter.setData(list);
-                }
-                brand_desc_gv.onLoadMoreComplete();
-            }
-        }
-    }
 
     @Click
     void brand_desc_pro_iv() {
@@ -106,5 +80,41 @@ public class BrandDescActivity extends BaseActivity implements BaseBusiness.Arra
     public void onLoadingMore() {
         pageNo++;
         commodityBiz.queryGoodsByBrand(pageNo, 10, mId);
+    }
+
+    @UiThread
+    @Override
+    public void objectCallBack(int type, Object t) {
+        if (CommodityBiz.QUERY_GOODS_BY_BRAND == type) {
+            if (t == null) {
+                return;
+            }
+            Response response = (Response) t;
+            List<GoodsDescBean> arrayList = (List<GoodsDescBean>) response.data;
+            if (arrayList == null) {
+                return;
+            }
+            if (pageNo == 1) {//是第一次调用,也就是默认刷新
+                if (response.size != 0 && arrayList.size() != 0) {
+                    isSatisfy = arrayList.size() >= 10 ? true : false;
+                    list.clear();
+                    for (int i = 0; i < response.size; i++) {
+                        list.add(arrayList.get(i));
+                    }
+                    gridAdapter.setData(list);
+                    brand_desc_gv.onRefreshComplete();
+                } else {
+                    brand_desc_gv.onRefreshComplete();
+                    brand_desc_gv.setVisibility(View.GONE);
+//                    order_empty.setVisibility(View.VISIBLE);
+                }
+            } else {//这个是上拉加载更多
+                if (response.size != 0 && arrayList.size() != 0 && isSatisfy) {
+                    list.addAll(arrayList);
+                    gridAdapter.setData(list);
+                }
+                brand_desc_gv.onLoadMoreComplete();
+            }
+        }
     }
 }

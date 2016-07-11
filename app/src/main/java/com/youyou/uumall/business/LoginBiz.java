@@ -16,9 +16,14 @@ import java.util.Map;
  */
 @EBean
 public class LoginBiz extends BaseBusiness {
+
     public static final int USER_LOGIN = 1;
     public static final int TEXT_LOGIN =2 ;
 
+
+    /**
+     * 用户登录接口
+     */
     @Background
     public void userLogin(String userPhone, String userPwd,String deviceToken){
         Map paramMap = new HashMap<>();

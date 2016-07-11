@@ -119,9 +119,9 @@ android {
         meizu {}
         xiaomi {}
         huawei {}
-    }
-    productFlavors.all { flavor ->
-        flavor.manifestPlaceholders = [APP_CHANNEL: name]
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [APP_CHANNEL: name]
+        }
     }
 
 }

@@ -67,7 +67,6 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
 //        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         linearLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         relativeLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        MyUtils.savePara(mApp, BaseConstants.preferencesFiled.FIRST_LOGIN,"");// TODO: 2016/6/2 要在主页设置
         String para = MyUtils.getPara(BaseConstants.preferencesFiled.FIRST_LOGIN, mApp);
         if (!TextUtils.isEmpty(para)) {
             MainActivity_.intent(this).start();

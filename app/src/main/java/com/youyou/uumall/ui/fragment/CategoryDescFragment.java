@@ -87,10 +87,11 @@ public class CategoryDescFragment extends BaseFragment implements BaseBusiness.O
     @Override
     public void objectCallBack(int type, Object t) {
         if (CategoryDescBiz.QUERY_GOODS_BY_ID == type) {
+            if (t != null) {
             GoodsDescBean bean = (GoodsDescBean) t;
-//            log.e(bean.toString());
             eventBus.post(new GoodsDescEvent(bean));
             initData(bean);
+            }
         }
     }
 

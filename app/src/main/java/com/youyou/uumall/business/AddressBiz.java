@@ -30,19 +30,10 @@ public class AddressBiz extends BaseBusiness {
      */
     @Background
     public void queryDict() {
-
         Map map = new HashMap();
         map.put("dictType", BG_BASE_COUNTRY);
         arrayListCallbackInterface.arrayCallBack(QUERY_COUNTRY, handleResponse(baseApi.queryDict(map)));
     }
-
-//    /**
-//     * 查询推荐商品
-//     */
-//    @Background
-//    public void getRecommendList(Map map) {
-//        arrayListCallbackInterface.arrayCallBack(GET_RECOMMEND_LIST, handleResponse(baseApi.getRecommendData(map)));
-//    }
 
     /**
      * 自提点查询

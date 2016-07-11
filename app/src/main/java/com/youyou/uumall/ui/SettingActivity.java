@@ -129,6 +129,9 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
     public void objectCallBack(int type, Object t) {
         if (RegisterBiz.LOGOUT == type) {
             Response response = (Response) t;
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 eventBus.post(new MineTriggerEvent());
                 MyUtils.savePara(this, BaseConstants.preferencesFiled.OPEN_ID,"");
@@ -143,6 +146,9 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
         } else if (RegisterBiz.MOD_USER_INFO == type) {
             Response response = (Response) t;
 //            log.e(response.toString());
+            if (response == null) {
+                return;
+            }
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
                 setting_exit_btn.setVisibility(View.VISIBLE);
             } else {
@@ -156,11 +162,11 @@ public class SettingActivity extends BaseActivity implements BaseBusiness.Object
         PushAgent mPushAgent = PushAgent.getInstance(this);
         if (!mPushAgent.isEnabled()&&isChecked){//点击之后是开
             mPushAgent.enable();
-            showToastShort("启用推送服务");
+//            showToastShort("启用推送服务");
         }
         if (mPushAgent.isEnabled()&&!isChecked){
             mPushAgent.disable();
-            showToastShort("关闭推送服务");
+//            showToastShort("关闭推送服务");
         }
     }
 }

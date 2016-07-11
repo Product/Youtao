@@ -12,6 +12,7 @@ import com.youyou.uumall.adapter.QueryMainAdapter;
 import com.youyou.uumall.base.BaseActivity;
 import com.youyou.uumall.base.BaseBusiness;
 import com.youyou.uumall.base.BaseConstants;
+import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.SearchBiz;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.view.ClearEditText;
@@ -31,7 +32,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/12.
  */
 @EActivity(R.layout.activity_query_main)
-public class QueryMainActivity extends BaseActivity implements BaseBusiness.ArrayListCallbackInterface, TextWatcher, QueryMainAdapter.OnItemClickListener, RefreshListView.OnLoadMoreListener, RefreshListView.OnRefreshListener {
+public class QueryMainActivity extends BaseActivity implements TextWatcher, QueryMainAdapter.OnItemClickListener, RefreshListView.OnLoadMoreListener, RefreshListView.OnRefreshListener, BaseBusiness.ObjectCallbackInterface {
 
     @ViewById
     RefreshListView listview;
@@ -59,7 +60,7 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
     void afterViews() {
         query_cancel_tv.setFocusable(true);
         query_cancel_tv.setFocusableInTouchMode(true);
-        searchBiz.setArrayListCallbackInterface(this);
+        searchBiz.setObjectCallbackInterface(this);
         listview.setAdapter(adapter);
         listview.setOnLoadMoreListener(this);
         listview.setOnRefreshListener(this);
@@ -78,36 +79,6 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
         super.onStart();
     }
 
-    @UiThread
-    @Override
-    public void arrayCallBack(int type, List<? extends Object> arrayList) {
-        //下拉刷新
-        if (!isAuto) {//第一次搜索也可能进入这里
-            if (arrayList != null && arrayList.size() != 0) {
-                list.clear();
-                List<GoodsDescBean> orderBean = (List<GoodsDescBean>) arrayList;
-                isSatisfy = orderBean.size() >= 10 ? true : false;
-                list.addAll(orderBean);
-                adapter.setData(list);
-                if (hasAnimation) {//不需要动画
-                    listview.onRefreshComplete();
-                    hasAnimation = false;
-                }
-                return;
-            } else {
-                list.clear();
-                adapter.setData(list);
-            }
-        }
-        //这个是上拉加载更多
-        if (arrayList != null && arrayList.size() != 0 && isSatisfy) {
-            List<GoodsDescBean> orderBean = (List<GoodsDescBean>) arrayList;
-            list.addAll(orderBean);
-            adapter.setData(list);
-        }
-        listview.onLoadMoreComplete();
-
-    }
 
     @Click
     void query_cancel_tv() {
@@ -158,5 +129,49 @@ public class QueryMainActivity extends BaseActivity implements BaseBusiness.Arra
         this.isAuto = isAuto;
         pageNo = 1;
         search();
+    }
+
+    @UiThread
+    @Override
+    public void objectCallBack(int type, Object t) {
+        //下拉刷新
+        if (t == null) {
+            return;
+        }
+        Response response = (Response) t;
+        List<GoodsDescBean> arrayList = (List<GoodsDescBean>) response.data;
+        if (arrayList == null) {
+            list.clear();
+            adapter.setData(null);
+            if (hasAnimation) {
+                listview.onRefreshComplete();
+                hasAnimation = false;
+            }
+            return;
+        }
+        if (!isAuto) {//第一次搜索也可能进入这里
+            if (response.size != 0 && arrayList.size() != 0) {
+                list.clear();
+                isSatisfy = arrayList.size() >= 10 ? true : false;
+                for (int i = 0; i < response.size; i++) {
+                    list.add(arrayList.get(i));
+                }
+                adapter.setData(list);
+            } else {
+                list.clear();
+                adapter.setData(null);
+            }
+            if (hasAnimation) {
+                listview.onRefreshComplete();
+                hasAnimation = false;
+            }
+            return;
+        }
+        //这个是上拉加载更多
+        if (response.size != 0 && arrayList.size() != 0 && isSatisfy) {
+            list.addAll(arrayList);
+            adapter.setData(list);
+        }
+            listview.onLoadMoreComplete();
     }
 }

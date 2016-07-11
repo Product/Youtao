@@ -23,9 +23,13 @@ public class SearchBiz extends BaseBusiness {
 
     @RootContext
     Context context;
+
     public static final int QUERY_GOODS_BY_KEYWORDS = 1;
     public static final int QUERY_BONUS = 2;
 
+    /**
+     * 搜索商品接口
+     */
     @Background
     public void queryGoodsById(int pageNo,int pageSize, String  searchKey){
         String countryCode = MyUtils.getCountryCode(context);
@@ -34,21 +38,15 @@ public class SearchBiz extends BaseBusiness {
         map.put("pageSize",pageSize);
         map.put("countryCode", countryCode);
         map.put("searchKeywords", searchKey);
-//        Response<Object> objectResponse = baseApi.queryGoodsByKeywords(map);
-//        log.e(objectResponse.toString());
-        arrayListCallbackInterface.arrayCallBack(QUERY_GOODS_BY_KEYWORDS, baseApi.queryGoodsByKeywords(map).data);
+        objectCallbackInterface.objectCallBack(QUERY_GOODS_BY_KEYWORDS, baseApi.queryGoodsByKeywords(map));
     }
 
-//    @Background
-//    public void queryCategory(Map map) {
-//        arrayListCallbackInterface.arrayCallBack(QUERY_CATEGORY, handleResponse(baseApi.queryCategory(map)));
-//    }
-
+    /**
+     * 查询红包接口
+     */
     @Background
     public void queryBonus(){
-        // TODO: 2016/6/7 测试
         Response<List<BonusBean>> listResponse = baseApi.queryBonus();
-//        log.e(listResponse.toString());
         arrayListCallbackInterface.arrayCallBack(QUERY_BONUS, listResponse.data);
     }
 }
