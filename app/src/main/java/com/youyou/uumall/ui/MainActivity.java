@@ -98,9 +98,19 @@ public class MainActivity extends BaseActivity implements BaseBusiness.ObjectCal
         eventBus.unregister(this);
     }
 
-    @Subscribe(sticky = false,threadMode = ThreadMode.MAIN)
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onShopCartUpdate(ShopCartUpdateEvent event) {
-        shopcartBiz.getcartList();
+        needUpdate = true;
+    }
+
+    private boolean needUpdate ;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (needUpdate) {
+            shopcartBiz.getcartList();
+            needUpdate = false;
+        }
     }
 
     private void initViews() {

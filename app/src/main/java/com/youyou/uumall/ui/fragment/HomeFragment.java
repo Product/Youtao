@@ -90,7 +90,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 loadData();
             }
         });
-        eventBus.post(new ShopCartUpdateEvent());// TODO: 2016/6/25 0025 观察bug
+        eventBus.postSticky(new ShopCartUpdateEvent());
         options = MyUtils.getImageOptions();
     }
 
@@ -216,7 +216,7 @@ public class HomeFragment extends BaseFragment implements BaseBusiness.ArrayList
                 MyUtils.savePara(mContext, "dictList", stringBuffer.toString());
                 defaultCountry = MyUtils.getPara(BaseConstants.preferencesFiled.DEFAULT_COUNTRY, mContext);
                 home_country_tv.setText(defaultCountry);
-                eventBus.post(new ShopCartUpdateEvent());
+                eventBus.postSticky(new ShopCartUpdateEvent());
                 commodityBiz.getRecommendList();//在拿到数值之后再访问
                 commodityBiz.getBrandList();
                 commodityBiz.getSliderList();

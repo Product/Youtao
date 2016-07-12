@@ -18,7 +18,6 @@ import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.CategoryDescBiz;
 import com.youyou.uumall.business.ShopcartBiz;
 import com.youyou.uumall.event.GoodsDescEvent;
-import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.ShopCartUpdateEvent;
 import com.youyou.uumall.model.GoodsDescBean;
 import com.youyou.uumall.model.ShopCartBean;
@@ -33,6 +32,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +66,7 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
     TextView category_menu_point_tv;
     private ShareDialog shareDialog;
     private GoodsDescBean goodsDesc;
+    private boolean needUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +151,7 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
             if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
 //                showToastShort("成功加入购物车");
                 shopcartBiz.getcartList();
-                eventBus.post(new ShopCartUpdateEvent());//发送给main
+                eventBus.postSticky(new ShopCartUpdateEvent());//发送给main
             } else {
                 showToastShort(response.msg);
             }
@@ -209,9 +210,18 @@ public class CommodityDescActivity extends BaseActivity implements BaseBusiness.
         eventBus.unregister(this);
     }
 
-    @Subscribe
-    public void onLoginSuceess(LoginEvent event) {//eventBus接收数据,并后台调用
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onLoginSuceess(ShopCartUpdateEvent event) {//eventBus接收数据,并后台调用
+        needUpdate = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (needUpdate) {
         shopcartBiz.getcartList();
+            needUpdate = false;
+        }
     }
 
     @Subscribe

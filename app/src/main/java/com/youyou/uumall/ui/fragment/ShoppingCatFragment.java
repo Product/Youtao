@@ -209,7 +209,7 @@ public class ShoppingCatFragment extends BaseFragment implements BaseBusiness.Ar
                 showToastShort(response.msg);
             }
         }
-        eventBus.post(new ShopCartUpdateEvent());
+        eventBus.postSticky(new ShopCartUpdateEvent());
     }
 
     @UiThread

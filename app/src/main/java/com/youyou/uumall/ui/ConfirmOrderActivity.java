@@ -186,7 +186,7 @@ public class ConfirmOrderActivity extends BaseActivity implements BaseBusiness.O
     public void objectCallBack(int type, Object t) {
         Response response = (Response) t;
         if (response.code == 0 && TextUtils.equals(response.msg, "请求成功")) {
-            eventBus.post(new ShopCartUpdateEvent());
+            eventBus.postSticky(new ShopCartUpdateEvent());
             log.e("code:"+response.code+"msg:"+response.msg+"data:"+response.data+"size:"+response.size);
             Intent intent = new Intent(this,PaymentActivity_.class);
             intent.putExtra("data",(String)response.data);

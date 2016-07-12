@@ -18,7 +18,6 @@ import com.youyou.uumall.base.BaseConstants;
 import com.youyou.uumall.bean.Response;
 import com.youyou.uumall.business.LoginBiz;
 import com.youyou.uumall.business.RegisterBiz;
-import com.youyou.uumall.event.LoginEvent;
 import com.youyou.uumall.event.MineTriggerEvent;
 import com.youyou.uumall.event.MobileBindingEvent;
 import com.youyou.uumall.event.ShopCartTriggerEvent;
@@ -194,9 +193,8 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
                     UserInfoBean bean = (UserInfoBean) list.get(0);
                     userUtils.saveUserId(bean.mobile);
                     eventBus.post(new MineTriggerEvent());
-                    eventBus.post(new ShopCartUpdateEvent());
+                    eventBus.postSticky(new ShopCartUpdateEvent());
                     eventBus.post(new ShopCartTriggerEvent());
-                    eventBus.post(new LoginEvent());
 //                    showToastShort("登录成功");
                     finish();
                     overridePendingTransition(R.anim.anim_none,R.anim.from_top_exit);
@@ -234,8 +232,7 @@ public class LoginActivity extends BaseActivity implements BaseBusiness.ObjectCa
             } else {
                 eventBus.post(new ShopCartTriggerEvent());
                 eventBus.post(new MineTriggerEvent());
-                eventBus.post(new ShopCartUpdateEvent());
-                eventBus.post(new LoginEvent());
+                eventBus.postSticky(new ShopCartUpdateEvent());
                 finish();
                 overridePendingTransition(0,0);
 //                MainActivity_.intent(LoginActivity.this).start();
