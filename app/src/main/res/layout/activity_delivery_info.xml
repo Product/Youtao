@@ -2,93 +2,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg_settings_gap"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        style="@style/RelativeLayout_Title_Normal">
+    <RelativeLayout style="@style/RelativeLayout_Title_Normal">
 
         <ImageView
-            style="@style/ImageView_Title_Pro"
             android:id="@+id/delivery_info_pro_iv"
-             />
+            style="@style/ImageView_Title_Pro" />
 
         <TextView
             style="@style/TextView_Title_Title"
-            android:text="@string/delivery_info_title"
-             />
+            android:text="@string/delivery_info_title" />
     </RelativeLayout>
+    <View
+        style="@style/HorizonLineStyle"
+        android:background="@color/bg_line_dark_gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_120"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/view_30"
+        android:paddingLeft="@dimen/view_50"
+        android:paddingRight="@dimen/view_50"
+        android:paddingTop="@dimen/view_30">
+
+        <RadioGroup
+            android:id="@+id/delivery_mode_rg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="@+id/delivery_mode_rb1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/delivery_mode_rb1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rb_delivery_left_seclector"
+                android:textColor="@drawable/font_guide_btn_seclector"
+                android:button="@null" />
+
+            <RadioButton
+                android:background="@drawable/rb_delivery_mid_seclector"
+                android:textColor="@drawable/font_guide_btn_seclector"
+                android:id="@+id/delivery_mode_rb2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null" />
+
+            <RadioButton
+                android:background="@drawable/rb_delivery_right_seclector"
+                android:textColor="@drawable/font_guide_btn_seclector"
+                android:id="@+id/delivery_mode_rb3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null" />
+        </RadioGroup>
+    </LinearLayout>
 
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <View
-            android:background="@color/bg_line_dark_gray"
-            style="@style/HorizonLineStyle" />
-
+            style="@style/HorizonLineStyle"
+            android:background="@color/bg_line_dark_gray" />
         <LinearLayout
-            android:paddingLeft="@dimen/view_25"
-            android:paddingRight="@dimen/view_25"
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_100"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="@dimen/view_182"
-                android:layout_height="wrap_content"
-                android:text="@string/delivery_info_name"
-                android:textColor="@color/font_hint_gray"
-                android:textSize="@dimen/font_26" />
-
-            <EditText
-                android:background="@color/white"
-                android:id="@+id/delivery_info_name_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/font_black"
-                android:textSize="@dimen/font_26" />
-        </LinearLayout>
-
-        <View style="@style/HorizonLineStyle" android:layout_marginLeft="@dimen/view_25"/>
-
-        <LinearLayout
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/view_25"
-            android:paddingRight="@dimen/view_25"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/view_100"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="@dimen/view_182"
-                android:layout_height="wrap_content"
-                android:text="@string/delivery_info_phone"
-                android:textColor="@color/font_hint_gray"
-                android:textSize="@dimen/font_26" />
-
-            <EditText
-                android:background="@color/white"
-                android:id="@+id/delivery_info_phone_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/font_black"
-                android:textSize="@dimen/font_26" />
-        </LinearLayout>
-
-        <View style="@style/HorizonLineStyle" android:layout_marginLeft="@dimen/view_25"/>
-
-        <LinearLayout
-            android:paddingLeft="@dimen/view_25"
-            android:paddingRight="@dimen/view_25"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/view_100"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:paddingRight="@dimen/view_25">
 
             <TextView
                 android:layout_width="@dimen/view_182"
@@ -98,25 +90,120 @@
                 android:textSize="@dimen/font_26" />
 
             <TextView
-                android:gravity="center_vertical"
-                android:background="@color/white"
                 android:id="@+id/delivery_info_date_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="选择机场提货时间"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="@string/delivery_info_date2"
+                android:textColor="@color/font_hint_gray_transparent"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+        <View
+            style="@style/HorizonLineStyle"
+            android:layout_marginLeft="@dimen/view_25" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
+
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/delivery_info_name"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+        <View
+            style="@style/HorizonLineStyle"
+            android:layout_marginLeft="@dimen/view_25" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_passport"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_passport_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:textColor="@color/font_black"
+                android:textSize="@dimen/font_26" />
+        </LinearLayout>
+        <View
+            style="@style/HorizonLineStyle"
+            android:layout_marginLeft="@dimen/view_25" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
+
+            <TextView
+                android:layout_width="@dimen/view_182"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_info_phone"
+                android:textColor="@color/font_hint_gray"
+                android:textSize="@dimen/font_26" />
+
+            <EditText
+                android:id="@+id/delivery_info_phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="phone"
+                android:maxLines="1"
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_26" />
         </LinearLayout>
 
-        <View style="@style/HorizonLineStyle" android:layout_marginLeft="@dimen/view_25"/>
+        <View
+            style="@style/HorizonLineStyle"
+            android:layout_marginLeft="@dimen/view_25" />
+
+
+
+
 
         <LinearLayout
-            android:paddingLeft="@dimen/view_25"
-            android:paddingRight="@dimen/view_25"
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_100"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
 
             <TextView
                 android:layout_width="@dimen/view_182"
@@ -126,25 +213,29 @@
                 android:textSize="@dimen/font_26" />
 
             <EditText
-                android:background="@color/white"
                 android:id="@+id/delivery_info_flt_no_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
                 android:text=""
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_26" />
         </LinearLayout>
 
-        <View style="@style/HorizonLineStyle" android:layout_marginLeft="@dimen/view_25"/>
+        <View
+            style="@style/HorizonLineStyle"
+            android:layout_marginLeft="@dimen/view_25" />
 
         <LinearLayout
-            android:paddingLeft="@dimen/view_25"
-            android:paddingRight="@dimen/view_25"
             android:id="@+id/delivery_info_delivery_ll"
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_100"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/view_25"
+            android:paddingRight="@dimen/view_25">
 
             <TextView
                 android:layout_width="@dimen/view_182"
@@ -156,58 +247,60 @@
             <TextView
                 android:id="@+id/delivery_info_delivery_tv2"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="@color/font_black"
                 android:textSize="@dimen/font_26" />
 
 
             <LinearLayout
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 >
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/delivery_info_delivery_tv"
-                    android:textColor="@color/font_country_conuntry"
-                    android:textSize="@dimen/font_26"
-                    android:text="请选择自提点"
-                    android:layout_marginRight="@dimen/view_20"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/view_20"
+                    android:text="请选择自提点"
+                    android:textColor="@color/font_country_conuntry"
+                    android:textSize="@dimen/font_26" />
+
                 <ImageView
                     android:id="@+id/delivery_info_delivery_iv"
-                    android:background="@mipmap/ic_arrow_down"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/ic_arrow_down" />
             </LinearLayout>
         </LinearLayout>
 
-        <View style="@style/HorizonLineStyle" android:layout_marginLeft="@dimen/view_25"/>
-        <LinearLayout
-            android:paddingLeft="@dimen/view_25"
-            android:paddingRight="@dimen/view_25"
-            android:id="@+id/delivery_info_add_ll"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-
+        <View
+            style="@style/HorizonLineStyle"
+            android:layout_marginLeft="@dimen/view_25" />
     </LinearLayout>
 
-    <Button
-        android:enabled="false"
-        android:id="@+id/delivery_info_confirm_btn"
-        android:background="@drawable/btn_confirm_seclector"
-        android:textColor="@drawable/font_confirm_seclector"
-        android:textSize="@dimen/font_30"
-        android:text="@string/delivery_info_confirm"
-        android:layout_marginTop="@dimen/view_80"
-        android:layout_width="@dimen/view_650"
-        android:layout_height="@dimen/view_86" />
+    <ListView
+        android:id="@+id/delivery_info_lv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:divider="@null"
+        android:visibility="invisible" />
 
+    <Button
+        android:id="@+id/delivery_info_confirm_btn"
+        android:layout_width="@dimen/view_650"
+        android:layout_height="@dimen/view_86"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/view_40"
+        android:background="@drawable/btn_confirm_seclector"
+        android:enabled="false"
+        android:text="@string/delivery_info_confirm"
+        android:textColor="@drawable/font_confirm_seclector"
+        android:textSize="@dimen/font_30" />
 
 
 </LinearLayout>

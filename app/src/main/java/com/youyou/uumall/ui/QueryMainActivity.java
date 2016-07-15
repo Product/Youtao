@@ -74,11 +74,6 @@ public class QueryMainActivity extends BaseActivity implements TextWatcher, Quer
         searchBiz.queryGoodsById(pageNo, 10, searchKey);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
 
     @Click
     void query_cancel_tv() {

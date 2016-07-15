@@ -12,6 +12,8 @@
     <color name="font_black">#333333</color>
     <color name="font_gray">#666666</color>
     <color name="font_hint_gray">#999999</color>
+    <color name="font_hint_gray_transparent">#c8c8c8</color>
+
     <color name="bg_hint_line_gray">#aeaeae</color>
     <!--浅色线-->
     <color name="bg_line_gray">#e6e6e6</color>

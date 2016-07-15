@@ -74,14 +74,15 @@
 
     <!--delivery info-->
     <string name="delivery_info_title">编辑取货信息</string>
-    <string name="delivery_info_name">收货人</string>
+    <string name="delivery_info_name">收货姓名</string>
     <string name="delivery_info_phone">手机号码</string>
-    <string name="delivery_info_date">回国日期</string>
+    <string name="delivery_info_passport">护照号码</string>
+    <string name="delivery_info_date">送达时间</string>
     <string name="delivery_info_flt_no">航班号</string>
     <string name="delivery_info_delivery">自提点</string>
     <string name="delivery_info_delivery2">请选择自提点</string>
     <string name="delivery_info_confirm">确认</string>
-    <string name="delivery_info_date2">选择机场提货时间</string>
+    <string name="delivery_info_date2">选择离店前一天</string>
 
     <!--payment-->
     <string name="payment_title">支付方式</string>

@@ -484,18 +484,18 @@ public class MyUtils {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  //设置 缓存模式
+//        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  //设置 缓存模式
         // 开启 DOM storage API 功能
         webView.getSettings().setDomStorageEnabled(true);
         //开启 database storage API 功能
 //        webView.getSettings().setDatabaseEnabled(true);
         String cacheDirPath = context.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
         //设置数据库缓存路径
-        webView.getSettings().setDatabasePath(cacheDirPath);
+//        webView.getSettings().setDatabasePath(cacheDirPath);
         //设置  Application Caches 缓存目录
-        webView.getSettings().setAppCachePath(cacheDirPath);
+//        webView.getSettings().setAppCachePath(cacheDirPath);
         //开启 Application Caches 功能
-        webView.getSettings().setAppCacheEnabled(true);
+//        webView.getSettings().setAppCacheEnabled(true);
     }
 
     public static void clearWebViewCeche(Context context) {

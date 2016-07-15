@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 //添加android-apt插件
 apply plugin: 'android-apt'
+
+apply from: '/version.gradle'
+
 def AAVersion = '3.3.1'
 //def AAVersion = '4.0.0'
 // 多渠道打包的时候 会读取系统的时间
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
-
 
 android {
     compileSdkVersion 23
@@ -17,9 +19,8 @@ android {
         applicationId "com.youyou.uumall"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
-
+        versionCode appVersionCode
+        versionName appVersionName
         // dex突破65535的限制
         multiDexEnabled true
     }
